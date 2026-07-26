@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STARVEL STUDIOS | Official Comic Universe</title>
+
+  <!-- Asset Preloading for Instant Rendering on GitHub Pages -->
+  <link rel="preload" href="AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="starvel.png" as="image">
+  <link rel="preload" href="bg.PNG" as="image">
+
+  <!-- High-End Marvel, Comic & Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       Font Imports: Custom Local Avengeance Heroic Avenger Font
+       ========================================================================== */
+    @font-face {
+      font-family: 'Avengance';
+      src: url('AVENGEANCE HEROIC AVENGER.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==========================================================================
+       Global Variables & Marvel Comic Palette
+       ========================================================================== */
+    :root {
+      --starvel-red: #EC1D24;
+      --starvel-red-glow: rgba(236, 29, 36, 0.75);
+      --comic-yellow: #FFD200;
+      --bg-dark: #08080A;
+      --bg-card: #121216;
+      --border-subtle: rgba(255, 255, 255, 0.2);
+      --text-main: #FFFFFF;
+      --text-muted: #B0B0B8;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base Body Styling with bg.PNG (Matched Case for GitHub Pages) */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(236, 29, 36, 0.12) 15%, transparent 16%),
+                        radial-gradient(rgba(255, 210, 0, 0.08) 15%, transparent 16%),
+                        url('bg.PNG');
+      background-size: 20px 20px, 20px 20px, cover;
+      background-position: 0 0, 10px 10px, center top;
+      background-repeat: repeat, repeat, no-repeat;
+      background-attachment: fixed, fixed, fixed;
+      perspective: 1000px;
+    }
+
+    /* Ambient dark vignette */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, 0.15) 0%, rgba(8, 8, 10, 0.88) 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ==========================================================================
+       Preloader Overlay
+       ========================================================================== */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #060608;
+      background-image: radial-gradient(rgba(236, 29, 36, 0.2) 15%, transparent 16%);
+      background-size: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #preloader.preloader-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .preloader-logo {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(236, 29, 36, 0.9));
+      animation: logoPulse 0.9s infinite alternate ease-in-out;
+      margin-bottom: 20px;
+    }
+
+    @keyframes logoPulse {
+      0% { transform: scale(0.96); }
+      100% { transform: scale(1.05); }
+    }
+
+    .preloader-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--comic-yellow);
+      margin-bottom: 12px;
+    }
+
+    .preloader-bar-bg {
+      width: 220px;
+      height: 8px;
+      background: #1A1A22;
+      border: 2px solid #FFFFFF;
+      overflow: hidden;
+    }
+
+    .preloader-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--starvel-red), var(--comic-yellow));
+      transition: width 0.15s ease;
+    }
+
+    /* ==========================================================================
+       Comic Navigation Bar
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      background: rgba(10, 10, 13, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 3px solid var(--starvel-red);
+      box-shadow: 0 6px 0px #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+    }
+
+    .navbar .logo-img {
+      height: 36px;
+      filter: drop-shadow(2px 2px 0px #000) drop-shadow(0 0 12px rgba(236, 29, 36, 0.8));
+      transition: transform 0.2s ease;
+    }
+
+    .navbar .logo-img:hover {
+      transform: scale(1.06);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #000000;
+      background: var(--comic-yellow);
+      border-color: #000000;
+      box-shadow: 3px 3px 0px var(--starvel-red);
+    }
+
+    /* ==========================================================================
+       Hero Section & Disappearing 3D Scroll Logo
+       ========================================================================== */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 110px 20px 40px 20px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #000000;
+      background: var(--comic-yellow);
+      border: 2px solid #FFFFFF;
+      box-shadow: 4px 4px 0px var(--starvel-red);
+      padding: 6px 20px;
+      margin-bottom: 25px;
+      transform: rotate(-1.5deg);
+    }
+
+    .hero-logo-3d-wrapper {
+      margin-bottom: 25px;
+      will-change: transform, opacity, filter;
+      transform-style: preserve-3d;
+    }
+
+    .hero-3d-text {
+      font-family: 'Avengance', 'Bangers', sans-serif;
+      font-size: 8rem;
+      letter-spacing: 6px;
+      line-height: 1;
+      background: linear-gradient(180deg, #FFFFFF 0%, #E2E2E8 35%, #888894 65%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 30px rgba(236, 29, 36, 0.85));
+      text-shadow: 
+        0 1px 0 #EC1D24,
+        1px 2px 0 #C11117,
+        2px 3px 0 #900B0E,
+        3px 4px 0 #60080A,
+        4px 5px 0 #300405,
+        5px 6px 0px #000000,
+        7px 8px 25px rgba(0, 0, 0, 0.95);
+    }
+
+    .hero p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #E2E2E8;
+      max-width: 580px;
+      margin: 0 auto 30px auto;
+      line-height: 1.8;
+      background: rgba(18, 18, 22, 0.88);
+      border: 2px solid var(--border-subtle);
+      padding: 16px 28px;
+      box-shadow: 6px 6px 0px #000000;
+    }
+
+    .btn-editorial {
+      display: inline-block;
+      color: #000000;
+      background: var(--starvel-red);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 40px;
+      border: 3px solid #FFFFFF;
+      box-shadow: 6px 6px 0px var(--comic-yellow), 6px 6px 0px 3px #000000;
+      transition: all 0.2s ease;
+    }
+
+    .btn-editorial:hover {
+      background: var(--comic-yellow);
+      box-shadow: 8px 8px 0px var(--starvel-red);
+      transform: translate(-3px, -3px);
+    }
+
+    /* ==========================================================================
+       Content Sections & Video Cards
+       ========================================================================== */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto 100px auto;
+      padding: 60px 30px 0 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding: 12px 24px;
+      background: var(--starvel-red);
+      border: 3px solid #FFFFFF;
+      box-shadow: 6px 6px 0px #000000;
+      transform: skew(-2deg);
+    }
+
+    .section-title {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 2.4rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0px #000000;
+    }
+
+    .section-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #000000;
+      background: var(--comic-yellow);
+      padding: 4px 14px;
+      border: 2px solid #000000;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .video-card {
+      background: var(--bg-card);
+      border: 3px solid #FFFFFF;
+      box-shadow: 8px 8px 0px var(--starvel-red), 8px 8px 0px 3px #000000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .video-card:hover {
+      border-color: var(--comic-yellow);
+      box-shadow: 12px 12px 0px var(--comic-yellow), 12px 12px 0px 3px #000000;
+      transform: translate(-4px, -4px);
+    }
+
+    .video-card.portrait-card {
+      justify-self: end;
+      width: 100%;
+      max-width: 330px;
+    }
+
+    .video-player-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      overflow: hidden;
+      border-bottom: 3px solid #FFFFFF;
+    }
+
+    .video-player-wrapper.portrait {
+      aspect-ratio: 9 / 16;
+    }
+
+    .video-player-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.4s ease;
+    }
+
+    .video-player-wrapper video.dolby-active {
+      filter: contrast(1.25) saturate(1.35) brightness(1.08) drop-shadow(0 0 15px rgba(255, 210, 0, 0.25));
+    }
+
+    .thumbnail-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: opacity 0.3s ease;
+    }
+
+    .play-btn {
+      width: 65px;
+      height: 65px;
+      border: 3px solid #000000;
+      background: var(--comic-yellow);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 4px 4px 0px #000000;
+      transition: all 0.2s ease;
+    }
+
+    .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent #000000;
+      margin-left: 4px;
+    }
+
+    .thumbnail-overlay:hover .play-btn {
+      background: var(--starvel-red);
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .thumbnail-overlay:hover .play-btn::after {
+      border-color: transparent transparent transparent #FFFFFF;
+    }
+
+    .video-details {
+      padding: 22px 24px;
+      background: #14141A;
+    }
+
+    .video-details-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .video-details h3 {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0px #000000;
+    }
+
+    .dolby-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1E1E26;
+      border: 2px solid #FFFFFF;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #000000;
+    }
+
+    .dolby-toggle-btn:hover {
+      background: var(--comic-yellow);
+      border-color: #000000;
+    }
+
+    .dolby-toggle-btn img.dolby-icon {
+      height: 22px;
+      width: auto;
+      filter: brightness(2) contrast(1.5);
+    }
+
+    .dolby-toggle-btn.active {
+      background: var(--starvel-red);
+      box-shadow: 4px 4px 0px var(--comic-yellow);
+    }
+
+    .video-details p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .video-details p span.label {
+      color: var(--comic-yellow);
+      background: #000000;
+      padding: 2px 8px;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      margin-right: 4px;
+    }
+
+    .coming-soon-card {
+      background: var(--bg-card);
+      border: 3px solid #FFFFFF;
+      box-shadow: 8px 8px 0px var(--starvel-red), 8px 8px 0px 3px #000000;
+      padding: 70px 30px;
+      text-align: center;
+    }
+
+    .coming-soon-card h3 {
+      font-family: 'Bangers', cursive;
+      font-size: 3.6rem;
+      color: var(--comic-yellow);
+      text-shadow: 3px 3px 0px #EC1D24, 6px 6px 0px #000000;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      border-top: 3px solid var(--starvel-red);
+      background: #08080B;
+      padding: 35px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--comic-yellow);
+      text-decoration: none;
+    }
+
+    @media (max-width: 850px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { gap: 12px; }
+      .hero-3d-text { font-size: 4.5rem; }
+      .video-grid { grid-template-columns: 1fr; gap: 30px; }
+      .video-card.portrait-card { justify-self: center; max-width: 320px; }
+      footer { padding: 25px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Marvel Comic Preloader -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="starvel.png" alt="STARVEL STUDIOS" class="preloader-logo">
+      <div class="preloader-text">LOADING SAGA...</div>
+      <div class="preloader-bar-bg">
+        <div class="preloader-bar-fill" id="preloader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo-container">
+      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">
+        <img src="starvel.png" alt="STARVEL STUDIOS" class="logo-img">
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#announcements">Announcements</a></li>
+      <li><a href="#characters">Characters</a></li>
+    </ul>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <span class="hero-subtitle">★ ISSUE #1 — STARVEL STUDIOS ★</span>
+
+    <div class="hero-logo-3d-wrapper" id="hero-logo-3d">
+      <h1 class="hero-3d-text">stArvel</h1>
+    </div>
+
+    <p>Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.</p>
+    <a href="#announcements" class="btn-editorial">Explore Announcements</a>
+  </section>
+
+  <!-- Announcements Section -->
+  <section id="announcements" class="content-section">
+    <div class="section-header">
+      <h2 class="section-title">Announcements</h2>
+      <span class="section-number">VOL. 01</span>
+    </div>
+    
+    <div class="video-grid">
+      <!-- Video 1 (thumb.PNG matched to GitHub capitalization) -->
+      <div class="video-card">
+        <div class="video-player-wrapper">
+          <div class="thumbnail-overlay" style="background-image: url('thumb.PNG');" onclick="playVideo(this)">
+            <div class="play-btn"></div>
+          </div>
+          <video preload="metadata" class="dolby-active" id="video-1">
+            <source src="https://www.dropbox.com/scl/fi/3ztq8zti4o6f2pphbtvzp/Announcement-1.mp4?rlkey=z3zosiguc5cjqpd6nwvr4v1g6&st=p2zgxqjh&raw=1" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-details">
+          <div class="video-details-header">
+            <h3>#SCI-FI Announcement</h3>
+            <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-1', this)" title="Toggle Dolby Vision">
+              <img src="dolby.png" alt="Dolby" class="dolby-icon">
+            </button>
+          </div>
+          <p>Directed by Jayden & Sathwik</p>
+          <p><span class="label">Cast & Crew</span> Jayden, Chinmay, Sathwik, Lokesh, Abhirama, Nihal, Srijan</p>
+        </div>
+      </div>
+
+      <!-- Video 2 (thumb2.PNG matched to GitHub capitalization) -->
+      <div class="video-card portrait-card">
+        <div class="video-player-wrapper portrait">
+          <div class="thumbnail-overlay" style="background-image: url('thumb2.PNG');" onclick="playVideo(this)">
+            <div class="play-btn"></div>
+          </div>
+          <video preload="metadata" class="dolby-active" id="video-2">
+            <source src="https://www.dropbox.com/scl/fi/5reqxypizxhvujm6xwy8c/IMG_7719.MP4?rlkey=oc6p5kygkvnxjyj9wvb1kfh8g&st=bmw42vgi&raw=1" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-details">
+          <div class="video-details-header">
+            <h3>#Oka Film Announcement</h3>
+            <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-2', this)" title="Toggle Dolby Vision">
+              <img src="dolby.png" alt="Dolby" class="dolby-icon">
+            </button>
+          </div>
+          <p>Directed by K.Abhirama Reddy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Characters Section -->
+  <section id="characters" class="content-section">
+    <div class="section-header">
+      <h2 class="section-title">Characters</h2>
+      <span class="section-number">VOL. 02</span>
+    </div>
+    <div class="coming-soon-card">
+      <h3>Coming Soon</h3>
+      <p>The roster of heroes and villains is currently classified.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
+    <div>FOLLOW ON <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></div>
+  </footer>
+
+  <script>
+    // Optimized Fast Preloader
+    const preloader = document.getElementById('preloader');
+    const fillBar = document.getElementById('preloader-fill');
+    let fillProgress = 0;
+
+    const interval = setInterval(() => {
+      fillProgress += 35;
+      fillBar.style.width = fillProgress + '%';
+      if (fillProgress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => preloader.classList.add('preloader-hidden'), 150);
+      }
+    }, 60);
+
+    // 60FPS Hardware-Accelerated Hero Logo 3D Scroll Transition
+    const heroLogo = document.getElementById('hero-logo-3d');
+    let ticking = false;
+
+    function updateHeroScroll() {
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 0.55;
+      const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
+
+      const scale = (1 + progress * 0.7).toFixed(2);
+      const rotateX = (progress * 25).toFixed(1);
+      const translateY = (-progress * 90).toFixed(1);
+      const opacity = Math.max(0, 1 - progress * 1.5).toFixed(2);
+      const blur = (progress * 8).toFixed(1);
+
+      if (heroLogo) {
+        heroLogo.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotateX(${rotateX}deg)`;
+        heroLogo.style.opacity = opacity;
+        heroLogo.style.filter = `blur(${blur}px)`;
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateHeroScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Video & Dolby Controls
+    function toggleDolbyVision(videoId, btnElement) {
+      const video = document.getElementById(videoId);
+      if (video.classList.contains('dolby-active')) {
+        video.classList.remove('dolby-active');
+        btnElement.classList.remove('active');
+      } else {
+        video.classList.add('dolby-active');
+        btnElement.classList.add('active');
+      }
+    }
+
+    function playVideo(overlayElement) {
+      const wrapper = overlayElement.parentElement;
+      const video = wrapper.querySelector('video');
+
+      overlayElement.style.opacity = '0';
+      setTimeout(() => {
+        overlayElement.style.display = 'none';
+      }, 300);
+
+      video.controls = true;
+      video.play();
+    }
+  </script>
+
+</body>
+</html>
