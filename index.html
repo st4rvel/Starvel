@@ -52,7 +52,7 @@
       box-sizing: border-box;
     }
 
-    /* Base Body Styling with bg.PNG */
+    /* Seamless Full-Page Tint & Background Styling */
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: var(--bg-dark);
@@ -61,27 +61,15 @@
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(236, 29, 36, 0.12) 15%, transparent 16%),
+      background-image: linear-gradient(rgba(6, 6, 8, 0.78), rgba(6, 6, 8, 0.78)),
+                        radial-gradient(rgba(236, 29, 36, 0.15) 15%, transparent 16%),
                         radial-gradient(rgba(255, 210, 0, 0.08) 15%, transparent 16%),
                         url('bg.PNG');
-      background-size: 20px 20px, 20px 20px, cover;
-      background-position: 0 0, 10px 10px, center top;
-      background-repeat: repeat, repeat, no-repeat;
-      background-attachment: fixed, fixed, fixed;
+      background-size: 100% 100%, 20px 20px, 20px 20px, cover;
+      background-position: center center, 0 0, 10px 10px, center top;
+      background-repeat: no-repeat, repeat, repeat, no-repeat;
+      background-attachment: fixed, fixed, fixed, fixed;
       perspective: 1000px;
-    }
-
-    /* Ambient dark vignette */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, 0.15) 0%, rgba(8, 8, 10, 0.88) 100%);
-      pointer-events: none;
-      z-index: -1;
     }
 
     /* Preloader Overlay */
@@ -706,7 +694,7 @@
         </div>
       </div>
 
-      <!-- Video 2 (#Oka Film Announcement VOL 2 - Video Left, Description Right) -->
+      <!-- Video 2 (#Oka Film Announcement VOL 2) -->
       <div class="video-card side-by-side-card">
         <div class="video-player-wrapper portrait">
           <div class="thumbnail-overlay" style="background-image: url('thumb2.PNG');" onclick="playVideo(this)">
@@ -783,7 +771,7 @@
   </footer>
 
   <script>
-    // Optimized Fast Preloader
+    // Fast Preloader
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
     let fillProgress = 0;
