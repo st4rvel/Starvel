@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>STARVEL STUDIOS | Official Comic Universe</title>
 
-  <!-- Asset Preloading for Instant Rendering on GitHub Pages -->
+  <!-- Asset Preloading for Instant Rendering -->
   <link rel="preload" href="AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="starvel.png" as="image">
+  <link rel="preload" href="starvel.png" as="image" fetchpriority="high">
   <link rel="preload" href="bg.PNG" as="image">
 
-  <!-- High-End Marvel, Comic & Editorial Typography -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       Font Imports: Custom Local Avengeance Heroic Avenger Font
-       ========================================================================== */
+    /* Custom Local Font */
     @font-face {
       font-family: 'Avengance';
       src: url('AVENGEANCE HEROIC AVENGER.ttf') format('truetype');
@@ -27,9 +25,7 @@
       font-display: swap;
     }
 
-    /* ==========================================================================
-       Global Variables & Marvel Comic Palette
-       ========================================================================== */
+    /* Global Variables & Theme */
     :root {
       --starvel-red: #EC1D24;
       --starvel-red-glow: rgba(236, 29, 36, 0.75);
@@ -52,7 +48,7 @@
       box-sizing: border-box;
     }
 
-    /* Seamless Full-Page Tint & Background Styling */
+    /* GPU-Accelerated Background (Prevents Scroll Jank) */
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: var(--bg-dark);
@@ -61,6 +57,19 @@
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      perspective: 1000px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
       background-image: linear-gradient(rgba(6, 6, 8, 0.78), rgba(6, 6, 8, 0.78)),
                         radial-gradient(rgba(236, 29, 36, 0.15) 15%, transparent 16%),
                         radial-gradient(rgba(255, 210, 0, 0.08) 15%, transparent 16%),
@@ -68,11 +77,11 @@
       background-size: 100% 100%, 20px 20px, 20px 20px, cover;
       background-position: center center, 0 0, 10px 10px, center top;
       background-repeat: no-repeat, repeat, repeat, no-repeat;
-      background-attachment: fixed, fixed, fixed, fixed;
-      perspective: 1000px;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
-    /* Preloader Overlay */
+    /* High-Performance Animated Preloader */
     #preloader {
       position: fixed;
       top: 0;
@@ -89,51 +98,84 @@
       z-index: 99999;
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
+      transform: scale(1);
+      filter: blur(0px);
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                  visibility 0.5s, 
+                  filter 0.5s ease;
+      will-change: opacity, transform, filter;
     }
 
     #preloader.preloader-hidden {
       opacity: 0;
+      transform: scale(1.04);
+      filter: blur(6px);
       visibility: hidden;
       pointer-events: none;
     }
 
+    .preloader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
     .preloader-logo {
-      height: 60px;
+      height: 65px;
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 20px rgba(236, 29, 36, 0.9));
-      animation: logoPulse 0.9s infinite alternate ease-in-out;
-      margin-bottom: 20px;
+      filter: drop-shadow(0 0 25px rgba(236, 29, 36, 0.95));
+      animation: logoPulse 1.2s infinite alternate ease-in-out;
+      margin-bottom: 24px;
+      will-change: transform;
     }
 
     @keyframes logoPulse {
-      0% { transform: scale(0.96); }
-      100% { transform: scale(1.05); }
+      0% { transform: scale(0.95); filter: drop-shadow(0 0 15px rgba(236, 29, 36, 0.7)); }
+      100% { transform: scale(1.06); filter: drop-shadow(0 0 30px rgba(255, 210, 0, 0.9)); }
     }
 
     .preloader-text {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       letter-spacing: 4px;
       color: var(--comic-yellow);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      text-shadow: 2px 2px 0px #000;
+      animation: textGlow 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes textGlow {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; text-shadow: 0 0 10px var(--comic-yellow); }
     }
 
     .preloader-bar-bg {
-      width: 220px;
-      height: 8px;
+      width: 240px;
+      height: 10px;
       background: #1A1A22;
       border: 2px solid #FFFFFF;
+      box-shadow: 3px 3px 0px #000000;
       overflow: hidden;
+      position: relative;
     }
 
     .preloader-bar-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, var(--starvel-red), var(--comic-yellow));
-      transition: width 0.15s ease;
+      background: linear-gradient(90deg, var(--starvel-red), var(--comic-yellow), var(--starvel-red));
+      background-size: 200% 100%;
+      animation: gradientShift 1.5s linear infinite;
+      transition: width 0.1s linear;
+      will-change: width;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
 
     /* Comic Navigation Bar */
@@ -279,9 +321,7 @@
       transform: translate(-3px, -3px);
     }
 
-    /* ==========================================================================
-       Content Sections & Vertical Stacked Video Cards
-       ========================================================================== */
+    /* Content Sections */
     .content-section {
       max-width: 1100px;
       margin: 0 auto 100px auto;
@@ -325,6 +365,7 @@
       box-shadow: 8px 8px 0px var(--starvel-red), 8px 8px 0px 3px #000000;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+      will-change: transform;
     }
 
     .video-card:hover {
@@ -333,7 +374,6 @@
       transform: translate(-4px, -4px);
     }
 
-    /* Side-By-Side Layout for #Oka */
     .video-card.side-by-side-card {
       display: flex;
       flex-direction: row;
@@ -515,9 +555,7 @@
       margin-right: 4px;
     }
 
-    /* ==========================================================================
-       Directors Section & Comic Cards
-       ========================================================================== */
+    /* Directors Section */
     .directors-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -533,6 +571,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      will-change: transform;
     }
 
     .director-card:hover {
@@ -627,7 +666,7 @@
   <!-- Marvel Comic Preloader -->
   <div id="preloader">
     <div class="preloader-content">
-      <img src="starvel.png" alt="STARVEL STUDIOS" class="preloader-logo">
+      <img src="starvel.png" alt="STARVEL STUDIOS" class="preloader-logo" fetchpriority="high">
       <div class="preloader-text">LOADING SAGA...</div>
       <div class="preloader-bar-bg">
         <div class="preloader-bar-fill" id="preloader-fill"></div>
@@ -732,7 +771,7 @@
       <!-- Director 1 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="jayden.png" alt="Jayden Jacob">
+          <img src="jayden.png" alt="Jayden Jacob" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Jayden Jacob</h3>
@@ -743,7 +782,7 @@
       <!-- Director 2 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="sathwik.png" alt="Sathwik">
+          <img src="sathwik.png" alt="Sathwik" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Sathwik</h3>
@@ -754,7 +793,7 @@
       <!-- Director 3 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="abhi.png" alt="Abhirama Reddy Kalluri">
+          <img src="abhi.png" alt="Abhirama Reddy Kalluri" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Abhirama Reddy Kalluri</h3>
@@ -771,21 +810,41 @@
   </footer>
 
   <script>
-    // Fast Preloader
+    // Smooth RAF-Driven Preloader with Real Asset-Load Detection
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
-    let fillProgress = 0;
+    let currentProgress = 0;
+    let targetProgress = 30; // Starts with rapid synthetic baseline
+    let isPageLoaded = false;
 
-    const interval = setInterval(() => {
-      fillProgress += 35;
-      fillBar.style.width = fillProgress + '%';
-      if (fillProgress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => preloader.classList.add('preloader-hidden'), 150);
+    function animatePreloader() {
+      if (currentProgress < targetProgress) {
+        currentProgress += (targetProgress - currentProgress) * 0.12 + 0.5;
+        if (currentProgress > targetProgress) currentProgress = targetProgress;
+        fillBar.style.width = `${currentProgress}%`;
       }
-    }, 60);
 
-    // 60FPS Hardware-Accelerated Hero Logo 3D Scroll Transition
+      if (currentProgress >= 100) {
+        setTimeout(() => {
+          preloader.classList.add('preloader-hidden');
+        }, 120);
+      } else {
+        requestAnimationFrame(animatePreloader);
+      }
+    }
+
+    // Step progression algorithm
+    requestAnimationFrame(animatePreloader);
+    
+    setTimeout(() => { if (!isPageLoaded) targetProgress = 65; }, 150);
+    setTimeout(() => { if (!isPageLoaded) targetProgress = 85; }, 350);
+
+    window.addEventListener('load', () => {
+      isPageLoaded = true;
+      targetProgress = 100;
+    });
+
+    // 60FPS / 120FPS Hardware-Accelerated Hero Logo 3D Scroll Transition
     const heroLogo = document.getElementById('hero-logo-3d');
     let ticking = false;
 
