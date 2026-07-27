@@ -6,13 +6,13 @@
   <title>STARVEL STUDIOS | Official Comic Universe</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="starvel.png">
-  <link rel="apple-touch-icon" href="starvel.png">
+  <link rel="icon" type="image/png" href="./starvel.png">
+  <link rel="apple-touch-icon" href="./starvel.png">
 
   <!-- Asset Preloading for Instant Rendering -->
-  <link rel="preload" href="AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="starvel.png" as="image" fetchpriority="high">
-  <link rel="preload" href="background.png" as="image">
+  <link rel="preload" href="./AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="./starvel.png" as="image" fetchpriority="high">
+  <link rel="preload" href="./background.png" as="image">
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
     /* Custom Local Font */
     @font-face {
       font-family: 'Avengance';
-      src: url('AVENGEANCE HEROIC AVENGER.ttf') format('truetype');
+      src: url('./AVENGEANCE HEROIC AVENGER.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -64,7 +64,7 @@
       position: relative;
     }
 
-    /* True Viewport-Locked Fixed Background */
+    /* GitHub Pages Fixed Tinted Background Layer */
     #fixed-bg {
       position: fixed;
       top: 0;
@@ -75,11 +75,11 @@
       pointer-events: none;
       background-color: var(--bg-dark);
       background-image: 
-        linear-gradient(rgba(10, 14, 23, 0.88), rgba(10, 14, 23, 0.88)),
-        url('background.png');
+        linear-gradient(rgba(10, 14, 23, 0.85), rgba(10, 14, 23, 0.85)),
+        url('./background.png');
       background-size: cover;
       background-position: center center;
-      background-repeat: repeat;
+      background-repeat: no-repeat;
     }
 
     /* Animated Preloader */
@@ -665,13 +665,13 @@
 </head>
 <body>
 
-  <!-- Full-Viewport Dedicated Fixed Background -->
+  <!-- Full-Viewport Fixed Background Layer -->
   <div id="fixed-bg"></div>
 
   <!-- Marvel Comic Preloader -->
   <div id="preloader">
     <div class="preloader-content">
-      <img src="starvel.png" alt="STARVEL STUDIOS" class="preloader-logo" fetchpriority="high">
+      <img src="./starvel.png" alt="STARVEL STUDIOS" class="preloader-logo" fetchpriority="high">
       <div class="preloader-text">LOADING SAGA...</div>
       <div class="preloader-bar-bg">
         <div class="preloader-bar-fill" id="preloader-fill"></div>
@@ -683,7 +683,7 @@
   <header class="navbar">
     <div class="logo-container">
       <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">
-        <img src="starvel.png" alt="STARVEL STUDIOS" class="logo-img">
+        <img src="./starvel.png" alt="STARVEL STUDIOS" class="logo-img">
       </a>
     </div>
     <ul class="nav-links">
@@ -716,7 +716,7 @@
       <!-- Video 1 (#SCI-FI Announcement VOL 1) -->
       <div class="video-card">
         <div class="video-player-wrapper">
-          <div class="thumbnail-overlay" style="background-image: url('thumb.PNG');" onclick="playVideo(this)">
+          <div class="thumbnail-overlay" style="background-image: url('./thumb.PNG');" onclick="playVideo(this)">
             <div class="play-btn"></div>
           </div>
           <video preload="metadata" class="dolby-active" id="video-1">
@@ -730,7 +730,7 @@
               <span class="announcement-vol-badge">VOL 1</span>
             </div>
             <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-1', this)" title="Toggle Dolby Vision">
-              <img src="dolby.png" alt="Dolby" class="dolby-icon">
+              <img src="./dolby.png" alt="Dolby" class="dolby-icon">
             </button>
           </div>
           <p>Directed by Jayden & Sathwik</p>
@@ -741,7 +741,7 @@
       <!-- Video 2 (#Oka Film Announcement VOL 2) -->
       <div class="video-card side-by-side-card">
         <div class="video-player-wrapper portrait">
-          <div class="thumbnail-overlay" style="background-image: url('thumb2.PNG');" onclick="playVideo(this)">
+          <div class="thumbnail-overlay" style="background-image: url('./thumb2.PNG');" onclick="playVideo(this)">
             <div class="play-btn"></div>
           </div>
           <video preload="metadata" class="dolby-active" id="video-2">
@@ -755,7 +755,7 @@
               <span class="announcement-vol-badge">VOL 2</span>
             </div>
             <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-2', this)" title="Toggle Dolby Vision">
-              <img src="dolby.png" alt="Dolby" class="dolby-icon">
+              <img src="./dolby.png" alt="Dolby" class="dolby-icon">
             </button>
           </div>
           <p>Directed by K.Abhirama Reddy</p>
@@ -776,7 +776,7 @@
       <!-- Director 1 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="jayden.png" alt="Jayden Jacob" loading="lazy" decoding="async">
+          <img src="./jayden.png" alt="Jayden Jacob" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Jayden Jacob</h3>
@@ -787,7 +787,7 @@
       <!-- Director 2 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="sath.png" alt="Sathwik" loading="lazy" decoding="async">
+          <img src="./sath.png" alt="Sathwik" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Sathwik</h3>
@@ -798,7 +798,7 @@
       <!-- Director 3 -->
       <div class="director-card">
         <div class="director-img-wrapper">
-          <img src="abhi.png" alt="Abhirama Reddy Kalluri" loading="lazy" decoding="async">
+          <img src="./abhi.png" alt="Abhirama Reddy Kalluri" loading="lazy" decoding="async">
         </div>
         <div class="director-info">
           <h3>Abhirama Reddy Kalluri</h3>
