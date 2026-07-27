@@ -52,7 +52,7 @@
       box-sizing: border-box;
     }
 
-    /* Base Body Styling with bg.PNG (Matched Case for GitHub Pages) */
+    /* Base Body Styling with bg.PNG */
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: var(--bg-dark);
@@ -84,9 +84,7 @@
       z-index: -1;
     }
 
-    /* ==========================================================================
-       Preloader Overlay
-       ========================================================================== */
+    /* Preloader Overlay */
     #preloader {
       position: fixed;
       top: 0;
@@ -150,9 +148,7 @@
       transition: width 0.15s ease;
     }
 
-    /* ==========================================================================
-       Comic Navigation Bar
-       ========================================================================== */
+    /* Comic Navigation Bar */
     .navbar {
       position: fixed;
       top: 0;
@@ -208,9 +204,7 @@
       box-shadow: 3px 3px 0px var(--starvel-red);
     }
 
-    /* ==========================================================================
-       Hero Section & Disappearing 3D Scroll Logo
-       ========================================================================== */
+    /* Hero Section */
     .hero {
       min-height: 85vh;
       display: flex;
@@ -298,10 +292,10 @@
     }
 
     /* ==========================================================================
-       Content Sections & Video Cards
+       Content Sections & Vertical Stacked Video Cards
        ========================================================================== */
     .content-section {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto 100px auto;
       padding: 60px 30px 0 30px;
     }
@@ -327,24 +321,17 @@
       text-shadow: 2px 2px 0px #000000;
     }
 
-    .section-number {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #000000;
-      background: var(--comic-yellow);
-      padding: 4px 14px;
-      border: 2px solid #000000;
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: 1.8fr 1fr;
-      gap: 40px;
-      align-items: start;
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
     }
 
     .video-card {
+      width: 100%;
+      max-width: 850px;
       background: var(--bg-card);
       border: 3px solid #FFFFFF;
       box-shadow: 8px 8px 0px var(--starvel-red), 8px 8px 0px 3px #000000;
@@ -358,10 +345,27 @@
       transform: translate(-4px, -4px);
     }
 
-    .video-card.portrait-card {
-      justify-self: end;
-      width: 100%;
-      max-width: 330px;
+    /* Side-By-Side Layout for #Oka */
+    .video-card.side-by-side-card {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .video-card.side-by-side-card .video-player-wrapper.portrait {
+      width: 320px;
+      flex-shrink: 0;
+      border-bottom: none;
+      border-right: 3px solid #FFFFFF;
+      aspect-ratio: 9 / 16;
+    }
+
+    .video-card.side-by-side-card .video-details {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px;
     }
 
     .video-player-wrapper {
@@ -371,10 +375,6 @@
       background-color: #000;
       overflow: hidden;
       border-bottom: 3px solid #FFFFFF;
-    }
-
-    .video-player-wrapper.portrait {
-      aspect-ratio: 9 / 16;
     }
 
     .video-player-wrapper video {
@@ -444,16 +444,41 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 15px;
       margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .video-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .video-details h3 {
       font-family: 'Bangers', 'Oswald', cursive;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       letter-spacing: 2px;
       color: #FFFFFF;
       text-shadow: 2px 2px 0px #000000;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .announcement-vol-badge {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #000000;
+      background: var(--comic-yellow);
+      padding: 3px 10px;
+      border: 2px solid #000000;
+      letter-spacing: 1.5px;
+      display: inline-block;
+      box-shadow: 2px 2px 0px #000000;
+      white-space: nowrap;
+      line-height: 1;
     }
 
     .dolby-toggle-btn {
@@ -502,20 +527,79 @@
       margin-right: 4px;
     }
 
-    .coming-soon-card {
+    /* ==========================================================================
+       Directors Section & Comic Cards
+       ========================================================================== */
+    .directors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .director-card {
       background: var(--bg-card);
       border: 3px solid #FFFFFF;
       box-shadow: 8px 8px 0px var(--starvel-red), 8px 8px 0px 3px #000000;
-      padding: 70px 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .director-card:hover {
+      border-color: var(--comic-yellow);
+      box-shadow: 12px 12px 0px var(--comic-yellow), 12px 12px 0px 3px #000000;
+      transform: translate(-4px, -4px);
+    }
+
+    .director-img-wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-bottom: 3px solid #FFFFFF;
+      background-color: #000;
+    }
+
+    .director-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .director-card:hover .director-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .director-info {
+      padding: 22px 20px;
+      background: #14141A;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
     }
 
-    .coming-soon-card h3 {
-      font-family: 'Bangers', cursive;
-      font-size: 3.6rem;
+    .director-info h3 {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0px #000000;
+      margin-bottom: 8px;
+    }
+
+    .director-info p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
       color: var(--comic-yellow);
-      text-shadow: 3px 3px 0px #EC1D24, 6px 6px 0px #000000;
-      margin-bottom: 12px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1.4;
     }
 
     footer {
@@ -539,8 +623,13 @@
       .navbar { padding: 0 20px; }
       .nav-links { gap: 12px; }
       .hero-3d-text { font-size: 4.5rem; }
-      .video-grid { grid-template-columns: 1fr; gap: 30px; }
-      .video-card.portrait-card { justify-self: center; max-width: 320px; }
+      .video-card.side-by-side-card { flex-direction: column; }
+      .video-card.side-by-side-card .video-player-wrapper.portrait {
+        width: 100%;
+        border-right: none;
+        border-bottom: 3px solid #FFFFFF;
+      }
+      .directors-grid { grid-template-columns: 1fr; gap: 30px; }
       footer { padding: 25px 20px; flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -568,7 +657,7 @@
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
       <li><a href="#announcements">Announcements</a></li>
-      <li><a href="#characters">Characters</a></li>
+      <li><a href="#directors">Directors</a></li>
     </ul>
   </header>
 
@@ -588,11 +677,11 @@
   <section id="announcements" class="content-section">
     <div class="section-header">
       <h2 class="section-title">Announcements</h2>
-      <span class="section-number">VOL. 01</span>
     </div>
     
-    <div class="video-grid">
-      <!-- Video 1 (thumb.PNG matched to GitHub capitalization) -->
+    <div class="video-stack">
+      
+      <!-- Video 1 (#SCI-FI Announcement VOL 1) -->
       <div class="video-card">
         <div class="video-player-wrapper">
           <div class="thumbnail-overlay" style="background-image: url('thumb.PNG');" onclick="playVideo(this)">
@@ -604,7 +693,10 @@
         </div>
         <div class="video-details">
           <div class="video-details-header">
-            <h3>#SCI-FI Announcement</h3>
+            <div class="video-title-group">
+              <h3>#SCI-FI Announcement</h3>
+              <span class="announcement-vol-badge">VOL 1</span>
+            </div>
             <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-1', this)" title="Toggle Dolby Vision">
               <img src="dolby.png" alt="Dolby" class="dolby-icon">
             </button>
@@ -614,8 +706,8 @@
         </div>
       </div>
 
-      <!-- Video 2 (thumb2.PNG matched to GitHub capitalization) -->
-      <div class="video-card portrait-card">
+      <!-- Video 2 (#Oka Film Announcement VOL 2 - Video Left, Description Right) -->
+      <div class="video-card side-by-side-card">
         <div class="video-player-wrapper portrait">
           <div class="thumbnail-overlay" style="background-image: url('thumb2.PNG');" onclick="playVideo(this)">
             <div class="play-btn"></div>
@@ -626,26 +718,61 @@
         </div>
         <div class="video-details">
           <div class="video-details-header">
-            <h3>#Oka Film Announcement</h3>
+            <div class="video-title-group">
+              <h3>#Oka Film Announcement</h3>
+              <span class="announcement-vol-badge">VOL 2</span>
+            </div>
             <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-2', this)" title="Toggle Dolby Vision">
               <img src="dolby.png" alt="Dolby" class="dolby-icon">
             </button>
           </div>
           <p>Directed by K.Abhirama Reddy</p>
+          <p><span class="label">Status</span> Coming Soon to Starvel Studios</p>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- Characters Section -->
-  <section id="characters" class="content-section">
+  <!-- Directors Section -->
+  <section id="directors" class="content-section">
     <div class="section-header">
-      <h2 class="section-title">Characters</h2>
-      <span class="section-number">VOL. 02</span>
+      <h2 class="section-title">Directors</h2>
     </div>
-    <div class="coming-soon-card">
-      <h3>Coming Soon</h3>
-      <p>The roster of heroes and villains is currently classified.</p>
+    
+    <div class="directors-grid">
+      <!-- Director 1 -->
+      <div class="director-card">
+        <div class="director-img-wrapper">
+          <img src="jayden.png" alt="Jayden Jacob">
+        </div>
+        <div class="director-info">
+          <h3>Jayden Jacob</h3>
+          <p>Director, Writer and Cinematographer</p>
+        </div>
+      </div>
+
+      <!-- Director 2 -->
+      <div class="director-card">
+        <div class="director-img-wrapper">
+          <img src="sathwik.png" alt="Sathwik">
+        </div>
+        <div class="director-info">
+          <h3>Sathwik</h3>
+          <p>VFX Artist, Director, Writer</p>
+        </div>
+      </div>
+
+      <!-- Director 3 -->
+      <div class="director-card">
+        <div class="director-img-wrapper">
+          <img src="abhi.png" alt="Abhirama Reddy Kalluri">
+        </div>
+        <div class="director-info">
+          <h3>Abhirama Reddy Kalluri</h3>
+          <p>Director, Writer, Production Designer</p>
+        </div>
+      </div>
     </div>
   </section>
 
