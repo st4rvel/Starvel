@@ -558,6 +558,102 @@
       margin-right: 4px;
     }
 
+    /* YouTube Channel Preview Section */
+    .youtube-card {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 3px solid #FFFFFF;
+      box-shadow: 8px 8px 0px #FF0000, 8px 8px 0px 3px #000000;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .youtube-card:hover {
+      border-color: var(--comic-cyan);
+      box-shadow: 12px 12px 0px var(--comic-cyan), 12px 12px 0px 3px #000000;
+      transform: translate(-4px, -4px);
+    }
+
+    .yt-channel-info {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .yt-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid #FFFFFF;
+      box-shadow: 3px 3px 0px #000000;
+      object-fit: cover;
+    }
+
+    .yt-text-details h3 {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0px #000000;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .yt-text-details p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .yt-buttons-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-youtube {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #FFFFFF;
+      background: #FF0000;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 24px;
+      border: 3px solid #FFFFFF;
+      box-shadow: 4px 4px 0px #000000;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-youtube:hover {
+      background: var(--comic-cyan);
+      color: #000000;
+      border-color: #000000;
+      box-shadow: 6px 6px 0px var(--comic-orange);
+      transform: translate(-2px, -2px);
+    }
+
+    .btn-youtube svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
     /* Directors Section */
     .directors-grid {
       display: grid;
@@ -733,6 +829,27 @@
         padding: 18px 16px;
       }
 
+      .youtube-card {
+        padding: 20px 18px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .yt-channel-info {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .yt-buttons-group {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .btn-youtube {
+        width: 100%;
+        justify-content: center;
+      }
+
       .directors-grid {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -777,6 +894,7 @@
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
       <li><a href="#announcements">Announcements</a></li>
+      <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
     </ul>
   </header>
@@ -851,6 +969,38 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- YouTube Channel Preview Section -->
+  <section id="youtube-channel" class="content-section">
+    <div class="section-header" style="background: #FF0000;">
+      <h2 class="section-title">STARVEL YOUTUBE</h2>
+    </div>
+
+    <div class="youtube-card">
+      <div class="yt-channel-info">
+        <img src="./starvel.png" alt="Starvel Studios YouTube" class="yt-avatar">
+        <div class="yt-text-details">
+          <h3>STARVEL STUDIOS</h3>
+          <p>Watch official title announcements, sci-fi teasers, and exclusive trailers on YouTube.</p>
+        </div>
+      </div>
+      
+      <div class="yt-buttons-group">
+        <!-- Direct Channel Subscription Link -->
+        <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="btn-youtube">
+          <svg viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          Subscribe Channel
+        </a>
+
+        <!-- Latest Video Link (TETHER Announcement) -->
+        <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-youtube" style="background: var(--comic-orange);">
+          Watch TETHER Teaser
+        </a>
+      </div>
     </div>
   </section>
 
