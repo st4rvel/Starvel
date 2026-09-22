@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STARVEL STUDIOS | Official Comic Universe</title>
+  <title>STARVEL STUDIOS | TETHER Teaser & Comic Universe</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./starvel.png">
@@ -53,7 +53,7 @@
       box-sizing: border-box;
     }
 
-    img, video {
+    img, video, iframe {
       max-width: 100%;
       height: auto;
       display: block;
@@ -207,7 +207,7 @@
 
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       list-style: none;
     }
 
@@ -352,6 +352,7 @@
       text-shadow: 2px 2px 0px #000000;
     }
 
+    /* TETHER Teaser Showcase Card */
     .video-stack {
       display: flex;
       flex-direction: column;
@@ -362,41 +363,20 @@
 
     .video-card {
       width: 100%;
-      max-width: 850px;
+      max-width: 900px;
       background: var(--bg-card);
       border: 3px solid #FFFFFF;
       box-shadow: 8px 8px 0px var(--comic-orange), 8px 8px 0px 3px #000000;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       will-change: transform;
+      overflow: hidden;
     }
 
     .video-card:hover {
       border-color: var(--comic-cyan);
       box-shadow: 12px 12px 0px var(--comic-cyan), 12px 12px 0px 3px #000000;
       transform: translate(-4px, -4px);
-    }
-
-    .video-card.side-by-side-card {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-    }
-
-    .video-card.side-by-side-card .video-player-wrapper.portrait {
-      width: 320px;
-      flex-shrink: 0;
-      border-bottom: none;
-      border-right: 3px solid #FFFFFF;
-      aspect-ratio: 9 / 16;
-    }
-
-    .video-card.side-by-side-card .video-details {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 30px;
     }
 
     .video-player-wrapper {
@@ -406,6 +386,13 @@
       background-color: #000;
       overflow: hidden;
       border-bottom: 3px solid #FFFFFF;
+    }
+
+    .video-player-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
     }
 
     .video-player-wrapper video {
@@ -467,7 +454,7 @@
     }
 
     .video-details {
-      padding: 22px 24px;
+      padding: 24px 28px;
       background: #141D2C;
     }
 
@@ -476,7 +463,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 15px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
@@ -489,11 +476,11 @@
 
     .video-details h3 {
       font-family: 'Bangers', 'Oswald', cursive;
-      font-size: 1.8rem;
+      font-size: 2.1rem;
       letter-spacing: 2px;
       color: #FFFFFF;
       text-shadow: 2px 2px 0px #000000;
-      line-height: 1.2;
+      line-height: 1.1;
       margin: 0;
     }
 
@@ -503,7 +490,7 @@
       font-weight: 700;
       color: #000000;
       background: var(--comic-cyan);
-      padding: 3px 10px;
+      padding: 4px 12px;
       border: 2px solid #000000;
       letter-spacing: 1.5px;
       display: inline-block;
@@ -512,40 +499,43 @@
       line-height: 1;
     }
 
-    .dolby-toggle-btn {
+    .btn-watch-youtube {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background: #1E293B;
+      gap: 8px;
+      background: #FF0000;
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 18px;
       border: 2px solid #FFFFFF;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
       box-shadow: 3px 3px 0px #000000;
+      transition: all 0.2s ease;
     }
 
-    .dolby-toggle-btn:hover {
+    .btn-watch-youtube:hover {
       background: var(--comic-cyan);
+      color: #000000;
       border-color: #000000;
+      box-shadow: 4px 4px 0px var(--comic-orange);
+      transform: translate(-2px, -2px);
     }
 
-    .dolby-toggle-btn img.dolby-icon {
-      height: 22px;
-      width: auto;
-      filter: brightness(2) contrast(1.5);
-    }
-
-    .dolby-toggle-btn.active {
-      background: var(--comic-orange);
-      box-shadow: 4px 4px 0px var(--comic-cyan);
+    .btn-watch-youtube svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .video-details p {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       margin-bottom: 8px;
     }
 
@@ -555,103 +545,178 @@
       padding: 2px 8px;
       border: 1px solid var(--border-subtle);
       font-size: 0.8rem;
-      margin-right: 4px;
+      margin-right: 6px;
     }
 
-    /* YouTube Channel Preview Section */
-    .youtube-card {
+    /* Mini YouTube Channel Interface */
+    .yt-app-window {
       width: 100%;
-      max-width: 850px;
+      max-width: 900px;
       margin: 0 auto;
-      background: var(--bg-card);
+      background: #0F131D;
       border: 3px solid #FFFFFF;
-      box-shadow: 8px 8px 0px #FF0000, 8px 8px 0px 3px #000000;
-      padding: 28px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+      box-shadow: 8px 8px 0px #FF0000, 8px 8px 0px 4px #000000;
+      overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .youtube-card:hover {
+    .yt-app-window:hover {
       border-color: var(--comic-cyan);
-      box-shadow: 12px 12px 0px var(--comic-cyan), 12px 12px 0px 3px #000000;
-      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px var(--comic-cyan), 12px 12px 0px 4px #000000;
+      transform: translate(-3px, -3px);
     }
 
-    .yt-channel-info {
+    .yt-channel-banner {
+      width: 100%;
+      height: 130px;
+      background: linear-gradient(135deg, #180505 0%, #300A0A 50%, #121926 100%);
+      background-image: 
+        radial-gradient(rgba(255, 0, 0, 0.3) 15%, transparent 16%),
+        linear-gradient(rgba(10, 14, 23, 0.5), rgba(10, 14, 23, 0.8));
+      background-size: 20px 20px, 100% 100%;
+      border-bottom: 3px solid #000000;
+      display: flex;
+      align-items: flex-end;
+      padding: 15px 25px;
+      position: relative;
+    }
+
+    .yt-banner-badge {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      background: #FF0000;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      padding: 3px 10px;
+      box-shadow: 2px 2px 0px #000000;
+      text-transform: uppercase;
+    }
+
+    .yt-profile-strip {
+      padding: 20px 25px;
+      background: #141A26;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
-      gap: 18px;
-      flex: 1;
-      min-width: 260px;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .yt-avatar {
-      width: 64px;
-      height: 64px;
+    .yt-profile-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .yt-channel-pic {
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       border: 3px solid #FFFFFF;
-      box-shadow: 3px 3px 0px #000000;
+      box-shadow: 4px 4px 0px #000000;
+      background-color: #000000;
       object-fit: cover;
+      flex-shrink: 0;
     }
 
-    .yt-text-details h3 {
+    .yt-profile-meta h3 {
       font-family: 'Bangers', 'Oswald', cursive;
       font-size: 1.8rem;
       letter-spacing: 2px;
       color: #FFFFFF;
-      text-shadow: 2px 2px 0px #000000;
+      margin: 0;
       line-height: 1.1;
-      margin-bottom: 4px;
+      text-shadow: 2px 2px 0px #000000;
     }
 
-    .yt-text-details p {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
+    .yt-profile-meta .yt-handle {
+      font-family: 'Oswald', sans-serif;
       font-size: 0.85rem;
+      color: var(--comic-cyan);
+      letter-spacing: 1.5px;
+      margin-top: 2px;
+    }
+
+    .yt-profile-meta .yt-sub-meta {
+      font-size: 0.75rem;
       color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
-    .yt-buttons-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-youtube {
+    .yt-subscribe-cta {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      color: #FFFFFF;
+      gap: 8px;
       background: #FF0000;
+      color: #FFFFFF;
       font-family: 'Oswald', sans-serif;
       font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 12px 24px;
-      border: 3px solid #FFFFFF;
+      padding: 10px 22px;
+      border: 2px solid #FFFFFF;
       box-shadow: 4px 4px 0px #000000;
       transition: all 0.2s ease;
       white-space: nowrap;
     }
 
-    .btn-youtube:hover {
+    .yt-subscribe-cta:hover {
       background: var(--comic-cyan);
       color: #000000;
       border-color: #000000;
-      box-shadow: 6px 6px 0px var(--comic-orange);
+      box-shadow: 5px 5px 0px var(--comic-orange);
       transform: translate(-2px, -2px);
     }
 
-    .btn-youtube svg {
+    .yt-subscribe-cta svg {
       width: 20px;
       height: 20px;
       fill: currentColor;
+    }
+
+    .yt-nav-tabs {
+      display: flex;
+      background: #0E131E;
+      border-bottom: 2px solid #000000;
+      padding: 0 25px;
+      gap: 20px;
+    }
+
+    .yt-tab {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 4px;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+    }
+
+    .yt-tab.active {
+      color: #FFFFFF;
+      border-bottom: 3px solid #FF0000;
+    }
+
+    .yt-channel-body {
+      padding: 22px 25px;
+      background: #0B0E17;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .yt-channel-body p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* Directors Section */
@@ -748,7 +813,7 @@
       text-decoration: none;
     }
 
-    /* Robust Responsive Alignments (Mobile & Tablet Fixes) */
+    /* Robust Responsive Alignments (Mobile & Tablet) */
     @media (max-width: 850px) {
       .navbar {
         padding: 0 15px;
@@ -814,38 +879,26 @@
         box-shadow: 5px 5px 0px var(--comic-orange), 5px 5px 0px 2px #000000;
       }
 
-      .video-card.side-by-side-card {
-        flex-direction: column;
-      }
-
-      .video-card.side-by-side-card .video-player-wrapper.portrait {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        border-right: none;
-        border-bottom: 3px solid #FFFFFF;
-      }
-
-      .video-card.side-by-side-card .video-details {
+      .video-details {
         padding: 18px 16px;
       }
 
-      .youtube-card {
-        padding: 20px 18px;
-        flex-direction: column;
-        text-align: center;
+      .video-details h3 {
+        font-size: 1.6rem;
       }
 
-      .yt-channel-info {
-        flex-direction: column;
-        align-items: center;
+      .yt-channel-banner {
+        height: 85px;
+        padding: 10px 15px;
       }
 
-      .yt-buttons-group {
-        width: 100%;
+      .yt-profile-strip {
         flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
       }
 
-      .btn-youtube {
+      .yt-subscribe-cta {
         width: 100%;
         justify-content: center;
       }
@@ -893,7 +946,7 @@
     </div>
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
-      <li><a href="#announcements">Announcements</a></li>
+      <li><a href="#tether-teaser">Tether Teaser</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
     </ul>
@@ -908,98 +961,89 @@
     </div>
 
     <p>Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.</p>
-    <a href="#announcements" class="btn-editorial">Explore Announcements</a>
+    <a href="#tether-teaser" class="btn-editorial">Watch TETHER Teaser</a>
   </section>
 
-  <!-- Announcements Section -->
-  <section id="announcements" class="content-section">
+  <!-- TETHER Teaser Section (Replacing Announcements) -->
+  <section id="tether-teaser" class="content-section">
     <div class="section-header">
-      <h2 class="section-title">Announcements</h2>
+      <h2 class="section-title">TETHER TEASER</h2>
     </div>
     
     <div class="video-stack">
       
-      <!-- Video 1 (#SCI-FI Announcement VOL 1) -->
+      <!-- Featured TETHER Teaser Player -->
       <div class="video-card">
         <div class="video-player-wrapper">
-          <div class="thumbnail-overlay" style="background-image: url('./thumb.PNG');" onclick="playVideo(this)">
-            <div class="play-btn"></div>
-          </div>
-          <video preload="metadata" class="dolby-active" id="video-1" playsinline>
-            <source src="https://www.dropbox.com/scl/fi/3ztq8zti4o6f2pphbtvzp/Announcement-1.mp4?rlkey=z3zosiguc5cjqpd6nwvr4v1g6&st=p2zgxqjh&raw=1" type="video/mp4">
-          </video>
+          <iframe 
+            src="https://www.youtube-nocookie.com/embed/H4hhmBM308o?rel=0" 
+            title="TETHER - Title Announcement | Sathwik | Jayden | Abhi Rama Reddy | Starvel Studios" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
         </div>
         <div class="video-details">
           <div class="video-details-header">
             <div class="video-title-group">
-              <h3>#SCI-FI Announcement</h3>
-              <span class="announcement-vol-badge">VOL 1</span>
+              <h3>TETHER — Official Title Teaser</h3>
+              <span class="announcement-vol-badge">PREMIERE</span>
             </div>
-            <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-1', this)" title="Toggle Dolby Vision">
-              <img src="./dolby.png" alt="Dolby" class="dolby-icon" decoding="async">
-            </button>
+            <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+              <svg viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Watch on YouTube
+            </a>
           </div>
-          <p>Directed by Jayden & Sathwik</p>
-          <p><span class="label">Cast & Crew</span> Jayden, Chinmay, Sathwik, Lokesh, Abhirama, Nihal, Srijan</p>
-        </div>
-      </div>
-
-      <!-- Video 2 (#Oka Film Announcement VOL 2) -->
-      <div class="video-card side-by-side-card">
-        <div class="video-player-wrapper portrait">
-          <div class="thumbnail-overlay" style="background-image: url('./thumb2.PNG');" onclick="playVideo(this)">
-            <div class="play-btn"></div>
-          </div>
-          <video preload="metadata" class="dolby-active" id="video-2" playsinline>
-            <source src="https://www.dropbox.com/scl/fi/5reqxypizxhvujm6xwy8c/IMG_7719.MP4?rlkey=oc6p5kygkvnxjyj9wvb1kfh8g&st=bmw42vgi&raw=1" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-details">
-          <div class="video-details-header">
-            <div class="video-title-group">
-              <h3>#Oka Film Announcement</h3>
-              <span class="announcement-vol-badge">VOL 2</span>
-            </div>
-            <button class="dolby-toggle-btn active" onclick="toggleDolbyVision('video-2', this)" title="Toggle Dolby Vision">
-              <img src="./dolby.png" alt="Dolby" class="dolby-icon" decoding="async">
-            </button>
-          </div>
-          <p>Directed by K.Abhirama Reddy</p>
-          <p><span class="label">Status</span> Coming Soon to Starvel Studios</p>
+          <p>Directed by Sathwik, Jayden Jacob & Abhirama Reddy Kalluri</p>
+          <p><span class="label">Cast & Crew</span> Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</p>
+          <p><span class="label">Production</span> Official Starvel Cinematic Universe Title Teaser</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- YouTube Channel Preview Section -->
+  <!-- Mini YouTube Channel Interface Section -->
   <section id="youtube-channel" class="content-section">
     <div class="section-header" style="background: #FF0000;">
-      <h2 class="section-title">STARVEL YOUTUBE</h2>
+      <h2 class="section-title">STARVEL ON YOUTUBE</h2>
     </div>
 
-    <div class="youtube-card">
-      <div class="yt-channel-info">
-        <img src="./starvel.png" alt="Starvel Studios YouTube" class="yt-avatar">
-        <div class="yt-text-details">
-          <h3>STARVEL STUDIOS</h3>
-          <p>Watch official title announcements, sci-fi teasers, and exclusive trailers on YouTube.</p>
-        </div>
+    <div class="yt-app-window">
+      <!-- Channel Banner Header -->
+      <div class="yt-channel-banner">
+        <span class="yt-banner-badge">Official YouTube Hub</span>
       </div>
-      
-      <div class="yt-buttons-group">
-        <!-- Direct Channel Subscription Link -->
-        <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="btn-youtube">
+
+      <!-- Profile & Subscribe Row -->
+      <div class="yt-profile-strip">
+        <div class="yt-profile-left">
+          <img src="./starvel.png" alt="Starvel Studios" class="yt-channel-pic">
+          <div class="yt-profile-meta">
+            <h3>STARVEL STUDIOS</h3>
+            <div class="yt-handle">@starvelstudios-1981</div>
+            <div class="yt-sub-meta">Official Teasers, Cinematic Trailers & Behind The Scenes</div>
+          </div>
+        </div>
+        <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="yt-subscribe-cta">
           <svg viewBox="0 0 24 24">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
-          Subscribe Channel
+          Subscribe
         </a>
+      </div>
 
-        <!-- Latest Video Link (TETHER Announcement) -->
-        <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-youtube" style="background: var(--comic-orange);">
-          Watch TETHER Teaser
-        </a>
+      <!-- Channel Tabs Simulation -->
+      <div class="yt-nav-tabs">
+        <div class="yt-tab active">Home</div>
+        <div class="yt-tab">Releases</div>
+        <div class="yt-tab">About</div>
+      </div>
+
+      <!-- Channel Info Body -->
+      <div class="yt-channel-body">
+        <p>Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
       </div>
     </div>
   </section>
@@ -1049,7 +1093,7 @@
   <!-- Footer -->
   <footer>
     <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
-    <div>FOLLOW ON <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></div>
+    <div>FOLLOW ON <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a> &amp; <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a></div>
   </footer>
 
   <script>
@@ -1122,9 +1166,10 @@
       }
     }, { passive: true });
 
-    // Video & Dolby Controls
+    // Video & Dolby Controls (Preserved for compatibility)
     function toggleDolbyVision(videoId, btnElement) {
       const video = document.getElementById(videoId);
+      if (!video) return;
       if (video.classList.contains('dolby-active')) {
         video.classList.remove('dolby-active');
         btnElement.classList.remove('active');
@@ -1137,6 +1182,7 @@
     function playVideo(overlayElement) {
       const wrapper = overlayElement.parentElement;
       const video = wrapper.querySelector('video');
+      if (!video) return;
 
       overlayElement.style.opacity = '0';
       setTimeout(() => {
