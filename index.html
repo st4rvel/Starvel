@@ -75,7 +75,6 @@
       position: relative;
     }
 
-    /* Fixed Background + GPU Ambient Orbs */
     #fixed-bg {
       position: fixed;
       inset: 0;
@@ -145,7 +144,6 @@
       100% { transform: translate3d(-3%, 3%, 0) scale(0.96); }
     }
 
-    /* Liquid Glass Surface */
     .glass-surface {
       background: linear-gradient(
         135deg,
@@ -180,7 +178,6 @@
       opacity: 1;
     }
 
-    /* Scroll Progress Hairline */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -196,7 +193,6 @@
       box-shadow: 0 0 12px var(--comic-cyan-glow);
     }
 
-    /* Liquid Glass Preloader */
     #preloader {
       position: fixed;
       inset: 0;
@@ -284,7 +280,6 @@
       will-change: width;
     }
 
-    /* Slim Floating Liquid Glass Navbar */
     .navbar {
       position: fixed;
       top: 10px;
@@ -376,7 +371,6 @@
       gap: 5px;
     }
 
-    /* Hero Section */
     .hero {
       min-height: 90vh;
       display: flex;
@@ -508,7 +502,6 @@
       box-shadow: 0 16px 38px rgba(245, 197, 24, 0.45), var(--glass-specular);
     }
 
-    /* Scroll-Reveal Fade */
     .reveal {
       opacity: 0;
       transform: translate3d(0, 28px, 0);
@@ -522,7 +515,6 @@
       transform: translate3d(0, 0, 0);
     }
 
-    /* Content Sections */
     .content-section {
       max-width: 1120px;
       margin: 0 auto 90px auto;
@@ -598,7 +590,6 @@
       transform: translateY(-1px);
     }
 
-    /* TETHER / Movies Showcase Cards */
     .video-stack {
       display: flex;
       flex-direction: column;
@@ -872,7 +863,6 @@
       margin-right: 8px;
     }
 
-    /* Mini IMDb Page Interface */
     .imdb-app-window {
       width: 100%;
       max-width: 920px;
@@ -1181,7 +1171,6 @@
       word-break: break-word;
     }
 
-    /* Mini YouTube Channel Interface */
     .yt-app-window {
       width: 100%;
       max-width: 920px;
@@ -1367,7 +1356,6 @@
       gap: 10px;
     }
 
-    /* Directors Section */
     .directors-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1445,7 +1433,6 @@
       line-height: 1.45;
     }
 
-    /* Footer */
     footer {
       max-width: 1120px;
       margin: 0 auto 30px auto;
@@ -1510,11 +1497,11 @@
       background: rgba(0, 229, 255, 0.14);
     }
 
-    /* Liquid Glass Email-Only Admin Modal & Dashboard */
+    /* Admin Modal & Full Studio Editor */
     .admin-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 14, 0.74);
+      background: rgba(4, 7, 14, 0.76);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 5000;
@@ -1536,11 +1523,11 @@
 
     .admin-modal {
       width: 100%;
-      max-width: 760px;
+      max-width: 820px;
       max-height: 88vh;
       overflow-y: auto;
       border-radius: 28px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.84) 45%, rgba(8, 12, 22, 0.92));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.88) 45%, rgba(8, 12, 22, 0.95));
       backdrop-filter: blur(22px) saturate(190%);
       -webkit-backdrop-filter: blur(22px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.28);
@@ -1572,6 +1559,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .admin-badge-live {
@@ -1605,11 +1593,28 @@
       border-color: var(--comic-orange);
     }
 
+    .admin-subbox {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .admin-subbox-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.92rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--comic-cyan);
+      margin-bottom: 12px;
+    }
+
     .admin-form-group {
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      margin-bottom: 14px;
+      gap: 6px;
+      margin-bottom: 12px;
     }
 
     .admin-form-grid {
@@ -1620,8 +1625,8 @@
 
     .admin-label {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 1.3px;
+      font-size: 0.78rem;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--text-muted);
     }
@@ -1630,13 +1635,13 @@
     .admin-select,
     .admin-textarea {
       width: 100%;
-      padding: 11px 15px;
-      border-radius: 14px;
+      padding: 10px 14px;
+      border-radius: 13px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(6, 10, 18, 0.65);
+      background: rgba(6, 10, 18, 0.68);
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
@@ -1957,17 +1962,14 @@
 </head>
 <body>
 
-  <!-- Smooth Scroll Progress Line -->
   <div id="scroll-progress"></div>
 
-  <!-- Fixed Background Layer -->
   <div id="fixed-bg">
     <div class="liquid-orb orb-cyan"></div>
     <div class="liquid-orb orb-orange"></div>
     <div class="liquid-orb orb-gold"></div>
   </div>
 
-  <!-- Liquid Glass Preloader -->
   <div id="preloader">
     <div class="preloader-comic-box">
       <img src="./starvel.png" alt="STARVEL STUDIOS" class="preloader-logo" fetchpriority="high" decoding="async">
@@ -1978,10 +1980,9 @@
     </div>
   </div>
 
-  <!-- Slim Floating Liquid Glass Navbar -->
   <header class="navbar" id="navbar">
     <div class="logo-container">
-      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">
+      <a id="nav-insta-logo-link" href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">
         <img src="./starvel.png" alt="STARVEL STUDIOS" class="logo-img" decoding="async">
       </a>
     </div>
@@ -1991,35 +1992,32 @@
       <li><a href="#imdb-page" class="nav-imdb-link">IMDb</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
-      <li><button type="button" id="nav-admin-badge" class="nav-admin-pill" onclick="openAdminModal('movies')">★ Studio Admin</button></li>
+      <li><button type="button" id="nav-admin-badge" class="nav-admin-pill" onclick="openAdminModal('editor')">★ Studio Editor</button></li>
     </ul>
   </header>
 
-  <!-- Hero Section -->
   <section id="top" class="hero">
-    <span class="hero-subtitle hero-fade" style="--hero-delay: 80ms;">★ ISSUE #1 — STARVEL STUDIOS ★</span>
+    <span class="hero-subtitle hero-fade" id="hero-subtitle-el" style="--hero-delay: 80ms;">★ ISSUE #1 — STARVEL STUDIOS ★</span>
 
     <div class="hero-logo-3d-wrapper hero-fade" id="hero-logo-3d" style="--hero-delay: 160ms;">
-      <h1 class="hero-3d-text">stArvel</h1>
+      <h1 class="hero-3d-text" id="hero-title-el">stArvel</h1>
     </div>
 
-    <p class="hero-fade" style="--hero-delay: 240ms;">Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.</p>
+    <p class="hero-fade" id="hero-desc-el" style="--hero-delay: 240ms;">Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.</p>
     <div class="hero-cta-group hero-fade" style="--hero-delay: 320ms;">
-      <a href="#tether-teaser" class="btn-editorial">Watch TETHER Teaser</a>
-      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-editorial btn-imdb-hero">View on IMDb</a>
+      <a href="#tether-teaser" class="btn-editorial" id="hero-cta-watch">Watch TETHER Teaser</a>
+      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-editorial btn-imdb-hero" id="hero-cta-imdb">View on IMDb</a>
     </div>
   </section>
 
-  <!-- TETHER Teaser & Movies Section -->
   <section id="tether-teaser" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title">TETHER TEASERS & FILMS</h2>
+      <h2 class="section-title" id="teasers-section-title">TETHER TEASERS &amp; FILMS</h2>
       <button type="button" class="btn-section-admin" onclick="openAdminModal('movies')">+ Add Movie / Video</button>
     </div>
     
     <div class="video-stack" id="movies-container">
-
-      <!-- Default Teaser 1 -->
+      <!-- Teaser 1 -->
       <div class="video-card glass-surface glass-interactive reveal" style="--reveal-delay: 50ms;">
         <div class="video-player-wrapper" id="player-wrapper-1">
           <div class="thumbnail-overlay" 
@@ -2029,7 +2027,7 @@
             <div class="play-btn" title="Play Teaser"></div>
           </div>
           <iframe 
-            id="iframe-tether-teaser"
+            id="iframe-tether-teaser-1"
             src="https://www.youtube-nocookie.com/embed/t_P2gRGizco?rel=0" 
             title="TETHER Teaser | Our First Film | Starvel Studios" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -2039,15 +2037,15 @@
         <div class="video-details">
           <div class="video-details-header">
             <div class="video-title-group">
-              <h3>TETHER — Official Film Teaser</h3>
-              <span class="announcement-vol-badge badge-orange">OUR FIRST FILM</span>
+              <h3 id="t1-title">TETHER — Official Film Teaser</h3>
+              <span class="announcement-vol-badge badge-orange" id="t1-badge">OUR FIRST FILM</span>
             </div>
             <div class="video-actions-group">
-              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb">
+              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb" id="t1-imdb-link">
                 <span class="imdb-pill-tag">IMDb</span>
                 View Page
               </a>
-              <a href="http://www.youtube.com/watch?v=t_P2gRGizco" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+              <a href="http://www.youtube.com/watch?v=t_P2gRGizco" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube" id="t1-yt-link">
                 <svg viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
@@ -2055,16 +2053,17 @@
               </a>
             </div>
           </div>
-          <p>Starring Jayden, Sathwik, Rithwik, Abhirama, Lokesh, and Ishaaq</p>
-          <p><span class="label">Production</span> Starvel Studios Debut Project</p>
-          <p><span class="label">Logline</span> Initiating quantum tempo displacement... Core resonance stabilized.</p>
+          <p id="t1-cast">Starring Jayden, Sathwik, Rithwik, Abhirama, Lokesh, and Ishaaq</p>
+          <p><span class="label">Production</span> <span id="t1-prod">Starvel Studios Debut Project</span></p>
+          <p><span class="label">Logline</span> <span id="t1-logline">Initiating quantum tempo displacement... Core resonance stabilized.</span></p>
         </div>
       </div>
 
-      <!-- Default Teaser 2 -->
+      <!-- Teaser 2 -->
       <div class="video-card glass-surface glass-interactive reveal" style="--reveal-delay: 100ms;">
         <div class="video-player-wrapper">
           <iframe 
+            id="iframe-tether-teaser-2"
             src="https://www.youtube-nocookie.com/embed/H4hhmBM308o?rel=0" 
             title="TETHER - Title Announcement | Sathwik | Jayden | Abhi Rama Reddy | Starvel Studios" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -2074,15 +2073,15 @@
         <div class="video-details">
           <div class="video-details-header">
             <div class="video-title-group">
-              <h3>TETHER — Official Title Teaser</h3>
-              <span class="announcement-vol-badge">PREMIERE</span>
+              <h3 id="t2-title">TETHER — Official Title Teaser</h3>
+              <span class="announcement-vol-badge" id="t2-badge">PREMIERE</span>
             </div>
             <div class="video-actions-group">
-              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb">
+              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb" id="t2-imdb-link">
                 <span class="imdb-pill-tag">IMDb</span>
                 View Page
               </a>
-              <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+              <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube" id="t2-yt-link">
                 <svg viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
@@ -2090,13 +2089,13 @@
               </a>
             </div>
           </div>
-          <p>Directed by Sathwik, Jayden Jacob & Abhirama Reddy Kalluri</p>
-          <p><span class="label">Cast & Crew</span> Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</p>
-          <p><span class="label">Production</span> Official Starvel Cinematic Universe Title Teaser</p>
+          <p id="t2-directors">Directed by Sathwik, Jayden Jacob &amp; Abhirama Reddy Kalluri</p>
+          <p><span class="label">Cast &amp; Crew</span> <span id="t2-cast">Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</span></p>
+          <p><span class="label">Production</span> <span id="t2-prod">Official Starvel Cinematic Universe Title Teaser</span></p>
         </div>
       </div>
 
-      <!-- Dynamic DB Movies Container -->
+      <!-- Dynamic DB Movies -->
       <div id="db-movies-list" style="width: 100%; display: flex; flex-direction: column; gap: 44px; align-items: center;"></div>
     </div>
   </section>
@@ -2104,30 +2103,28 @@
   <!-- Mini IMDb Page Section -->
   <section id="imdb-page" class="content-section">
     <div class="section-header imdb-header reveal">
-      <h2 class="section-title">TETHER ON IMDb</h2>
+      <h2 class="section-title" id="imdb-section-title">TETHER ON IMDb</h2>
       <button type="button" class="btn-section-admin" onclick="openAdminModal('imdb')">+ Manage IMDb Links</button>
     </div>
 
     <div class="imdb-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
-      <!-- IMDb Top Bar -->
       <div class="imdb-top-bar">
         <div class="imdb-brand-group">
           <span class="imdb-logo-box">IMDb</span>
-          <span class="imdb-id-badge">TITLE ID: tt50941110</span>
+          <span class="imdb-id-badge" id="imdb-id-badge-el">TITLE ID: tt50941110</span>
         </div>
-        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-url-preview">
+        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-url-preview" id="imdb-top-url-el">
           imdb.com/title/tt50941110 ↗
         </a>
       </div>
 
-      <!-- IMDb Title Hero Strip -->
       <div class="imdb-hero-banner">
-        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-poster-thumb" title="Open TETHER on IMDb">
+        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-poster-thumb" id="imdb-poster-link" title="Open TETHER on IMDb">
           <span class="imdb-poster-label">★ Official Listing</span>
         </a>
 
         <div class="imdb-title-meta">
-          <h3>TETHER: Chapter 1 — The Residual Locus</h3>
+          <h3 id="imdb-card-title-el">TETHER: Chapter 1 — The Residual Locus</h3>
           <div class="imdb-meta-chips">
             <span class="imdb-chip chip-gold">Official IMDb Page</span>
             <span class="imdb-chip">Short Film</span>
@@ -2136,80 +2133,75 @@
             <span class="imdb-chip">Starvel Studios</span>
           </div>
           <div class="imdb-cta-row" id="imdb-links-cta-row">
-            <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+            <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta" id="imdb-primary-cta">
               Open Full IMDb Page ↗
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Interactive IMDb Mini Tabs -->
       <div class="imdb-nav-tabs" role="tablist">
         <button type="button" class="imdb-tab active" onclick="switchImdbTab(event, 'imdb-overview')">Overview</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast & Crew</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production & Links</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast &amp; Crew</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production &amp; Links</button>
       </div>
 
-      <!-- Interactive IMDb Body -->
       <div class="imdb-body">
-        <!-- Overview Tab -->
         <div id="imdb-overview" class="imdb-tab-panel active">
-          <p class="imdb-plot-text">
+          <p class="imdb-plot-text" id="imdb-plot-el">
             Initiating quantum tempo displacement... Core resonance stabilized. <strong>TETHER: Chapter 1 — The Residual Locus</strong> is the debut sci-fi action film from <strong>Starvel Studios</strong>, launching the Starvel Cinematic Universe.
           </p>
           <div class="imdb-credits-list">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Directors</div>
-              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-names" id="imdb-directors-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Studio</div>
-              <div class="imdb-credit-names">Starvel Studios</div>
+              <div class="imdb-credit-names" id="imdb-studio-el">Starvel Studios</div>
             </div>
           </div>
         </div>
 
-        <!-- Cast & Crew Tab -->
         <div id="imdb-cast" class="imdb-tab-panel">
           <div class="imdb-credits-list">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Cast</div>
-              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri, Rithwik, Lokesh</div>
+              <div class="imdb-credit-names" id="imdb-cast-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri, Rithwik, Lokesh</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Writers</div>
-              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-names" id="imdb-writers-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">VFX & Post-Production</div>
-              <div class="imdb-credit-names">Sathwik Gurram • Starvel Studios</div>
+              <div class="imdb-credit-role">VFX &amp; Post-Production</div>
+              <div class="imdb-credit-names" id="imdb-vfx-el">Sathwik Gurram • Starvel Studios</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">Cinematography & Design</div>
-              <div class="imdb-credit-names">Jayden Jacob, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-role">Cinematography &amp; Design</div>
+              <div class="imdb-credit-names" id="imdb-cine-el">Jayden Jacob, Abhirama Reddy Kalluri</div>
             </div>
           </div>
         </div>
 
-        <!-- Production & Extra IMDb Links Tab -->
         <div id="imdb-details" class="imdb-tab-panel">
           <div class="imdb-credits-list" id="imdb-details-grid">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">IMDb Identifier</div>
-              <div class="imdb-credit-names">tt50941110</div>
+              <div class="imdb-credit-names" id="imdb-detail-id-el">tt50941110</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Production Banner</div>
-              <div class="imdb-credit-names">Starvel Studios</div>
+              <div class="imdb-credit-names" id="imdb-detail-studio-el">Starvel Studios</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Country of Origin</div>
-              <div class="imdb-credit-names">India</div>
+              <div class="imdb-credit-names" id="imdb-detail-country-el">India</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Primary IMDb Link</div>
               <div class="imdb-credit-names">
-                <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
+                <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" id="imdb-detail-url-el" style="color: var(--imdb-gold); text-decoration: none;">
                   https://www.imdb.com/title/tt50941110/ ↗
                 </a>
               </div>
@@ -2223,8 +2215,8 @@
   <!-- Mini YouTube Channel Interface Section -->
   <section id="youtube-channel" class="content-section">
     <div class="section-header yt-header reveal">
-      <h2 class="section-title">STARVEL ON YOUTUBE</h2>
-      <button type="button" class="btn-section-admin" onclick="openAdminModal('youtube')">+ Manage YouTube & Instagram</button>
+      <h2 class="section-title" id="yt-section-title">STARVEL ON YOUTUBE</h2>
+      <button type="button" class="btn-section-admin" onclick="openAdminModal('youtube')">+ Manage YouTube &amp; Instagram</button>
     </div>
 
     <div class="yt-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -2236,12 +2228,12 @@
         <div class="yt-profile-left">
           <img src="./starvel.png" alt="Starvel Studios" class="yt-channel-pic">
           <div class="yt-profile-meta">
-            <h3>STARVEL STUDIOS</h3>
-            <div class="yt-handle">@starvelstudios-1981</div>
-            <div class="yt-sub-meta">Official Teasers, Cinematic Trailers & Behind The Scenes</div>
+            <h3 id="yt-channel-name-el">STARVEL STUDIOS</h3>
+            <div class="yt-handle" id="yt-channel-handle-el">@starvelstudios-1981</div>
+            <div class="yt-sub-meta" id="yt-channel-sub-el">Official Teasers, Cinematic Trailers &amp; Behind The Scenes</div>
           </div>
         </div>
-        <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="yt-subscribe-cta">
+        <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="yt-subscribe-cta" id="yt-subscribe-link-el">
           <svg viewBox="0 0 24 24">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
@@ -2256,7 +2248,7 @@
       </div>
 
       <div class="yt-channel-body">
-        <p>Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
+        <p id="yt-channel-desc-el">Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
         <div class="yt-extra-links" id="db-youtube-links"></div>
       </div>
     </div>
@@ -2265,7 +2257,7 @@
   <!-- Directors Section -->
   <section id="directors" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title">Directors</h2>
+      <h2 class="section-title" id="directors-section-title">Directors</h2>
     </div>
     
     <div class="directors-grid">
@@ -2274,8 +2266,8 @@
           <img src="./jayden.png" alt="Jayden Jacob" loading="eager" decoding="async">
         </div>
         <div class="director-info">
-          <h3>Jayden Jacob</h3>
-          <p>Director, Writer and Cinematographer</p>
+          <h3 id="dir1-name">Jayden Jacob</h3>
+          <p id="dir1-role">Director, Writer and Cinematographer</p>
         </div>
       </div>
 
@@ -2284,8 +2276,8 @@
           <img src="./ishaaq.jpeg" alt="Mohammad Ishaaq Ali Khan" loading="eager" decoding="async">
         </div>
         <div class="director-info">
-          <h3>Mohammad Ishaaq Ali Khan</h3>
-          <p>Director, Writer</p>
+          <h3 id="dir2-name">Mohammad Ishaaq Ali Khan</h3>
+          <p id="dir2-role">Director, Writer</p>
         </div>
       </div>
 
@@ -2294,8 +2286,8 @@
           <img src="./sath.png" alt="Sathwik" loading="eager" decoding="async">
         </div>
         <div class="director-info">
-          <h3>Sathwik</h3>
-          <p>VFX Artist, Director, Writer</p>
+          <h3 id="dir3-name">Sathwik</h3>
+          <p id="dir3-role">VFX Artist, Director, Writer</p>
         </div>
       </div>
 
@@ -2304,8 +2296,8 @@
           <img src="./abhi.png" alt="Abhirama Reddy Kalluri" loading="eager" decoding="async">
         </div>
         <div class="director-info">
-          <h3>Abhirama Reddy Kalluri</h3>
-          <p>Director, Writer, Production Designer</p>
+          <h3 id="dir4-name">Abhirama Reddy Kalluri</h3>
+          <p id="dir4-role">Director, Writer, Production Designer</p>
         </div>
       </div>
     </div>
@@ -2313,22 +2305,22 @@
 
   <!-- Footer -->
   <footer class="reveal">
-    <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
+    <div id="footer-copyright-el">© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
     <div id="footer-social-links">
       FOLLOW ON 
-      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer" class="footer-insta">INSTAGRAM</a>, 
-      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a> & 
-      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb">IMDb</a>
+      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer" class="footer-insta" id="footer-insta-link">INSTAGRAM</a>, 
+      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" id="footer-yt-link">YOUTUBE</a> &amp; 
+      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb" id="footer-imdb-link">IMDb</a>
       <span id="db-instagram-footer-extra"></span>
     </div>
     <div>
-      <button type="button" id="footer-admin-btn" class="btn-admin-trigger" onclick="openAdminModal('movies')">
+      <button type="button" id="footer-admin-btn" class="btn-admin-trigger" onclick="openAdminModal('editor')">
         🔒 Admin
       </button>
     </div>
   </footer>
 
-  <!-- Liquid Glass Email-Only Admin Modal & Live CRUD Dashboard -->
+  <!-- Liquid Glass Email-Only Admin Modal & Full Live Editor -->
   <div id="admin-backdrop" class="admin-backdrop" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading">
     <div class="admin-modal">
       <div class="admin-modal-header">
@@ -2342,7 +2334,7 @@
       <!-- STEP 1: Email-Only Login Gate -->
       <div id="admin-login-view">
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
-          Sign in with an authorized <strong>Starvel Studios</strong> admin email (<strong>studiosstarvel@gmail.com</strong> or <strong>sathwik.gurram@gmail.com</strong>). A one-time code and magic link will be sent to your inbox.
+          Sign in with an authorized <strong>Starvel Studios</strong> admin email (<strong>studiosstarvel@gmail.com</strong> or <strong>sathwik.gurram@gmail.com</strong>). Enter the 6-digit code sent to your inbox—or click the magic link in your email—to open the live page editor.
         </p>
 
         <form id="admin-email-form" onsubmit="handleSendAdminOtp(event)">
@@ -2355,16 +2347,16 @@
 
         <form id="admin-otp-form" onsubmit="handleVerifyAdminOtp(event)" style="display: none; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12);">
           <div class="admin-form-group">
-            <label class="admin-label" for="admin-otp-input">Enter 6-Digit Email Code (or click the link in your email)</label>
+            <label class="admin-label" for="admin-otp-input">Enter 6-Digit Code From Email</label>
             <input type="text" id="admin-otp-input" class="admin-input" placeholder="123456" inputmode="numeric" autocomplete="one-time-code" required>
           </div>
-          <button type="submit" class="admin-btn-primary" id="btn-verify-otp">Verify & Unlock Studio</button>
+          <button type="submit" class="admin-btn-primary" id="btn-verify-otp">Verify &amp; Open Editor</button>
         </form>
 
         <div id="admin-login-status" class="admin-status-msg"></div>
       </div>
 
-      <!-- STEP 2: Authenticated Live CRUD Manager -->
+      <!-- STEP 2: Authenticated Live Editor & CRUD Manager -->
       <div id="admin-dashboard-view" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
           <span style="font-size: 0.84rem; color: #A7F3D0;">Signed in as <strong id="admin-signed-email"></strong></span>
@@ -2372,16 +2364,160 @@
         </div>
 
         <div class="admin-tabs">
-          <button type="button" class="admin-tab-btn active" data-panel="panel-movies" onclick="switchAdminPanel('panel-movies')">Movies & Videos</button>
+          <button type="button" class="admin-tab-btn active" data-panel="panel-editor" onclick="switchAdminPanel('panel-editor')">Edit Page &amp; Links</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-movies" onclick="switchAdminPanel('panel-movies')">+ Add Videos</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
-          <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube</button>
-          <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube Links</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram Links</button>
         </div>
 
         <div id="admin-crud-status" class="admin-status-msg"></div>
 
-        <!-- Panel 1: Add New Movie / Video Card -->
-        <div id="panel-movies" class="admin-panel active">
+        <!-- PANEL 0: Full Editable Page & Links Form -->
+        <div id="panel-editor" class="admin-panel active">
+          <form onsubmit="handleSaveSiteConfig(event)">
+            <div class="admin-subbox">
+              <div class="admin-subbox-title">Hero &amp; Brand Links</div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Hero Badge Text</label>
+                  <input type="text" id="cfg-hero-subtitle" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Hero Title</label>
+                  <input type="text" id="cfg-hero-title" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Hero Description</label>
+                <input type="text" id="cfg-hero-desc" class="admin-input">
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Navbar / Instagram URL</label>
+                  <input type="url" id="cfg-insta-url" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Hero IMDb Button URL</label>
+                  <input type="url" id="cfg-hero-imdb-url" class="admin-input">
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-subbox">
+              <div class="admin-subbox-title">Teaser 1 &amp; Teaser 2</div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 1 Title</label>
+                  <input type="text" id="cfg-t1-title" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 1 YouTube ID or URL</label>
+                  <input type="text" id="cfg-t1-yt" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 1 Cast Line</label>
+                  <input type="text" id="cfg-t1-cast" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 1 Logline</label>
+                  <input type="text" id="cfg-t1-logline" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 2 Title</label>
+                  <input type="text" id="cfg-t2-title" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Teaser 2 YouTube ID or URL</label>
+                  <input type="text" id="cfg-t2-yt" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Teaser 2 Cast &amp; Crew</label>
+                <input type="text" id="cfg-t2-cast" class="admin-input">
+              </div>
+            </div>
+
+            <div class="admin-subbox">
+              <div class="admin-subbox-title">IMDb Mini Page &amp; YouTube Channel</div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">IMDb Title Name</label>
+                  <input type="text" id="cfg-imdb-title" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">IMDb ID (e.g. tt50941110)</label>
+                  <input type="text" id="cfg-imdb-id" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">IMDb Full URL</label>
+                <input type="url" id="cfg-imdb-url" class="admin-input">
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">YouTube Channel Name</label>
+                  <input type="text" id="cfg-yt-name" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">YouTube Handle</label>
+                  <input type="text" id="cfg-yt-handle" class="admin-input">
+                </div>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">YouTube Subscribe / Channel URL</label>
+                <input type="url" id="cfg-yt-url" class="admin-input">
+              </div>
+            </div>
+
+            <div class="admin-subbox">
+              <div class="admin-subbox-title">Directors (Names &amp; Roles)</div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 1 Name</label>
+                  <input type="text" id="cfg-d1-name" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 1 Role</label>
+                  <input type="text" id="cfg-d1-role" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 2 Name</label>
+                  <input type="text" id="cfg-d2-name" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 2 Role</label>
+                  <input type="text" id="cfg-d2-role" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 3 Name</label>
+                  <input type="text" id="cfg-d3-name" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 3 Role</label>
+                  <input type="text" id="cfg-d3-role" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 4 Name</label>
+                  <input type="text" id="cfg-d4-name" class="admin-input">
+                </div>
+                <div class="admin-form-group">
+                  <label class="admin-label">Director 4 Role</label>
+                  <input type="text" id="cfg-d4-role" class="admin-input">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="admin-btn-primary">Save All Changes to Public Site</button>
+          </form>
+        </div>
+
+        <!-- PANEL 1: Add New Movie / Video -->
+        <div id="panel-movies" class="admin-panel">
           <form onsubmit="handleAddMovie(event)">
             <div class="admin-form-grid">
               <div class="admin-form-group">
@@ -2404,7 +2540,7 @@
               </div>
             </div>
             <div class="admin-form-group">
-              <label class="admin-label">Cast & Credits Line</label>
+              <label class="admin-label">Cast &amp; Credits Line</label>
               <input type="text" id="movie-cast" class="admin-input" placeholder="Directed by Sathwik, Jayden Jacob, Mohammad Ishaaq Ali Khan & Abhirama Reddy Kalluri">
             </div>
             <div class="admin-form-group">
@@ -2416,7 +2552,7 @@
           <div class="admin-saved-list" id="admin-movies-saved"></div>
         </div>
 
-        <!-- Panel 2: Add / Delete IMDb Links -->
+        <!-- PANEL 2: IMDb Links -->
         <div id="panel-imdb" class="admin-panel">
           <form onsubmit="handleAddImdb(event)">
             <div class="admin-form-grid">
@@ -2425,7 +2561,7 @@
                 <input type="text" id="imdb-label" class="admin-input" placeholder="TETHER Chapter 2 IMDb" required>
               </div>
               <div class="admin-form-group">
-                <label class="admin-label">IMDb Title / Name ID *</label>
+                <label class="admin-label">IMDb Title ID *</label>
                 <input type="text" id="imdb-id" class="admin-input" placeholder="tt50941110" required>
               </div>
             </div>
@@ -2438,7 +2574,7 @@
           <div class="admin-saved-list" id="admin-imdb-saved"></div>
         </div>
 
-        <!-- Panel 3: Add / Delete YouTube Links & Videos -->
+        <!-- PANEL 3: YouTube Links -->
         <div id="panel-youtube" class="admin-panel">
           <form onsubmit="handleAddYouTube(event)">
             <div class="admin-form-grid">
@@ -2456,7 +2592,7 @@
           <div class="admin-saved-list" id="admin-youtube-saved"></div>
         </div>
 
-        <!-- Panel 4: Add / Delete Instagram Features & Links -->
+        <!-- PANEL 4: Instagram Links -->
         <div id="panel-instagram" class="admin-panel">
           <form onsubmit="handleAddInstagram(event)">
             <div class="admin-form-grid">
@@ -2483,7 +2619,7 @@
 
   <!-- UI, 60Hz/120Hz+ Smooth Scroll, Reveal & Modal Controls -->
   <script>
-    window.openAdminModal = function(initialPanel = 'movies') {
+    window.openAdminModal = function(initialPanel = 'editor') {
       const backdrop = document.getElementById('admin-backdrop');
       if (backdrop) {
         backdrop.classList.add('open');
@@ -2505,10 +2641,6 @@
         backdrop.style.pointerEvents = '';
       }
     };
-
-    document.getElementById('footer-admin-btn')?.addEventListener('click', () => {
-      window.openAdminModal('movies');
-    });
 
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
@@ -2638,7 +2770,7 @@
           stopSmoothScroll();
         }
         if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
-          window.openAdminModal('movies');
+          window.openAdminModal('editor');
         }
       }, { passive: true });
 
@@ -2744,7 +2876,7 @@
     };
   </script>
 
-  <!-- Supabase Email-Only Auth & Live Database CRUD Module -->
+  <!-- Supabase Email-Only Auth & Full Live Public Editor Module -->
   <script type="module">
     const SUPABASE_URL = 'https://inragjjxjzoxvwlfisfal.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_xH-t3BgZ-IdaSK0_VggK_Q_OYxCghhA';
@@ -2753,17 +2885,47 @@
       'sathwik.gurram@gmail.com'
     ];
 
+    const DEFAULT_CONFIG = {
+      heroSubtitle: '★ ISSUE #1 — STARVEL STUDIOS ★',
+      heroTitle: 'stArvel',
+      heroDesc: 'Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.',
+      instaUrl: 'https://www.instagram.com/_starvelstudios_?',
+      heroImdbUrl: 'https://www.imdb.com/title/tt50941110/',
+      t1Title: 'TETHER — Official Film Teaser',
+      t1Yt: 't_P2gRGizco',
+      t1Cast: 'Starring Jayden, Sathwik, Rithwik, Abhirama, Lokesh, and Ishaaq',
+      t1Logline: 'Initiating quantum tempo displacement... Core resonance stabilized.',
+      t2Title: 'TETHER — Official Title Teaser',
+      t2Yt: 'H4hhmBM308o',
+      t2Cast: 'Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan',
+      imdbTitle: 'TETHER: Chapter 1 — The Residual Locus',
+      imdbId: 'tt50941110',
+      imdbUrl: 'https://www.imdb.com/title/tt50941110/',
+      ytName: 'STARVEL STUDIOS',
+      ytHandle: '@starvelstudios-1981',
+      ytUrl: 'https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz',
+      d1Name: 'Jayden Jacob',
+      d1Role: 'Director, Writer and Cinematographer',
+      d2Name: 'Mohammad Ishaaq Ali Khan',
+      d2Role: 'Director, Writer',
+      d3Name: 'Sathwik',
+      d3Role: 'VFX Artist, Director, Writer',
+      d4Name: 'Abhirama Reddy Kalluri',
+      d4Role: 'Director, Writer, Production Designer'
+    };
+
+    let currentConfig = { ...DEFAULT_CONFIG };
     let supabase = null;
     let pendingLoginEmail = '';
     let isAdmin = false;
 
     function escapeHtml(str) {
       return String(str ?? '')
-        .replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>')
-        .replace(/"/g, '"')
-        .replace(/'/g, ''');
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     function extractYouTubeId(input) {
@@ -2783,6 +2945,113 @@
       }
       el.className = `admin-status-msg ${type}`;
       el.textContent = message;
+    }
+
+    function populateEditorInputs(cfg) {
+      const map = {
+        'cfg-hero-subtitle': cfg.heroSubtitle,
+        'cfg-hero-title': cfg.heroTitle,
+        'cfg-hero-desc': cfg.heroDesc,
+        'cfg-insta-url': cfg.instaUrl,
+        'cfg-hero-imdb-url': cfg.heroImdbUrl,
+        'cfg-t1-title': cfg.t1Title,
+        'cfg-t1-yt': cfg.t1Yt,
+        'cfg-t1-cast': cfg.t1Cast,
+        'cfg-t1-logline': cfg.t1Logline,
+        'cfg-t2-title': cfg.t2Title,
+        'cfg-t2-yt': cfg.t2Yt,
+        'cfg-t2-cast': cfg.t2Cast,
+        'cfg-imdb-title': cfg.imdbTitle,
+        'cfg-imdb-id': cfg.imdbId,
+        'cfg-imdb-url': cfg.imdbUrl,
+        'cfg-yt-name': cfg.ytName,
+        'cfg-yt-handle': cfg.ytHandle,
+        'cfg-yt-url': cfg.ytUrl,
+        'cfg-d1-name': cfg.d1Name,
+        'cfg-d1-role': cfg.d1Role,
+        'cfg-d2-name': cfg.d2Name,
+        'cfg-d2-role': cfg.d2Role,
+        'cfg-d3-name': cfg.d3Name,
+        'cfg-d3-role': cfg.d3Role,
+        'cfg-d4-name': cfg.d4Name,
+        'cfg-d4-role': cfg.d4Role
+      };
+      Object.entries(map).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val ?? '';
+      });
+    }
+
+    function applySiteConfigToPublicUI(cfg) {
+      currentConfig = { ...DEFAULT_CONFIG, ...(cfg || {}) };
+
+      const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text !== undefined && text !== null) el.textContent = text;
+      };
+      const setHref = (id, url) => {
+        const el = document.getElementById(id);
+        if (el && url) el.href = url;
+      };
+
+      setText('hero-subtitle-el', currentConfig.heroSubtitle);
+      setText('hero-title-el', currentConfig.heroTitle);
+      setText('hero-desc-el', currentConfig.heroDesc);
+      setHref('nav-insta-logo-link', currentConfig.instaUrl);
+      setHref('footer-insta-link', currentConfig.instaUrl);
+      setHref('hero-cta-imdb', currentConfig.heroImdbUrl || currentConfig.imdbUrl);
+
+      const t1Id = extractYouTubeId(currentConfig.t1Yt);
+      setText('t1-title', currentConfig.t1Title);
+      setText('t1-cast', currentConfig.t1Cast);
+      setText('t1-logline', currentConfig.t1Logline);
+      setHref('t1-imdb-link', currentConfig.imdbUrl);
+      setHref('t1-yt-link', `https://www.youtube.com/watch?v=${t1Id}`);
+      const ov1 = document.getElementById('overlay-1');
+      if (ov1) {
+        ov1.style.backgroundImage = `url('https://img.youtube.com/vi/${t1Id}/maxresdefault.jpg')`;
+        ov1.setAttribute('onclick', `playEmbeddedTeaser('player-wrapper-1', 'overlay-1', '${t1Id}')`);
+      }
+      const if1 = document.getElementById('iframe-tether-teaser-1');
+      if (if1 && !if1.src.includes('autoplay=1')) {
+        if1.src = `https://www.youtube-nocookie.com/embed/${t1Id}?rel=0`;
+      }
+
+      const t2Id = extractYouTubeId(currentConfig.t2Yt);
+      setText('t2-title', currentConfig.t2Title);
+      setText('t2-cast', currentConfig.t2Cast);
+      setHref('t2-imdb-link', currentConfig.imdbUrl);
+      setHref('t2-yt-link', `https://www.youtube.com/watch?v=${t2Id}`);
+      const if2 = document.getElementById('iframe-tether-teaser-2');
+      if (if2 && !if2.src.includes('autoplay=1')) {
+        if2.src = `https://www.youtube-nocookie.com/embed/${t2Id}?rel=0`;
+      }
+
+      setText('imdb-id-badge-el', `TITLE ID: ${currentConfig.imdbId}`);
+      setText('imdb-top-url-el', `${currentConfig.imdbUrl.replace(/^https?:\/\/(www\.)?/, '')} ↗`);
+      setText('imdb-card-title-el', currentConfig.imdbTitle);
+      setText('imdb-detail-id-el', currentConfig.imdbId);
+      setText('imdb-detail-url-el', `${currentConfig.imdbUrl} ↗`);
+      setHref('imdb-poster-link', currentConfig.imdbUrl);
+      setHref('imdb-primary-cta', currentConfig.imdbUrl);
+      setHref('imdb-detail-url-el', currentConfig.imdbUrl);
+      setHref('footer-imdb-link', currentConfig.imdbUrl);
+
+      setText('yt-channel-name-el', currentConfig.ytName);
+      setText('yt-channel-handle-el', currentConfig.ytHandle);
+      setHref('yt-subscribe-link-el', currentConfig.ytUrl);
+      setHref('footer-yt-link', currentConfig.ytUrl);
+
+      setText('dir1-name', currentConfig.d1Name);
+      setText('dir1-role', currentConfig.d1Role);
+      setText('dir2-name', currentConfig.d2Name);
+      setText('dir2-role', currentConfig.d2Role);
+      setText('dir3-name', currentConfig.d3Name);
+      setText('dir3-role', currentConfig.d3Role);
+      setText('dir4-name', currentConfig.d4Name);
+      setText('dir4-role', currentConfig.d4Role);
+
+      populateEditorInputs(currentConfig);
     }
 
     document.getElementById('admin-backdrop')?.addEventListener('click', (e) => {
@@ -2807,7 +3076,7 @@
       document.getElementById('nav-admin-badge')?.classList.toggle('visible', isAdmin);
 
       const footerBtn = document.getElementById('footer-admin-btn');
-      if (footerBtn) footerBtn.textContent = isAdmin ? '★ Studio Admin' : '🔒 Admin';
+      if (footerBtn) footerBtn.textContent = isAdmin ? '★ Studio Editor' : '🔒 Admin';
 
       const loginView = document.getElementById('admin-login-view');
       const dashView = document.getElementById('admin-dashboard-view');
@@ -2817,8 +3086,9 @@
       if (isAdmin) {
         if (loginView) loginView.style.display = 'none';
         if (dashView) dashView.style.display = 'block';
-        if (stateBadge) stateBadge.textContent = 'AUTHENTICATED';
+        if (stateBadge) stateBadge.textContent = 'EDITOR UNLOCKED';
         if (signedEmail) signedEmail.textContent = email;
+        populateEditorInputs(currentConfig);
       } else {
         if (loginView) loginView.style.display = 'block';
         if (dashView) dashView.style.display = 'none';
@@ -2829,7 +3099,7 @@
     window.handleSendAdminOtp = async function(e) {
       e.preventDefault();
       if (!supabase) {
-        setStatus('admin-login-status', 'Database client failed to initialize. Check Console (F12) for details.', 'error');
+        setStatus('admin-login-status', 'Supabase client not ready. Check Console (F12).', 'error');
         return;
       }
       const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
@@ -2864,7 +3134,7 @@
 
       pendingLoginEmail = email;
       document.getElementById('admin-otp-form').style.display = 'block';
-      setStatus('admin-login-status', `Verification email sent to ${email}. Enter the 6-digit code below or click the magic link in your inbox.`, 'info');
+      setStatus('admin-login-status', `Code sent to ${email}. Enter the 6-digit code below or click the magic link in your email.`, 'info');
     };
 
     window.handleVerifyAdminOtp = async function(e) {
@@ -2883,7 +3153,7 @@
       });
 
       btn.disabled = false;
-      btn.textContent = 'Verify & Unlock Studio';
+      btn.textContent = 'Verify & Open Editor';
 
       if (error) {
         setStatus('admin-login-status', error.message, 'error');
@@ -2901,15 +3171,68 @@
       await loadAndRenderAll();
     };
 
+    window.handleSaveSiteConfig = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const updated = {
+        heroSubtitle: document.getElementById('cfg-hero-subtitle').value.trim(),
+        heroTitle: document.getElementById('cfg-hero-title').value.trim(),
+        heroDesc: document.getElementById('cfg-hero-desc').value.trim(),
+        instaUrl: document.getElementById('cfg-insta-url').value.trim(),
+        heroImdbUrl: document.getElementById('cfg-hero-imdb-url').value.trim(),
+        t1Title: document.getElementById('cfg-t1-title').value.trim(),
+        t1Yt: document.getElementById('cfg-t1-yt').value.trim(),
+        t1Cast: document.getElementById('cfg-t1-cast').value.trim(),
+        t1Logline: document.getElementById('cfg-t1-logline').value.trim(),
+        t2Title: document.getElementById('cfg-t2-title').value.trim(),
+        t2Yt: document.getElementById('cfg-t2-yt').value.trim(),
+        t2Cast: document.getElementById('cfg-t2-cast').value.trim(),
+        imdbTitle: document.getElementById('cfg-imdb-title').value.trim(),
+        imdbId: document.getElementById('cfg-imdb-id').value.trim(),
+        imdbUrl: document.getElementById('cfg-imdb-url').value.trim(),
+        ytName: document.getElementById('cfg-yt-name').value.trim(),
+        ytHandle: document.getElementById('cfg-yt-handle').value.trim(),
+        ytUrl: document.getElementById('cfg-yt-url').value.trim(),
+        d1Name: document.getElementById('cfg-d1-name').value.trim(),
+        d1Role: document.getElementById('cfg-d1-role').value.trim(),
+        d2Name: document.getElementById('cfg-d2-name').value.trim(),
+        d2Role: document.getElementById('cfg-d2-role').value.trim(),
+        d3Name: document.getElementById('cfg-d3-name').value.trim(),
+        d3Role: document.getElementById('cfg-d3-role').value.trim(),
+        d4Name: document.getElementById('cfg-d4-name').value.trim(),
+        d4Role: document.getElementById('cfg-d4-role').value.trim()
+      };
+
+      const { error } = await supabase
+        .from('site_config')
+        .upsert([{ id: 'starvel-main', data: updated, updated_at: new Date().toISOString() }]);
+
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+
+      applySiteConfigToPublicUI(updated);
+      setStatus('admin-crud-status', 'Saved! All public visitors now see your updated page and links.', 'info');
+    };
+
     async function loadAndRenderAll() {
       if (!supabase) return;
 
-      const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+      const [cfgRes, moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+        supabase.from('site_config').select('data').eq('id', 'starvel-main').maybeSingle(),
         supabase.from('movies').select('*').order('created_at', { ascending: false }),
         supabase.from('imdb_links').select('*').order('created_at', { ascending: true }),
         supabase.from('youtube_items').select('*').order('created_at', { ascending: false }),
         supabase.from('instagram_links').select('*').order('created_at', { ascending: true })
       ]);
+
+      if (cfgRes?.data?.data) {
+        applySiteConfigToPublicUI(cfgRes.data.data);
+      } else {
+        applySiteConfigToPublicUI(DEFAULT_CONFIG);
+      }
 
       renderMovies(moviesRes.data || []);
       renderImdbLinks(imdbRes.data || []);
@@ -2985,14 +3308,14 @@
 
       if (ctaRow) {
         const extraCtas = links
-          .filter(l => l.imdb_id !== 'tt50941110')
+          .filter(l => l.imdb_id !== currentConfig.imdbId)
           .map(l => `
             <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
               ${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)}) ↗
             </a>
           `).join('');
         ctaRow.innerHTML = `
-          <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+          <a href="${escapeHtml(currentConfig.imdbUrl)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
             Open Full IMDb Page ↗
           </a>
           ${extraCtas}
@@ -3185,19 +3508,18 @@
 
     try {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      if (SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.length > 10) {
-        supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        const { data: { session } } = await supabase.auth.getSession();
-        applyAdminSession(session);
-        await loadAndRenderAll();
+      supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        supabase.auth.onAuthStateChange((_event, session) => {
-          applyAdminSession(session);
-          loadAndRenderAll();
-        });
-      }
+      const { data: { session } } = await supabase.auth.getSession();
+      applyAdminSession(session);
+      await loadAndRenderAll();
+
+      supabase.auth.onAuthStateChange((_event, session) => {
+        applyAdminSession(session);
+        loadAndRenderAll();
+      });
     } catch (err) {
-      console.error('Supabase module load issue:', err);
+      console.error('Supabase initialization error:', err);
     }
   </script>
 
