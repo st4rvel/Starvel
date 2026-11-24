@@ -35,6 +35,8 @@
       --comic-orange-glow: rgba(255, 85, 0, 0.75);
       --comic-cyan: #00E5FF;
       --comic-cyan-glow: rgba(0, 229, 255, 0.75);
+      --imdb-gold: #F5C518;
+      --imdb-gold-glow: rgba(245, 197, 24, 0.55);
       --bg-dark: #0A0E17;
       --bg-card: #121926;
       --border-subtle: rgba(0, 229, 255, 0.25);
@@ -207,7 +209,7 @@
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 14px;
       list-style: none;
     }
 
@@ -231,6 +233,12 @@
       background: var(--comic-cyan);
       border-color: #000000;
       box-shadow: 3px 3px 0px var(--comic-orange);
+    }
+
+    .nav-links a.nav-imdb-link:hover {
+      background: var(--imdb-gold);
+      color: #000000;
+      box-shadow: 3px 3px 0px #FFFFFF;
     }
 
     /* Hero Section */
@@ -301,6 +309,13 @@
       box-shadow: 6px 6px 0px #000000;
     }
 
+    .hero-cta-group {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     .btn-editorial {
       display: inline-block;
       color: #000000;
@@ -311,7 +326,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 14px 40px;
+      padding: 14px 36px;
       border: 3px solid #FFFFFF;
       box-shadow: 6px 6px 0px var(--comic-cyan), 6px 6px 0px 3px #000000;
       transition: all 0.2s ease;
@@ -321,6 +336,17 @@
       background: var(--comic-cyan);
       box-shadow: 8px 8px 0px var(--comic-orange);
       transform: translate(-3px, -3px);
+    }
+
+    .btn-editorial.btn-imdb-hero {
+      background: var(--imdb-gold);
+      box-shadow: 6px 6px 0px #000000, 6px 6px 0px 3px #FFFFFF;
+    }
+
+    .btn-editorial.btn-imdb-hero:hover {
+      background: #FFFFFF;
+      color: #000000;
+      box-shadow: 8px 8px 0px var(--imdb-gold);
     }
 
     /* Content Sections */
@@ -350,6 +376,17 @@
       text-transform: uppercase;
       color: #FFFFFF;
       text-shadow: 2px 2px 0px #000000;
+    }
+
+    .section-header.imdb-header {
+      background: var(--imdb-gold);
+      border-color: #000000;
+      box-shadow: 6px 6px 0px #FFFFFF, 6px 6px 0px 3px #000000;
+    }
+
+    .section-header.imdb-header .section-title {
+      color: #000000;
+      text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
     }
 
     /* TETHER Teaser Showcase Cards */
@@ -478,6 +515,13 @@
       flex-wrap: wrap;
     }
 
+    .video-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .video-details h3 {
       font-family: 'Bangers', 'Oswald', cursive;
       font-size: 2.1rem;
@@ -540,6 +584,44 @@
       fill: currentColor;
     }
 
+    .btn-view-imdb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--imdb-gold);
+      color: #000000;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 2px solid #000000;
+      box-shadow: 3px 3px 0px #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-imdb:hover {
+      background: #FFFFFF;
+      color: #000000;
+      border-color: #000000;
+      box-shadow: 4px 4px 0px var(--imdb-gold);
+      transform: translate(-2px, -2px);
+    }
+
+    .imdb-pill-tag {
+      background: #000000;
+      color: var(--imdb-gold);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 900;
+      font-size: 0.78rem;
+      padding: 1px 6px;
+      letter-spacing: 0.5px;
+      border-radius: 2px;
+      text-transform: none;
+    }
+
     .video-details p {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
@@ -555,6 +637,282 @@
       border: 1px solid var(--border-subtle);
       font-size: 0.8rem;
       margin-right: 6px;
+    }
+
+    /* Mini IMDb Page Interface */
+    .imdb-app-window {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #121212;
+      border: 3px solid #FFFFFF;
+      box-shadow: 8px 8px 0px var(--imdb-gold), 8px 8px 0px 4px #000000;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .imdb-app-window:hover {
+      border-color: var(--imdb-gold);
+      box-shadow: 12px 12px 0px var(--comic-cyan), 12px 12px 0px 4px #000000;
+      transform: translate(-3px, -3px);
+    }
+
+    .imdb-top-bar {
+      background: #1A1A1A;
+      border-bottom: 3px solid #000000;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .imdb-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .imdb-logo-box {
+      background: var(--imdb-gold);
+      color: #000000;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+      padding: 2px 10px;
+      border: 2px solid #000000;
+      box-shadow: 3px 3px 0px #000000;
+      line-height: 1.15;
+    }
+
+    .imdb-id-badge {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: #E2E8F0;
+      background: #0A0E17;
+      border: 1px solid rgba(245, 197, 24, 0.5);
+      padding: 3px 10px;
+    }
+
+    .imdb-url-preview {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .imdb-url-preview:hover {
+      color: var(--imdb-gold);
+    }
+
+    .imdb-hero-banner {
+      background:
+        radial-gradient(rgba(245, 197, 24, 0.14) 12%, transparent 13%),
+        linear-gradient(135deg, #1F1F1F 0%, #141A26 60%, #0B0E17 100%);
+      background-size: 22px 22px, 100% 100%;
+      padding: 26px 25px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .imdb-poster-thumb {
+      width: 170px;
+      aspect-ratio: 16 / 10;
+      background-color: #000000;
+      background-image: url('https://img.youtube.com/vi/t_P2gRGizco/maxresdefault.jpg');
+      background-size: cover;
+      background-position: center;
+      border: 3px solid var(--imdb-gold);
+      box-shadow: 5px 5px 0px #000000;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+      text-decoration: none;
+      overflow: hidden;
+    }
+
+    .imdb-poster-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
+    }
+
+    .imdb-poster-label {
+      position: relative;
+      z-index: 2;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--imdb-gold);
+      text-transform: uppercase;
+    }
+
+    .imdb-title-meta {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .imdb-title-meta h3 {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0px #000000;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .imdb-meta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .imdb-chip {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #E2E8F0;
+    }
+
+    .imdb-chip.chip-gold {
+      background: rgba(245, 197, 24, 0.18);
+      border-color: var(--imdb-gold);
+      color: var(--imdb-gold);
+    }
+
+    .imdb-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .imdb-open-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--imdb-gold);
+      color: #000000;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border: 2px solid #FFFFFF;
+      box-shadow: 4px 4px 0px #000000;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .imdb-open-cta:hover {
+      background: var(--comic-cyan);
+      color: #000000;
+      border-color: #000000;
+      box-shadow: 5px 5px 0px var(--imdb-gold);
+      transform: translate(-2px, -2px);
+    }
+
+    .imdb-nav-tabs {
+      display: flex;
+      background: #0F0F0F;
+      border-bottom: 2px solid #000000;
+      padding: 0 25px;
+      gap: 22px;
+      overflow-x: auto;
+    }
+
+    .imdb-tab {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 4px;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .imdb-tab:hover {
+      color: #FFFFFF;
+    }
+
+    .imdb-tab.active {
+      color: var(--imdb-gold);
+      border-bottom: 3px solid var(--imdb-gold);
+    }
+
+    .imdb-body {
+      padding: 22px 25px;
+      background: #0B0E17;
+    }
+
+    .imdb-tab-panel {
+      display: none;
+    }
+
+    .imdb-tab-panel.active {
+      display: block;
+    }
+
+    .imdb-plot-text {
+      font-size: 0.9rem;
+      color: #E2E8F0;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .imdb-credits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .imdb-credit-row {
+      background: #141A26;
+      border: 1px solid rgba(245, 197, 24, 0.25);
+      border-left: 4px solid var(--imdb-gold);
+      padding: 10px 14px;
+    }
+
+    .imdb-credit-role {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--imdb-gold);
+      margin-bottom: 3px;
+    }
+
+    .imdb-credit-names {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #FFFFFF;
     }
 
     /* Mini YouTube Channel Interface */
@@ -822,25 +1180,29 @@
       text-decoration: none;
     }
 
+    footer a.footer-imdb {
+      color: var(--imdb-gold);
+    }
+
     /* Robust Responsive Alignments (Mobile & Tablet) */
     @media (max-width: 850px) {
       .navbar {
-        padding: 0 15px;
+        padding: 0 12px;
         height: 64px;
       }
 
       .navbar .logo-img {
-        height: 28px;
+        height: 26px;
       }
 
       .nav-links {
-        gap: 8px;
+        gap: 6px;
       }
 
       .nav-links a {
-        font-size: 0.75rem;
-        padding: 4px 8px;
-        letter-spacing: 1px;
+        font-size: 0.7rem;
+        padding: 4px 6px;
+        letter-spacing: 0.8px;
       }
 
       .hero {
@@ -894,6 +1256,31 @@
 
       .video-details h3 {
         font-size: 1.6rem;
+      }
+
+      .imdb-top-bar {
+        padding: 12px 16px;
+      }
+
+      .imdb-hero-banner {
+        padding: 18px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .imdb-poster-thumb {
+        width: 100%;
+      }
+
+      .imdb-open-cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .imdb-nav-tabs,
+      .imdb-body {
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .yt-channel-banner {
@@ -955,7 +1342,8 @@
     </div>
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
-      <li><a href="#tether-teaser">Tether Teaser</a></li>
+      <li><a href="#tether-teaser">Teasers</a></li>
+      <li><a href="#imdb-page" class="nav-imdb-link">IMDb</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
     </ul>
@@ -970,7 +1358,10 @@
     </div>
 
     <p>Discover new heroes, epic cinematic sagas, and official announcements from Starvel Studios.</p>
-    <a href="#tether-teaser" class="btn-editorial">Watch TETHER Teaser</a>
+    <div class="hero-cta-group">
+      <a href="#tether-teaser" class="btn-editorial">Watch TETHER Teaser</a>
+      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-editorial btn-imdb-hero">View on IMDb</a>
+    </div>
   </section>
 
   <!-- TETHER Teaser Section -->
@@ -1004,12 +1395,18 @@
               <h3>TETHER — Official Film Teaser</h3>
               <span class="announcement-vol-badge badge-orange">OUR FIRST FILM</span>
             </div>
-            <a href="http://www.youtube.com/watch?v=t_P2gRGizco" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
-              <svg viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              Watch on YouTube
-            </a>
+            <div class="video-actions-group">
+              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb">
+                <span class="imdb-pill-tag">IMDb</span>
+                View Page
+              </a>
+              <a href="http://www.youtube.com/watch?v=t_P2gRGizco" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+                <svg viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch on YouTube
+              </a>
+            </div>
           </div>
           <p>Starring Jayden, Sathwik, Rithwik, Abhirama, Lokesh, and Ishaaq</p>
           <p><span class="label">Production</span> Starvel Studios Debut Project</p>
@@ -1033,12 +1430,18 @@
               <h3>TETHER — Official Title Teaser</h3>
               <span class="announcement-vol-badge">PREMIERE</span>
             </div>
-            <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
-              <svg viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              Watch on YouTube
-            </a>
+            <div class="video-actions-group">
+              <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="btn-view-imdb">
+                <span class="imdb-pill-tag">IMDb</span>
+                View Page
+              </a>
+              <a href="https://www.youtube.com/watch?v=H4hhmBM308o" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+                <svg viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch on YouTube
+              </a>
+            </div>
           </div>
           <p>Directed by Sathwik, Jayden Jacob & Abhirama Reddy Kalluri</p>
           <p><span class="label">Cast & Crew</span> Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</p>
@@ -1046,6 +1449,124 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Mini IMDb Page Section -->
+  <section id="imdb-page" class="content-section">
+    <div class="section-header imdb-header">
+      <h2 class="section-title">TETHER ON IMDb</h2>
+    </div>
+
+    <div class="imdb-app-window">
+      <!-- IMDb Top Bar -->
+      <div class="imdb-top-bar">
+        <div class="imdb-brand-group">
+          <span class="imdb-logo-box">IMDb</span>
+          <span class="imdb-id-badge">TITLE ID: tt50941110</span>
+        </div>
+        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-url-preview">
+          imdb.com/title/tt50941110 ↗
+        </a>
+      </div>
+
+      <!-- IMDb Title Hero Strip -->
+      <div class="imdb-hero-banner">
+        <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-poster-thumb" title="Open TETHER on IMDb">
+          <span class="imdb-poster-label">★ Official Listing</span>
+        </a>
+
+        <div class="imdb-title-meta">
+          <h3>TETHER: Chapter 1 — The Residual Locus</h3>
+          <div class="imdb-meta-chips">
+            <span class="imdb-chip chip-gold">Official IMDb Page</span>
+            <span class="imdb-chip">Short Film</span>
+            <span class="imdb-chip">Sci-Fi</span>
+            <span class="imdb-chip">Action</span>
+            <span class="imdb-chip">Starvel Studios</span>
+          </div>
+          <div class="imdb-cta-row">
+            <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+              Open Full IMDb Page ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive IMDb Mini Tabs -->
+      <div class="imdb-nav-tabs" role="tablist">
+        <button type="button" class="imdb-tab active" onclick="switchImdbTab(event, 'imdb-overview')">Overview</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast & Crew</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production</button>
+      </div>
+
+      <!-- Interactive IMDb Body -->
+      <div class="imdb-body">
+        <!-- Overview Tab -->
+        <div id="imdb-overview" class="imdb-tab-panel active">
+          <p class="imdb-plot-text">
+            Initiating quantum tempo displacement... Core resonance stabilized. <strong>TETHER: Chapter 1 — The Residual Locus</strong> is the debut sci-fi action film from <strong>Starvel Studios</strong>, launching the Starvel Cinematic Universe.
+          </p>
+          <div class="imdb-credits-list">
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Directors</div>
+              <div class="imdb-credit-names">Sathwik Gurram, Jayden Jacob, Abhirama Reddy Kalluri</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Studio</div>
+              <div class="imdb-credit-names">Starvel Studios</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cast & Crew Tab -->
+        <div id="imdb-cast" class="imdb-tab-panel">
+          <div class="imdb-credits-list">
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Cast</div>
+              <div class="imdb-credit-names">Jayden Jacob, Sathwik Gurram, Abhirama Reddy Kalluri, Rithwik, Lokesh, Ishaaq</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Writers</div>
+              <div class="imdb-credit-names">Sathwik Gurram, Jayden Jacob, Abhirama Reddy Kalluri</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">VFX & Post-Production</div>
+              <div class="imdb-credit-names">Sathwik Gurram • Starvel Studios</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Cinematography & Design</div>
+              <div class="imdb-credit-names">Jayden Jacob, Abhirama Reddy Kalluri</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Production Details Tab -->
+        <div id="imdb-details" class="imdb-tab-panel">
+          <div class="imdb-credits-list">
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">IMDb Identifier</div>
+              <div class="imdb-credit-names">tt50941110</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Production Banner</div>
+              <div class="imdb-credit-names">Starvel Studios</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Country of Origin</div>
+              <div class="imdb-credit-names">India</div>
+            </div>
+            <div class="imdb-credit-row">
+              <div class="imdb-credit-role">Direct Link</div>
+              <div class="imdb-credit-names">
+                <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
+                  https://www.imdb.com/title/tt50941110/ ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1138,7 +1659,12 @@
   <!-- Footer -->
   <footer>
     <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
-    <div>FOLLOW ON <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a> &amp; <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a></div>
+    <div>
+      FOLLOW ON 
+      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>, 
+      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a> & 
+      <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb">IMDb</a>
+    </div>
   </footer>
 
   <script>
@@ -1224,6 +1750,21 @@
 
       if (iframe) {
         iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+      }
+    }
+
+    // Interactive Mini IMDb Page Tab Switcher
+    function switchImdbTab(event, panelId) {
+      const tabs = document.querySelectorAll('.imdb-tab');
+      const panels = document.querySelectorAll('.imdb-tab-panel');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      panels.forEach(panel => panel.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      const activePanel = document.getElementById(panelId);
+      if (activePanel) {
+        activePanel.classList.add('active');
       }
     }
   </script>
