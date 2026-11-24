@@ -25,6 +25,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
+  <!-- Primary Supabase Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <!-- Search Engine Structured Data for TETHER (tt50941110) -->
   <script type="application/ld+json">
   {
@@ -125,7 +128,6 @@
       position: relative;
     }
 
-    /* Ambient Fixed Background & Floating Liquid Orbs */
     #fixed-bg {
       position: fixed;
       inset: 0;
@@ -195,7 +197,6 @@
       100% { transform: translate3d(-3%, 3%, 0) scale(0.96); }
     }
 
-    /* Glassmorphism Surface + Mouse Spotlight */
     .glass-surface {
       background: linear-gradient(
         135deg,
@@ -230,7 +231,6 @@
       opacity: 1;
     }
 
-    /* Scroll Progress Bar */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -246,7 +246,6 @@
       box-shadow: 0 0 12px var(--comic-cyan-glow);
     }
 
-    /* Preloader */
     #preloader {
       position: fixed;
       inset: 0;
@@ -331,7 +330,6 @@
       transition: width 0.08s linear;
     }
 
-    /* Floating Glass Navbar */
     .navbar {
       position: fixed;
       top: 10px;
@@ -423,16 +421,44 @@
       align-items: center;
       gap: 5px;
       color: #A7F3D0;
-      background: rgba(16, 185, 129, 0.18);
-      border-color: rgba(52, 211, 153, 0.55);
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.58);
     }
 
     .nav-admin-pill:hover {
-      background: rgba(16, 185, 129, 0.32);
+      background: rgba(16, 185, 129, 0.36);
       box-shadow: 0 0 16px rgba(52, 211, 153, 0.35);
     }
 
-    /* Hero Section */
+    /* Floating Quick Studio Editor Pill (Only Visible When Logged In) */
+    .floating-editor-fab {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 3000;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.7);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(0, 180, 216, 0.82));
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(16, 185, 129, 0.4);
+      transition: transform 0.25s var(--ease-liquid), box-shadow 0.25s var(--ease-liquid);
+    }
+
+    .floating-editor-fab:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.58), 0 0 30px rgba(0, 229, 255, 0.55);
+    }
+
+    /* Hero */
     .hero {
       min-height: 90vh;
       display: flex;
@@ -563,7 +589,6 @@
       box-shadow: 0 16px 38px rgba(245, 197, 24, 0.45), var(--glass-specular);
     }
 
-    /* Scroll Reveal */
     .reveal {
       opacity: 0;
       transform: translate3d(0, 28px, 0);
@@ -576,7 +601,6 @@
       transform: translate3d(0, 0, 0);
     }
 
-    /* Sections */
     .content-section {
       max-width: 1120px;
       margin: 0 auto 90px auto;
@@ -646,7 +670,7 @@
       transform: translateY(-1px);
     }
 
-    /* Video Cards */
+    /* Videos */
     .video-stack {
       display: flex;
       flex-direction: column;
@@ -902,7 +926,7 @@
       margin-right: 8px;
     }
 
-    /* Mini IMDb App Window */
+    /* Mini IMDb Window */
     .imdb-app-window {
       width: 100%;
       max-width: 920px;
@@ -1208,7 +1232,7 @@
       word-break: break-word;
     }
 
-    /* YouTube Hub Window */
+    /* YouTube Hub */
     .yt-app-window {
       width: 100%;
       max-width: 920px;
@@ -1387,7 +1411,7 @@
       gap: 10px;
     }
 
-    /* Directors Grid */
+    /* Directors */
     .directors-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1531,7 +1555,7 @@
     .admin-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 14, 0.78);
+      background: rgba(4, 7, 14, 0.8);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       z-index: 5000;
@@ -1542,7 +1566,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.32s var(--ease-liquid), visibility 0.32s var(--ease-liquid);
+      transition: opacity 0.3s var(--ease-liquid), visibility 0.3s var(--ease-liquid);
     }
 
     .admin-backdrop.open {
@@ -1557,14 +1581,14 @@
       max-height: 88vh;
       overflow-y: auto;
       border-radius: 28px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.9) 45%, rgba(8, 12, 22, 0.96));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.92) 45%, rgba(8, 12, 22, 0.97));
       backdrop-filter: blur(22px) saturate(190%);
       -webkit-backdrop-filter: blur(22px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.28);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.74), var(--glass-specular);
       padding: 28px;
       transform: translate3d(0, 22px, 0) scale(0.97);
-      transition: transform 0.38s var(--ease-liquid);
+      transition: transform 0.35s var(--ease-liquid);
     }
 
     .admin-backdrop.open .admin-modal {
@@ -1666,7 +1690,7 @@
       padding: 10px 14px;
       border-radius: 13px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(6, 10, 18, 0.72);
+      background: rgba(6, 10, 18, 0.74);
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.88rem;
@@ -2010,6 +2034,11 @@
     </ul>
   </header>
 
+  <!-- Floating Quick Studio Editor Button (Visible Only to Authenticated Admins) -->
+  <button type="button" class="floating-editor-fab admin-only-control" onclick="openAdminModal('editor')">
+    ★ Open Studio Editor
+  </button>
+
   <!-- Public Hero -->
   <section id="top" class="hero">
     <span class="hero-subtitle hero-fade" id="hero-subtitle-el" style="--hero-delay: 80ms;">★ ISSUE #1 — STARVEL STUDIOS ★</span>
@@ -2347,10 +2376,10 @@
         <button type="button" class="admin-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Panel">✕</button>
       </div>
 
-      <!-- STEP 1: Strict Login Gate (No Direct Bypass, No Exposed Emails) -->
+      <!-- STEP 1: Strict Login Gate -->
       <div id="admin-login-view">
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
-          Private studio access. Sign in with an authorized account password or request a sign-in link to unlock the editor.
+          Private studio access. Sign in with an authorized account password, or request a sign-in link / code to unlock the Studio Editor.
         </p>
 
         <form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
@@ -2361,14 +2390,23 @@
             </div>
             <div class="admin-form-group">
               <label class="admin-label" for="admin-password-input">Password</label>
-              <input type="password" id="admin-password-input" class="admin-input" placeholder="enter password" required autocomplete="current-password">
+              <input type="password" id="admin-password-input" class="admin-input" placeholder="enter password" autocomplete="current-password">
             </div>
           </div>
 
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
             <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In</button>
-            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Link</button>
+            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Link / Code</button>
           </div>
+        </form>
+
+        <!-- Optional 6-Digit Email Code Verification -->
+        <form id="admin-otp-form" onsubmit="handleVerifyOtpCode(event)" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12);">
+          <div class="admin-form-group">
+            <label class="admin-label" for="admin-otp-input">Email Verification Code</label>
+            <input type="text" id="admin-otp-input" class="admin-input" placeholder="enter 6-digit code" inputmode="numeric" autocomplete="one-time-code">
+          </div>
+          <button type="submit" class="admin-btn-primary" id="btn-verify-otp">Verify & Open Studio Editor</button>
         </form>
 
         <div id="admin-login-status" class="admin-status-msg"></div>
@@ -2638,7 +2676,7 @@
     </div>
   </div>
 
-  <!-- UI Animations, Preloader, 3D Scroll & Modal Controls -->
+  <!-- UI Animations & Modal Controls -->
   <script>
     window.openAdminModal = function(initialPanel = 'editor') {
       const backdrop = document.getElementById('admin-backdrop');
@@ -2653,7 +2691,6 @@
       if (backdrop) backdrop.classList.remove('open');
     };
 
-    /* Preloader */
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
     let currentProgress = 0;
@@ -2674,10 +2711,9 @@
     }
     requestAnimationFrame(animatePreloader);
     setTimeout(() => { if (targetProgress < 80) targetProgress = 80; }, 80);
-    setTimeout(() => { targetProgress = 100; }, 520);
+    setTimeout(() => { targetProgress = 100; }, 500);
     window.addEventListener('load', () => { targetProgress = 100; });
 
-    /* GPU Scroll Progress + 3D Hero Parallax */
     const heroLogo = document.getElementById('hero-logo-3d');
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
@@ -2716,7 +2752,6 @@
     }, { passive: true });
     updateScrollEffects();
 
-    /* Keyboard Shortcuts */
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') window.closeAdminModal();
       if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
@@ -2724,7 +2759,6 @@
       }
     });
 
-    /* Staggered Scroll Reveals */
     const revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !prefersReducedMotion) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -2740,7 +2774,6 @@
       revealElements.forEach((el) => el.classList.add('is-visible'));
     }
 
-    /* Delegated Glass Spotlight Hover (works on dynamic cards too) */
     document.addEventListener('pointermove', (e) => {
       const card = e.target.closest('.glass-interactive');
       if (!card) return;
@@ -2749,7 +2782,6 @@
       card.style.setProperty('--my', `${e.clientY - rect.top}px`);
     }, { passive: true });
 
-    /* Teaser Click-to-Play */
     window.playEmbeddedTeaser = function(wrapperId, overlayId, videoId) {
       const cleanId = /^[a-zA-Z0-9_-]{11}$/.test(String(videoId || '').trim()) ? String(videoId).trim() : 't_P2gRGizco';
       const overlay = document.getElementById(overlayId);
@@ -2764,7 +2796,6 @@
       }
     };
 
-    /* IMDb Mini-App Tabs */
     window.switchImdbTab = function(event, panelId) {
       document.querySelectorAll('.imdb-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.imdb-tab-panel').forEach(p => p.classList.remove('active'));
@@ -2774,7 +2805,7 @@
     };
   </script>
 
-  <!-- Strict Supabase Authentication & Public/Private Content Sync -->
+  <!-- Strict Supabase Auth & Public/Private Content Sync -->
   <script type="module">
     const SUPABASE_URL = 'https://ijxgsumhiwfobcpsprlh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_CaBD1BOqJK-tSe3_Dw2WWg_wzEev0he';
@@ -2815,6 +2846,7 @@
     let currentConfig = { ...DEFAULT_CONFIG };
     let supabase = null;
     let activeSession = null;
+    let pendingOtpEmail = '';
 
     function escapeHtml(str) {
       return String(str ?? '')
@@ -3019,7 +3051,10 @@
         if (stateBadge) stateBadge.textContent = 'EDITOR UNLOCKED';
         if (signedEmail) signedEmail.textContent = session.user.email.trim().toLowerCase();
         populateEditorInputs(currentConfig);
-        if (autoOpenEditor) window.openAdminModal('editor');
+        if (autoOpenEditor) {
+          window.openAdminModal('editor');
+          window.switchAdminPanel('panel-editor');
+        }
       } else {
         if (loginView) loginView.style.display = 'block';
         if (dashView) dashView.style.display = 'none';
@@ -3031,7 +3066,7 @@
     window.handlePasswordSignIn = async function(e) {
       e.preventDefault();
       if (!supabase) {
-        setStatus('admin-login-status', 'Authentication service unavailable.', 'error');
+        setStatus('admin-login-status', 'Auth client failed to load. Hard refresh (Ctrl + F5) and try again.', 'error');
         return;
       }
 
@@ -3040,6 +3075,11 @@
 
       if (!ADMIN_ACCOUNTS.includes(email)) {
         setStatus('admin-login-status', 'Unauthorized account.', 'error');
+        return;
+      }
+
+      if (!password) {
+        setStatus('admin-login-status', 'Enter your password, or click "Send Sign-In Link / Code".', 'error');
         return;
       }
 
@@ -3055,19 +3095,21 @@
 
       if (error || !hasVerifiedAdminSession(data?.session)) {
         applySessionState(null);
-        setStatus('admin-login-status', error?.message || 'Invalid credentials.', 'error');
+        const hint = error?.message?.toLowerCase().includes('invalid')
+          ? ' — make sure this user has a password set in Supabase → Authentication → Users, or use "Send Sign-In Link / Code".'
+          : '';
+        setStatus('admin-login-status', (error?.message || 'Sign-in failed.') + hint, 'error');
         return;
       }
 
       setStatus('admin-login-status', '');
       applySessionState(data.session, true);
-      window.switchAdminPanel('panel-editor');
       await loadAndRenderAll();
     };
 
     window.handleSendMagicLink = async function() {
       if (!supabase) {
-        setStatus('admin-login-status', 'Authentication service unavailable.', 'error');
+        setStatus('admin-login-status', 'Auth client failed to load. Hard refresh (Ctrl + F5) and try again.', 'error');
         return;
       }
 
@@ -3094,14 +3136,53 @@
       });
 
       btn.disabled = false;
-      btn.textContent = 'Send Sign-In Link';
+      btn.textContent = 'Send Sign-In Link / Code';
 
       if (error) {
-        setStatus('admin-login-status', `${error.message} (Use Password Sign In instead.)`, 'error');
+        setStatus('admin-login-status', `${error.message} — use Password Sign In instead.`, 'error');
         return;
       }
 
-      setStatus('admin-login-status', 'Sign-in link sent. Open the newest link in your inbox to unlock the editor.', 'info');
+      pendingOtpEmail = email;
+      const otpForm = document.getElementById('admin-otp-form');
+      if (otpForm) otpForm.style.display = 'block';
+      setStatus('admin-login-status', 'Email sent! Click the newest link in your inbox OR enter the 6-digit code below.', 'info');
+    };
+
+    window.handleVerifyOtpCode = async function(e) {
+      e.preventDefault();
+      if (!supabase) return;
+
+      const email = pendingOtpEmail || document.getElementById('admin-email-input').value.trim().toLowerCase();
+      const token = document.getElementById('admin-otp-input').value.trim();
+
+      if (!email || !token) {
+        setStatus('admin-login-status', 'Enter the 6-digit code from your email.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-verify-otp');
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: 'email'
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Verify & Open Studio Editor';
+
+      if (error || !hasVerifiedAdminSession(data?.session)) {
+        setStatus('admin-login-status', error?.message || 'Invalid or expired code.', 'error');
+        return;
+      }
+
+      document.getElementById('admin-otp-input').value = '';
+      setStatus('admin-login-status', '');
+      applySessionState(data.session, true);
+      await loadAndRenderAll();
     };
 
     window.handleAdminSignOut = async function() {
@@ -3482,47 +3563,78 @@
       await loadAndRenderAll();
     };
 
-    /* Surface expired/invalid magic-link errors clearly instead of silently looping */
-    function checkAuthHashErrors() {
-      if (!window.location.hash) return;
-      const params = new URLSearchParams(window.location.hash.substring(1));
-      const errDesc = params.get('error_description') || params.get('error');
+    function checkAuthUrlErrors() {
+      const hashParams = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+      const searchParams = new URLSearchParams(window.location.search || '');
+      const errDesc =
+        hashParams.get('error_description') ||
+        hashParams.get('error') ||
+        searchParams.get('error_description') ||
+        searchParams.get('error');
+
       if (errDesc) {
         window.openAdminModal('editor');
         setStatus('admin-login-status', `${errDesc.replace(/\+/g, ' ')} — sign in with your password instead.`, 'error');
-        history.replaceState(null, '', window.location.pathname + window.location.search);
+        history.replaceState(null, '', window.location.pathname);
+        return true;
       }
+      return false;
+    }
+
+    async function initSupabase() {
+      let createClientFn = window.supabase?.createClient;
+      if (!createClientFn) {
+        const mod = await import('https://esm.sh/@supabase/supabase-js@2');
+        createClientFn = mod.createClient;
+      }
+      return createClientFn(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
     try {
-      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const returningFromAuth =
+        window.location.hash.includes('access_token=') ||
+        window.location.hash.includes('type=magiclink') ||
+        window.location.search.includes('code=');
 
-      checkAuthHashErrors();
+      const hadAuthError = checkAuthUrlErrors();
+      supabase = await initSupabase();
 
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session && !hasVerifiedAdminSession(session)) {
-        await supabase.auth.signOut();
-        applySessionState(null);
-      } else {
-        applySessionState(session, false);
-      }
-
-      await loadAndRenderAll();
-
+      /* Register auth listener FIRST so redirect events are never missed */
       supabase.auth.onAuthStateChange(async (event, nextSession) => {
         if (nextSession && !hasVerifiedAdminSession(nextSession)) {
           await supabase.auth.signOut();
           applySessionState(null);
           return;
         }
-        const shouldAutoOpen = event === 'SIGNED_IN';
+        const shouldAutoOpen = event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && returningFromAuth);
         applySessionState(nextSession, shouldAutoOpen);
-        if (event === 'SIGNED_IN' && window.location.hash.includes('access_token')) {
-          history.replaceState(null, '', window.location.pathname + window.location.search);
+        if (nextSession && (window.location.hash.includes('access_token') || window.location.search.includes('code='))) {
+          history.replaceState(null, '', window.location.pathname);
         }
         await loadAndRenderAll();
       });
+
+      /* Handle PKCE ?code= exchange if present */
+      if (window.location.search.includes('code=')) {
+        const code = new URLSearchParams(window.location.search).get('code');
+        if (code) {
+          await supabase.auth.exchangeCodeForSession(code).catch(() => {});
+        }
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session && !hasVerifiedAdminSession(session)) {
+        await supabase.auth.signOut();
+        applySessionState(null);
+      } else {
+        applySessionState(session, Boolean(session && returningFromAuth && !hadAuthError));
+      }
+
+      if (session && (window.location.hash.includes('access_token') || window.location.search.includes('code='))) {
+        history.replaceState(null, '', window.location.pathname);
+      }
+
+      await loadAndRenderAll();
     } catch (err) {
       console.error('Supabase initialization error:', err);
     }
