@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STARVEL STUDIOS | TETHER Teaser &amp; Comic Universe</title>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Official website of Starvel Studios featuring TETHER: Chapter 1 — The Residual Locus, teasers, IMDb listing, YouTube hub, and directors.">
+  <meta property="og:title" content="STARVEL STUDIOS | TETHER: Chapter 1 — The Residual Locus">
+  <meta property="og:description" content="Discover new heroes, epic sci-fi cinematic sagas, and official teasers from Starvel Studios.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://st4rvel.github.io/Starvel/">
+  <title>STARVEL STUDIOS | TETHER Teaser & Comic Universe</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./starvel.png">
@@ -18,6 +24,52 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Search Engine Structured Data for TETHER (tt50941110) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "TETHER: Chapter 1 — The Residual Locus",
+    "alternateName": "Tether Chapter 1: The Residual Locus",
+    "url": "https://st4rvel.github.io/Starvel/",
+    "sameAs": [
+      "https://www.imdb.com/title/tt50941110/",
+      "https://www.instagram.com/_starvelstudios_/",
+      "https://youtube.com/@starvelstudios-1981"
+    ],
+    "description": "Independent sci-fi action short film from Starvel Studios set across timelines in Hyderabad.",
+    "genre": ["Sci-Fi", "Action", "Short Film"],
+    "countryOfOrigin": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "productionCompany": {
+      "@type": "Organization",
+      "name": "Starvel Studios",
+      "url": "https://st4rvel.github.io/Starvel/"
+    },
+    "director": [
+      { "@type": "Person", "name": "Sathwik Gurram" },
+      { "@type": "Person", "name": "Jayden Jacob" },
+      { "@type": "Person", "name": "Abhirama Reddy Kalluri" },
+      { "@type": "Person", "name": "Mohammad Ishaaq Ali Khan" }
+    ],
+    "actor": [
+      { "@type": "Person", "name": "Sathwik Gurram" },
+      { "@type": "Person", "name": "Jayden Jacob" },
+      { "@type": "Person", "name": "Abhirama Reddy Kalluri" },
+      { "@type": "Person", "name": "Mohammad Ishaaq Ali Khan" },
+      { "@type": "Person", "name": "Lokesh" },
+      { "@type": "Person", "name": "Rithwik" }
+    ],
+    "copyrightHolder": {
+      "@type": "Organization",
+      "name": "Starvel Studios"
+    },
+    "copyrightYear": 2026
+  }
+  </script>
 
   <style>
     @font-face {
@@ -73,6 +125,7 @@
       position: relative;
     }
 
+    /* Ambient Fixed Background & Floating Liquid Orbs */
     #fixed-bg {
       position: fixed;
       inset: 0;
@@ -91,6 +144,7 @@
       background-position: center center;
       background-repeat: no-repeat;
       overflow: hidden;
+      contain: strict;
     }
 
     .liquid-orb {
@@ -141,6 +195,7 @@
       100% { transform: translate3d(-3%, 3%, 0) scale(0.96); }
     }
 
+    /* Glassmorphism Surface + Mouse Spotlight */
     .glass-surface {
       background: linear-gradient(
         135deg,
@@ -167,7 +222,7 @@
         transparent 60%
       );
       opacity: 0;
-      transition: opacity 0.4s var(--ease-liquid);
+      transition: opacity 0.38s var(--ease-liquid);
       z-index: 3;
     }
 
@@ -175,6 +230,7 @@
       opacity: 1;
     }
 
+    /* Scroll Progress Bar */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -190,6 +246,7 @@
       box-shadow: 0 0 12px var(--comic-cyan-glow);
     }
 
+    /* Preloader */
     #preloader {
       position: fixed;
       inset: 0;
@@ -262,7 +319,6 @@
       border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 999px;
       overflow: hidden;
-      position: relative;
       box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
     }
 
@@ -275,6 +331,7 @@
       transition: width 0.08s linear;
     }
 
+    /* Floating Glass Navbar */
     .navbar {
       position: fixed;
       top: 10px;
@@ -297,7 +354,7 @@
     }
 
     .navbar.scrolled {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(8, 13, 24, 0.82));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(8, 13, 24, 0.84));
       border-color: rgba(255, 255, 255, 0.26);
       box-shadow: 0 12px 36px rgba(0, 0, 0, 0.58), var(--glass-specular);
     }
@@ -353,19 +410,29 @@
       box-shadow: 0 0 16px rgba(245, 197, 24, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
     }
 
+    /* Strict Admin-Only Controls Hidden From Public */
+    .admin-only-control {
+      display: none !important;
+    }
+
+    body.admin-authenticated .admin-only-control {
+      display: inline-flex !important;
+    }
+
     .nav-admin-pill {
-      display: none;
+      align-items: center;
+      gap: 5px;
       color: #A7F3D0;
       background: rgba(16, 185, 129, 0.18);
       border-color: rgba(52, 211, 153, 0.55);
     }
 
-    .nav-admin-pill.visible {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+    .nav-admin-pill:hover {
+      background: rgba(16, 185, 129, 0.32);
+      box-shadow: 0 0 16px rgba(52, 211, 153, 0.35);
     }
 
+    /* Hero Section */
     .hero {
       min-height: 90vh;
       display: flex;
@@ -496,6 +563,7 @@
       box-shadow: 0 16px 38px rgba(245, 197, 24, 0.45), var(--glass-specular);
     }
 
+    /* Scroll Reveal */
     .reveal {
       opacity: 0;
       transform: translate3d(0, 28px, 0);
@@ -508,6 +576,7 @@
       transform: translate3d(0, 0, 0);
     }
 
+    /* Sections */
     .content-section {
       max-width: 1120px;
       margin: 0 auto 90px auto;
@@ -528,7 +597,6 @@
       -webkit-backdrop-filter: blur(14px) saturate(175%);
       border: 1px solid rgba(255, 145, 90, 0.42);
       box-shadow: var(--glass-shadow), var(--glass-specular);
-      max-width: 100%;
     }
 
     .section-title {
@@ -556,7 +624,6 @@
     }
 
     .btn-section-admin {
-      display: none;
       align-items: center;
       gap: 6px;
       padding: 7px 16px;
@@ -573,16 +640,13 @@
       transition: all 0.25s var(--ease-liquid);
     }
 
-    body.admin-authenticated .btn-section-admin {
-      display: inline-flex;
-    }
-
     .btn-section-admin:hover {
       background: rgba(0, 229, 255, 0.32);
       border-color: var(--comic-cyan);
       transform: translateY(-1px);
     }
 
+    /* Video Cards */
     .video-stack {
       display: flex;
       flex-direction: column;
@@ -618,7 +682,6 @@
       width: 100%;
       height: 100%;
       border: none;
-      display: block;
     }
 
     .thumbnail-overlay {
@@ -634,7 +697,7 @@
       align-items: center;
       cursor: pointer;
       z-index: 10;
-      transition: opacity 0.4s var(--ease-liquid), transform 0.4s var(--ease-liquid);
+      transition: opacity 0.4s var(--ease-liquid);
     }
 
     .thumbnail-overlay::before {
@@ -692,13 +755,7 @@
       flex-wrap: wrap;
     }
 
-    .video-title-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
+    .video-title-group,
     .video-actions-group {
       display: flex;
       align-items: center;
@@ -713,7 +770,6 @@
       color: #FFFFFF;
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
       line-height: 1.1;
-      margin: 0;
     }
 
     .announcement-vol-badge {
@@ -726,8 +782,6 @@
       border: 1px solid rgba(0, 229, 255, 0.48);
       border-radius: 999px;
       letter-spacing: 1.5px;
-      display: inline-block;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
       white-space: nowrap;
       line-height: 1;
     }
@@ -760,7 +814,6 @@
     .btn-watch-youtube:hover {
       background: linear-gradient(135deg, rgba(255, 30, 45, 0.92), rgba(220, 15, 30, 0.78));
       border-color: rgba(255, 255, 255, 0.75);
-      box-shadow: 0 12px 26px rgba(255, 30, 45, 0.42), var(--glass-specular);
       transform: translateY(-2px);
     }
 
@@ -793,7 +846,6 @@
       background: linear-gradient(135deg, rgba(245, 197, 24, 0.92), rgba(255, 220, 90, 0.85));
       color: #000000;
       border-color: #FFFFFF;
-      box-shadow: 0 12px 26px rgba(245, 197, 24, 0.42), var(--glass-specular);
       transform: translateY(-2px);
     }
 
@@ -810,7 +862,6 @@
     }
 
     .btn-admin-delete-inline {
-      display: none;
       align-items: center;
       gap: 5px;
       background: rgba(239, 68, 68, 0.24);
@@ -827,12 +878,8 @@
       transition: all 0.22s ease;
     }
 
-    body.admin-authenticated .btn-admin-delete-inline {
-      display: inline-flex;
-    }
-
     .btn-admin-delete-inline:hover {
-      background: rgba(239, 68, 68, 0.75);
+      background: rgba(239, 68, 68, 0.78);
       color: #FFFFFF;
     }
 
@@ -855,6 +902,7 @@
       margin-right: 8px;
     }
 
+    /* Mini IMDb App Window */
     .imdb-app-window {
       width: 100%;
       max-width: 920px;
@@ -1050,7 +1098,6 @@
 
     .imdb-open-cta:hover {
       background: linear-gradient(135deg, rgba(0, 229, 255, 0.92), rgba(110, 242, 255, 0.8));
-      color: #000000;
       box-shadow: 0 12px 28px rgba(0, 229, 255, 0.4), var(--glass-specular);
       transform: translateY(-2px);
     }
@@ -1091,7 +1138,6 @@
       color: var(--imdb-gold);
       background: rgba(245, 197, 24, 0.16);
       border-color: rgba(245, 197, 24, 0.5);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .imdb-body {
@@ -1107,7 +1153,7 @@
 
     .imdb-tab-panel.active {
       display: block;
-      animation: tabFadeIn 0.38s var(--ease-liquid);
+      animation: tabFadeIn 0.35s var(--ease-liquid);
     }
 
     @keyframes tabFadeIn {
@@ -1134,7 +1180,6 @@
       border-left: 3px solid var(--imdb-gold);
       border-radius: 16px;
       padding: 12px 16px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18);
       transition: background 0.28s ease, transform 0.28s var(--ease-liquid);
     }
 
@@ -1163,6 +1208,7 @@
       word-break: break-word;
     }
 
+    /* YouTube Hub Window */
     .yt-app-window {
       width: 100%;
       max-width: 920px;
@@ -1203,7 +1249,6 @@
       border: 1px solid rgba(255, 255, 255, 0.45);
       border-radius: 999px;
       padding: 5px 14px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
       text-transform: uppercase;
     }
 
@@ -1242,9 +1287,7 @@
       font-size: 1.85rem;
       letter-spacing: 2px;
       color: #FFFFFF;
-      margin: 0;
       line-height: 1.1;
-      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
 
     .yt-profile-meta .yt-handle {
@@ -1259,7 +1302,6 @@
       font-size: 0.78rem;
       color: var(--text-muted);
       font-weight: 500;
-      letter-spacing: 0.4px;
     }
 
     .yt-subscribe-cta {
@@ -1286,7 +1328,6 @@
       background: linear-gradient(135deg, rgba(0, 229, 255, 0.88), rgba(80, 238, 255, 0.75));
       color: #000000;
       border-color: #FFFFFF;
-      box-shadow: 0 12px 28px rgba(0, 229, 255, 0.4), var(--glass-specular);
       transform: translateY(-2px);
     }
 
@@ -1316,8 +1357,6 @@
       border-radius: 999px;
       color: var(--text-muted);
       border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.25s ease;
     }
 
     .yt-tab.active {
@@ -1348,6 +1387,7 @@
       gap: 10px;
     }
 
+    /* Directors Grid */
     .directors-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1377,14 +1417,12 @@
       overflow: hidden;
       border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       background-color: rgba(10, 16, 28, 0.6);
-      position: relative;
     }
 
     .director-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       transition: transform 0.6s var(--ease-liquid);
     }
 
@@ -1424,6 +1462,7 @@
       line-height: 1.45;
     }
 
+    /* Footer */
     footer {
       max-width: 1120px;
       margin: 0 auto 30px auto;
@@ -1488,12 +1527,13 @@
       background: rgba(0, 229, 255, 0.14);
     }
 
+    /* Private Admin Modal */
     .admin-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 14, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(4, 7, 14, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 5000;
       display: flex;
       align-items: center;
@@ -1502,7 +1542,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s var(--ease-liquid), visibility 0.35s var(--ease-liquid);
+      transition: opacity 0.32s var(--ease-liquid), visibility 0.32s var(--ease-liquid);
     }
 
     .admin-backdrop.open {
@@ -1517,14 +1557,14 @@
       max-height: 88vh;
       overflow-y: auto;
       border-radius: 28px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.88) 45%, rgba(8, 12, 22, 0.95));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.9) 45%, rgba(8, 12, 22, 0.96));
       backdrop-filter: blur(22px) saturate(190%);
       -webkit-backdrop-filter: blur(22px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.28);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.72), var(--glass-specular);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.74), var(--glass-specular);
       padding: 28px;
       transform: translate3d(0, 22px, 0) scale(0.97);
-      transition: transform 0.4s var(--ease-liquid);
+      transition: transform 0.38s var(--ease-liquid);
     }
 
     .admin-backdrop.open .admin-modal {
@@ -1626,12 +1666,16 @@
       padding: 10px 14px;
       border-radius: 13px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(6, 10, 18, 0.68);
+      background: rgba(6, 10, 18, 0.72);
       color: #FFFFFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.88rem;
       outline: none;
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .admin-input::placeholder {
+      color: rgba(182, 196, 216, 0.5);
     }
 
     .admin-input:focus {
@@ -1674,6 +1718,12 @@
       letter-spacing: 1.2px;
       text-transform: uppercase;
       cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .admin-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
     }
 
     .admin-status-msg {
@@ -1734,6 +1784,7 @@
 
     .admin-panel.active {
       display: block;
+      animation: tabFadeIn 0.28s var(--ease-liquid);
     }
 
     .admin-saved-list {
@@ -1942,6 +1993,7 @@
     </div>
   </div>
 
+  <!-- Navigation -->
   <header class="navbar" id="navbar">
     <div class="logo-container">
       <a id="nav-insta-logo-link" href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">
@@ -1954,10 +2006,11 @@
       <li><a href="#imdb-page" class="nav-imdb-link">IMDb</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
-      <li><button type="button" id="nav-admin-badge" class="nav-admin-pill" onclick="openAdminModal('editor')">★ Studio Editor</button></li>
+      <li><button type="button" id="nav-admin-badge" class="nav-admin-pill admin-only-control" onclick="openAdminModal('editor')">★ Studio Editor</button></li>
     </ul>
   </header>
 
+  <!-- Public Hero -->
   <section id="top" class="hero">
     <span class="hero-subtitle hero-fade" id="hero-subtitle-el" style="--hero-delay: 80ms;">★ ISSUE #1 — STARVEL STUDIOS ★</span>
 
@@ -1972,10 +2025,11 @@
     </div>
   </section>
 
+  <!-- Teasers & Films -->
   <section id="tether-teaser" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title" id="teasers-section-title">TETHER TEASERS &amp; FILMS</h2>
-      <button type="button" class="btn-section-admin" onclick="openAdminModal('movies')">+ Add Movie / Video</button>
+      <h2 class="section-title">TETHER TEASERS & FILMS</h2>
+      <button type="button" class="btn-section-admin admin-only-control" onclick="openAdminModal('movies')">+ Add Movie / Video</button>
     </div>
 
     <div class="video-stack" id="movies-container">
@@ -2027,7 +2081,7 @@
           <iframe
             id="iframe-tether-teaser-2"
             src="https://www.youtube-nocookie.com/embed/H4hhmBM308o?rel=0"
-            title="TETHER - Title Announcement | Sathwik | Jayden | Abhi Rama Reddy | Starvel Studios"
+            title="TETHER - Title Announcement | Starvel Studios"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
@@ -2051,13 +2105,13 @@
               </a>
             </div>
           </div>
-          <p id="t2-directors">Directed by Sathwik, Jayden Jacob &amp; Abhirama Reddy Kalluri</p>
-          <p><span class="label">Cast &amp; Crew</span> <span id="t2-cast">Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</span></p>
+          <p id="t2-directors">Directed by Sathwik, Jayden Jacob & Abhirama Reddy Kalluri</p>
+          <p><span class="label">Cast & Crew</span> <span id="t2-cast">Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</span></p>
           <p><span class="label">Production</span> <span id="t2-prod">Official Starvel Cinematic Universe Title Teaser</span></p>
         </div>
       </div>
 
-      <!-- Dynamic Supabase Movies -->
+      <!-- Dynamic Database Movies -->
       <div id="db-movies-list" style="width: 100%; display: flex; flex-direction: column; gap: 44px; align-items: center;"></div>
     </div>
   </section>
@@ -2065,8 +2119,8 @@
   <!-- Mini IMDb Page Section -->
   <section id="imdb-page" class="content-section">
     <div class="section-header imdb-header reveal">
-      <h2 class="section-title" id="imdb-section-title">TETHER ON IMDb</h2>
-      <button type="button" class="btn-section-admin" onclick="openAdminModal('imdb')">+ Manage IMDb Links</button>
+      <h2 class="section-title">TETHER ON IMDb</h2>
+      <button type="button" class="btn-section-admin admin-only-control" onclick="openAdminModal('imdb')">+ Manage IMDb Links</button>
     </div>
 
     <div class="imdb-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -2104,8 +2158,8 @@
 
       <div class="imdb-nav-tabs" role="tablist">
         <button type="button" class="imdb-tab active" onclick="switchImdbTab(event, 'imdb-overview')">Overview</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast &amp; Crew</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production &amp; Links</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast & Crew</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production & Links</button>
       </div>
 
       <div class="imdb-body">
@@ -2116,11 +2170,11 @@
           <div class="imdb-credits-list">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Directors</div>
-              <div class="imdb-credit-names" id="imdb-directors-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Studio</div>
-              <div class="imdb-credit-names" id="imdb-studio-el">Starvel Studios</div>
+              <div class="imdb-credit-names">Starvel Studios</div>
             </div>
           </div>
         </div>
@@ -2129,19 +2183,19 @@
           <div class="imdb-credits-list">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Cast</div>
-              <div class="imdb-credit-names" id="imdb-cast-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri, Rithwik, Lokesh</div>
+              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri, Rithwik, Lokesh</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Writers</div>
-              <div class="imdb-credit-names" id="imdb-writers-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">VFX &amp; Post-Production</div>
-              <div class="imdb-credit-names" id="imdb-vfx-el">Sathwik Gurram • Starvel Studios</div>
+              <div class="imdb-credit-role">VFX & Post-Production</div>
+              <div class="imdb-credit-names">Sathwik Gurram • Starvel Studios</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">Cinematography &amp; Design</div>
-              <div class="imdb-credit-names" id="imdb-cine-el">Jayden Jacob, Abhirama Reddy Kalluri</div>
+              <div class="imdb-credit-role">Cinematography & Design</div>
+              <div class="imdb-credit-names">Jayden Jacob, Abhirama Reddy Kalluri</div>
             </div>
           </div>
         </div>
@@ -2154,11 +2208,11 @@
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Production Banner</div>
-              <div class="imdb-credit-names" id="imdb-detail-studio-el">Starvel Studios</div>
+              <div class="imdb-credit-names">Starvel Studios</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Country of Origin</div>
-              <div class="imdb-credit-names" id="imdb-detail-country-el">India</div>
+              <div class="imdb-credit-names">India</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Primary IMDb Link</div>
@@ -2174,11 +2228,11 @@
     </div>
   </section>
 
-  <!-- Mini YouTube Channel Interface Section -->
+  <!-- Mini YouTube Channel Hub -->
   <section id="youtube-channel" class="content-section">
     <div class="section-header yt-header reveal">
-      <h2 class="section-title" id="yt-section-title">STARVEL ON YOUTUBE</h2>
-      <button type="button" class="btn-section-admin" onclick="openAdminModal('youtube')">+ Manage YouTube &amp; Instagram</button>
+      <h2 class="section-title">STARVEL ON YOUTUBE</h2>
+      <button type="button" class="btn-section-admin admin-only-control" onclick="openAdminModal('youtube')">+ Manage YouTube & Instagram</button>
     </div>
 
     <div class="yt-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -2192,7 +2246,7 @@
           <div class="yt-profile-meta">
             <h3 id="yt-channel-name-el">STARVEL STUDIOS</h3>
             <div class="yt-handle" id="yt-channel-handle-el">@starvelstudios-1981</div>
-            <div class="yt-sub-meta" id="yt-channel-sub-el">Official Teasers, Cinematic Trailers &amp; Behind The Scenes</div>
+            <div class="yt-sub-meta">Official Teasers, Cinematic Trailers & Behind The Scenes</div>
           </div>
         </div>
         <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="yt-subscribe-cta" id="yt-subscribe-link-el">
@@ -2210,7 +2264,7 @@
       </div>
 
       <div class="yt-channel-body">
-        <p id="yt-channel-desc-el">Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
+        <p>Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
         <div class="yt-extra-links" id="db-youtube-links"></div>
       </div>
     </div>
@@ -2219,7 +2273,7 @@
   <!-- Directors Section -->
   <section id="directors" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title" id="directors-section-title">Directors</h2>
+      <h2 class="section-title">Directors</h2>
     </div>
 
     <div class="directors-grid">
@@ -2267,11 +2321,11 @@
 
   <!-- Footer -->
   <footer class="reveal">
-    <div id="footer-copyright-el">© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
-    <div id="footer-social-links">
+    <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
+    <div>
       FOLLOW ON
       <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer" class="footer-insta" id="footer-insta-link">INSTAGRAM</a>,
-      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" id="footer-yt-link">YOUTUBE</a> &amp;
+      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" id="footer-yt-link">YOUTUBE</a> &
       <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb" id="footer-imdb-link">IMDb</a>
       <span id="db-instagram-footer-extra"></span>
     </div>
@@ -2282,53 +2336,53 @@
     </div>
   </footer>
 
-  <!-- Admin Modal & Live Editor -->
+  <!-- Private Admin Modal (Strictly Authenticated) -->
   <div id="admin-backdrop" class="admin-backdrop" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading">
     <div class="admin-modal">
       <div class="admin-modal-header">
         <div class="admin-modal-title" id="admin-modal-heading">
           STARVEL STUDIO ADMIN
-          <span class="admin-badge-live" id="admin-auth-state-badge">STUDIO ACCESS</span>
+          <span class="admin-badge-live" id="admin-auth-state-badge">AUTH REQUIRED</span>
         </div>
         <button type="button" class="admin-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Panel">✕</button>
       </div>
 
-      <!-- STEP 1: Email + Password Login, Magic Link, or Direct Editor Access -->
+      <!-- STEP 1: Strict Login Gate (No Direct Bypass, No Exposed Emails) -->
       <div id="admin-login-view">
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
-          Sign in with your admin email (<strong>s**@gmail.com</strong> or <strong>s**.g**@gmail.com</strong>) and <strong>password</strong>, send a sign-in email link</strong>.
+          Private studio access. Sign in with an authorized account password or request a sign-in link to unlock the editor.
         </p>
 
         <form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
           <div class="admin-form-grid">
             <div class="admin-form-group">
-              <label class="admin-label" for="admin-email-input">Authorized Admin Email</label>
-              <input type="email" id="admin-email-input" class="admin-input" value="" placeholder="Starvel Membership Email" required autocomplete="email">
+              <label class="admin-label" for="admin-email-input">Admin Email</label>
+              <input type="email" id="admin-email-input" class="admin-input" placeholder="enter email" required autocomplete="email">
             </div>
             <div class="admin-form-group">
               <label class="admin-label" for="admin-password-input">Password</label>
-              <input type="password" id="admin-password-input" class="admin-input" placeholder="Enter your Password" autocomplete="current-password">
+              <input type="password" id="admin-password-input" class="admin-input" placeholder="enter password" required autocomplete="current-password">
             </div>
           </div>
 
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
-            <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
-            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
+            <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In</button>
+            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Link</button>
           </div>
         </form>
 
         <div id="admin-login-status" class="admin-status-msg"></div>
       </div>
 
-      <!-- STEP 2: Authenticated Live Editor & CRUD Manager -->
+      <!-- STEP 2: Authenticated Private Studio Editor -->
       <div id="admin-dashboard-view" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
-          <span style="font-size: 0.84rem; color: #A7F3D0;">Editor active as <strong id="admin-signed-email"></strong></span>
-          <button type="button" class="admin-btn-secondary" onclick="handleAdminSignOut()">Lock / Sign Out</button>
+          <span style="font-size: 0.84rem; color: #A7F3D0;">Verified session: <strong id="admin-signed-email"></strong></span>
+          <button type="button" class="admin-btn-secondary" onclick="handleAdminSignOut()">Sign Out</button>
         </div>
 
         <div class="admin-tabs">
-          <button type="button" class="admin-tab-btn active" data-panel="panel-editor" onclick="switchAdminPanel('panel-editor')">Edit Page &amp; Links</button>
+          <button type="button" class="admin-tab-btn active" data-panel="panel-editor" onclick="switchAdminPanel('panel-editor')">Edit Page & Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-movies" onclick="switchAdminPanel('panel-movies')">+ Add Videos</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube Links</button>
@@ -2337,146 +2391,149 @@
 
         <div id="admin-crud-status" class="admin-status-msg"></div>
 
-        <!-- PANEL 0: Full Editable Page & Links Form -->
+        <!-- PANEL 0: Page & Links Editor -->
         <div id="panel-editor" class="admin-panel active">
           <form onsubmit="handleSaveSiteConfig(event)">
             <div class="admin-subbox">
-              <div class="admin-subbox-title">Hero &amp; Brand Links</div>
+              <div class="admin-subbox-title">Hero & Brand Links</div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Hero Badge Text</label>
-                  <input type="text" id="cfg-hero-subtitle" class="admin-input">
+                  <input type="text" id="cfg-hero-subtitle" class="admin-input" placeholder="enter hero badge text">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Hero Title</label>
-                  <input type="text" id="cfg-hero-title" class="admin-input">
+                  <input type="text" id="cfg-hero-title" class="admin-input" placeholder="enter hero title">
                 </div>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Hero Description</label>
-                <input type="text" id="cfg-hero-desc" class="admin-input">
+                <input type="text" id="cfg-hero-desc" class="admin-input" placeholder="enter hero description">
               </div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Navbar / Instagram URL</label>
-                  <input type="url" id="cfg-insta-url" class="admin-input">
+                  <input type="url" id="cfg-insta-url" class="admin-input" placeholder="enter link">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Hero IMDb Button URL</label>
-                  <input type="url" id="cfg-hero-imdb-url" class="admin-input">
+                  <input type="url" id="cfg-hero-imdb-url" class="admin-input" placeholder="enter link">
                 </div>
               </div>
             </div>
 
             <div class="admin-subbox">
-              <div class="admin-subbox-title">Teaser 1 &amp; Teaser 2</div>
+              <div class="admin-subbox-title">Teaser 1 & Teaser 2</div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 1 Title</label>
-                  <input type="text" id="cfg-t1-title" class="admin-input">
+                  <input type="text" id="cfg-t1-title" class="admin-input" placeholder="enter Movie/film name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 1 YouTube ID or URL</label>
-                  <input type="text" id="cfg-t1-yt" class="admin-input">
+                  <input type="text" id="cfg-t1-yt" class="admin-input" placeholder="enter YouTube ID or link">
                 </div>
               </div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 1 Cast Line</label>
-                  <input type="text" id="cfg-t1-cast" class="admin-input">
+                  <input type="text" id="cfg-t1-cast" class="admin-input" placeholder="enter cast & credits">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 1 Logline</label>
-                  <input type="text" id="cfg-t1-logline" class="admin-input">
+                  <input type="text" id="cfg-t1-logline" class="admin-input" placeholder="enter logline">
                 </div>
               </div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 2 Title</label>
-                  <input type="text" id="cfg-t2-title" class="admin-input">
+                  <input type="text" id="cfg-t2-title" class="admin-input" placeholder="enter Movie/film name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Teaser 2 YouTube ID or URL</label>
-                  <input type="text" id="cfg-t2-yt" class="admin-input">
+                  <input type="text" id="cfg-t2-yt" class="admin-input" placeholder="enter YouTube ID or link">
                 </div>
               </div>
               <div class="admin-form-group">
-                <label class="admin-label">Teaser 2 Cast &amp; Crew</label>
-                <input type="text" id="cfg-t2-cast" class="admin-input">
+                <label class="admin-label">Teaser 2 Cast & Crew</label>
+                <input type="text" id="cfg-t2-cast" class="admin-input" placeholder="enter cast & credits">
               </div>
             </div>
 
             <div class="admin-subbox">
-              <div class="admin-subbox-title">IMDb Mini Page &amp; YouTube Channel</div>
+              <div class="admin-subbox-title">IMDb Mini Page & YouTube Channel</div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">IMDb Title Name</label>
-                  <input type="text" id="cfg-imdb-title" class="admin-input">
+                  <input type="text" id="cfg-imdb-title" class="admin-input" placeholder="enter Movie/film name">
                 </div>
                 <div class="admin-form-group">
-                  <label class="admin-label">IMDb ID (e.g. tt50941110)</label>
-                  <input type="text" id="cfg-imdb-id" class="admin-input">
+                  <label class="admin-label">IMDb ID</label>
+                  <input type="text" id="cfg-imdb-id" class="admin-input" placeholder="enter IMDb ID">
                 </div>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Full URL</label>
-                <input type="url" id="cfg-imdb-url" class="admin-input">
+                <input type="url" id="cfg-imdb-url" class="admin-input" placeholder="enter link">
               </div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">YouTube Channel Name</label>
-                  <input type="text" id="cfg-yt-name" class="admin-input">
+                  <input type="text" id="cfg-yt-name" class="admin-input" placeholder="enter channel name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">YouTube Handle</label>
-                  <input type="text" id="cfg-yt-handle" class="admin-input">
+                  <input type="text" id="cfg-yt-handle" class="admin-input" placeholder="enter handle">
                 </div>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">YouTube Subscribe / Channel URL</label>
-                <input type="url" id="cfg-yt-url" class="admin-input">
+                <input type="url" id="cfg-yt-url" class="admin-input" placeholder="enter link">
               </div>
             </div>
 
             <div class="admin-subbox">
-              <div class="admin-subbox-title">Directors (Names &amp; Roles)</div>
+              <div class="admin-subbox-title">Directors (Names & Roles)</div>
               <div class="admin-form-grid">
                 <div class="admin-form-group">
                   <label class="admin-label">Director 1 Name</label>
-                  <input type="text" id="cfg-d1-name" class="admin-input">
+                  <input type="text" id="cfg-d1-name" class="admin-input" placeholder="enter name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 1 Role</label>
-                  <input type="text" id="cfg-d1-role" class="admin-input">
+                  <input type="text" id="cfg-d1-role" class="admin-input" placeholder="enter role">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 2 Name</label>
-                  <input type="text" id="cfg-d2-name" class="admin-input">
+                  <input type="text" id="cfg-d2-name" class="admin-input" placeholder="enter name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 2 Role</label>
-                  <input type="text" id="cfg-d2-role" class="admin-input">
+                  <input type="text" id="cfg-d2-role" class="admin-input" placeholder="enter role">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 3 Name</label>
-                  <input type="text" id="cfg-d3-name" class="admin-input">
+                  <input type="text" id="cfg-d3-name" class="admin-input" placeholder="enter name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 3 Role</label>
-                  <input type="text" id="cfg-d3-role" class="admin-input">
+                  <input type="text" id="cfg-d3-role" class="admin-input" placeholder="enter role">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 4 Name</label>
-                  <input type="text" id="cfg-d4-name" class="admin-input">
+                  <input type="text" id="cfg-d4-name" class="admin-input" placeholder="enter name">
                 </div>
                 <div class="admin-form-group">
                   <label class="admin-label">Director 4 Role</label>
-                  <input type="text" id="cfg-d4-role" class="admin-input">
+                  <input type="text" id="cfg-d4-role" class="admin-input" placeholder="enter role">
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="admin-btn-primary">Save All Changes to Public Site</button>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="submit" class="admin-btn-primary">Save All Changes to Public Site</button>
+              <button type="button" class="admin-btn-secondary" onclick="handleResetDefaults()">Reset Form to Defaults</button>
+            </div>
           </form>
         </div>
 
@@ -2486,30 +2543,30 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Movie / Teaser Title *</label>
-                <input type="text" id="movie-title" class="admin-input" placeholder="TETHER: Chapter 2 — Teaser" required>
+                <input type="text" id="movie-title" class="admin-input" placeholder="enter Movie/film name" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Badge Label</label>
-                <input type="text" id="movie-badge" class="admin-input" placeholder="CHAPTER 2 / TEASER">
+                <input type="text" id="movie-badge" class="admin-input" placeholder="enter badge label">
               </div>
             </div>
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">YouTube Video ID or URL *</label>
-                <input type="text" id="movie-youtube" class="admin-input" placeholder="t_P2gRGizco or https://youtu.be/..." required>
+                <input type="text" id="movie-youtube" class="admin-input" placeholder="enter YouTube ID or link" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Link (Optional)</label>
-                <input type="url" id="movie-imdb" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/">
+                <input type="url" id="movie-imdb" class="admin-input" placeholder="enter link">
               </div>
             </div>
             <div class="admin-form-group">
-              <label class="admin-label">Cast &amp; Credits Line</label>
-              <input type="text" id="movie-cast" class="admin-input" placeholder="Directed by Sathwik, Jayden Jacob, Mohammad Ishaaq Ali Khan & Abhirama Reddy Kalluri">
+              <label class="admin-label">Cast & Credits Line</label>
+              <input type="text" id="movie-cast" class="admin-input" placeholder="enter cast & credits">
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Logline / Description</label>
-              <input type="text" id="movie-logline" class="admin-input" placeholder="Temporal resonance destabilized across timelines...">
+              <input type="text" id="movie-logline" class="admin-input" placeholder="enter logline">
             </div>
             <button type="submit" class="admin-btn-primary">Save Movie to Database</button>
           </form>
@@ -2522,16 +2579,16 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Display Label *</label>
-                <input type="text" id="imdb-label" class="admin-input" placeholder="TETHER Chapter 2 IMDb" required>
+                <input type="text" id="imdb-label" class="admin-input" placeholder="enter Movie/film name" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Title ID *</label>
-                <input type="text" id="imdb-id" class="admin-input" placeholder="tt50941110" required>
+                <input type="text" id="imdb-id" class="admin-input" placeholder="enter IMDb ID" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Full IMDb URL *</label>
-              <input type="url" id="imdb-url" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/" required>
+              <input type="url" id="imdb-url" class="admin-input" placeholder="enter link" required>
             </div>
             <button type="submit" class="admin-btn-primary">Add IMDb Link</button>
           </form>
@@ -2544,11 +2601,11 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Title / Button Name *</label>
-                <input type="text" id="yt-title" class="admin-input" placeholder="Behind The Scenes — TETHER VFX" required>
+                <input type="text" id="yt-title" class="admin-input" placeholder="enter title" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">YouTube URL *</label>
-                <input type="url" id="yt-url" class="admin-input" placeholder="https://www.youtube.com/watch?v=..." required>
+                <input type="url" id="yt-url" class="admin-input" placeholder="enter link" required>
               </div>
             </div>
             <button type="submit" class="admin-btn-primary">Save YouTube Link</button>
@@ -2562,16 +2619,16 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Feature / Link Label *</label>
-                <input type="text" id="insta-label" class="admin-input" placeholder="TETHER Reel / Official Page" required>
+                <input type="text" id="insta-label" class="admin-input" placeholder="enter label" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Instagram Handle *</label>
-                <input type="text" id="insta-handle" class="admin-input" placeholder="@_starvelstudios_" required>
+                <input type="text" id="insta-handle" class="admin-input" placeholder="enter handle" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Instagram URL *</label>
-              <input type="url" id="insta-url" class="admin-input" placeholder="https://www.instagram.com/_starvelstudios_" required>
+              <input type="url" id="insta-url" class="admin-input" placeholder="enter link" required>
             </div>
             <button type="submit" class="admin-btn-primary">Save Instagram Link</button>
           </form>
@@ -2581,13 +2638,11 @@
     </div>
   </div>
 
-  <!-- UI, Scroll, Reveal & Modal Controls -->
+  <!-- UI Animations, Preloader, 3D Scroll & Modal Controls -->
   <script>
     window.openAdminModal = function(initialPanel = 'editor') {
       const backdrop = document.getElementById('admin-backdrop');
-      if (backdrop) {
-        backdrop.classList.add('open');
-      }
+      if (backdrop) backdrop.classList.add('open');
       if (typeof window.switchAdminPanel === 'function' && initialPanel) {
         window.switchAdminPanel(`panel-${initialPanel}`);
       }
@@ -2595,11 +2650,10 @@
 
     window.closeAdminModal = function() {
       const backdrop = document.getElementById('admin-backdrop');
-      if (backdrop) {
-        backdrop.classList.remove('open');
-      }
+      if (backdrop) backdrop.classList.remove('open');
     };
 
+    /* Preloader */
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
     let currentProgress = 0;
@@ -2620,9 +2674,10 @@
     }
     requestAnimationFrame(animatePreloader);
     setTimeout(() => { if (targetProgress < 80) targetProgress = 80; }, 80);
-    setTimeout(() => { targetProgress = 100; }, 550);
+    setTimeout(() => { targetProgress = 100; }, 520);
     window.addEventListener('load', () => { targetProgress = 100; });
 
+    /* GPU Scroll Progress + 3D Hero Parallax */
     const heroLogo = document.getElementById('hero-logo-3d');
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
@@ -2661,6 +2716,7 @@
     }, { passive: true });
     updateScrollEffects();
 
+    /* Keyboard Shortcuts */
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') window.closeAdminModal();
       if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
@@ -2668,6 +2724,7 @@
       }
     });
 
+    /* Staggered Scroll Reveals */
     const revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !prefersReducedMotion) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -2683,15 +2740,18 @@
       revealElements.forEach((el) => el.classList.add('is-visible'));
     }
 
-    document.querySelectorAll('.glass-interactive').forEach((card) => {
-      card.addEventListener('pointermove', (e) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-      }, { passive: true });
-    });
+    /* Delegated Glass Spotlight Hover (works on dynamic cards too) */
+    document.addEventListener('pointermove', (e) => {
+      const card = e.target.closest('.glass-interactive');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    }, { passive: true });
 
+    /* Teaser Click-to-Play */
     window.playEmbeddedTeaser = function(wrapperId, overlayId, videoId) {
+      const cleanId = /^[a-zA-Z0-9_-]{11}$/.test(String(videoId || '').trim()) ? String(videoId).trim() : 't_P2gRGizco';
       const overlay = document.getElementById(overlayId);
       const wrapper = document.getElementById(wrapperId);
       const iframe = wrapper ? wrapper.querySelector('iframe') : null;
@@ -2700,10 +2760,11 @@
         setTimeout(() => { overlay.style.display = 'none'; }, 350);
       }
       if (iframe) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+        iframe.src = `https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=1&rel=0`;
       }
     };
 
+    /* IMDb Mini-App Tabs */
     window.switchImdbTab = function(event, panelId) {
       document.querySelectorAll('.imdb-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.imdb-tab-panel').forEach(p => p.classList.remove('active'));
@@ -2713,13 +2774,13 @@
     };
   </script>
 
-  <!-- Supabase Email + Password Auth & Public Live Editor Module -->
+  <!-- Strict Supabase Authentication & Public/Private Content Sync -->
   <script type="module">
     const SUPABASE_URL = 'https://ijxgsumhiwfobcpsprlh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_CaBD1BOqJK-tSe3_Dw2WWg_wzEev0he';
-    const ALLOWED_ADMIN_EMAILS = [
-      'studiosstarvel@gmail.com',
-      'sathwik.gurram@gmail.com'
+    const ADMIN_ACCOUNTS = [
+      atob('c3R1ZGlvc3N0YXJ2ZWxAZ21haWwuY29t'),
+      atob('c2F0aHdpay5ndXJyYW1AZ21haWwuY29t')
     ];
 
     const DEFAULT_CONFIG = {
@@ -2753,22 +2814,35 @@
 
     let currentConfig = { ...DEFAULT_CONFIG };
     let supabase = null;
-    let isAdmin = false;
+    let activeSession = null;
 
     function escapeHtml(str) {
       return String(str ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
+        .replace(/'/g, ''');
+    }
+
+    function safeUrl(url, fallback = '#') {
+      const raw = String(url ?? '').trim();
+      if (!raw) return fallback;
+      if (raw.startsWith('#') || raw.startsWith('./') || raw.startsWith('/')) return raw;
+      try {
+        const parsed = new URL(raw);
+        if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+          return parsed.href;
+        }
+      } catch (_) {}
+      return fallback;
     }
 
     function extractYouTubeId(input) {
       const val = String(input || '').trim();
       if (/^[a-zA-Z0-9_-]{11}$/.test(val)) return val;
       const match = val.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
-      return match ? match[1] : val;
+      return match ? match[1] : 't_P2gRGizco';
     }
 
     function setStatus(elementId, message, type = 'info') {
@@ -2781,6 +2855,22 @@
       }
       el.className = `admin-status-msg ${type}`;
       el.textContent = message;
+    }
+
+    function hasVerifiedAdminSession(session) {
+      const email = session?.user?.email?.trim().toLowerCase() || '';
+      return Boolean(session?.access_token && email && ADMIN_ACCOUNTS.includes(email));
+    }
+
+    async function requireVerifiedAdmin() {
+      if (!supabase) return false;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!hasVerifiedAdminSession(session)) {
+        applySessionState(null);
+        return false;
+      }
+      activeSession = session;
+      return true;
     }
 
     function populateEditorInputs(cfg) {
@@ -2825,24 +2915,25 @@
         const el = document.getElementById(id);
         if (el && text !== undefined && text !== null) el.textContent = text;
       };
-      const setHref = (id, url) => {
+      const setHref = (id, url, fallback) => {
         const el = document.getElementById(id);
-        if (el && url) el.href = url;
+        if (el) el.href = safeUrl(url, fallback);
       };
 
       setText('hero-subtitle-el', currentConfig.heroSubtitle);
       setText('hero-title-el', currentConfig.heroTitle);
       setText('hero-desc-el', currentConfig.heroDesc);
-      setHref('nav-insta-logo-link', currentConfig.instaUrl);
-      setHref('footer-insta-link', currentConfig.instaUrl);
-      setHref('hero-cta-imdb', currentConfig.heroImdbUrl || currentConfig.imdbUrl);
+      setHref('nav-insta-logo-link', currentConfig.instaUrl, DEFAULT_CONFIG.instaUrl);
+      setHref('footer-insta-link', currentConfig.instaUrl, DEFAULT_CONFIG.instaUrl);
+      setHref('hero-cta-imdb', currentConfig.heroImdbUrl || currentConfig.imdbUrl, DEFAULT_CONFIG.imdbUrl);
 
       const t1Id = extractYouTubeId(currentConfig.t1Yt);
+      const cleanImdbUrl = safeUrl(currentConfig.imdbUrl, DEFAULT_CONFIG.imdbUrl);
       setText('t1-title', currentConfig.t1Title);
       setText('t1-cast', currentConfig.t1Cast);
       setText('t1-logline', currentConfig.t1Logline);
-      setHref('t1-imdb-link', currentConfig.imdbUrl);
-      setHref('t1-yt-link', `https://www.youtube.com/watch?v=${t1Id}`);
+      setHref('t1-imdb-link', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
+      setHref('t1-yt-link', `https://www.youtube.com/watch?v=${t1Id}`, `https://www.youtube.com/watch?v=${t1Id}`);
       const ov1 = document.getElementById('overlay-1');
       if (ov1) {
         ov1.style.backgroundImage = `url('https://img.youtube.com/vi/${t1Id}/maxresdefault.jpg')`;
@@ -2856,27 +2947,28 @@
       const t2Id = extractYouTubeId(currentConfig.t2Yt);
       setText('t2-title', currentConfig.t2Title);
       setText('t2-cast', currentConfig.t2Cast);
-      setHref('t2-imdb-link', currentConfig.imdbUrl);
-      setHref('t2-yt-link', `https://www.youtube.com/watch?v=${t2Id}`);
+      setHref('t2-imdb-link', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
+      setHref('t2-yt-link', `https://www.youtube.com/watch?v=${t2Id}`, `https://www.youtube.com/watch?v=${t2Id}`);
       const if2 = document.getElementById('iframe-tether-teaser-2');
       if (if2 && !if2.src.includes('autoplay=1')) {
         if2.src = `https://www.youtube-nocookie.com/embed/${t2Id}?rel=0`;
       }
 
       setText('imdb-id-badge-el', `TITLE ID: ${currentConfig.imdbId}`);
-      setText('imdb-top-url-el', `${currentConfig.imdbUrl.replace(/^https?:\/\/(www\.)?/, '')} ↗`);
+      setText('imdb-top-url-el', `${cleanImdbUrl.replace(/^https?:\/\/(www\.)?/, '')} ↗`);
       setText('imdb-card-title-el', currentConfig.imdbTitle);
       setText('imdb-detail-id-el', currentConfig.imdbId);
-      setText('imdb-detail-url-el', `${currentConfig.imdbUrl} ↗`);
-      setHref('imdb-poster-link', currentConfig.imdbUrl);
-      setHref('imdb-primary-cta', currentConfig.imdbUrl);
-      setHref('imdb-detail-url-el', currentConfig.imdbUrl);
-      setHref('footer-imdb-link', currentConfig.imdbUrl);
+      setText('imdb-detail-url-el', `${cleanImdbUrl} ↗`);
+      setHref('imdb-poster-link', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
+      setHref('imdb-primary-cta', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
+      setHref('imdb-detail-url-el', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
+      setHref('footer-imdb-link', cleanImdbUrl, DEFAULT_CONFIG.imdbUrl);
 
+      const cleanYtUrl = safeUrl(currentConfig.ytUrl, DEFAULT_CONFIG.ytUrl);
       setText('yt-channel-name-el', currentConfig.ytName);
       setText('yt-channel-handle-el', currentConfig.ytHandle);
-      setHref('yt-subscribe-link-el', currentConfig.ytUrl);
-      setHref('footer-yt-link', currentConfig.ytUrl);
+      setHref('yt-subscribe-link-el', cleanYtUrl, DEFAULT_CONFIG.ytUrl);
+      setHref('footer-yt-link', cleanYtUrl, DEFAULT_CONFIG.ytUrl);
 
       setText('dir1-name', currentConfig.d1Name);
       setText('dir1-role', currentConfig.d1Role);
@@ -2887,7 +2979,9 @@
       setText('dir4-name', currentConfig.d4Name);
       setText('dir4-role', currentConfig.d4Role);
 
-      populateEditorInputs(currentConfig);
+      if (hasVerifiedAdminSession(activeSession)) {
+        populateEditorInputs(currentConfig);
+      }
     }
 
     document.getElementById('admin-backdrop')?.addEventListener('click', (e) => {
@@ -2895,6 +2989,7 @@
     });
 
     window.switchAdminPanel = function(panelId) {
+      if (!hasVerifiedAdminSession(activeSession)) return;
       document.querySelectorAll('.admin-tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.panel === panelId);
       });
@@ -2904,47 +2999,47 @@
       setStatus('admin-crud-status', '');
     };
 
-    function setEditorUnlocked(active, labelEmail = 'sathwik.gurram@gmail.com') {
-      isAdmin = active;
-      document.body.classList.toggle('admin-authenticated', isAdmin);
-      document.getElementById('nav-admin-badge')?.classList.toggle('visible', isAdmin);
+    function applySessionState(session, autoOpenEditor = false) {
+      const verified = hasVerifiedAdminSession(session);
+      activeSession = verified ? session : null;
+
+      document.body.classList.toggle('admin-authenticated', verified);
 
       const footerBtn = document.getElementById('footer-admin-btn');
-      if (footerBtn) footerBtn.textContent = isAdmin ? '★ Studio Editor' : '🔒 Admin';
+      if (footerBtn) footerBtn.textContent = verified ? '★ Studio Editor' : '🔒 Admin';
 
       const loginView = document.getElementById('admin-login-view');
       const dashView = document.getElementById('admin-dashboard-view');
       const stateBadge = document.getElementById('admin-auth-state-badge');
       const signedEmail = document.getElementById('admin-signed-email');
 
-      if (isAdmin) {
+      if (verified) {
         if (loginView) loginView.style.display = 'none';
         if (dashView) dashView.style.display = 'block';
         if (stateBadge) stateBadge.textContent = 'EDITOR UNLOCKED';
-        if (signedEmail) signedEmail.textContent = labelEmail;
+        if (signedEmail) signedEmail.textContent = session.user.email.trim().toLowerCase();
         populateEditorInputs(currentConfig);
+        if (autoOpenEditor) window.openAdminModal('editor');
       } else {
         if (loginView) loginView.style.display = 'block';
         if (dashView) dashView.style.display = 'none';
-        if (stateBadge) stateBadge.textContent = 'STUDIO ACCESS';
+        if (stateBadge) stateBadge.textContent = 'AUTH REQUIRED';
+        if (signedEmail) signedEmail.textContent = '';
       }
     }
 
     window.handlePasswordSignIn = async function(e) {
       e.preventDefault();
+      if (!supabase) {
+        setStatus('admin-login-status', 'Authentication service unavailable.', 'error');
+        return;
+      }
+
       const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
       const password = document.getElementById('admin-password-input').value;
 
-      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
-        return;
-      }
-      if (!password) {
-        setStatus('admin-login-status', 'Enter your password, send a sign-in email, or click "Open Editor Directly".', 'error');
-        return;
-      }
-      if (!supabase) {
-        setStatus('admin-login-status', 'Supabase client not ready. Click "Open Editor Directly".', 'error');
+      if (!ADMIN_ACCOUNTS.includes(email)) {
+        setStatus('admin-login-status', 'Unauthorized account.', 'error');
         return;
       }
 
@@ -2955,27 +3050,34 @@
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       btn.disabled = false;
-      btn.textContent = 'Sign In with Password';
+      btn.textContent = 'Sign In';
+      document.getElementById('admin-password-input').value = '';
 
-      if (error) {
-        setStatus('admin-login-status', `${error.message} — or click "Open Editor Directly".`, 'error');
+      if (error || !hasVerifiedAdminSession(data?.session)) {
+        applySessionState(null);
+        setStatus('admin-login-status', error?.message || 'Invalid credentials.', 'error');
         return;
       }
 
       setStatus('admin-login-status', '');
-      setEditorUnlocked(true, data.user?.email || email);
+      applySessionState(data.session, true);
       window.switchAdminPanel('panel-editor');
       await loadAndRenderAll();
     };
 
     window.handleSendMagicLink = async function() {
-      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
-      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
+      if (!supabase) {
+        setStatus('admin-login-status', 'Authentication service unavailable.', 'error');
         return;
       }
-      if (!supabase) {
-        unlockEditorDirectly();
+
+      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
+      if (!email) {
+        setStatus('admin-login-status', 'Enter your admin email first.', 'error');
+        return;
+      }
+      if (!ADMIN_ACCOUNTS.includes(email)) {
+        setStatus('admin-login-status', 'Unauthorized account.', 'error');
         return;
       }
 
@@ -2992,51 +3094,54 @@
       });
 
       btn.disabled = false;
-      btn.textContent = 'Send Sign-In Email';
+      btn.textContent = 'Send Sign-In Link';
 
       if (error) {
-        setStatus('admin-login-status', `${error.message} — sign in with password or click "Open Editor Directly".`, 'error');
+        setStatus('admin-login-status', `${error.message} (Use Password Sign In instead.)`, 'error');
         return;
       }
 
-      setStatus('admin-login-status', `Sign-in link sent to ${email}. Check inbox/spam or use password / "Open Editor Directly".`, 'info');
-    };
-
-    window.unlockEditorDirectly = function() {
-      const emailInput = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
-      const chosenEmail = ALLOWED_ADMIN_EMAILS.includes(emailInput) ? emailInput : 'sathwik.gurram@gmail.com';
-      setEditorUnlocked(true, chosenEmail);
-      window.switchAdminPanel('panel-editor');
+      setStatus('admin-login-status', 'Sign-in link sent. Open the newest link in your inbox to unlock the editor.', 'info');
     };
 
     window.handleAdminSignOut = async function() {
       if (supabase) await supabase.auth.signOut().catch(() => {});
-      setEditorUnlocked(false);
+      applySessionState(null);
+      window.closeAdminModal();
+    };
+
+    window.handleResetDefaults = function() {
+      if (!hasVerifiedAdminSession(activeSession)) return;
+      populateEditorInputs(DEFAULT_CONFIG);
+      setStatus('admin-crud-status', 'Default values loaded into the form. Click Save to publish.', 'info');
     };
 
     window.handleSaveSiteConfig = async function(e) {
       e.preventDefault();
-      if (!isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
 
       const updated = {
         heroSubtitle: document.getElementById('cfg-hero-subtitle').value.trim(),
         heroTitle: document.getElementById('cfg-hero-title').value.trim(),
         heroDesc: document.getElementById('cfg-hero-desc').value.trim(),
-        instaUrl: document.getElementById('cfg-insta-url').value.trim(),
-        heroImdbUrl: document.getElementById('cfg-hero-imdb-url').value.trim(),
+        instaUrl: safeUrl(document.getElementById('cfg-insta-url').value, DEFAULT_CONFIG.instaUrl),
+        heroImdbUrl: safeUrl(document.getElementById('cfg-hero-imdb-url').value, DEFAULT_CONFIG.imdbUrl),
         t1Title: document.getElementById('cfg-t1-title').value.trim(),
-        t1Yt: document.getElementById('cfg-t1-yt').value.trim(),
+        t1Yt: extractYouTubeId(document.getElementById('cfg-t1-yt').value),
         t1Cast: document.getElementById('cfg-t1-cast').value.trim(),
         t1Logline: document.getElementById('cfg-t1-logline').value.trim(),
         t2Title: document.getElementById('cfg-t2-title').value.trim(),
-        t2Yt: document.getElementById('cfg-t2-yt').value.trim(),
+        t2Yt: extractYouTubeId(document.getElementById('cfg-t2-yt').value),
         t2Cast: document.getElementById('cfg-t2-cast').value.trim(),
         imdbTitle: document.getElementById('cfg-imdb-title').value.trim(),
         imdbId: document.getElementById('cfg-imdb-id').value.trim(),
-        imdbUrl: document.getElementById('cfg-imdb-url').value.trim(),
+        imdbUrl: safeUrl(document.getElementById('cfg-imdb-url').value, DEFAULT_CONFIG.imdbUrl),
         ytName: document.getElementById('cfg-yt-name').value.trim(),
         ytHandle: document.getElementById('cfg-yt-handle').value.trim(),
-        ytUrl: document.getElementById('cfg-yt-url').value.trim(),
+        ytUrl: safeUrl(document.getElementById('cfg-yt-url').value, DEFAULT_CONFIG.ytUrl),
         d1Name: document.getElementById('cfg-d1-name').value.trim(),
         d1Role: document.getElementById('cfg-d1-role').value.trim(),
         d2Name: document.getElementById('cfg-d2-name').value.trim(),
@@ -3047,23 +3152,17 @@
         d4Role: document.getElementById('cfg-d4-role').value.trim()
       };
 
-      applySiteConfigToPublicUI(updated);
-
-      if (!supabase) {
-        setStatus('admin-crud-status', 'Updated on page (Supabase client not initialized).', 'error');
-        return;
-      }
-
       const { error } = await supabase
         .from('site_config')
         .upsert([{ id: 'starvel-main', data: updated, updated_at: new Date().toISOString() }]);
 
       if (error) {
-        setStatus('admin-crud-status', `Supabase save error: ${error.message}`, 'error');
+        setStatus('admin-crud-status', error.message, 'error');
         return;
       }
 
-      setStatus('admin-crud-status', 'Saved to Supabase and published live to all public visitors!', 'info');
+      applySiteConfigToPublicUI(updated);
+      setStatus('admin-crud-status', 'Saved to database and published live to all visitors.', 'info');
     };
 
     async function loadAndRenderAll() {
@@ -3100,8 +3199,9 @@
         const safeBadge = escapeHtml(m.badge || 'STARVEL ORIGINAL');
         const safeCast = escapeHtml(m.cast_line || '');
         const safeLogline = escapeHtml(m.logline || '');
-        const imdbBtn = m.imdb_url
-          ? `<a href="${escapeHtml(m.imdb_url)}" target="_blank" rel="noopener noreferrer" class="btn-view-imdb"><span class="imdb-pill-tag">IMDb</span>View Page</a>`
+        const imdbUrl = m.imdb_url ? safeUrl(m.imdb_url, '') : '';
+        const imdbBtn = imdbUrl
+          ? `<a href="${escapeHtml(imdbUrl)}" target="_blank" rel="noopener noreferrer" class="btn-view-imdb"><span class="imdb-pill-tag">IMDb</span>View Page</a>`
           : '';
 
         return `
@@ -3125,7 +3225,7 @@
                   <a href="https://www.youtube.com/watch?v=${escapeHtml(ytId)}" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
                     Watch on YouTube
                   </a>
-                  <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('movies', '${escapeHtml(m.id)}')">Delete</button>
+                  <button type="button" class="btn-admin-delete-inline admin-only-control" onclick="deleteDbRow('movies', '${escapeHtml(m.id)}')">Delete</button>
                 </div>
               </div>
               ${safeCast ? `<p>${safeCast}</p>` : ''}
@@ -3154,17 +3254,21 @@
       const ctaRow = document.getElementById('imdb-links-cta-row');
       const detailsGrid = document.getElementById('imdb-details-grid');
       const adminList = document.getElementById('admin-imdb-saved');
+      const primaryImdb = safeUrl(currentConfig.imdbUrl, DEFAULT_CONFIG.imdbUrl);
 
       if (ctaRow) {
         const extraCtas = links
           .filter(l => l.imdb_id !== currentConfig.imdbId)
-          .map(l => `
-            <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
-              ${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)}) ↗
-            </a>
-          `).join('');
+          .map(l => {
+            const targetUrl = safeUrl(l.url, DEFAULT_CONFIG.imdbUrl);
+            return `
+              <a href="${escapeHtml(targetUrl)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+                ${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)}) ↗
+              </a>
+            `;
+          }).join('');
         ctaRow.innerHTML = `
-          <a href="${escapeHtml(currentConfig.imdbUrl)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+          <a href="${escapeHtml(primaryImdb)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
             Open Full IMDb Page ↗
           </a>
           ${extraCtas}
@@ -3174,16 +3278,17 @@
       if (detailsGrid) {
         detailsGrid.querySelectorAll('.dynamic-imdb-row').forEach(el => el.remove());
         links.forEach(l => {
+          const targetUrl = safeUrl(l.url, DEFAULT_CONFIG.imdbUrl);
           const row = document.createElement('div');
           row.className = 'imdb-credit-row dynamic-imdb-row';
           row.innerHTML = `
             <div class="imdb-credit-role">
               <span>${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)})</span>
-              <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('imdb_links', '${escapeHtml(l.id)}')">Delete</button>
+              <button type="button" class="btn-admin-delete-inline admin-only-control" onclick="deleteDbRow('imdb_links', '${escapeHtml(l.id)}')">Delete</button>
             </div>
             <div class="imdb-credit-names">
-              <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
-                ${escapeHtml(l.url)} ↗
+              <a href="${escapeHtml(targetUrl)}" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
+                ${escapeHtml(targetUrl)} ↗
               </a>
             </div>
           `;
@@ -3197,7 +3302,7 @@
               <div class="admin-saved-item">
                 <div class="admin-saved-item-meta">
                   <strong>${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)})</strong>
-                  <span>${escapeHtml(l.url)}</span>
+                  <span>${escapeHtml(safeUrl(l.url, DEFAULT_CONFIG.imdbUrl))}</span>
                 </div>
                 <button type="button" class="btn-delete-row" onclick="deleteDbRow('imdb_links', '${escapeHtml(l.id)}')">Delete</button>
               </div>
@@ -3211,14 +3316,17 @@
       const adminList = document.getElementById('admin-youtube-saved');
 
       if (container) {
-        container.innerHTML = items.map(item => `
-          <div style="display: inline-flex; align-items: center; gap: 6px;">
-            <a href="${escapeHtml(item.youtube_url)}" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
-              ${escapeHtml(item.title)} ↗
-            </a>
-            <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('youtube_items', '${escapeHtml(item.id)}')">✕</button>
-          </div>
-        `).join('');
+        container.innerHTML = items.map(item => {
+          const ytHref = safeUrl(item.youtube_url, DEFAULT_CONFIG.ytUrl);
+          return `
+            <div style="display: inline-flex; align-items: center; gap: 6px;">
+              <a href="${escapeHtml(ytHref)}" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+                ${escapeHtml(item.title)} ↗
+              </a>
+              <button type="button" class="btn-admin-delete-inline admin-only-control" onclick="deleteDbRow('youtube_items', '${escapeHtml(item.id)}')">✕</button>
+            </div>
+          `;
+        }).join('');
       }
 
       if (adminList) {
@@ -3227,7 +3335,7 @@
               <div class="admin-saved-item">
                 <div class="admin-saved-item-meta">
                   <strong>${escapeHtml(item.title)}</strong>
-                  <span>${escapeHtml(item.youtube_url)}</span>
+                  <span>${escapeHtml(safeUrl(item.youtube_url, DEFAULT_CONFIG.ytUrl))}</span>
                 </div>
                 <button type="button" class="btn-delete-row" onclick="deleteDbRow('youtube_items', '${escapeHtml(item.id)}')">Delete</button>
               </div>
@@ -3242,8 +3350,11 @@
 
       if (footerExtra) {
         footerExtra.innerHTML = items
-          .filter(i => !i.url.includes('_starvelstudios_'))
-          .map(i => ` • <a href="${escapeHtml(i.url)}" target="_blank" rel="noopener noreferrer" class="footer-insta">${escapeHtml(i.label)} (${escapeHtml(i.handle)})</a>`)
+          .filter(i => !String(i.url || '').includes('_starvelstudios_'))
+          .map(i => {
+            const igHref = safeUrl(i.url, DEFAULT_CONFIG.instaUrl);
+            return ` • <a href="${escapeHtml(igHref)}" target="_blank" rel="noopener noreferrer" class="footer-insta">${escapeHtml(i.label)} (${escapeHtml(i.handle)})</a>`;
+          })
           .join('');
       }
 
@@ -3253,7 +3364,7 @@
               <div class="admin-saved-item">
                 <div class="admin-saved-item-meta">
                   <strong>${escapeHtml(i.label)} (${escapeHtml(i.handle)})</strong>
-                  <span>${escapeHtml(i.url)}</span>
+                  <span>${escapeHtml(safeUrl(i.url, DEFAULT_CONFIG.instaUrl))}</span>
                 </div>
                 <button type="button" class="btn-delete-row" onclick="deleteDbRow('instagram_links', '${escapeHtml(i.id)}')">Delete</button>
               </div>
@@ -3264,13 +3375,17 @@
 
     window.handleAddMovie = async function(e) {
       e.preventDefault();
-      if (!supabase || !isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
 
+      const rawImdb = document.getElementById('movie-imdb').value.trim();
       const payload = {
         title: document.getElementById('movie-title').value.trim(),
         badge: document.getElementById('movie-badge').value.trim() || 'STARVEL ORIGINAL',
         youtube_id: extractYouTubeId(document.getElementById('movie-youtube').value),
-        imdb_url: document.getElementById('movie-imdb').value.trim() || null,
+        imdb_url: rawImdb ? safeUrl(rawImdb, '') : null,
         cast_line: document.getElementById('movie-cast').value.trim() || null,
         logline: document.getElementById('movie-logline').value.trim() || null
       };
@@ -3281,18 +3396,21 @@
         return;
       }
       e.target.reset();
-      setStatus('admin-crud-status', 'New movie saved and published live!', 'info');
+      setStatus('admin-crud-status', 'Movie saved and published live.', 'info');
       await loadAndRenderAll();
     };
 
     window.handleAddImdb = async function(e) {
       e.preventDefault();
-      if (!supabase || !isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
 
       const payload = {
         label: document.getElementById('imdb-label').value.trim(),
         imdb_id: document.getElementById('imdb-id').value.trim(),
-        url: document.getElementById('imdb-url').value.trim()
+        url: safeUrl(document.getElementById('imdb-url').value, DEFAULT_CONFIG.imdbUrl)
       };
 
       const { error } = await supabase.from('imdb_links').insert([payload]);
@@ -3301,17 +3419,20 @@
         return;
       }
       e.target.reset();
-      setStatus('admin-crud-status', 'IMDb link added and saved!', 'info');
+      setStatus('admin-crud-status', 'IMDb link saved.', 'info');
       await loadAndRenderAll();
     };
 
     window.handleAddYouTube = async function(e) {
       e.preventDefault();
-      if (!supabase || !isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
 
       const payload = {
         title: document.getElementById('yt-title').value.trim(),
-        youtube_url: document.getElementById('yt-url').value.trim()
+        youtube_url: safeUrl(document.getElementById('yt-url').value, DEFAULT_CONFIG.ytUrl)
       };
 
       const { error } = await supabase.from('youtube_items').insert([payload]);
@@ -3320,18 +3441,21 @@
         return;
       }
       e.target.reset();
-      setStatus('admin-crud-status', 'YouTube link saved!', 'info');
+      setStatus('admin-crud-status', 'YouTube link saved.', 'info');
       await loadAndRenderAll();
     };
 
     window.handleAddInstagram = async function(e) {
       e.preventDefault();
-      if (!supabase || !isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
 
       const payload = {
         label: document.getElementById('insta-label').value.trim(),
         handle: document.getElementById('insta-handle').value.trim(),
-        url: document.getElementById('insta-url').value.trim()
+        url: safeUrl(document.getElementById('insta-url').value, DEFAULT_CONFIG.instaUrl)
       };
 
       const { error } = await supabase.from('instagram_links').insert([payload]);
@@ -3340,12 +3464,15 @@
         return;
       }
       e.target.reset();
-      setStatus('admin-crud-status', 'Instagram link saved!', 'info');
+      setStatus('admin-crud-status', 'Instagram link saved.', 'info');
       await loadAndRenderAll();
     };
 
     window.deleteDbRow = async function(table, id) {
-      if (!supabase || !isAdmin) return;
+      if (!(await requireVerifiedAdmin())) {
+        setStatus('admin-crud-status', 'Authentication required.', 'error');
+        return;
+      }
       const { error } = await supabase.from(table).delete().eq('id', id);
       if (error) {
         setStatus('admin-crud-status', error.message, 'error');
@@ -3355,22 +3482,46 @@
       await loadAndRenderAll();
     };
 
+    /* Surface expired/invalid magic-link errors clearly instead of silently looping */
+    function checkAuthHashErrors() {
+      if (!window.location.hash) return;
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const errDesc = params.get('error_description') || params.get('error');
+      if (errDesc) {
+        window.openAdminModal('editor');
+        setStatus('admin-login-status', `${errDesc.replace(/\+/g, ' ')} — sign in with your password instead.`, 'error');
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+
     try {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
       supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+      checkAuthHashErrors();
+
       const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user?.email && ALLOWED_ADMIN_EMAILS.includes(session.user.email.toLowerCase())) {
-        setEditorUnlocked(true, session.user.email.toLowerCase());
+      if (session && !hasVerifiedAdminSession(session)) {
+        await supabase.auth.signOut();
+        applySessionState(null);
+      } else {
+        applySessionState(session, false);
       }
 
       await loadAndRenderAll();
 
-      supabase.auth.onAuthStateChange((_event, session) => {
-        if (session?.user?.email && ALLOWED_ADMIN_EMAILS.includes(session.user.email.toLowerCase())) {
-          setEditorUnlocked(true, session.user.email.toLowerCase());
+      supabase.auth.onAuthStateChange(async (event, nextSession) => {
+        if (nextSession && !hasVerifiedAdminSession(nextSession)) {
+          await supabase.auth.signOut();
+          applySessionState(null);
+          return;
         }
-        loadAndRenderAll();
+        const shouldAutoOpen = event === 'SIGNED_IN';
+        applySessionState(nextSession, shouldAutoOpen);
+        if (event === 'SIGNED_IN' && window.location.hash.includes('access_token')) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        await loadAndRenderAll();
       });
     } catch (err) {
       console.error('Supabase initialization error:', err);
