@@ -1488,7 +1488,6 @@
       background: rgba(0, 229, 255, 0.14);
     }
 
-    /* Admin Modal & Live Editor */
     .admin-backdrop {
       position: fixed;
       inset: 0;
@@ -1665,13 +1664,13 @@
     }
 
     .admin-btn-secondary {
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.24);
       background: rgba(255, 255, 255, 0.08);
       color: #E2E8F0;
       font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       letter-spacing: 1.2px;
       text-transform: uppercase;
       cursor: pointer;
@@ -2294,19 +2293,27 @@
         <button type="button" class="admin-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Panel">✕</button>
       </div>
 
-      <!-- STEP 1: Email Sign-In + Direct Editor Access -->
+      <!-- STEP 1: Email + Password Login, Magic Link, or Direct Editor Access -->
       <div id="admin-login-view">
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
-          Sign in with <strong>studiosstarvel@gmail.com</strong> or <strong>sathwik.gurram@gmail.com</strong>, or click <strong>Open Editor Directly</strong> to edit and publish changes immediately.
+          Sign in with your admin email (<strong>studiosstarvel@gmail.com</strong> or <strong>sathwik.gurram@gmail.com</strong>) and <strong>password</strong>, send a sign-in email link, or click <strong>Open Editor Directly</strong>.
         </p>
 
-        <form id="admin-email-form" onsubmit="handleSendAdminOtp(event)">
-          <div class="admin-form-group">
-            <label class="admin-label" for="admin-email-input">Authorized Admin Email</label>
-            <input type="email" id="admin-email-input" class="admin-input" value="sathwik.gurram@gmail.com" placeholder="studiosstarvel@gmail.com or sathwik.gurram@gmail.com" required autocomplete="email">
+        <form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-email-input">Authorized Admin Email</label>
+              <input type="email" id="admin-email-input" class="admin-input" value="sathwik.gurram@gmail.com" placeholder="studiosstarvel@gmail.com or sathwik.gurram@gmail.com" required autocomplete="email">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-password-input">Password</label>
+              <input type="password" id="admin-password-input" class="admin-input" placeholder="Enter your Supabase password" autocomplete="current-password">
+            </div>
           </div>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="submit" class="admin-btn-primary" id="btn-send-otp">Send Sign-In Email</button>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+            <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
+            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
             <button type="button" class="admin-btn-secondary" onclick="unlockEditorDirectly()">Open Editor Directly</button>
           </div>
         </form>
@@ -2707,14 +2714,14 @@
     };
   </script>
 
-  <!-- Supabase & Public Live Editor Module -->
+  <!-- Supabase Email + Password Auth & Public Live Editor Module -->
   <script type="module">
-    const SUPABASE_URL = 'https://ijxgsumhiwfobcpsprlh.supabase.co'; //[cite: 10]
+    const SUPABASE_URL = 'https://ijxgsumhiwfobcpsprlh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_CaBD1BOqJK-tSe3_Dw2WWg_wzEev0he';
     const ALLOWED_ADMIN_EMAILS = [
       'studiosstarvel@gmail.com',
       'sathwik.gurram@gmail.com'
-    ]; //
+    ];
 
     const DEFAULT_CONFIG = {
       heroSubtitle: '★ ISSUE #1 — STARVEL STUDIOS ★',
@@ -2924,15 +2931,45 @@
       }
     }
 
-    window.unlockEditorDirectly = function() {
-      const emailInput = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
-      const chosenEmail = ALLOWED_ADMIN_EMAILS.includes(emailInput) ? emailInput : 'sathwik.gurram@gmail.com';
-      setEditorUnlocked(true, chosenEmail);
+    window.handlePasswordSignIn = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
+      const password = document.getElementById('admin-password-input').value;
+
+      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
+        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
+        return;
+      }
+      if (!password) {
+        setStatus('admin-login-status', 'Enter your password, send a sign-in email, or click "Open Editor Directly".', 'error');
+        return;
+      }
+      if (!supabase) {
+        setStatus('admin-login-status', 'Supabase client not ready. Click "Open Editor Directly".', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-password-login');
+      btn.disabled = true;
+      btn.textContent = 'Signing In...';
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+      btn.disabled = false;
+      btn.textContent = 'Sign In with Password';
+
+      if (error) {
+        setStatus('admin-login-status', `${error.message} — or click "Open Editor Directly".`, 'error');
+        return;
+      }
+
+      setStatus('admin-login-status', '');
+      setEditorUnlocked(true, data.user?.email || email);
       window.switchAdminPanel('panel-editor');
+      await loadAndRenderAll();
     };
 
-    window.handleSendAdminOtp = async function(e) {
-      e.preventDefault();
+    window.handleSendMagicLink = async function() {
       const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
       if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
         setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
@@ -2959,11 +2996,18 @@
       btn.textContent = 'Send Sign-In Email';
 
       if (error) {
-        setStatus('admin-login-status', `${error.message} — click "Open Editor Directly" to edit now.`, 'error');
+        setStatus('admin-login-status', `${error.message} — sign in with password or click "Open Editor Directly".`, 'error');
         return;
       }
 
-      setStatus('admin-login-status', `Sign-in link sent to ${email}. Check inbox/spam or click "Open Editor Directly".`, 'info');
+      setStatus('admin-login-status', `Sign-in link sent to ${email}. Check inbox/spam or use password / "Open Editor Directly".`, 'info');
+    };
+
+    window.unlockEditorDirectly = function() {
+      const emailInput = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
+      const chosenEmail = ALLOWED_ADMIN_EMAILS.includes(emailInput) ? emailInput : 'sathwik.gurram@gmail.com';
+      setEditorUnlocked(true, chosenEmail);
+      window.switchAdminPanel('panel-editor');
     };
 
     window.handleAdminSignOut = async function() {
@@ -3016,7 +3060,7 @@
         .upsert([{ id: 'starvel-main', data: updated, updated_at: new Date().toISOString() }]);
 
       if (error) {
-        setStatus('admin-crud-status', `Supabase save error: ${error.message} (sign in via email link for DB write permission).`, 'error');
+        setStatus('admin-crud-status', `Supabase save error: ${error.message}`, 'error');
         return;
       }
 
