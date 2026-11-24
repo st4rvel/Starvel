@@ -2481,8 +2481,35 @@
     </div>
   </div>
 
-  <!-- UI, 60Hz/120Hz+ Smooth Scroll & Reveal Script -->
+  <!-- UI, 60Hz/120Hz+ Smooth Scroll, Reveal & Modal Controls -->
   <script>
+    window.openAdminModal = function(initialPanel = 'movies') {
+      const backdrop = document.getElementById('admin-backdrop');
+      if (backdrop) {
+        backdrop.classList.add('open');
+        backdrop.style.opacity = '1';
+        backdrop.style.visibility = 'visible';
+        backdrop.style.pointerEvents = 'auto';
+      }
+      if (typeof window.switchAdminPanel === 'function' && initialPanel) {
+        window.switchAdminPanel(`panel-${initialPanel}`);
+      }
+    };
+
+    window.closeAdminModal = function() {
+      const backdrop = document.getElementById('admin-backdrop');
+      if (backdrop) {
+        backdrop.classList.remove('open');
+        backdrop.style.opacity = '';
+        backdrop.style.visibility = '';
+        backdrop.style.pointerEvents = '';
+      }
+    };
+
+    document.getElementById('footer-admin-btn')?.addEventListener('click', () => {
+      window.openAdminModal('movies');
+    });
+
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
     let currentProgress = 0;
@@ -2719,8 +2746,6 @@
 
   <!-- Supabase Email-Only Auth & Live Database CRUD Module -->
   <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-
     const SUPABASE_URL = 'https://inragjjxjzoxvwlfisfal.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_xH-t3BgZ-IdaSK0_VggK_Q_OYxCghhA';
     const ALLOWED_ADMIN_EMAILS = [
@@ -2728,9 +2753,7 @@
       'sathwik.gurram@gmail.com'
     ];
 
-    const isConfigured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_PROJECT_REF');
-    const supabase = isConfigured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
+    let supabase = null;
     let pendingLoginEmail = '';
     let isAdmin = false;
 
@@ -2761,19 +2784,6 @@
       el.className = `admin-status-msg ${type}`;
       el.textContent = message;
     }
-
-    window.openAdminModal = function(initialPanel = 'movies') {
-      const backdrop = document.getElementById('admin-backdrop');
-      if (backdrop) backdrop.classList.add('open');
-      if (isAdmin && initialPanel) {
-        window.switchAdminPanel(`panel-${initialPanel}`);
-      }
-    };
-
-    window.closeAdminModal = function() {
-      const backdrop = document.getElementById('admin-backdrop');
-      if (backdrop) backdrop.classList.remove('open');
-    };
 
     document.getElementById('admin-backdrop')?.addEventListener('click', (e) => {
       if (e.target.id === 'admin-backdrop') window.closeAdminModal();
@@ -2819,7 +2829,7 @@
     window.handleSendAdminOtp = async function(e) {
       e.preventDefault();
       if (!supabase) {
-        setStatus('admin-login-status', 'Add your Supabase Project URL and Anon Key in index.html first.', 'error');
+        setStatus('admin-login-status', 'Database client failed to initialize. Check Console (F12) for details.', 'error');
         return;
       }
       const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
@@ -3173,16 +3183,21 @@
       await loadAndRenderAll();
     };
 
-    if (supabase) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
+    try {
+      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+      if (SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.length > 10) {
+        supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { data: { session } } = await supabase.auth.getSession();
         applyAdminSession(session);
-        loadAndRenderAll();
-      });
+        await loadAndRenderAll();
 
-      supabase.auth.onAuthStateChange((_event, session) => {
-        applyAdminSession(session);
-        loadAndRenderAll();
-      });
+        supabase.auth.onAuthStateChange((_event, session) => {
+          applyAdminSession(session);
+          loadAndRenderAll();
+        });
+      }
+    } catch (err) {
+      console.error('Supabase module load issue:', err);
     }
   </script>
 
