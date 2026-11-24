@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="./starvel.png">
   <link rel="apple-touch-icon" href="./starvel.png">
 
-  <!-- Critical Asset Preloading for Fast Rendering -->
+  <!-- Critical Asset Preloading -->
   <link rel="preload" href="./AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="./starvel.png" as="image" fetchpriority="high">
   <link rel="preload" href="./background.png" as="image" fetchpriority="high">
@@ -20,7 +20,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Custom Local Font */
     @font-face {
       font-family: 'Avengance';
       src: url('./AVENGEANCE HEROIC AVENGER.ttf') format('truetype');
@@ -29,7 +28,6 @@
       font-display: swap;
     }
 
-    /* Global Liquid Glass Theme & Variables */
     :root {
       --comic-orange: #FF5500;
       --comic-orange-glow: rgba(255, 85, 0, 0.55);
@@ -38,6 +36,7 @@
       --imdb-gold: #F5C518;
       --imdb-gold-glow: rgba(245, 197, 24, 0.45);
       --yt-red: #FF1E2D;
+      --insta-pink: #E1306C;
       --bg-dark: #070B14;
       --glass-border: rgba(255, 255, 255, 0.18);
       --glass-border-bright: rgba(255, 255, 255, 0.34);
@@ -76,7 +75,7 @@
       position: relative;
     }
 
-    /* Viewport-Locked Fixed Background + Zero-Blur GPU Ambient Orbs */
+    /* Fixed Background + GPU Ambient Orbs */
     #fixed-bg {
       position: fixed;
       inset: 0;
@@ -146,7 +145,7 @@
       100% { transform: translate3d(-3%, 3%, 0) scale(0.96); }
     }
 
-    /* Reusable Liquid Glass Surface (Tuned for 60Hz+ Smoothness) */
+    /* Liquid Glass Surface */
     .glass-surface {
       background: linear-gradient(
         135deg,
@@ -161,7 +160,6 @@
       position: relative;
     }
 
-    /* Subtle Pointer-Reactive Specular Highlight */
     .glass-interactive::after {
       content: '';
       position: absolute;
@@ -182,7 +180,7 @@
       opacity: 1;
     }
 
-    /* Smooth Scroll Progress Hairline */
+    /* Scroll Progress Hairline */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -286,7 +284,7 @@
       will-change: width;
     }
 
-    /* Sleek Slim Liquid Glass Navbar */
+    /* Slim Floating Liquid Glass Navbar */
     .navbar {
       position: fixed;
       top: 10px;
@@ -332,7 +330,8 @@
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .nav-admin-pill {
       color: rgba(255, 255, 255, 0.9);
       text-decoration: none;
       font-family: 'Oswald', sans-serif;
@@ -347,6 +346,7 @@
       transition: all 0.25s var(--ease-liquid);
       white-space: nowrap;
       line-height: 1.2;
+      cursor: pointer;
     }
 
     .nav-links a:hover {
@@ -361,6 +361,19 @@
       border-color: rgba(245, 197, 24, 0.65);
       color: var(--imdb-gold);
       box-shadow: 0 0 16px rgba(245, 197, 24, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+
+    .nav-admin-pill {
+      display: none;
+      color: #A7F3D0;
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(52, 211, 153, 0.55);
+    }
+
+    .nav-admin-pill.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
     /* Hero Section */
@@ -495,13 +508,11 @@
       box-shadow: 0 16px 38px rgba(245, 197, 24, 0.45), var(--glass-specular);
     }
 
-    /* Smooth Compositor-Only Scroll-Reveal Fade System */
+    /* Scroll-Reveal Fade */
     .reveal {
       opacity: 0;
       transform: translate3d(0, 28px, 0);
-      transition:
-        opacity 0.8s var(--ease-liquid),
-        transform 0.8s var(--ease-liquid);
+      transition: opacity 0.8s var(--ease-liquid), transform 0.8s var(--ease-liquid);
       transition-delay: var(--reveal-delay, 0ms);
       will-change: opacity, transform;
     }
@@ -522,6 +533,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
       margin-bottom: 34px;
       padding: 13px 26px;
       border-radius: 20px;
@@ -557,7 +570,35 @@
       border-color: rgba(255, 85, 95, 0.45);
     }
 
-    /* TETHER Teaser Showcase Cards */
+    .btn-section-admin {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.14);
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-liquid);
+    }
+
+    body.admin-authenticated .btn-section-admin {
+      display: inline-flex;
+    }
+
+    .btn-section-admin:hover {
+      background: rgba(0, 229, 255, 0.32);
+      border-color: var(--comic-cyan);
+      transform: translateY(-1px);
+    }
+
+    /* TETHER / Movies Showcase Cards */
     .video-stack {
       display: flex;
       flex-direction: column;
@@ -597,7 +638,6 @@
       display: block;
     }
 
-    /* Thumbnail Overlay */
     .thumbnail-overlay {
       position: absolute;
       inset: 0;
@@ -786,6 +826,33 @@
       text-transform: none;
     }
 
+    .btn-admin-delete-inline {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.24);
+      border: 1px solid rgba(248, 113, 113, 0.6);
+      color: #FECACA;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    body.admin-authenticated .btn-admin-delete-inline {
+      display: inline-flex;
+    }
+
+    .btn-admin-delete-inline:hover {
+      background: rgba(239, 68, 68, 0.75);
+      color: #FFFFFF;
+    }
+
     .video-details p {
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
@@ -805,7 +872,7 @@
       margin-right: 8px;
     }
 
-    /* Mini IMDb Page Interface — Liquid Glass */
+    /* Mini IMDb Page Interface */
     .imdb-app-window {
       width: 100%;
       max-width: 920px;
@@ -975,7 +1042,7 @@
     .imdb-cta-row {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -986,12 +1053,12 @@
       background: linear-gradient(135deg, rgba(245, 197, 24, 0.88), rgba(255, 215, 75, 0.74));
       color: #000000;
       font-family: 'Oswald', sans-serif;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 10px 24px;
+      padding: 10px 22px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.65);
       box-shadow: 0 10px 24px rgba(245, 197, 24, 0.3), var(--glass-specular);
@@ -1062,14 +1129,8 @@
     }
 
     @keyframes tabFadeIn {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 8px, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
+      from { opacity: 0; transform: translate3d(0, 8px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
     }
 
     .imdb-plot-text {
@@ -1107,15 +1168,20 @@
       text-transform: uppercase;
       color: var(--imdb-gold);
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
     }
 
     .imdb-credit-names {
       font-size: 0.87rem;
       font-weight: 600;
       color: #FFFFFF;
+      word-break: break-word;
     }
 
-    /* Mini YouTube Channel Interface — Liquid Glass */
+    /* Mini YouTube Channel Interface */
     .yt-app-window {
       width: 100%;
       max-width: 920px;
@@ -1284,7 +1350,7 @@
       background: rgba(8, 12, 22, 0.34);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       position: relative;
       z-index: 2;
     }
@@ -1295,7 +1361,13 @@
       line-height: 1.7;
     }
 
-    /* Directors Section — Liquid Glass Cards */
+    .yt-extra-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Directors Section */
     .directors-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1373,6 +1445,7 @@
       line-height: 1.45;
     }
 
+    /* Footer */
     footer {
       max-width: 1120px;
       margin: 0 auto 30px auto;
@@ -1387,6 +1460,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
       font-family: 'Oswald', sans-serif;
       font-size: 0.86rem;
       letter-spacing: 1.2px;
@@ -1407,7 +1482,318 @@
       color: var(--imdb-gold);
     }
 
-    /* Respect Reduced Motion */
+    footer a.footer-insta {
+      color: #FF759F;
+    }
+
+    .btn-admin-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.85);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-liquid);
+    }
+
+    .btn-admin-trigger:hover {
+      border-color: var(--comic-cyan);
+      color: var(--comic-cyan);
+      background: rgba(0, 229, 255, 0.14);
+    }
+
+    /* Liquid Glass Email-Only Admin Modal & Dashboard */
+    .admin-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 14, 0.74);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-liquid), visibility 0.35s var(--ease-liquid);
+    }
+
+    .admin-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .admin-modal {
+      width: 100%;
+      max-width: 760px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(14, 22, 38, 0.84) 45%, rgba(8, 12, 22, 0.92));
+      backdrop-filter: blur(22px) saturate(190%);
+      -webkit-backdrop-filter: blur(22px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.72), var(--glass-specular);
+      padding: 28px;
+      transform: translate3d(0, 22px, 0) scale(0.97);
+      transition: transform 0.4s var(--ease-liquid);
+    }
+
+    .admin-backdrop.open .admin-modal {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .admin-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .admin-modal-title {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 1.9rem;
+      letter-spacing: 2.5px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-badge-live {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 1.4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(0, 229, 255, 0.18);
+      border: 1px solid rgba(0, 229, 255, 0.5);
+      color: var(--comic-cyan);
+    }
+
+    .admin-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s ease;
+    }
+
+    .admin-close-btn:hover {
+      background: rgba(255, 85, 0, 0.45);
+      border-color: var(--comic-orange);
+    }
+
+    .admin-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .admin-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .admin-input,
+    .admin-select,
+    .admin-textarea {
+      width: 100%;
+      padding: 11px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(6, 10, 18, 0.65);
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .admin-input:focus,
+    .admin-select:focus,
+    .admin-textarea:focus {
+      border-color: var(--comic-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.18);
+    }
+
+    .admin-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.72), rgba(0, 165, 210, 0.52));
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-liquid);
+    }
+
+    .admin-btn-primary:hover {
+      background: linear-gradient(135deg, rgba(255, 85, 0, 0.82), rgba(255, 130, 55, 0.65));
+      transform: translateY(-1px);
+    }
+
+    .admin-btn-secondary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+      color: #E2E8F0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .admin-status-msg {
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .admin-status-msg.info {
+      display: block;
+      background: rgba(0, 229, 255, 0.14);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      color: #CFFAFE;
+    }
+
+    .admin-status-msg.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      color: #FECACA;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .admin-tab-btn {
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .admin-tab-btn.active {
+      background: rgba(0, 229, 255, 0.22);
+      border-color: var(--comic-cyan);
+      color: #FFFFFF;
+    }
+
+    .admin-panel {
+      display: none;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-saved-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .admin-saved-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 15px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .admin-saved-item-meta {
+      font-size: 0.85rem;
+      color: #FFFFFF;
+      word-break: break-word;
+    }
+
+    .admin-saved-item-meta span {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .btn-delete-row {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.55);
+      background: rgba(239, 68, 68, 0.22);
+      color: #FECACA;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .btn-delete-row:hover {
+      background: rgba(239, 68, 68, 0.78);
+      color: #FFFFFF;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .liquid-orb,
       .preloader-logo {
@@ -1421,7 +1807,6 @@
       }
     }
 
-    /* Tablet Directors Grid */
     @media (max-width: 980px) {
       .directors-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1429,7 +1814,6 @@
       }
     }
 
-    /* Responsive Alignments (Mobile & Tablet) */
     @media (max-width: 850px) {
       .navbar {
         top: 8px;
@@ -1446,7 +1830,8 @@
         gap: 3px;
       }
 
-      .nav-links a {
+      .nav-links a,
+      .nav-admin-pill {
         font-size: 0.68rem;
         padding: 4px 7px;
         letter-spacing: 0.7px;
@@ -1549,6 +1934,10 @@
         justify-content: center;
       }
 
+      .admin-form-grid {
+        grid-template-columns: 1fr;
+      }
+
       footer {
         width: calc(100% - 28px);
         padding: 20px 16px;
@@ -1571,7 +1960,7 @@
   <!-- Smooth Scroll Progress Line -->
   <div id="scroll-progress"></div>
 
-  <!-- Full-Viewport Fixed Background Layer with Soft Liquid Orbs -->
+  <!-- Fixed Background Layer -->
   <div id="fixed-bg">
     <div class="liquid-orb orb-cyan"></div>
     <div class="liquid-orb orb-orange"></div>
@@ -1602,6 +1991,7 @@
       <li><a href="#imdb-page" class="nav-imdb-link">IMDb</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
+      <li><button type="button" id="nav-admin-badge" class="nav-admin-pill" onclick="openAdminModal('movies')">★ Studio Admin</button></li>
     </ul>
   </header>
 
@@ -1620,15 +2010,16 @@
     </div>
   </section>
 
-  <!-- TETHER Teaser Section -->
+  <!-- TETHER Teaser & Movies Section -->
   <section id="tether-teaser" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title">TETHER TEASERS</h2>
+      <h2 class="section-title">TETHER TEASERS & FILMS</h2>
+      <button type="button" class="btn-section-admin" onclick="openAdminModal('movies')">+ Add Movie / Video</button>
     </div>
     
-    <div class="video-stack">
+    <div class="video-stack" id="movies-container">
 
-      <!-- Teaser 1: Official Film Teaser with Thumbnail & Play Trigger -->
+      <!-- Default Teaser 1 -->
       <div class="video-card glass-surface glass-interactive reveal" style="--reveal-delay: 50ms;">
         <div class="video-player-wrapper" id="player-wrapper-1">
           <div class="thumbnail-overlay" 
@@ -1670,7 +2061,7 @@
         </div>
       </div>
 
-      <!-- Teaser 2: Title Announcement Teaser -->
+      <!-- Default Teaser 2 -->
       <div class="video-card glass-surface glass-interactive reveal" style="--reveal-delay: 100ms;">
         <div class="video-player-wrapper">
           <iframe 
@@ -1699,12 +2090,14 @@
               </a>
             </div>
           </div>
-          <p>Directed by Sathwik, Jayden Jacob &amp; Abhirama Reddy Kalluri</p>
-          <p><span class="label">Cast &amp; Crew</span> Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</p>
+          <p>Directed by Sathwik, Jayden Jacob & Abhirama Reddy Kalluri</p>
+          <p><span class="label">Cast & Crew</span> Sathwik, Jayden, Abhirama, Chinmay, Lokesh, Nihal, Srijan</p>
           <p><span class="label">Production</span> Official Starvel Cinematic Universe Title Teaser</p>
         </div>
       </div>
 
+      <!-- Dynamic DB Movies Container -->
+      <div id="db-movies-list" style="width: 100%; display: flex; flex-direction: column; gap: 44px; align-items: center;"></div>
     </div>
   </section>
 
@@ -1712,6 +2105,7 @@
   <section id="imdb-page" class="content-section">
     <div class="section-header imdb-header reveal">
       <h2 class="section-title">TETHER ON IMDb</h2>
+      <button type="button" class="btn-section-admin" onclick="openAdminModal('imdb')">+ Manage IMDb Links</button>
     </div>
 
     <div class="imdb-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -1741,7 +2135,7 @@
             <span class="imdb-chip">Action</span>
             <span class="imdb-chip">Starvel Studios</span>
           </div>
-          <div class="imdb-cta-row">
+          <div class="imdb-cta-row" id="imdb-links-cta-row">
             <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
               Open Full IMDb Page ↗
             </a>
@@ -1752,8 +2146,8 @@
       <!-- Interactive IMDb Mini Tabs -->
       <div class="imdb-nav-tabs" role="tablist">
         <button type="button" class="imdb-tab active" onclick="switchImdbTab(event, 'imdb-overview')">Overview</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast &amp; Crew</button>
-        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-cast')">Cast & Crew</button>
+        <button type="button" class="imdb-tab" onclick="switchImdbTab(event, 'imdb-details')">Production & Links</button>
       </div>
 
       <!-- Interactive IMDb Body -->
@@ -1787,19 +2181,19 @@
               <div class="imdb-credit-names">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">VFX &amp; Post-Production</div>
+              <div class="imdb-credit-role">VFX & Post-Production</div>
               <div class="imdb-credit-names">Sathwik Gurram • Starvel Studios</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">Cinematography &amp; Design</div>
+              <div class="imdb-credit-role">Cinematography & Design</div>
               <div class="imdb-credit-names">Jayden Jacob, Abhirama Reddy Kalluri</div>
             </div>
           </div>
         </div>
 
-        <!-- Production Details Tab -->
+        <!-- Production & Extra IMDb Links Tab -->
         <div id="imdb-details" class="imdb-tab-panel">
-          <div class="imdb-credits-list">
+          <div class="imdb-credits-list" id="imdb-details-grid">
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">IMDb Identifier</div>
               <div class="imdb-credit-names">tt50941110</div>
@@ -1813,7 +2207,7 @@
               <div class="imdb-credit-names">India</div>
             </div>
             <div class="imdb-credit-row">
-              <div class="imdb-credit-role">Direct Link</div>
+              <div class="imdb-credit-role">Primary IMDb Link</div>
               <div class="imdb-credit-names">
                 <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
                   https://www.imdb.com/title/tt50941110/ ↗
@@ -1830,22 +2224,21 @@
   <section id="youtube-channel" class="content-section">
     <div class="section-header yt-header reveal">
       <h2 class="section-title">STARVEL ON YOUTUBE</h2>
+      <button type="button" class="btn-section-admin" onclick="openAdminModal('youtube')">+ Manage YouTube & Instagram</button>
     </div>
 
     <div class="yt-app-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
-      <!-- Channel Banner Header -->
       <div class="yt-channel-banner">
         <span class="yt-banner-badge">Official YouTube Hub</span>
       </div>
 
-      <!-- Profile & Subscribe Row -->
       <div class="yt-profile-strip">
         <div class="yt-profile-left">
           <img src="./starvel.png" alt="Starvel Studios" class="yt-channel-pic">
           <div class="yt-profile-meta">
             <h3>STARVEL STUDIOS</h3>
             <div class="yt-handle">@starvelstudios-1981</div>
-            <div class="yt-sub-meta">Official Teasers, Cinematic Trailers &amp; Behind The Scenes</div>
+            <div class="yt-sub-meta">Official Teasers, Cinematic Trailers & Behind The Scenes</div>
           </div>
         </div>
         <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer" class="yt-subscribe-cta">
@@ -1856,16 +2249,15 @@
         </a>
       </div>
 
-      <!-- Channel Tabs Simulation -->
       <div class="yt-nav-tabs">
         <div class="yt-tab active">Home</div>
         <div class="yt-tab">Releases</div>
         <div class="yt-tab">About</div>
       </div>
 
-      <!-- Channel Info Body -->
       <div class="yt-channel-body">
         <p>Welcome to the official <strong>Starvel Studios</strong> YouTube channel. Follow for the latest drops, teasers for upcoming universe projects, and full cinematic sagas.</p>
+        <div class="yt-extra-links" id="db-youtube-links"></div>
       </div>
     </div>
   </section>
@@ -1877,7 +2269,6 @@
     </div>
     
     <div class="directors-grid">
-      <!-- Director 1 -->
       <div class="director-card glass-surface glass-interactive reveal" style="--reveal-delay: 0ms;">
         <div class="director-img-wrapper">
           <img src="./jayden.png" alt="Jayden Jacob" loading="eager" decoding="async">
@@ -1888,7 +2279,6 @@
         </div>
       </div>
 
-      <!-- Director 2 -->
       <div class="director-card glass-surface glass-interactive reveal" style="--reveal-delay: 80ms;">
         <div class="director-img-wrapper">
           <img src="./ishaaq.jpeg" alt="Mohammad Ishaaq Ali Khan" loading="eager" decoding="async">
@@ -1899,7 +2289,6 @@
         </div>
       </div>
 
-      <!-- Director 3 -->
       <div class="director-card glass-surface glass-interactive reveal" style="--reveal-delay: 160ms;">
         <div class="director-img-wrapper">
           <img src="./sath.png" alt="Sathwik" loading="eager" decoding="async">
@@ -1910,7 +2299,6 @@
         </div>
       </div>
 
-      <!-- Director 4 -->
       <div class="director-card glass-surface glass-interactive reveal" style="--reveal-delay: 240ms;">
         <div class="director-img-wrapper">
           <img src="./abhi.png" alt="Abhirama Reddy Kalluri" loading="eager" decoding="async">
@@ -1926,18 +2314,175 @@
   <!-- Footer -->
   <footer class="reveal">
     <div>© STARVEL STUDIOS. ALL RIGHTS RESERVED.</div>
-    <div>
+    <div id="footer-social-links">
       FOLLOW ON 
-      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>, 
-      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a> &amp; 
+      <a href="https://www.instagram.com/_starvelstudios_?" target="_blank" rel="noopener noreferrer" class="footer-insta">INSTAGRAM</a>, 
+      <a href="https://youtube.com/@starvelstudios-1981?si=REKXvzlxg3aquNqz" target="_blank" rel="noopener noreferrer">YOUTUBE</a> & 
       <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb">IMDb</a>
+      <span id="db-instagram-footer-extra"></span>
+    </div>
+    <div>
+      <button type="button" id="footer-admin-btn" class="btn-admin-trigger" onclick="openAdminModal('movies')">
+        🔒 Admin
+      </button>
     </div>
   </footer>
 
+  <!-- Liquid Glass Email-Only Admin Modal & Live CRUD Dashboard -->
+  <div id="admin-backdrop" class="admin-backdrop" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <div class="admin-modal-title" id="admin-modal-heading">
+          STARVEL STUDIO ADMIN
+          <span class="admin-badge-live" id="admin-auth-state-badge">EMAIL VERIFICATION</span>
+        </div>
+        <button type="button" class="admin-close-btn" onclick="closeAdminModal()" aria-label="Close Admin Panel">✕</button>
+      </div>
+
+      <!-- STEP 1: Email-Only Login Gate -->
+      <div id="admin-login-view">
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px;">
+          Sign in with an authorized <strong>Starvel Studios</strong> admin email (<strong>studiosstarvel@gmail.com</strong> or <strong>sathwik.gurram@gmail.com</strong>). A one-time code and magic link will be sent to your inbox.
+        </p>
+
+        <form id="admin-email-form" onsubmit="handleSendAdminOtp(event)">
+          <div class="admin-form-group">
+            <label class="admin-label" for="admin-email-input">Authorized Admin Email</label>
+            <input type="email" id="admin-email-input" class="admin-input" placeholder="studiosstarvel@gmail.com or sathwik.gurram@gmail.com" required autocomplete="email">
+          </div>
+          <button type="submit" class="admin-btn-primary" id="btn-send-otp">Send Email Login Code</button>
+        </form>
+
+        <form id="admin-otp-form" onsubmit="handleVerifyAdminOtp(event)" style="display: none; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12);">
+          <div class="admin-form-group">
+            <label class="admin-label" for="admin-otp-input">Enter 6-Digit Email Code (or click the link in your email)</label>
+            <input type="text" id="admin-otp-input" class="admin-input" placeholder="123456" inputmode="numeric" autocomplete="one-time-code" required>
+          </div>
+          <button type="submit" class="admin-btn-primary" id="btn-verify-otp">Verify & Unlock Studio</button>
+        </form>
+
+        <div id="admin-login-status" class="admin-status-msg"></div>
+      </div>
+
+      <!-- STEP 2: Authenticated Live CRUD Manager -->
+      <div id="admin-dashboard-view" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+          <span style="font-size: 0.84rem; color: #A7F3D0;">Signed in as <strong id="admin-signed-email"></strong></span>
+          <button type="button" class="admin-btn-secondary" onclick="handleAdminSignOut()">Sign Out</button>
+        </div>
+
+        <div class="admin-tabs">
+          <button type="button" class="admin-tab-btn active" data-panel="panel-movies" onclick="switchAdminPanel('panel-movies')">Movies & Videos</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram</button>
+        </div>
+
+        <div id="admin-crud-status" class="admin-status-msg"></div>
+
+        <!-- Panel 1: Add New Movie / Video Card -->
+        <div id="panel-movies" class="admin-panel active">
+          <form onsubmit="handleAddMovie(event)">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-label">Movie / Teaser Title *</label>
+                <input type="text" id="movie-title" class="admin-input" placeholder="TETHER: Chapter 2 — Teaser" required>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Badge Label</label>
+                <input type="text" id="movie-badge" class="admin-input" placeholder="CHAPTER 2 / TEASER">
+              </div>
+            </div>
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-label">YouTube Video ID or URL *</label>
+                <input type="text" id="movie-youtube" class="admin-input" placeholder="t_P2gRGizco or https://youtu.be/..." required>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">IMDb Link (Optional)</label>
+                <input type="url" id="movie-imdb" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/">
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Cast & Credits Line</label>
+              <input type="text" id="movie-cast" class="admin-input" placeholder="Directed by Sathwik, Jayden Jacob, Mohammad Ishaaq Ali Khan & Abhirama Reddy Kalluri">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Logline / Description</label>
+              <input type="text" id="movie-logline" class="admin-input" placeholder="Temporal resonance destabilized across timelines...">
+            </div>
+            <button type="submit" class="admin-btn-primary">Save Movie to Database</button>
+          </form>
+          <div class="admin-saved-list" id="admin-movies-saved"></div>
+        </div>
+
+        <!-- Panel 2: Add / Delete IMDb Links -->
+        <div id="panel-imdb" class="admin-panel">
+          <form onsubmit="handleAddImdb(event)">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-label">Display Label *</label>
+                <input type="text" id="imdb-label" class="admin-input" placeholder="TETHER Chapter 2 IMDb" required>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">IMDb Title / Name ID *</label>
+                <input type="text" id="imdb-id" class="admin-input" placeholder="tt50941110" required>
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Full IMDb URL *</label>
+              <input type="url" id="imdb-url" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/" required>
+            </div>
+            <button type="submit" class="admin-btn-primary">Add IMDb Link</button>
+          </form>
+          <div class="admin-saved-list" id="admin-imdb-saved"></div>
+        </div>
+
+        <!-- Panel 3: Add / Delete YouTube Links & Videos -->
+        <div id="panel-youtube" class="admin-panel">
+          <form onsubmit="handleAddYouTube(event)">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-label">Title / Button Name *</label>
+                <input type="text" id="yt-title" class="admin-input" placeholder="Behind The Scenes — TETHER VFX" required>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">YouTube URL *</label>
+                <input type="url" id="yt-url" class="admin-input" placeholder="https://www.youtube.com/watch?v=..." required>
+              </div>
+            </div>
+            <button type="submit" class="admin-btn-primary">Save YouTube Link</button>
+          </form>
+          <div class="admin-saved-list" id="admin-youtube-saved"></div>
+        </div>
+
+        <!-- Panel 4: Add / Delete Instagram Features & Links -->
+        <div id="panel-instagram" class="admin-panel">
+          <form onsubmit="handleAddInstagram(event)">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-label">Feature / Link Label *</label>
+                <input type="text" id="insta-label" class="admin-input" placeholder="TETHER Reel / Official Page" required>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Instagram Handle *</label>
+                <input type="text" id="insta-handle" class="admin-input" placeholder="@_starvelstudios_" required>
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Instagram URL *</label>
+              <input type="url" id="insta-url" class="admin-input" placeholder="https://www.instagram.com/_starvelstudios_" required>
+            </div>
+            <button type="submit" class="admin-btn-primary">Save Instagram Link</button>
+          </form>
+          <div class="admin-saved-list" id="admin-instagram-saved"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UI, 60Hz/120Hz+ Smooth Scroll & Reveal Script -->
   <script>
-    // =========================================================================
-    // 1. Ultra-Fast Preloader Engine + Staggered Hero Fade Trigger
-    // =========================================================================
     const preloader = document.getElementById('preloader');
     const fillBar = document.getElementById('preloader-fill');
     let currentProgress = 0;
@@ -1950,7 +2495,6 @@
         if (currentProgress > targetProgress) currentProgress = targetProgress;
         fillBar.style.width = `${Math.min(100, currentProgress)}%`;
       }
-
       if (currentProgress >= 100) {
         preloader.classList.add('preloader-hidden');
         document.body.classList.add('page-ready');
@@ -1958,32 +2502,18 @@
         requestAnimationFrame(animatePreloader);
       }
     }
-
     requestAnimationFrame(animatePreloader);
-
     setTimeout(() => { if (!isPageLoaded) targetProgress = 75; }, 80);
     setTimeout(() => { if (!isPageLoaded) targetProgress = 92; }, 200);
+    const maxPreloaderWait = setTimeout(() => { isPageLoaded = true; targetProgress = 100; }, 650);
+    window.addEventListener('load', () => { clearTimeout(maxPreloaderWait); isPageLoaded = true; targetProgress = 100; });
 
-    const maxPreloaderWait = setTimeout(() => {
-      isPageLoaded = true;
-      targetProgress = 100;
-    }, 650);
-
-    window.addEventListener('load', () => {
-      clearTimeout(maxPreloaderWait);
-      isPageLoaded = true;
-      targetProgress = 100;
-    });
-
-    // =========================================================================
-    // 2. Fixed Unlimited Refresh-Rate Smooth Scroll (60Hz / 120Hz / 144Hz / 240Hz+)
-    //    Properly handles async scroll events without stalling on 60Hz displays
-    // =========================================================================
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const heroLogo = document.getElementById('hero-logo-3d');
     const navbar = document.getElementById('navbar');
     const scrollProgress = document.getElementById('scroll-progress');
+    const adminBackdrop = document.getElementById('admin-backdrop');
 
     const smoothScroll = {
       current: window.scrollY,
@@ -2001,16 +2531,12 @@
 
     function updateVisualsOnScroll(scrollY) {
       const maxScroll = getMaxScroll();
-
       if (scrollProgress && maxScroll > 0) {
         scrollProgress.style.transform = `scaleX(${Math.min(1, Math.max(0, scrollY / maxScroll))})`;
       }
-
       if (navbar) {
         navbar.classList.toggle('scrolled', scrollY > 28);
       }
-
-      // Compositor-only 3D Hero Scroll Effect (no per-frame blur repaints)
       if (heroLogo && !prefersReducedMotion) {
         const heroHeight = window.innerHeight * 0.6;
         const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
@@ -2018,7 +2544,6 @@
         const rotateX = progress * 16;
         const translateY = -progress * 60;
         const opacity = Math.max(0, 1 - progress * 1.4);
-
         heroLogo.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale.toFixed(3)}) rotateX(${rotateX.toFixed(2)}deg)`;
         heroLogo.style.opacity = opacity.toFixed(3);
       }
@@ -2035,7 +2560,6 @@
     function smoothScrollTick(now) {
       const dt = Math.min(0.05, Math.max(0.001, (now - smoothScroll.lastTime) / 1000));
       smoothScroll.lastTime = now;
-
       const diff = smoothScroll.target - smoothScroll.current;
 
       if (Math.abs(diff) < 0.35) {
@@ -2050,11 +2574,9 @@
 
       const easeFactor = 1 - Math.exp(-smoothScroll.damping * dt);
       smoothScroll.current += diff * easeFactor;
-
       window.scrollTo(0, smoothScroll.current);
       smoothScroll.lastAppliedY = window.scrollY;
       updateVisualsOnScroll(smoothScroll.current);
-
       smoothScroll.rafId = requestAnimationFrame(smoothScrollTick);
     }
 
@@ -2069,6 +2591,7 @@
     if (!prefersReducedMotion && !isCoarsePointer) {
       window.addEventListener('wheel', (e) => {
         if (e.ctrlKey || e.metaKey) return;
+        if (adminBackdrop && adminBackdrop.classList.contains('open')) return;
 
         e.preventDefault();
         let delta = e.deltaY;
@@ -2079,32 +2602,28 @@
           smoothScroll.current = window.scrollY;
           smoothScroll.target = window.scrollY;
         }
-
         smoothScroll.target = Math.max(0, Math.min(getMaxScroll(), smoothScroll.target + delta));
         startSmoothScroll();
       }, { passive: false });
 
-      // Yield immediately to keyboard navigation or scrollbar clicks
       window.addEventListener('keydown', (e) => {
-        const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
-        if (scrollKeys.includes(e.key)) {
+        if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) {
           stopSmoothScroll();
+        }
+        if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+          window.openAdminModal('movies');
         }
       }, { passive: true });
 
       window.addEventListener('pointerdown', (e) => {
-        if (e.clientX >= document.documentElement.clientWidth) {
-          stopSmoothScroll();
-        }
+        if (e.clientX >= document.documentElement.clientWidth) stopSmoothScroll();
       }, { passive: true });
     }
 
-    // Sync visuals on native scroll without cancelling programmatic wheel glide
     let visualRaf = false;
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (smoothScroll.isAnimating) {
-        // Only abort if user manually dragged scrollbar far from our applied position
         if (Math.abs(y - smoothScroll.lastAppliedY) > 6) {
           stopSmoothScroll();
           smoothScroll.current = y;
@@ -2112,11 +2631,9 @@
         }
         return;
       }
-
       smoothScroll.current = y;
       smoothScroll.target = y;
       smoothScroll.lastAppliedY = y;
-
       if (!visualRaf) {
         visualRaf = true;
         requestAnimationFrame(() => {
@@ -2131,7 +2648,6 @@
       updateVisualsOnScroll(window.scrollY);
     }, { passive: true });
 
-    // Smooth glide for internal anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
         const href = anchor.getAttribute('href');
@@ -2142,12 +2658,10 @@
         e.preventDefault();
         const navOffset = 68;
         const destination = Math.max(0, Math.min(getMaxScroll(), targetEl.getBoundingClientRect().top + window.scrollY - navOffset));
-
         if (prefersReducedMotion) {
           window.scrollTo(0, destination);
           return;
         }
-
         smoothScroll.current = window.scrollY;
         smoothScroll.target = destination;
         startSmoothScroll();
@@ -2156,9 +2670,6 @@
 
     updateVisualsOnScroll(window.scrollY);
 
-    // =========================================================================
-    // 3. Smooth Scroll-Reveal Fade Observer
-    // =========================================================================
     const revealElements = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !prefersReducedMotion) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -2168,19 +2679,12 @@
             observer.unobserve(entry.target);
           }
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -30px 0px'
-      });
-
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
       revealElements.forEach((el) => revealObserver.observe(el));
     } else {
       revealElements.forEach((el) => el.classList.add('is-visible'));
     }
 
-    // =========================================================================
-    // 4. Liquid Glass Specular Cursor Highlight
-    // =========================================================================
     if (!isCoarsePointer) {
       document.querySelectorAll('.glass-interactive').forEach((card) => {
         card.addEventListener('pointermove', (e) => {
@@ -2191,38 +2695,494 @@
       });
     }
 
-    // =========================================================================
-    // 5. Interactive Thumbnail Overlay Play Trigger & IMDb Tab Switcher
-    // =========================================================================
-    function playEmbeddedTeaser(wrapperId, overlayId, videoId) {
+    window.playEmbeddedTeaser = function(wrapperId, overlayId, videoId) {
       const overlay = document.getElementById(overlayId);
       const wrapper = document.getElementById(wrapperId);
       const iframe = wrapper ? wrapper.querySelector('iframe') : null;
-
       if (overlay) {
         overlay.style.opacity = '0';
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 400);
+        setTimeout(() => { overlay.style.display = 'none'; }, 400);
       }
-
       if (iframe) {
         iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
       }
-    }
+    };
 
-    function switchImdbTab(event, panelId) {
-      const tabs = document.querySelectorAll('.imdb-tab');
-      const panels = document.querySelectorAll('.imdb-tab-panel');
-
-      tabs.forEach(tab => tab.classList.remove('active'));
-      panels.forEach(panel => panel.classList.remove('active'));
-
+    window.switchImdbTab = function(event, panelId) {
+      document.querySelectorAll('.imdb-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.imdb-tab-panel').forEach(p => p.classList.remove('active'));
       event.currentTarget.classList.add('active');
       const activePanel = document.getElementById(panelId);
-      if (activePanel) {
-        activePanel.classList.add('active');
+      if (activePanel) activePanel.classList.add('active');
+    };
+  </script>
+
+  <!-- Supabase Email-Only Auth & Live Database CRUD Module -->
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://inragjjxjzoxvwlfisfal.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_xH-t3BgZ-IdaSK0_VggK_Q_OYxCghhA';
+    const ALLOWED_ADMIN_EMAILS = [
+      'studiosstarvel@gmail.com',
+      'sathwik.gurram@gmail.com'
+    ];
+
+    const isConfigured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_PROJECT_REF');
+    const supabase = isConfigured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    let pendingLoginEmail = '';
+    let isAdmin = false;
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
+        .replace(/'/g, ''');
+    }
+
+    function extractYouTubeId(input) {
+      const val = String(input || '').trim();
+      if (/^[a-zA-Z0-9_-]{11}$/.test(val)) return val;
+      const match = val.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+      return match ? match[1] : val;
+    }
+
+    function setStatus(elementId, message, type = 'info') {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      if (!message) {
+        el.className = 'admin-status-msg';
+        el.textContent = '';
+        return;
       }
+      el.className = `admin-status-msg ${type}`;
+      el.textContent = message;
+    }
+
+    window.openAdminModal = function(initialPanel = 'movies') {
+      const backdrop = document.getElementById('admin-backdrop');
+      if (backdrop) backdrop.classList.add('open');
+      if (isAdmin && initialPanel) {
+        window.switchAdminPanel(`panel-${initialPanel}`);
+      }
+    };
+
+    window.closeAdminModal = function() {
+      const backdrop = document.getElementById('admin-backdrop');
+      if (backdrop) backdrop.classList.remove('open');
+    };
+
+    document.getElementById('admin-backdrop')?.addEventListener('click', (e) => {
+      if (e.target.id === 'admin-backdrop') window.closeAdminModal();
+    });
+
+    window.switchAdminPanel = function(panelId) {
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.panel === panelId);
+      });
+      document.querySelectorAll('.admin-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === panelId);
+      });
+      setStatus('admin-crud-status', '');
+    };
+
+    function applyAdminSession(session) {
+      const email = session?.user?.email?.toLowerCase() || '';
+      isAdmin = Boolean(email && ALLOWED_ADMIN_EMAILS.includes(email));
+
+      document.body.classList.toggle('admin-authenticated', isAdmin);
+      document.getElementById('nav-admin-badge')?.classList.toggle('visible', isAdmin);
+
+      const footerBtn = document.getElementById('footer-admin-btn');
+      if (footerBtn) footerBtn.textContent = isAdmin ? '★ Studio Admin' : '🔒 Admin';
+
+      const loginView = document.getElementById('admin-login-view');
+      const dashView = document.getElementById('admin-dashboard-view');
+      const stateBadge = document.getElementById('admin-auth-state-badge');
+      const signedEmail = document.getElementById('admin-signed-email');
+
+      if (isAdmin) {
+        if (loginView) loginView.style.display = 'none';
+        if (dashView) dashView.style.display = 'block';
+        if (stateBadge) stateBadge.textContent = 'AUTHENTICATED';
+        if (signedEmail) signedEmail.textContent = email;
+      } else {
+        if (loginView) loginView.style.display = 'block';
+        if (dashView) dashView.style.display = 'none';
+        if (stateBadge) stateBadge.textContent = 'EMAIL VERIFICATION';
+      }
+    }
+
+    window.handleSendAdminOtp = async function(e) {
+      e.preventDefault();
+      if (!supabase) {
+        setStatus('admin-login-status', 'Add your Supabase Project URL and Anon Key in index.html first.', 'error');
+        return;
+      }
+      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
+      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
+        setStatus(
+          'admin-login-status',
+          'Access is restricted to studiosstarvel@gmail.com and sathwik.gurram@gmail.com.',
+          'error'
+        );
+        return;
+      }
+
+      const btn = document.getElementById('btn-send-otp');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: window.location.origin + window.location.pathname
+        }
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Send Email Login Code';
+
+      if (error) {
+        setStatus('admin-login-status', error.message, 'error');
+        return;
+      }
+
+      pendingLoginEmail = email;
+      document.getElementById('admin-otp-form').style.display = 'block';
+      setStatus('admin-login-status', `Verification email sent to ${email}. Enter the 6-digit code below or click the magic link in your inbox.`, 'info');
+    };
+
+    window.handleVerifyAdminOtp = async function(e) {
+      e.preventDefault();
+      if (!supabase || !pendingLoginEmail) return;
+
+      const token = document.getElementById('admin-otp-input').value.trim();
+      const btn = document.getElementById('btn-verify-otp');
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: pendingLoginEmail,
+        token,
+        type: 'email'
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Verify & Unlock Studio';
+
+      if (error) {
+        setStatus('admin-login-status', error.message, 'error');
+        return;
+      }
+
+      setStatus('admin-login-status', '');
+      applyAdminSession(data.session);
+      await loadAndRenderAll();
+    };
+
+    window.handleAdminSignOut = async function() {
+      if (supabase) await supabase.auth.signOut();
+      applyAdminSession(null);
+      await loadAndRenderAll();
+    };
+
+    async function loadAndRenderAll() {
+      if (!supabase) return;
+
+      const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+        supabase.from('movies').select('*').order('created_at', { ascending: false }),
+        supabase.from('imdb_links').select('*').order('created_at', { ascending: true }),
+        supabase.from('youtube_items').select('*').order('created_at', { ascending: false }),
+        supabase.from('instagram_links').select('*').order('created_at', { ascending: true })
+      ]);
+
+      renderMovies(moviesRes.data || []);
+      renderImdbLinks(imdbRes.data || []);
+      renderYouTubeLinks(ytRes.data || []);
+      renderInstagramLinks(instaRes.data || []);
+    }
+
+    function renderMovies(movies) {
+      const container = document.getElementById('db-movies-list');
+      const adminList = document.getElementById('admin-movies-saved');
+      if (!container) return;
+
+      container.innerHTML = movies.map((m) => {
+        const ytId = extractYouTubeId(m.youtube_id);
+        const safeTitle = escapeHtml(m.title);
+        const safeBadge = escapeHtml(m.badge || 'STARVEL ORIGINAL');
+        const safeCast = escapeHtml(m.cast_line || '');
+        const safeLogline = escapeHtml(m.logline || '');
+        const imdbBtn = m.imdb_url
+          ? `<a href="${escapeHtml(m.imdb_url)}" target="_blank" rel="noopener noreferrer" class="btn-view-imdb"><span class="imdb-pill-tag">IMDb</span>View Page</a>`
+          : '';
+
+        return `
+          <div class="video-card glass-surface glass-interactive is-visible">
+            <div class="video-player-wrapper">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/${escapeHtml(ytId)}?rel=0"
+                title="${safeTitle}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-details">
+              <div class="video-details-header">
+                <div class="video-title-group">
+                  <h3>${safeTitle}</h3>
+                  <span class="announcement-vol-badge badge-orange">${safeBadge}</span>
+                </div>
+                <div class="video-actions-group">
+                  ${imdbBtn}
+                  <a href="https://www.youtube.com/watch?v=${escapeHtml(ytId)}" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+                    Watch on YouTube
+                  </a>
+                  <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('movies', '${escapeHtml(m.id)}')">Delete</button>
+                </div>
+              </div>
+              ${safeCast ? `<p>${safeCast}</p>` : ''}
+              ${safeLogline ? `<p><span class="label">Logline</span> ${safeLogline}</p>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (adminList) {
+        adminList.innerHTML = movies.length
+          ? movies.map(m => `
+              <div class="admin-saved-item">
+                <div class="admin-saved-item-meta">
+                  <strong>${escapeHtml(m.title)}</strong>
+                  <span>YouTube ID: ${escapeHtml(extractYouTubeId(m.youtube_id))}</span>
+                </div>
+                <button type="button" class="btn-delete-row" onclick="deleteDbRow('movies', '${escapeHtml(m.id)}')">Delete</button>
+              </div>
+            `).join('')
+          : '<p style="font-size: 0.82rem; color: var(--text-muted);">No extra database movies added yet.</p>';
+      }
+    }
+
+    function renderImdbLinks(links) {
+      const ctaRow = document.getElementById('imdb-links-cta-row');
+      const detailsGrid = document.getElementById('imdb-details-grid');
+      const adminList = document.getElementById('admin-imdb-saved');
+
+      if (ctaRow) {
+        const extraCtas = links
+          .filter(l => l.imdb_id !== 'tt50941110')
+          .map(l => `
+            <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+              ${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)}) ↗
+            </a>
+          `).join('');
+        ctaRow.innerHTML = `
+          <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="imdb-open-cta">
+            Open Full IMDb Page ↗
+          </a>
+          ${extraCtas}
+        `;
+      }
+
+      if (detailsGrid) {
+        detailsGrid.querySelectorAll('.dynamic-imdb-row').forEach(el => el.remove());
+        links.forEach(l => {
+          const row = document.createElement('div');
+          row.className = 'imdb-credit-row dynamic-imdb-row';
+          row.innerHTML = `
+            <div class="imdb-credit-role">
+              <span>${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)})</span>
+              <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('imdb_links', '${escapeHtml(l.id)}')">Delete</button>
+            </div>
+            <div class="imdb-credit-names">
+              <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" style="color: var(--imdb-gold); text-decoration: none;">
+                ${escapeHtml(l.url)} ↗
+              </a>
+            </div>
+          `;
+          detailsGrid.appendChild(row);
+        });
+      }
+
+      if (adminList) {
+        adminList.innerHTML = links.length
+          ? links.map(l => `
+              <div class="admin-saved-item">
+                <div class="admin-saved-item-meta">
+                  <strong>${escapeHtml(l.label)} (${escapeHtml(l.imdb_id)})</strong>
+                  <span>${escapeHtml(l.url)}</span>
+                </div>
+                <button type="button" class="btn-delete-row" onclick="deleteDbRow('imdb_links', '${escapeHtml(l.id)}')">Delete</button>
+              </div>
+            `).join('')
+          : '<p style="font-size: 0.82rem; color: var(--text-muted);">No database IMDb links saved yet.</p>';
+      }
+    }
+
+    function renderYouTubeLinks(items) {
+      const container = document.getElementById('db-youtube-links');
+      const adminList = document.getElementById('admin-youtube-saved');
+
+      if (container) {
+        container.innerHTML = items.map(item => `
+          <div style="display: inline-flex; align-items: center; gap: 6px;">
+            <a href="${escapeHtml(item.youtube_url)}" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube">
+              ${escapeHtml(item.title)} ↗
+            </a>
+            <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('youtube_items', '${escapeHtml(item.id)}')">✕</button>
+          </div>
+        `).join('');
+      }
+
+      if (adminList) {
+        adminList.innerHTML = items.length
+          ? items.map(item => `
+              <div class="admin-saved-item">
+                <div class="admin-saved-item-meta">
+                  <strong>${escapeHtml(item.title)}</strong>
+                  <span>${escapeHtml(item.youtube_url)}</span>
+                </div>
+                <button type="button" class="btn-delete-row" onclick="deleteDbRow('youtube_items', '${escapeHtml(item.id)}')">Delete</button>
+              </div>
+            `).join('')
+          : '<p style="font-size: 0.82rem; color: var(--text-muted);">No extra YouTube links saved yet.</p>';
+      }
+    }
+
+    function renderInstagramLinks(items) {
+      const footerExtra = document.getElementById('db-instagram-footer-extra');
+      const adminList = document.getElementById('admin-instagram-saved');
+
+      if (footerExtra) {
+        footerExtra.innerHTML = items
+          .filter(i => !i.url.includes('_starvelstudios_'))
+          .map(i => ` • <a href="${escapeHtml(i.url)}" target="_blank" rel="noopener noreferrer" class="footer-insta">${escapeHtml(i.label)} (${escapeHtml(i.handle)})</a>`)
+          .join('');
+      }
+
+      if (adminList) {
+        adminList.innerHTML = items.length
+          ? items.map(i => `
+              <div class="admin-saved-item">
+                <div class="admin-saved-item-meta">
+                  <strong>${escapeHtml(i.label)} (${escapeHtml(i.handle)})</strong>
+                  <span>${escapeHtml(i.url)}</span>
+                </div>
+                <button type="button" class="btn-delete-row" onclick="deleteDbRow('instagram_links', '${escapeHtml(i.id)}')">Delete</button>
+              </div>
+            `).join('')
+          : '<p style="font-size: 0.82rem; color: var(--text-muted);">No extra Instagram links saved yet.</p>';
+      }
+    }
+
+    window.handleAddMovie = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const payload = {
+        title: document.getElementById('movie-title').value.trim(),
+        badge: document.getElementById('movie-badge').value.trim() || 'STARVEL ORIGINAL',
+        youtube_id: extractYouTubeId(document.getElementById('movie-youtube').value),
+        imdb_url: document.getElementById('movie-imdb').value.trim() || null,
+        cast_line: document.getElementById('movie-cast').value.trim() || null,
+        logline: document.getElementById('movie-logline').value.trim() || null
+      };
+
+      const { error } = await supabase.from('movies').insert([payload]);
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+      e.target.reset();
+      setStatus('admin-crud-status', 'New movie saved and published live!', 'info');
+      await loadAndRenderAll();
+    };
+
+    window.handleAddImdb = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const payload = {
+        label: document.getElementById('imdb-label').value.trim(),
+        imdb_id: document.getElementById('imdb-id').value.trim(),
+        url: document.getElementById('imdb-url').value.trim()
+      };
+
+      const { error } = await supabase.from('imdb_links').insert([payload]);
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+      e.target.reset();
+      setStatus('admin-crud-status', 'IMDb link added and saved!', 'info');
+      await loadAndRenderAll();
+    };
+
+    window.handleAddYouTube = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const payload = {
+        title: document.getElementById('yt-title').value.trim(),
+        youtube_url: document.getElementById('yt-url').value.trim()
+      };
+
+      const { error } = await supabase.from('youtube_items').insert([payload]);
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+      e.target.reset();
+      setStatus('admin-crud-status', 'YouTube link saved!', 'info');
+      await loadAndRenderAll();
+    };
+
+    window.handleAddInstagram = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const payload = {
+        label: document.getElementById('insta-label').value.trim(),
+        handle: document.getElementById('insta-handle').value.trim(),
+        url: document.getElementById('insta-url').value.trim()
+      };
+
+      const { error } = await supabase.from('instagram_links').insert([payload]);
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+      e.target.reset();
+      setStatus('admin-crud-status', 'Instagram link saved!', 'info');
+      await loadAndRenderAll();
+    };
+
+    window.deleteDbRow = async function(table, id) {
+      if (!supabase || !isAdmin) return;
+      const { error } = await supabase.from(table).delete().eq('id', id);
+      if (error) {
+        setStatus('admin-crud-status', error.message, 'error');
+        return;
+      }
+      setStatus('admin-crud-status', 'Item deleted from database.', 'info');
+      await loadAndRenderAll();
+    };
+
+    if (supabase) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        applyAdminSession(session);
+        loadAndRenderAll();
+      });
+
+      supabase.auth.onAuthStateChange((_event, session) => {
+        applyAdminSession(session);
+        loadAndRenderAll();
+      });
     }
   </script>
 
