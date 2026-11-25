@@ -1966,7 +1966,85 @@
       text-transform: uppercase;
     }
 
-    .public-ai-messages {
+    .starvel-intel-font {
+      font-family: 'Avengance', 'Bangers', sans-serif !important;
+      letter-spacing: 2px;
+    }
+
+    @keyframes liquidGlassOrbit {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.06); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes liquidTriDotSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes liquidGlassShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .liquid-glass-loader {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 15px;
+      border-radius: 18px;
+      background: linear-gradient(125deg, rgba(0, 229, 255, 0.16), rgba(255, 255, 255, 0.06) 50%, rgba(255, 85, 0, 0.16));
+      background-size: 200% 200%;
+      backdrop-filter: blur(16px) saturate(185%);
+      -webkit-backdrop-filter: blur(16px) saturate(185%);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.34);
+      color: #E8F8FF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      align-self: flex-start;
+      animation: liquidGlassShimmer 3.2s ease infinite;
+    }
+
+    .liquid-loop-ring {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .liquid-loop-svg {
+      width: 28px;
+      height: 28px;
+      animation: liquidGlassOrbit 2.1s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .liquid-tridot-ring {
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      animation: liquidTriDotSpin 1.4s linear infinite;
+    }
+
+    .liquid-tridot-ring span {
+      position: absolute;
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 8px var(--comic-cyan);
+    }
+
+    .liquid-tridot-ring span:nth-child(1) { top: -1px; left: 50%; transform: translateX(-50%); background: var(--comic-cyan); }
+    .liquid-tridot-ring span:nth-child(2) { bottom: 1px; left: 1px; background: var(--imdb-gold); }
+    .liquid-tridot-ring span:nth-child(3) { bottom: 1px; right: 1px; background: var(--comic-orange); }
+
+        .public-ai-messages {
       padding: 14px;
       height: 290px;
       overflow-y: auto;
@@ -2547,13 +2625,13 @@
   <!-- Public Starvel Intelligence Q&A Chatbot -->
   <button type="button" class="public-ai-fab" id="public-ai-fab" onclick="togglePublicAiDrawer()" aria-label="Ask Starvel Intelligence">
     <span class="public-ai-dot"></span>
-    ✦ Ask Starvel Intelligence
+    <span class="starvel-intel-font">✦ Ask stArvel Intelligence</span>
   </button>
 
   <aside class="public-ai-drawer" id="public-ai-drawer" aria-label="Starvel Intelligence Film Guide">
     <div class="public-ai-header">
       <div>
-        <div class="public-ai-title">✦ STARVEL INTELLIGENCE</div>
+        <div class="public-ai-title"><span class="starvel-intel-font">✦ stArvel Intelligence</span></div>
         <div class="public-ai-sub">Ask about TETHER, Cast, Directors &amp; Studio</div>
       </div>
       <button type="button" class="admin-close-btn" onclick="togglePublicAiDrawer(false)" aria-label="Close Starvel Intelligence" style="width: 30px; height: 30px; font-size: 1rem;">✕</button>
@@ -2628,7 +2706,7 @@
           <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram Links</button>
-          <button type="button" class="admin-tab-btn" data-panel="panel-gemini" onclick="switchAdminPanel('panel-gemini')">✦ Starvel Intelligence</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-gemini" onclick="switchAdminPanel('panel-gemini')"><span class="starvel-intel-font">✦ stArvel Intelligence</span></button>
         </div>
 
         <div id="admin-crud-status" class="admin-status-msg"></div>
@@ -2878,14 +2956,14 @@
         <!-- PANEL 5: Starvel Intelligence Conversational AI -->
         <div id="panel-gemini" class="admin-panel">
           <div class="admin-subbox" style="display: flex; flex-direction: column; gap: 12px;">
-            <div class="admin-subbox-title">Starvel Intelligence — Conversational Studio AI</div>
+            <div class="admin-subbox-title"><span class="starvel-intel-font">stArvel Intelligence</span> — Conversational Studio AI</div>
             <div id="gemini-chat-messages" style="height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: rgba(4, 8, 16, 0.55); border: 1px solid rgba(255,255,255,0.1);">
               <div style="color: var(--text-muted); font-size: 0.85rem;">
-                Starvel Intelligence online. Ask me to add a film, edit titles, links, or directors, or delete items—just like we talk.
+                <span class="starvel-intel-font">stArvel Intelligence</span> online. Ask me to add a film, edit titles, links, or directors, or delete items—just like we talk.
               </div>
             </div>
             <form onsubmit="handleGeminiChatSubmit(event)" style="display: flex; gap: 10px;">
-              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Ask Starvel Intelligence to add, edit, or delete site content..." required>
+              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Ask stArvel Intelligence to add, edit, or delete site content..." required>
               <button type="submit" class="admin-btn-primary" id="btn-gemini-send">Send</button>
             </form>
           </div>
@@ -3790,9 +3868,9 @@
           await loadAndRenderAll();
         }
 
-        const textReply = candidateParts.find(p => p.text)?.text
-          || (actionSummaries.length ? `Done! ${actionSummaries.join(' • ')}` : 'Completed your request.');
-        appendGeminiBubble('model', textReply);
+        const rawAdminReply = candidateParts.find(p => p.text)?.text
+          || (actionSummaries.length ? `Done! ${actionSummaries.join(' ')}` : 'Completed your request.');
+        appendGeminiBubble('model', formatPlainParagraph(rawAdminReply));
       } catch (err) {
         appendGeminiBubble('model', `Error: ${err.message}`);
       } finally {
@@ -3821,14 +3899,55 @@
       document.querySelector('.public-ai-form')?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
     };
 
+    function formatPlainParagraph(rawText) {
+      let clean = String(rawText || '')
+        .replace(/\*+/g, '')
+        .replace(/^\s*#{1,6}\s+/gm, '')
+        .replace(/^\s*[-•]\s+/gm, '')
+        .replace(/^\s*\d+[.)]\s+/gm, '')
+        .replace(/`+/g, '');
+      const paragraphs = clean
+        .split(/\n\s*\n/)
+        .map(block =>
+          block
+            .split('\n')
+            .map(line => line.trim().replace(/[,:;]+$/, ''))
+            .filter(Boolean)
+            .map(line => (/[.!?]$/.test(line) ? line : `${line}.`))
+            .join(' ')
+        )
+        .filter(Boolean);
+      return paragraphs.join('\n\n');
+    }
+
+    function createLiquidGlassLoader(label = 'Looping through stArvel archive...') {
+      const wrap = document.createElement('div');
+      wrap.className = 'liquid-glass-loader';
+      wrap.id = 'public-ai-loop-loader';
+      wrap.innerHTML = `
+        <div class="liquid-loop-ring" aria-hidden="true">
+          <svg class="liquid-loop-svg" viewBox="0 0 28 28">
+            <circle cx="14" cy="14" r="10.5" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"></circle>
+            <path d="M 14 3.5 A 10.5 10.5 0 1 1 5.6 19.8" fill="none" stroke="#00E5FF" stroke-width="2.4" stroke-linecap="round"></path>
+          </svg>
+          <div class="liquid-tridot-ring">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <span>${escapeHtml(label)}</span>
+      `;
+      return wrap;
+    }
+
     function appendPublicAiBubble(role, text) {
       const box = document.getElementById('public-ai-messages');
       if (!box) return;
       const bubble = document.createElement('div');
+      const displayText = role === 'model' ? formatPlainParagraph(text) : text;
       bubble.style.cssText = role === 'user'
-        ? 'align-self: flex-end; max-width: 82%; padding: 9px 13px; border-radius: 16px; background: rgba(0, 229, 255, 0.22); border: 1px solid rgba(0, 229, 255, 0.45); color: #FFFFFF; font-size: 0.85rem; white-space: pre-wrap;'
-        : 'align-self: flex-start; max-width: 88%; padding: 9px 13px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.85rem; white-space: pre-wrap;';
-      bubble.textContent = text;
+        ? 'align-self: flex-end; max-width: 82%; padding: 9px 13px; border-radius: 16px; background: rgba(0, 229, 255, 0.22); border: 1px solid rgba(0, 229, 255, 0.45); color: #FFFFFF; font-size: 0.85rem; line-height: 1.55; white-space: pre-wrap;'
+        : 'align-self: flex-start; max-width: 88%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;';
+      bubble.textContent = displayText;
       box.appendChild(bubble);
       box.scrollTop = box.scrollHeight;
     }
@@ -3837,6 +3956,7 @@
       e.preventDefault();
       const input = document.getElementById('public-ai-input');
       const btn = document.getElementById('btn-public-ai-send');
+      const box = document.getElementById('public-ai-messages');
       const question = input.value.trim();
       if (!question) return;
 
@@ -3846,6 +3966,12 @@
 
       btn.disabled = true;
       btn.textContent = '...';
+
+      const loader = createLiquidGlassLoader('Looping through stArvel archive...');
+      if (box) {
+        box.appendChild(loader);
+        box.scrollTop = box.scrollHeight;
+      }
 
       try {
         let moviesData = [];
@@ -3867,7 +3993,8 @@
         }
 
         const publicKnowledge = {
-          studio: 'Starvel Studios (India)',
+          responseStyle: 'Always respond in clean natural paragraphs with zero asterisks, bullet points, or lists.',
+          studio: 'stArvel Studios (India)',
           flagshipFilm: {
             title: currentConfig.imdbTitle,
             imdbId: currentConfig.imdbId,
@@ -3882,6 +4009,62 @@
             ],
             cast: document.getElementById('imdb-cast-el')?.textContent?.trim() || currentConfig.t1Cast,
             writers: document.getElementById('imdb-writers-el')?.textContent?.trim() || '',
+            vfxAndPostProduction: document.getElementById('imdb-vfx-el')?.textContent?.trim() || 'Sathwik Gurram • stArvel Studios',
+            cinematographyAndDesign: document.getElementById('imdb-cine-el')?.textContent?.trim() || 'Jayden Jacob, Abhirama Reddy Kalluri',
+            producersAndBanner: 'stArvel Studios (Independent Debut Production)',
+            teasers: [
+              { title: currentConfig.t1Title, cast: currentConfig.t1Cast, logline: currentConfig.t1Logline, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t1Yt)}` },
+              { title: currentConfig.t2Title, castAndCrew: currentConfig.t2Cast, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t2Yt)}` }
+            ]
+          },
+          additionalReleases: moviesData,
+          officialLinks: {
+            youtubeChannel: currentConfig.ytName,
+            youtubeHandle: currentConfig.ytHandle,
+            youtubeUrl: currentConfig.ytUrl,
+            instagramUrl: currentConfig.instaUrl,
+            imdbLinks: imdbData,
+            youtubeItems: ytData,
+            instagramLinks: instaData
+          }
+        };
+
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            mode: 'public_qa',
+            messages: publicAiConversation,
+            siteState: publicKnowledge
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || `Request failed (${res.status})`);
+        }
+
+        const candidateParts = data?.candidates?.[0]?.content?.parts || [];
+        const rawReply = candidateParts.find(p => p.text)?.text
+          || 'I could not find that detail in the stArvel Studios catalog right now.';
+        const replyText = formatPlainParagraph(rawReply);
+        publicAiConversation.push({ role: 'model', parts: [{ text: replyText }] });
+        document.getElementById('public-ai-loop-loader')?.remove();
+        appendPublicAiBubble('model', replyText);
+      } catch (err) {
+        document.getElementById('public-ai-loop-loader')?.remove();
+        appendPublicAiBubble('model', formatPlainParagraph(`Sorry, stArvel Intelligence could not respond right now (${err.message}).`));
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Ask';
+      }
+    };
+
+d('imdb-writers-el')?.textContent?.trim() || '',
             vfxAndPostProduction: document.getElementById('imdb-vfx-el')?.textContent?.trim() || 'Sathwik Gurram • Starvel Studios',
             cinematographyAndDesign: document.getElementById('imdb-cine-el')?.textContent?.trim() || 'Jayden Jacob, Abhirama Reddy Kalluri',
             producersAndBanner: 'Starvel Studios (Independent Debut Production)',
@@ -3923,11 +4106,11 @@
 
         const candidateParts = data?.candidates?.[0]?.content?.parts || [];
         const replyText = candidateParts.find(p => p.text)?.text
-          || 'I could not find that detail in the Starvel Studios catalog right now.';
+          || 'I could not find that detail in the stArvel Studios catalog right now.';
         publicAiConversation.push({ role: 'model', parts: [{ text: replyText }] });
         appendPublicAiBubble('model', replyText);
       } catch (err) {
-        appendPublicAiBubble('model', `Sorry, Starvel Intelligence couldn't respond right now (${err.message}).`);
+        appendPublicAiBubble('model', `Sorry, stArvel Intelligence couldn't respond right now (${err.message}).`);
       } finally {
         btn.disabled = false;
         btn.textContent = 'Ask';
