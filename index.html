@@ -2421,7 +2421,22 @@
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
             <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
             <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
+            <button type="button" class="admin-btn-secondary" id="btn-reset-pw" onclick="handleSendPasswordReset()">Reset Password</button>
           </div>
+        </form>
+
+        <form id="admin-new-password-form" onsubmit="handleUpdateRecoveredPassword(event)" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.14);">
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-new-password-input">New Admin Password</label>
+              <input type="password" id="admin-new-password-input" class="admin-input" minlength="6" placeholder="Enter new password (min 6 chars)" required autocomplete="new-password">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-confirm-password-input">Confirm New Password</label>
+              <input type="password" id="admin-confirm-password-input" class="admin-input" minlength="6" placeholder="Confirm new password" required autocomplete="new-password">
+            </div>
+          </div>
+          <button type="submit" class="admin-btn-primary" id="btn-save-new-pw">Save New Password</button>
         </form>
 <form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
           ...
@@ -3133,6 +3148,75 @@
       setStatus('admin-login-status', `Sign-in link sent to ${email}. Check inbox/spam or use password / "Open Editor Directly".`, 'info');
     };
 
+    window.handleSendPasswordReset = async function() {
+      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
+      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
+        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
+        return;
+      }
+      if (!supabase) {
+        setStatus('admin-login-status', 'Supabase client not ready.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-reset-pw');
+      btn.disabled = true;
+      btn.textContent = 'Sending Reset...';
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Reset Password';
+
+      if (error) {
+        setStatus('admin-login-status', `${error.message}`, 'error');
+        return;
+      }
+
+      setStatus('admin-login-status', `Password reset link sent to ${email}. Open the link in your email to set a new password.`, 'info');
+    };
+
+    window.handleUpdateRecoveredPassword = async function(e) {
+      e.preventDefault();
+      if (!supabase) return;
+
+      const newPassword = document.getElementById('admin-new-password-input').value;
+      const confirmPassword = document.getElementById('admin-confirm-password-input').value;
+
+      if (newPassword.length < 6) {
+        setStatus('admin-login-status', 'Password must be at least 6 characters.', 'error');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setStatus('admin-login-status', 'Passwords do not match.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-save-new-pw');
+      btn.disabled = true;
+      btn.textContent = 'Updating...';
+
+      const { data, error } = await supabase.auth.updateUser({ password: newPassword });
+
+      btn.disabled = false;
+      btn.textContent = 'Save New Password';
+
+      if (error) {
+        setStatus('admin-login-status', `${error.message}`, 'error');
+        return;
+      }
+
+      document.getElementById('admin-new-password-form').style.display = 'none';
+      e.target.reset();
+      const userEmail = data?.user?.email?.toLowerCase() || 'sathwik.gurram@gmail.com';
+      setStatus('admin-login-status', '');
+      setEditorUnlocked(true, userEmail);
+      window.switchAdminPanel('panel-editor');
+      setStatus('admin-crud-status', 'Password updated and Studio Editor unlocked!', 'info');
+    };
+
     window.unlockEditorDirectly = function() {
       const emailInput = (document.getElementById('admin-email-input')?.value || '').trim().toLowerCase();
       const chosenEmail = ALLOWED_ADMIN_EMAILS.includes(emailInput) ? emailInput : 'sathwik.gurram@gmail.com';
@@ -3609,7 +3693,18 @@
       await loadAndRenderAll();
       await loadCommentsAndSubscribe();
 
-      supabase.auth.onAuthStateChange((_event, session) => {
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'PASSWORD_RECOVERY') {
+          window.openAdminModal('editor');
+          const loginView = document.getElementById('admin-login-view');
+          const dashView = document.getElementById('admin-dashboard-view');
+          const resetForm = document.getElementById('admin-new-password-form');
+          if (loginView) loginView.style.display = 'block';
+          if (dashView) dashView.style.display = 'none';
+          if (resetForm) resetForm.style.display = 'block';
+          setStatus('admin-login-status', 'Recovery verified. Enter and save your new password below.', 'info');
+          return;
+        }
         if (session?.user?.email && ALLOWED_ADMIN_EMAILS.includes(session.user.email.toLowerCase())) {
           setEditorUnlocked(true, session.user.email.toLowerCase());
         }
