@@ -1868,6 +1868,161 @@
       color: #FFFFFF;
     }
 
+    /* Public Starvel Intelligence Floating Widget */
+    .public-ai-fab {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 4200;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.58);
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.28), rgba(14, 22, 38, 0.86) 55%, rgba(255, 85, 0, 0.28));
+      backdrop-filter: blur(18px) saturate(185%);
+      -webkit-backdrop-filter: blur(18px) saturate(185%);
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.58), 0 0 22px rgba(0, 229, 255, 0.28), var(--glass-specular);
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-liquid), box-shadow 0.3s var(--ease-liquid), border-color 0.3s var(--ease-liquid);
+    }
+
+    .public-ai-fab:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: #FFFFFF;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.65), 0 0 28px rgba(0, 229, 255, 0.45), var(--glass-specular);
+    }
+
+    .public-ai-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--comic-cyan);
+      box-shadow: 0 0 10px var(--comic-cyan);
+    }
+
+    .public-ai-drawer {
+      position: fixed;
+      bottom: 78px;
+      right: 22px;
+      width: min(410px, calc(100vw - 28px));
+      max-height: 72vh;
+      z-index: 4300;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(12, 19, 34, 0.92) 48%, rgba(7, 11, 20, 0.96));
+      backdrop-filter: blur(22px) saturate(190%);
+      -webkit-backdrop-filter: blur(22px) saturate(190%);
+      border: 1px solid rgba(0, 229, 255, 0.45);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.72), var(--glass-specular);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(0, 16px, 0) scale(0.97);
+      transition: opacity 0.3s var(--ease-liquid), transform 0.3s var(--ease-liquid), visibility 0.3s var(--ease-liquid);
+    }
+
+    .public-ai-drawer.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .public-ai-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(0, 229, 255, 0.08);
+    }
+
+    .public-ai-title {
+      font-family: 'Bangers', 'Oswald', cursive;
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .public-ai-sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.2px;
+      color: var(--comic-cyan);
+      text-transform: uppercase;
+    }
+
+    .public-ai-messages {
+      padding: 14px;
+      height: 290px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .public-ai-chips {
+      padding: 0 14px 10px 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .public-ai-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .public-ai-chip:hover {
+      border-color: var(--comic-cyan);
+      color: #FFFFFF;
+      background: rgba(0, 229, 255, 0.16);
+    }
+
+    .public-ai-form {
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      gap: 8px;
+      background: rgba(5, 8, 16, 0.6);
+    }
+
+    @media (max-width: 600px) {
+      .public-ai-fab {
+        bottom: 14px;
+        right: 14px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+      }
+      .public-ai-drawer {
+        bottom: 66px;
+        right: 14px;
+        width: calc(100vw - 28px);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .liquid-orb,
       .preloader-logo {
@@ -2389,6 +2544,40 @@
     </div>
   </footer>
 
+  <!-- Public Starvel Intelligence Q&A Chatbot -->
+  <button type="button" class="public-ai-fab" id="public-ai-fab" onclick="togglePublicAiDrawer()" aria-label="Ask Starvel Intelligence">
+    <span class="public-ai-dot"></span>
+    ✦ Ask Starvel Intelligence
+  </button>
+
+  <aside class="public-ai-drawer" id="public-ai-drawer" aria-label="Starvel Intelligence Film Guide">
+    <div class="public-ai-header">
+      <div>
+        <div class="public-ai-title">✦ STARVEL INTELLIGENCE</div>
+        <div class="public-ai-sub">Ask about TETHER, Cast, Directors &amp; Studio</div>
+      </div>
+      <button type="button" class="admin-close-btn" onclick="togglePublicAiDrawer(false)" aria-label="Close Starvel Intelligence" style="width: 30px; height: 30px; font-size: 1rem;">✕</button>
+    </div>
+
+    <div class="public-ai-messages" id="public-ai-messages">
+      <div style="align-self: flex-start; max-width: 88%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.85rem;">
+        Welcome to <strong>Starvel Studios</strong>! Ask me anything about <em>TETHER: Chapter 1 — The Residual Locus</em>, our actors, directors, writers, VFX, or official links.
+      </div>
+    </div>
+
+    <div class="public-ai-chips">
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Who are the directors of TETHER?')">Directors?</button>
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Who is in the cast of TETHER?')">Cast &amp; Actors?</button>
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('What is TETHER about?')">Story / Logline?</button>
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Who produced and did VFX for Starvel Studios?')">Producers &amp; VFX?</button>
+    </div>
+
+    <form class="public-ai-form" onsubmit="handlePublicAiSubmit(event)">
+      <input type="text" id="public-ai-input" class="admin-input" placeholder="Ask about actors, directors, films..." style="padding: 9px 12px; font-size: 0.84rem;" required>
+      <button type="submit" class="admin-btn-primary" id="btn-public-ai-send" style="padding: 9px 16px; font-size: 0.82rem;">Ask</button>
+    </form>
+  </aside>
+
   <!-- Admin Modal & Live Editor -->
   <div id="admin-backdrop" class="admin-backdrop" role="dialog" aria-modal="true" aria-labelledby="admin-modal-heading">
     <div class="admin-modal">
@@ -2786,7 +2975,10 @@
     updateScrollEffects();
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') window.closeAdminModal();
+      if (e.key === 'Escape') {
+        window.closeAdminModal();
+        if (typeof window.togglePublicAiDrawer === 'function') window.togglePublicAiDrawer(false);
+      }
       if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
         window.openAdminModal('editor');
       }
@@ -3606,6 +3798,139 @@
       } finally {
         btn.disabled = false;
         btn.textContent = 'Send';
+      }
+    };
+
+    // Public Starvel Intelligence Q&A Chatbot (Read-Only Visitor Mode)
+    let publicAiConversation = [];
+
+    window.togglePublicAiDrawer = function(forceState) {
+      const drawer = document.getElementById('public-ai-drawer');
+      if (!drawer) return;
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : !drawer.classList.contains('open');
+      drawer.classList.toggle('open', shouldOpen);
+      if (shouldOpen) {
+        setTimeout(() => document.getElementById('public-ai-input')?.focus(), 120);
+      }
+    };
+
+    window.askPublicAiPreset = function(question) {
+      const input = document.getElementById('public-ai-input');
+      if (!input) return;
+      input.value = question;
+      document.querySelector('.public-ai-form')?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    };
+
+    function appendPublicAiBubble(role, text) {
+      const box = document.getElementById('public-ai-messages');
+      if (!box) return;
+      const bubble = document.createElement('div');
+      bubble.style.cssText = role === 'user'
+        ? 'align-self: flex-end; max-width: 82%; padding: 9px 13px; border-radius: 16px; background: rgba(0, 229, 255, 0.22); border: 1px solid rgba(0, 229, 255, 0.45); color: #FFFFFF; font-size: 0.85rem; white-space: pre-wrap;'
+        : 'align-self: flex-start; max-width: 88%; padding: 9px 13px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.85rem; white-space: pre-wrap;';
+      bubble.textContent = text;
+      box.appendChild(bubble);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    window.handlePublicAiSubmit = async function(e) {
+      e.preventDefault();
+      const input = document.getElementById('public-ai-input');
+      const btn = document.getElementById('btn-public-ai-send');
+      const question = input.value.trim();
+      if (!question) return;
+
+      input.value = '';
+      appendPublicAiBubble('user', question);
+      publicAiConversation.push({ role: 'user', parts: [{ text: question }] });
+
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      try {
+        let moviesData = [];
+        let imdbData = [];
+        let ytData = [];
+        let instaData = [];
+
+        if (supabase) {
+          const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+            supabase.from('movies').select('title, badge, cast_line, production_line, logline, youtube_id, imdb_url'),
+            supabase.from('imdb_links').select('label, imdb_id, url'),
+            supabase.from('youtube_items').select('title, youtube_url'),
+            supabase.from('instagram_links').select('label, handle, url')
+          ]);
+          moviesData = moviesRes.data || [];
+          imdbData = imdbRes.data || [];
+          ytData = ytRes.data || [];
+          instaData = instaRes.data || [];
+        }
+
+        const publicKnowledge = {
+          studio: 'Starvel Studios (India)',
+          flagshipFilm: {
+            title: currentConfig.imdbTitle,
+            imdbId: currentConfig.imdbId,
+            imdbUrl: currentConfig.imdbUrl,
+            genre: ['Short Film', 'Sci-Fi', 'Action'],
+            logline: currentConfig.t1Logline,
+            directors: [
+              { name: currentConfig.d1Name, role: currentConfig.d1Role },
+              { name: currentConfig.d2Name, role: currentConfig.d2Role },
+              { name: currentConfig.d3Name, role: currentConfig.d3Role },
+              { name: currentConfig.d4Name, role: currentConfig.d4Role }
+            ],
+            cast: document.getElementById('imdb-cast-el')?.textContent?.trim() || currentConfig.t1Cast,
+            writers: document.getElementById('imdb-writers-el')?.textContent?.trim() || '',
+            vfxAndPostProduction: document.getElementById('imdb-vfx-el')?.textContent?.trim() || 'Sathwik Gurram • Starvel Studios',
+            cinematographyAndDesign: document.getElementById('imdb-cine-el')?.textContent?.trim() || 'Jayden Jacob, Abhirama Reddy Kalluri',
+            producersAndBanner: 'Starvel Studios (Independent Debut Production)',
+            teasers: [
+              { title: currentConfig.t1Title, cast: currentConfig.t1Cast, logline: currentConfig.t1Logline, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t1Yt)}` },
+              { title: currentConfig.t2Title, castAndCrew: currentConfig.t2Cast, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t2Yt)}` }
+            ]
+          },
+          additionalReleases: moviesData,
+          officialLinks: {
+            youtubeChannel: currentConfig.ytName,
+            youtubeHandle: currentConfig.ytHandle,
+            youtubeUrl: currentConfig.ytUrl,
+            instagramUrl: currentConfig.instaUrl,
+            imdbLinks: imdbData,
+            youtubeItems: ytData,
+            instagramLinks: instaData
+          }
+        };
+
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({
+            mode: 'public_qa',
+            messages: publicAiConversation,
+            siteState: publicKnowledge
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || `Request failed (${res.status})`);
+        }
+
+        const candidateParts = data?.candidates?.[0]?.content?.parts || [];
+        const replyText = candidateParts.find(p => p.text)?.text
+          || 'I could not find that detail in the Starvel Studios catalog right now.';
+        publicAiConversation.push({ role: 'model', parts: [{ text: replyText }] });
+        appendPublicAiBubble('model', replyText);
+      } catch (err) {
+        appendPublicAiBubble('model', `Sorry, Starvel Intelligence couldn't respond right now (${err.message}).`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Ask';
       }
     };
 
