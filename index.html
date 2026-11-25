@@ -1868,6 +1868,54 @@
       color: #FFFFFF;
     }
 
+    .comment-replies {
+      margin-top: 10px;
+      padding-left: 16px;
+      border-left: 2px solid rgba(0, 229, 255, 0.32);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comment-reply-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .comment-actions-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-comment-reply {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--comic-cyan);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .reply-form-inline {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     /* Public Starvel Intelligence Floating Widget */
     .public-ai-fab {
       position: fixed;
@@ -2587,6 +2635,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Dynamic AI-Managed Sections -->
+  <div id="dynamic-sections-container"></div>
 
   <!-- Public Realtime Comments Section -->
   <section id="comments" class="content-section">
@@ -3464,12 +3515,13 @@
     async function loadAndRenderAll() {
       if (!supabase) return;
 
-      const [cfgRes, moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+      const [cfgRes, moviesRes, imdbRes, ytRes, instaRes, secRes] = await Promise.all([
         supabase.from('site_config').select('data').eq('id', 'starvel-main').maybeSingle(),
         supabase.from('movies').select('*').order('created_at', { ascending: false }),
         supabase.from('imdb_links').select('*').order('created_at', { ascending: true }),
         supabase.from('youtube_items').select('*').order('created_at', { ascending: false }),
-        supabase.from('instagram_links').select('*').order('created_at', { ascending: true })
+        supabase.from('instagram_links').select('*').order('created_at', { ascending: true }),
+        supabase.from('custom_sections').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true })
       ]);
 
       if (cfgRes?.data?.data && Object.keys(cfgRes.data.data).length > 0) {
@@ -3482,6 +3534,7 @@
       renderImdbLinks(imdbRes.data || []);
       renderYouTubeLinks(ytRes.data || []);
       renderInstagramLinks(instaRes.data || []);
+      renderCustomSections(secRes?.data || []);
     }
 
     function renderMovies(movies) {
@@ -3657,6 +3710,40 @@
       }
     }
 
+    let customSectionsCache = [];
+
+    function renderCustomSections(sections) {
+      customSectionsCache = sections || [];
+      const container = document.getElementById('dynamic-sections-container');
+      if (!container) return;
+
+      container.innerHTML = customSectionsCache.map((sec) => {
+        const safeId = escapeHtml(sec.slug || sec.id);
+        const safeTitle = escapeHtml(sec.title);
+        const safeBadge = escapeHtml(sec.badge || 'STARVEL SECTION');
+        const safeBody = escapeHtml(sec.body);
+        const ctaHtml = (sec.cta_label && sec.cta_url)
+          ? `<div style="margin-top: 16px;"><a href="${escapeHtml(sec.cta_url)}" target="_blank" rel="noopener noreferrer" class="btn-editorial">${escapeHtml(sec.cta_label)} ↗</a></div>`
+          : '';
+
+        return `
+          <section id="sec-${safeId}" class="content-section">
+            <div class="section-header is-visible">
+              <h2 class="section-title">${safeTitle}</h2>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="announcement-vol-badge">${safeBadge}</span>
+                <button type="button" class="btn-admin-delete-inline" onclick="deleteDbRow('custom_sections', '${escapeHtml(sec.id)}')">Delete</button>
+              </div>
+            </div>
+            <div class="comments-window glass-surface glass-interactive is-visible">
+              <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.75; white-space: pre-line;">${safeBody}</p>
+              ${ctaHtml}
+            </div>
+          </section>
+        `;
+      }).join('');
+    }
+
     window.handleAddMovie = async function(e) {
       e.preventDefault();
       if (!supabase || !isAdmin) return;
@@ -3800,6 +3887,42 @@
           return error ? `Error: ${error.message}` : `Deleted link from ${args.table}`;
         }
       }
+      if (call.name === 'add_section') {
+        const slugBase = String(args.title || 'section').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
+        const { error } = await supabase.from('custom_sections').insert([{
+          slug: `${slugBase}-${Date.now().toString().slice(-4)}`,
+          title: args.title,
+          badge: args.badge || 'STARVEL SECTION',
+          body: args.body || '',
+          cta_label: args.cta_label || null,
+          cta_url: args.cta_url || null,
+          sort_order: args.sort_order ?? customSectionsCache.length
+        }]);
+        return error ? `Error: ${error.message}` : `Added section "${args.title}"`;
+      }
+      if (call.name === 'edit_section') {
+        const target = customSectionsCache.find(
+          s => s.id === args.id || s.slug === args.slug || s.title.toLowerCase() === String(args.match_title || '').toLowerCase()
+        );
+        if (!target) return 'Section not found to edit.';
+        const patch = {};
+        if (args.title !== undefined) patch.title = args.title;
+        if (args.badge !== undefined) patch.badge = args.badge;
+        if (args.body !== undefined) patch.body = args.body;
+        if (args.cta_label !== undefined) patch.cta_label = args.cta_label;
+        if (args.cta_url !== undefined) patch.cta_url = args.cta_url;
+        const { error } = await supabase.from('custom_sections').update(patch).eq('id', target.id);
+        return error ? `Error: ${error.message}` : `Updated section "${patch.title || target.title}"`;
+      }
+      if (call.name === 'delete_section') {
+        const target = customSectionsCache.find(
+          s => s.id === args.id || s.slug === args.slug || s.title.toLowerCase() === String(args.match_title || '').toLowerCase()
+        );
+        const idToDelete = target?.id || args.id;
+        if (!idToDelete) return 'Section not found to delete.';
+        const { error } = await supabase.from('custom_sections').delete().eq('id', idToDelete);
+        return error ? `Error: ${error.message}` : `Deleted section "${target?.title || idToDelete}"`;
+      }
       return 'No action executed';
     }
 
@@ -3832,7 +3955,8 @@
           movies: moviesRes.data || [],
           imdb_links: imdbRes.data || [],
           youtube_items: ytRes.data || [],
-          instagram_links: instaRes.data || []
+          instagram_links: instaRes.data || [],
+          custom_sections: customSectionsCache
         };
 
         const { data: { session } } = await supabase.auth.getSession();
@@ -4077,32 +4201,99 @@
 
     let commentsCache = [];
 
+    let activeReplyParentId = null;
+
+    window.setReplyTarget = function(commentId) {
+      activeReplyParentId = activeReplyParentId === commentId ? null : commentId;
+      renderCommentsList();
+    };
+
+    window.submitCommentReply = async function(e, parentId) {
+      e.preventDefault();
+      if (!supabase) return;
+
+      const authorEl = document.getElementById(`reply-author-${parentId}`);
+      const msgEl = document.getElementById(`reply-msg-${parentId}`);
+      const message = msgEl?.value.trim();
+      const author_name = (authorEl?.value.trim() || 'Anonymous');
+      if (!message) return;
+
+      const { data, error } = await supabase
+        .from('comments')
+        .insert([{
+          author_name,
+          message,
+          parent_id: parentId,
+          owner_token: getCommentOwnerToken()
+        }])
+        .select()
+        .single();
+
+      if (error) {
+        setStatus('comment-status-msg', `Could not post reply: ${error.message}`, 'error');
+        return;
+      }
+
+      setStatus('comment-status-msg', '');
+      activeReplyParentId = null;
+      if (data && !commentsCache.some(item => item.id === data.id)) {
+        commentsCache = [data, ...commentsCache];
+      }
+      renderCommentsList();
+    };
+
+    function renderSingleCommentCard(c, myToken, isReply = false) {
+      const canDelete = isAdmin || (c.owner_token && c.owner_token === myToken);
+      const dateLabel = c.created_at ? new Date(c.created_at).toLocaleString() : '';
+      const childReplies = isReply
+        ? []
+        : commentsCache.filter(r => r.parent_id === c.id).sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      const isReplyingHere = !isReply && activeReplyParentId === c.id;
+
+      return `
+        <div class="${isReply ? 'comment-reply-item' : 'comment-item'}" id="comment-${escapeHtml(c.id)}">
+          <div style="flex: 1; min-width: 0;">
+            <div>
+              <span class="comment-author">${escapeHtml(c.author_name || 'Anonymous')}</span>
+              <span class="comment-time">${escapeHtml(dateLabel)}</span>
+            </div>
+            <div class="comment-body">${escapeHtml(c.message)}</div>
+
+            <div class="comment-actions-row">
+              ${!isReply ? `<button type="button" class="btn-comment-reply" onclick="setReplyTarget('${escapeHtml(c.id)}')">${isReplyingHere ? 'Cancel Reply' : 'Reply'}</button>` : ''}
+              ${canDelete ? `<button type="button" class="btn-comment-delete" onclick="deletePublicComment('${escapeHtml(c.id)}')">Delete</button>` : ''}
+            </div>
+
+            ${isReplyingHere ? `
+              <form class="reply-form-inline" onsubmit="submitCommentReply(event, '${escapeHtml(c.id)}')">
+                <input type="text" id="reply-author-${escapeHtml(c.id)}" class="admin-input" maxlength="40" placeholder="Your Name (optional)" style="max-width: 180px; padding: 7px 11px; font-size: 0.82rem;">
+                <input type="text" id="reply-msg-${escapeHtml(c.id)}" class="admin-input" maxlength="500" placeholder="Write a reply..." required style="flex: 1; min-width: 180px; padding: 7px 11px; font-size: 0.82rem;">
+                <button type="submit" class="admin-btn-primary" style="padding: 7px 14px; font-size: 0.78rem;">Reply</button>
+              </form>
+            ` : ''}
+
+            ${childReplies.length ? `
+              <div class="comment-replies">
+                ${childReplies.map(r => renderSingleCommentCard(r, myToken, true)).join('')}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
     function renderCommentsList() {
       const feed = document.getElementById('comments-feed');
       if (!feed) return;
       const myToken = getCommentOwnerToken();
+      const topLevel = commentsCache.filter(c => !c.parent_id);
 
-      if (!commentsCache.length) {
+      if (!topLevel.length) {
         feed.innerHTML = '<p style="font-size: 0.88rem; color: var(--text-muted);">No comments yet. Be the first to transmit.</p>';
         return;
       }
 
-      feed.innerHTML = commentsCache.map((c) => {
-        const canDelete = isAdmin || (c.owner_token && c.owner_token === myToken);
-        const dateLabel = c.created_at ? new Date(c.created_at).toLocaleString() : '';
-        return `
-          <div class="comment-item" id="comment-${escapeHtml(c.id)}">
-            <div>
-              <div>
-                <span class="comment-author">${escapeHtml(c.author_name || 'Anonymous')}</span>
-                <span class="comment-time">${escapeHtml(dateLabel)}</span>
-              </div>
-              <div class="comment-body">${escapeHtml(c.message)}</div>
-            </div>
-            ${canDelete ? `<button type="button" class="btn-comment-delete" onclick="deletePublicComment('${escapeHtml(c.id)}')">Delete</button>` : ''}
-          </div>
-        `;
-      }).join('');
+      feed.innerHTML = topLevel.map(c => renderSingleCommentCard(c, myToken, false)).join('');
     }
 
     async function loadCommentsAndSubscribe() {
@@ -4129,7 +4320,7 @@
         .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'comments' }, (payload) => {
           const deletedId = payload.old?.id;
           if (!deletedId) return;
-          commentsCache = commentsCache.filter(item => item.id !== deletedId);
+          commentsCache = commentsCache.filter(item => item.id !== deletedId && item.parent_id !== deletedId);
           renderCommentsList();
         })
         .subscribe();
@@ -4171,7 +4362,7 @@
         setStatus('comment-status-msg', `Could not delete comment: ${error.message}`, 'error');
         return;
       }
-      commentsCache = commentsCache.filter(item => item.id !== id);
+      commentsCache = commentsCache.filter(item => item.id !== id && item.parent_id !== id);
       renderCommentsList();
     };
 
