@@ -1785,6 +1785,89 @@
       color: #FFFFFF;
     }
 
+    /* Public Realtime Comments Section */
+    .comments-window {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 26px;
+      overflow: hidden;
+      padding: 26px;
+      transition: transform 0.4s var(--ease-liquid), box-shadow 0.4s var(--ease-liquid), border-color 0.4s var(--ease-liquid);
+    }
+
+    .comments-window:hover {
+      border-color: rgba(0, 229, 255, 0.45);
+    }
+
+    .comment-form-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      gap: 12px;
+      margin-bottom: 22px;
+      align-items: center;
+    }
+
+    .comment-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comment-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 3px solid var(--comic-cyan);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      animation: tabFadeIn 0.32s var(--ease-liquid);
+    }
+
+    .comment-author {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.86rem;
+      letter-spacing: 1.3px;
+      color: var(--comic-cyan);
+      text-transform: uppercase;
+    }
+
+    .comment-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+
+    .comment-body {
+      margin-top: 6px;
+      font-size: 0.92rem;
+      color: #F1F5F9;
+      word-break: break-word;
+    }
+
+    .btn-comment-delete {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      background: rgba(239, 68, 68, 0.18);
+      color: #FECACA;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .btn-comment-delete:hover {
+      background: rgba(239, 68, 68, 0.8);
+      color: #FFFFFF;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .liquid-orb,
       .preloader-logo {
@@ -1860,8 +1943,15 @@
       }
       .video-card,
       .imdb-app-window,
-      .yt-app-window {
+      .yt-app-window,
+      .comments-window {
         border-radius: 20px;
+      }
+      .comments-window {
+        padding: 18px 16px;
+      }
+      .comment-form-grid {
+        grid-template-columns: 1fr;
       }
       .video-details {
         padding: 18px 16px;
@@ -2133,7 +2223,7 @@
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Writers</div>
-              <div class="imdb-credit-names" id="imdb-writers-el">Sathwik Gurram</div>
+              <div class="imdb-credit-names" id="imdb-writers-el">Jayden Jacob, Mohammad Ishaaq Ali Khan, Sathwik Gurram, Abhirama Reddy Kalluri</div>
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">VFX &amp; Post-Production</div>
@@ -2141,7 +2231,7 @@
             </div>
             <div class="imdb-credit-row">
               <div class="imdb-credit-role">Cinematography &amp; Design</div>
-              <div class="imdb-credit-names" id="imdb-cine-el">Sathwik Gurram(Cinematography),Jayden Jacob(Cinematography), Abhirama Reddy Kalluri(Production Designer)</div>
+              <div class="imdb-credit-names" id="imdb-cine-el">Jayden Jacob, Abhirama Reddy Kalluri</div>
             </div>
           </div>
         </div>
@@ -2262,6 +2352,23 @@
           <p id="dir4-role">Director, Writer, Production Designer</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Public Realtime Comments Section -->
+  <section id="comments" class="content-section">
+    <div class="section-header reveal">
+      <h2 class="section-title">Comment Section</h2>
+    </div>
+
+    <div class="comments-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
+      <form id="public-comment-form" class="comment-form-grid">
+        <input type="text" id="comment-author-input" class="admin-input" maxlength="40" placeholder="Your Name (optional)">
+        <input type="text" id="comment-message-input" class="admin-input" maxlength="500" placeholder="Drop a comment on TETHER or Starvel Studios..." required>
+        <button type="submit" class="btn-editorial" style="padding: 10px 22px; font-size: 0.85rem;">Post</button>
+      </form>
+      <div id="comment-status-msg" class="admin-status-msg" style="margin-bottom: 14px;"></div>
+      <div id="comments-feed" class="comment-feed"></div>
     </div>
   </section>
 
@@ -2928,6 +3035,7 @@
         if (dashView) dashView.style.display = 'none';
         if (stateBadge) stateBadge.textContent = 'STUDIO ACCESS';
       }
+      if (typeof renderCommentsList === 'function') renderCommentsList();
     }
 
     window.handlePasswordSignIn = async function(e) {
@@ -3355,6 +3463,117 @@
       await loadAndRenderAll();
     };
 
+    // Public Realtime Comments
+    const COMMENT_OWNER_KEY = 'starvel_comment_owner_token';
+    function getCommentOwnerToken() {
+      let token = localStorage.getItem(COMMENT_OWNER_KEY);
+      if (!token) {
+        token = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        localStorage.setItem(COMMENT_OWNER_KEY, token);
+      }
+      return token;
+    }
+
+    let commentsCache = [];
+
+    function renderCommentsList() {
+      const feed = document.getElementById('comments-feed');
+      if (!feed) return;
+      const myToken = getCommentOwnerToken();
+
+      if (!commentsCache.length) {
+        feed.innerHTML = '<p style="font-size: 0.88rem; color: var(--text-muted);">No comments yet. Be the first to transmit.</p>';
+        return;
+      }
+
+      feed.innerHTML = commentsCache.map((c) => {
+        const canDelete = isAdmin || (c.owner_token && c.owner_token === myToken);
+        const dateLabel = c.created_at ? new Date(c.created_at).toLocaleString() : '';
+        return `
+          <div class="comment-item" id="comment-${escapeHtml(c.id)}">
+            <div>
+              <div>
+                <span class="comment-author">${escapeHtml(c.author_name || 'Anonymous')}</span>
+                <span class="comment-time">${escapeHtml(dateLabel)}</span>
+              </div>
+              <div class="comment-body">${escapeHtml(c.message)}</div>
+            </div>
+            ${canDelete ? `<button type="button" class="btn-comment-delete" onclick="deletePublicComment('${escapeHtml(c.id)}')">Delete</button>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadCommentsAndSubscribe() {
+      if (!supabase) return;
+
+      const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && Array.isArray(data)) {
+        commentsCache = data;
+        renderCommentsList();
+      }
+
+      supabase
+        .channel('starvel-public-comments')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'comments' }, (payload) => {
+          const row = payload.new;
+          if (!row || commentsCache.some(item => item.id === row.id)) return;
+          commentsCache = [row, ...commentsCache];
+          renderCommentsList();
+        })
+        .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'comments' }, (payload) => {
+          const deletedId = payload.old?.id;
+          if (!deletedId) return;
+          commentsCache = commentsCache.filter(item => item.id !== deletedId);
+          renderCommentsList();
+        })
+        .subscribe();
+    }
+
+    document.getElementById('public-comment-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!supabase) return;
+
+      const authorInput = document.getElementById('comment-author-input');
+      const msgInput = document.getElementById('comment-message-input');
+      const message = msgInput.value.trim();
+      const author_name = (authorInput.value.trim() || 'Anonymous');
+      if (!message) return;
+
+      const { data, error } = await supabase
+        .from('comments')
+        .insert([{ author_name, message, owner_token: getCommentOwnerToken() }])
+        .select()
+        .single();
+
+      if (error) {
+        setStatus('comment-status-msg', `Could not post comment: ${error.message}`, 'error');
+        return;
+      }
+
+      setStatus('comment-status-msg', '');
+      if (data && !commentsCache.some(item => item.id === data.id)) {
+        commentsCache = [data, ...commentsCache];
+        renderCommentsList();
+      }
+      msgInput.value = '';
+    });
+
+    window.deletePublicComment = async function(id) {
+      if (!supabase) return;
+      const { error } = await supabase.from('comments').delete().eq('id', id);
+      if (error) {
+        setStatus('comment-status-msg', `Could not delete comment: ${error.message}`, 'error');
+        return;
+      }
+      commentsCache = commentsCache.filter(item => item.id !== id);
+      renderCommentsList();
+    };
+
     try {
       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
       supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -3365,6 +3584,7 @@
       }
 
       await loadAndRenderAll();
+      await loadCommentsAndSubscribe();
 
       supabase.auth.onAuthStateChange((_event, session) => {
         if (session?.user?.email && ALLOWED_ADMIN_EMAILS.includes(session.user.email.toLowerCase())) {
