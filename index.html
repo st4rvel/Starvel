@@ -2423,7 +2423,30 @@
             <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
           </div>
         </form>
+<form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
+          ...
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+            <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
+            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
+            <!-- ▼ ADD RESET PASSWORD BUTTON RIGHT HERE ▼ -->
+            <button type="button" class="admin-btn-secondary" id="btn-reset-pw" onclick="handleSendPasswordReset()">Reset Password</button>
+          </div>
+        </form>
 
+        <!-- ▼ ADD NEW PASSWORD RECOVERY FORM RIGHT AFTER </form> ▼ -->
+        <form id="admin-new-password-form" onsubmit="handleUpdateRecoveredPassword(event)" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.14);">
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-new-password-input">New Admin Password</label>
+              <input type="password" id="admin-new-password-input" class="admin-input" minlength="6" placeholder="Enter new password (min 6 chars)" required autocomplete="new-password">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label" for="admin-confirm-password-input">Confirm New Password</label>
+              <input type="password" id="admin-confirm-password-input" class="admin-input" minlength="6" placeholder="Confirm new password" required autocomplete="new-password">
+            </div>
+          </div>
+          <button type="submit" class="admin-btn-primary" id="btn-save-new-pw">Save New Password</button>
+        </form>
         <div id="admin-login-status" class="admin-status-msg"></div>
       </div>
 
