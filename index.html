@@ -2358,7 +2358,7 @@
   <!-- Public Realtime Comments Section -->
   <section id="comments" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title">STUDIO TRANSMISSION LOGS (COMMENTS)</h2>
+      <h2 class="section-title">Comment Section</h2>
     </div>
 
     <div class="comments-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -2423,7 +2423,6 @@
             <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
           </div>
         </form>
-
         <div id="admin-login-status" class="admin-status-msg"></div>
       </div>
 
@@ -2440,6 +2439,7 @@
           <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram Links</button>
+          <button type="button" class="admin-tab-btn" data-panel="panel-gemini" onclick="switchAdminPanel('panel-gemini')">✦ Starvel Intelligence</button>
         </div>
 
         <div id="admin-crud-status" class="admin-status-msg"></div>
@@ -2593,32 +2593,32 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Movie / Teaser Title *</label>
-                <input type="text" id="movie-title" class="admin-input" placeholder="TETHER: Chapter 2 — Teaser" required>
+                <input type="text" id="movie-title" class="admin-input" placeholder="Enter Title" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Badge Label</label>
-                <input type="text" id="movie-badge" class="admin-input" placeholder="CHAPTER 2 / TEASER">
+                <input type="text" id="movie-badge" class="admin-input" placeholder="Enter Label">
               </div>
             </div>
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">YouTube Video ID or URL *</label>
-                <input type="text" id="movie-youtube" class="admin-input" placeholder="t_P2gRGizco or https://youtu.be/..." required>
+                <input type="text" id="movie-youtube" class="admin-input" placeholder="paste link here" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Link (Optional)</label>
-                <input type="url" id="movie-imdb" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/">
+                <input type="url" id="movie-imdb" class="admin-input" placeholder="paste imdb link here">
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Cast &amp; Credits Line</label>
-              <input type="text" id="movie-cast" class="admin-input" placeholder="Directed by Sathwik, Jayden Jacob, Mohammad Ishaaq Ali Khan & Abhirama Reddy Kalluri">
+              <input type="text" id="movie-cast" class="admin-input" placeholder="Enter Cast Details">
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Logline / Description</label>
-              <input type="text" id="movie-logline" class="admin-input" placeholder="Temporal resonance destabilized across timelines...">
+              <input type="text" id="movie-logline" class="admin-input" placeholder="Description of your Video/Film">
             </div>
-            <button type="submit" class="admin-btn-primary">Save Movie to Database</button>
+            <button type="submit" class="admin-btn-primary">Save</button>
           </form>
           <div class="admin-saved-list" id="admin-movies-saved"></div>
         </div>
@@ -2629,16 +2629,16 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Display Label *</label>
-                <input type="text" id="imdb-label" class="admin-input" placeholder="TETHER Chapter 2 IMDb" required>
+                <input type="text" id="imdb-label" class="admin-input" placeholder="Enter Title Name" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Title ID *</label>
-                <input type="text" id="imdb-id" class="admin-input" placeholder="tt50941110" required>
+                <input type="text" id="imdb-id" class="admin-input" placeholder="paste ID here" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Full IMDb URL *</label>
-              <input type="url" id="imdb-url" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/" required>
+              <input type="url" id="imdb-url" class="admin-input" placeholder="paste URL of IMDb" required>
             </div>
             <button type="submit" class="admin-btn-primary">Add IMDb Link</button>
           </form>
@@ -2651,11 +2651,11 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Title / Button Name *</label>
-                <input type="text" id="yt-title" class="admin-input" placeholder="Behind The Scenes — TETHER VFX" required>
+                <input type="text" id="yt-title" class="admin-input" placeholder="Enter Title of Your Video" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">YouTube URL *</label>
-                <input type="url" id="yt-url" class="admin-input" placeholder="https://www.youtube.com/watch?v=..." required>
+                <input type="url" id="yt-url" class="admin-input" placeholder="Paste URL" required>
               </div>
             </div>
             <button type="submit" class="admin-btn-primary">Save YouTube Link</button>
@@ -2669,20 +2669,37 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Feature / Link Label *</label>
-                <input type="text" id="insta-label" class="admin-input" placeholder="TETHER Reel / Official Page" required>
+                <input type="text" id="insta-label" class="admin-input" placeholder="Official Instagram Page" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Instagram Handle *</label>
-                <input type="text" id="insta-handle" class="admin-input" placeholder="@_starvelstudios_" required>
+                <input type="text" id="insta-handle" class="admin-input" placeholder="@Paste Handle here" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Instagram URL *</label>
-              <input type="url" id="insta-url" class="admin-input" placeholder="https://www.instagram.com/_starvelstudios_" required>
+              <input type="url" id="insta-url" class="admin-input" placeholder="Paste Your Insta URL" required>
             </div>
             <button type="submit" class="admin-btn-primary">Save Instagram Link</button>
           </form>
           <div class="admin-saved-list" id="admin-instagram-saved"></div>
+        </div>
+      </div>
+
+        <!-- PANEL 5: Starvel Intelligence Conversational AI -->
+        <div id="panel-gemini" class="admin-panel">
+          <div class="admin-subbox" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="admin-subbox-title">Starvel Intelligence — Conversational Studio AI</div>
+            <div id="gemini-chat-messages" style="height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: rgba(4, 8, 16, 0.55); border: 1px solid rgba(255,255,255,0.1);">
+              <div style="color: var(--text-muted); font-size: 0.85rem;">
+                Starvel Intelligence online. Ask me to add a film, edit titles, links, or directors, or delete items—just like we talk.
+              </div>
+            </div>
+            <form onsubmit="handleGeminiChatSubmit(event)" style="display: flex; gap: 10px;">
+              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Ask Starvel Intelligence to add, edit, or delete site content..." required>
+              <button type="submit" class="admin-btn-primary" id="btn-gemini-send">Send</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -3044,7 +3061,7 @@
       const password = document.getElementById('admin-password-input').value;
 
       if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
+        setStatus('admin-login-status', 'Use Admin Autorized Email', 'error');
         return;
       }
       if (!password) {
@@ -3461,6 +3478,135 @@
       }
       setStatus('admin-crud-status', 'Item deleted from database.', 'info');
       await loadAndRenderAll();
+    };
+
+    // Starvel Intelligence Conversational AI Assistant
+    let geminiConversation = [];
+
+    function appendGeminiBubble(role, text) {
+      const box = document.getElementById('gemini-chat-messages');
+      if (!box) return;
+      const bubble = document.createElement('div');
+      bubble.style.cssText = role === 'user'
+        ? 'align-self: flex-end; max-width: 82%; padding: 10px 14px; border-radius: 16px; background: rgba(0, 229, 255, 0.2); border: 1px solid rgba(0, 229, 255, 0.45); color: #fff; font-size: 0.86rem; white-space: pre-wrap;'
+        : 'align-self: flex-start; max-width: 86%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.86rem; white-space: pre-wrap;';
+      bubble.textContent = text;
+      box.appendChild(bubble);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    async function executeGeminiToolCall(call) {
+      const args = call.args || {};
+      if (call.name === 'update_site_config' && args.patch) {
+        const merged = { ...currentConfig, ...args.patch };
+        applySiteConfigToPublicUI(merged);
+        const { error } = await supabase
+          .from('site_config')
+          .upsert([{ id: 'starvel-main', data: merged, updated_at: new Date().toISOString() }]);
+        return error ? `Error: ${error.message}` : `Updated: ${Object.keys(args.patch).join(', ')}`;
+      }
+      if (call.name === 'add_movie') {
+        const { error } = await supabase.from('movies').insert([{
+          title: args.title,
+          badge: args.badge || 'STARVEL ORIGINAL',
+          youtube_id: extractYouTubeId(args.youtube_id),
+          imdb_url: args.imdb_url || null,
+          cast_line: args.cast_line || null,
+          logline: args.logline || null
+        }]);
+        return error ? `Error: ${error.message}` : `Added movie "${args.title}"`;
+      }
+      if (call.name === 'delete_movie' && args.id) {
+        const { error } = await supabase.from('movies').delete().eq('id', args.id);
+        return error ? `Error: ${error.message}` : `Deleted movie ${args.id}`;
+      }
+      if (call.name === 'manage_link') {
+        if (args.operation === 'add' && args.data) {
+          const { error } = await supabase.from(args.table).insert([args.data]);
+          return error ? `Error: ${error.message}` : `Added link to ${args.table}`;
+        }
+        if (args.operation === 'delete' && args.id) {
+          const { error } = await supabase.from(args.table).delete().eq('id', args.id);
+          return error ? `Error: ${error.message}` : `Deleted link from ${args.table}`;
+        }
+      }
+      return 'No action executed';
+    }
+
+    window.handleGeminiChatSubmit = async function(e) {
+      e.preventDefault();
+      if (!supabase || !isAdmin) return;
+
+      const input = document.getElementById('gemini-chat-input');
+      const btn = document.getElementById('btn-gemini-send');
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      input.value = '';
+      appendGeminiBubble('user', userText);
+      geminiConversation.push({ role: 'user', parts: [{ text: userText }] });
+
+      btn.disabled = true;
+      btn.textContent = 'Thinking...';
+
+      try {
+        const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+          supabase.from('movies').select('*'),
+          supabase.from('imdb_links').select('*'),
+          supabase.from('youtube_items').select('*'),
+          supabase.from('instagram_links').select('*')
+        ]);
+
+        const siteState = {
+          currentConfig,
+          movies: moviesRes.data || [],
+          imdb_links: imdbRes.data || [],
+          youtube_items: ytRes.data || [],
+          instagram_links: instaRes.data || []
+        };
+
+        const { data: { session } } = await supabase.auth.getSession();
+        const bearerToken = session?.access_token || SUPABASE_ANON_KEY;
+
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${bearerToken}`,
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({ messages: geminiConversation, siteState })
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || `Request failed (${res.status})`);
+        }
+
+        const candidateParts = data?.candidates?.[0]?.content?.parts || [];
+        geminiConversation.push({ role: 'model', parts: candidateParts });
+
+        const actionSummaries = [];
+        for (const part of candidateParts) {
+          if (part.functionCall) {
+            const outcome = await executeGeminiToolCall(part.functionCall);
+            actionSummaries.push(outcome);
+          }
+        }
+
+        if (actionSummaries.length > 0) {
+          await loadAndRenderAll();
+        }
+
+        const textReply = candidateParts.find(p => p.text)?.text
+          || (actionSummaries.length ? `Done! ${actionSummaries.join(' • ')}` : 'Completed your request.');
+        appendGeminiBubble('model', textReply);
+      } catch (err) {
+        appendGeminiBubble('model', `Error: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      }
     };
 
     // Public Realtime Comments
