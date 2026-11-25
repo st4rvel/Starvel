@@ -2358,7 +2358,7 @@
   <!-- Public Realtime Comments Section -->
   <section id="comments" class="content-section">
     <div class="section-header reveal">
-      <h2 class="section-title">Comment Section</h2>
+      <h2 class="section-title">STUDIO TRANSMISSION LOGS (COMMENTS)</h2>
     </div>
 
     <div class="comments-window glass-surface glass-interactive reveal" style="--reveal-delay: 60ms;">
@@ -2421,47 +2421,9 @@
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
             <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
             <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
-            <button type="button" class="admin-btn-secondary" id="btn-reset-pw" onclick="handleSendPasswordReset()">Reset Password</button>
           </div>
         </form>
 
-        <form id="admin-new-password-form" onsubmit="handleUpdateRecoveredPassword(event)" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.14);">
-          <div class="admin-form-grid">
-            <div class="admin-form-group">
-              <label class="admin-label" for="admin-new-password-input">New Admin Password</label>
-              <input type="password" id="admin-new-password-input" class="admin-input" minlength="6" placeholder="Enter new password (min 6 chars)" required autocomplete="new-password">
-            </div>
-            <div class="admin-form-group">
-              <label class="admin-label" for="admin-confirm-password-input">Confirm New Password</label>
-              <input type="password" id="admin-confirm-password-input" class="admin-input" minlength="6" placeholder="Confirm new password" required autocomplete="new-password">
-            </div>
-          </div>
-          <button type="submit" class="admin-btn-primary" id="btn-save-new-pw">Save New Password</button>
-        </form>
-<form id="admin-password-form" onsubmit="handlePasswordSignIn(event)">
-          ...
-          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
-            <button type="submit" class="admin-btn-primary" id="btn-password-login">Sign In with Password</button>
-            <button type="button" class="admin-btn-secondary" id="btn-send-otp" onclick="handleSendMagicLink()">Send Sign-In Email</button>
-            <!-- ▼ ADD RESET PASSWORD BUTTON RIGHT HERE ▼ -->
-            <button type="button" class="admin-btn-secondary" id="btn-reset-pw" onclick="handleSendPasswordReset()">Reset Password</button>
-          </div>
-        </form>
-
-        <!-- ▼ ADD NEW PASSWORD RECOVERY FORM RIGHT AFTER </form> ▼ -->
-        <form id="admin-new-password-form" onsubmit="handleUpdateRecoveredPassword(event)" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.14);">
-          <div class="admin-form-grid">
-            <div class="admin-form-group">
-              <label class="admin-label" for="admin-new-password-input">New Admin Password</label>
-              <input type="password" id="admin-new-password-input" class="admin-input" minlength="6" placeholder="Enter new password (min 6 chars)" required autocomplete="new-password">
-            </div>
-            <div class="admin-form-group">
-              <label class="admin-label" for="admin-confirm-password-input">Confirm New Password</label>
-              <input type="password" id="admin-confirm-password-input" class="admin-input" minlength="6" placeholder="Confirm new password" required autocomplete="new-password">
-            </div>
-          </div>
-          <button type="submit" class="admin-btn-primary" id="btn-save-new-pw">Save New Password</button>
-        </form>
         <div id="admin-login-status" class="admin-status-msg"></div>
       </div>
 
@@ -2631,32 +2593,32 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Movie / Teaser Title *</label>
-                <input type="text" id="movie-title" class="admin-input" placeholder="Enter Title" required>
+                <input type="text" id="movie-title" class="admin-input" placeholder="TETHER: Chapter 2 — Teaser" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Badge Label</label>
-                <input type="text" id="movie-badge" class="admin-input" placeholder="Enter Label">
+                <input type="text" id="movie-badge" class="admin-input" placeholder="CHAPTER 2 / TEASER">
               </div>
             </div>
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">YouTube Video ID or URL *</label>
-                <input type="text" id="movie-youtube" class="admin-input" placeholder="paste link here" required>
+                <input type="text" id="movie-youtube" class="admin-input" placeholder="t_P2gRGizco or https://youtu.be/..." required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Link (Optional)</label>
-                <input type="url" id="movie-imdb" class="admin-input" placeholder="paste imdb link here">
+                <input type="url" id="movie-imdb" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/">
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Cast &amp; Credits Line</label>
-              <input type="text" id="movie-cast" class="admin-input" placeholder="Enter Cast Details">
+              <input type="text" id="movie-cast" class="admin-input" placeholder="Directed by Sathwik, Jayden Jacob, Mohammad Ishaaq Ali Khan & Abhirama Reddy Kalluri">
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Logline / Description</label>
-              <input type="text" id="movie-logline" class="admin-input" placeholder="Description of your Video/Film">
+              <input type="text" id="movie-logline" class="admin-input" placeholder="Temporal resonance destabilized across timelines...">
             </div>
-            <button type="submit" class="admin-btn-primary">Save</button>
+            <button type="submit" class="admin-btn-primary">Save Movie to Database</button>
           </form>
           <div class="admin-saved-list" id="admin-movies-saved"></div>
         </div>
@@ -2667,16 +2629,16 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Display Label *</label>
-                <input type="text" id="imdb-label" class="admin-input" placeholder="Enter Title Name" required>
+                <input type="text" id="imdb-label" class="admin-input" placeholder="TETHER Chapter 2 IMDb" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">IMDb Title ID *</label>
-                <input type="text" id="imdb-id" class="admin-input" placeholder="paste ID here" required>
+                <input type="text" id="imdb-id" class="admin-input" placeholder="tt50941110" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Full IMDb URL *</label>
-              <input type="url" id="imdb-url" class="admin-input" placeholder="paste URL of IMDb" required>
+              <input type="url" id="imdb-url" class="admin-input" placeholder="https://www.imdb.com/title/tt50941110/" required>
             </div>
             <button type="submit" class="admin-btn-primary">Add IMDb Link</button>
           </form>
@@ -2689,11 +2651,11 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Title / Button Name *</label>
-                <input type="text" id="yt-title" class="admin-input" placeholder="Enter Title of Your Video" required>
+                <input type="text" id="yt-title" class="admin-input" placeholder="Behind The Scenes — TETHER VFX" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">YouTube URL *</label>
-                <input type="url" id="yt-url" class="admin-input" placeholder="Paste URL" required>
+                <input type="url" id="yt-url" class="admin-input" placeholder="https://www.youtube.com/watch?v=..." required>
               </div>
             </div>
             <button type="submit" class="admin-btn-primary">Save YouTube Link</button>
@@ -2707,16 +2669,16 @@
             <div class="admin-form-grid">
               <div class="admin-form-group">
                 <label class="admin-label">Feature / Link Label *</label>
-                <input type="text" id="insta-label" class="admin-input" placeholder="Official Instagram Page" required>
+                <input type="text" id="insta-label" class="admin-input" placeholder="TETHER Reel / Official Page" required>
               </div>
               <div class="admin-form-group">
                 <label class="admin-label">Instagram Handle *</label>
-                <input type="text" id="insta-handle" class="admin-input" placeholder="@Paste Handle here" required>
+                <input type="text" id="insta-handle" class="admin-input" placeholder="@_starvelstudios_" required>
               </div>
             </div>
             <div class="admin-form-group">
               <label class="admin-label">Instagram URL *</label>
-              <input type="url" id="insta-url" class="admin-input" placeholder="Paste Your Insta URL" required>
+              <input type="url" id="insta-url" class="admin-input" placeholder="https://www.instagram.com/_starvelstudios_" required>
             </div>
             <button type="submit" class="admin-btn-primary">Save Instagram Link</button>
           </form>
@@ -3082,7 +3044,7 @@
       const password = document.getElementById('admin-password-input').value;
 
       if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use Admin Autorized Email', 'error');
+        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
         return;
       }
       if (!password) {
@@ -3146,75 +3108,6 @@
       }
 
       setStatus('admin-login-status', `Sign-in link sent to ${email}. Check inbox/spam or use password / "Open Editor Directly".`, 'info');
-    };
-
-    window.handleSendPasswordReset = async function() {
-      const email = document.getElementById('admin-email-input').value.trim().toLowerCase();
-      if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
-        return;
-      }
-      if (!supabase) {
-        setStatus('admin-login-status', 'Supabase client not ready.', 'error');
-        return;
-      }
-
-      const btn = document.getElementById('btn-reset-pw');
-      btn.disabled = true;
-      btn.textContent = 'Sending Reset...';
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + window.location.pathname
-      });
-
-      btn.disabled = false;
-      btn.textContent = 'Reset Password';
-
-      if (error) {
-        setStatus('admin-login-status', `${error.message}`, 'error');
-        return;
-      }
-
-      setStatus('admin-login-status', `Password reset link sent to ${email}. Open the link in your email to set a new password.`, 'info');
-    };
-
-    window.handleUpdateRecoveredPassword = async function(e) {
-      e.preventDefault();
-      if (!supabase) return;
-
-      const newPassword = document.getElementById('admin-new-password-input').value;
-      const confirmPassword = document.getElementById('admin-confirm-password-input').value;
-
-      if (newPassword.length < 6) {
-        setStatus('admin-login-status', 'Password must be at least 6 characters.', 'error');
-        return;
-      }
-      if (newPassword !== confirmPassword) {
-        setStatus('admin-login-status', 'Passwords do not match.', 'error');
-        return;
-      }
-
-      const btn = document.getElementById('btn-save-new-pw');
-      btn.disabled = true;
-      btn.textContent = 'Updating...';
-
-      const { data, error } = await supabase.auth.updateUser({ password: newPassword });
-
-      btn.disabled = false;
-      btn.textContent = 'Save New Password';
-
-      if (error) {
-        setStatus('admin-login-status', `${error.message}`, 'error');
-        return;
-      }
-
-      document.getElementById('admin-new-password-form').style.display = 'none';
-      e.target.reset();
-      const userEmail = data?.user?.email?.toLowerCase() || 'sathwik.gurram@gmail.com';
-      setStatus('admin-login-status', '');
-      setEditorUnlocked(true, userEmail);
-      window.switchAdminPanel('panel-editor');
-      setStatus('admin-crud-status', 'Password updated and Studio Editor unlocked!', 'info');
     };
 
     window.unlockEditorDirectly = function() {
@@ -3693,18 +3586,7 @@
       await loadAndRenderAll();
       await loadCommentsAndSubscribe();
 
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'PASSWORD_RECOVERY') {
-          window.openAdminModal('editor');
-          const loginView = document.getElementById('admin-login-view');
-          const dashView = document.getElementById('admin-dashboard-view');
-          const resetForm = document.getElementById('admin-new-password-form');
-          if (loginView) loginView.style.display = 'block';
-          if (dashView) dashView.style.display = 'none';
-          if (resetForm) resetForm.style.display = 'block';
-          setStatus('admin-login-status', 'Recovery verified. Enter and save your new password below.', 'info');
-          return;
-        }
+      supabase.auth.onAuthStateChange((_event, session) => {
         if (session?.user?.email && ALLOWED_ADMIN_EMAILS.includes(session.user.email.toLowerCase())) {
           setEditorUnlocked(true, session.user.email.toLowerCase());
         }
