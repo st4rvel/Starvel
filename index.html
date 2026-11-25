@@ -4064,59 +4064,6 @@
       }
     };
 
-d('imdb-writers-el')?.textContent?.trim() || '',
-            vfxAndPostProduction: document.getElementById('imdb-vfx-el')?.textContent?.trim() || 'Sathwik Gurram • Starvel Studios',
-            cinematographyAndDesign: document.getElementById('imdb-cine-el')?.textContent?.trim() || 'Jayden Jacob, Abhirama Reddy Kalluri',
-            producersAndBanner: 'Starvel Studios (Independent Debut Production)',
-            teasers: [
-              { title: currentConfig.t1Title, cast: currentConfig.t1Cast, logline: currentConfig.t1Logline, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t1Yt)}` },
-              { title: currentConfig.t2Title, castAndCrew: currentConfig.t2Cast, youtubeUrl: `https://www.youtube.com/watch?v=${extractYouTubeId(currentConfig.t2Yt)}` }
-            ]
-          },
-          additionalReleases: moviesData,
-          officialLinks: {
-            youtubeChannel: currentConfig.ytName,
-            youtubeHandle: currentConfig.ytHandle,
-            youtubeUrl: currentConfig.ytUrl,
-            instagramUrl: currentConfig.instaUrl,
-            imdbLinks: imdbData,
-            youtubeItems: ytData,
-            instagramLinks: instaData
-          }
-        };
-
-        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'apikey': SUPABASE_ANON_KEY
-          },
-          body: JSON.stringify({
-            mode: 'public_qa',
-            messages: publicAiConversation,
-            siteState: publicKnowledge
-          })
-        });
-
-        const data = await res.json();
-        if (!res.ok || data.error) {
-          throw new Error(data.error || `Request failed (${res.status})`);
-        }
-
-        const candidateParts = data?.candidates?.[0]?.content?.parts || [];
-        const replyText = candidateParts.find(p => p.text)?.text
-          || 'I could not find that detail in the stArvel Studios catalog right now.';
-        publicAiConversation.push({ role: 'model', parts: [{ text: replyText }] });
-        appendPublicAiBubble('model', replyText);
-      } catch (err) {
-        appendPublicAiBubble('model', `Sorry, stArvel Intelligence couldn't respond right now (${err.message}).`);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Ask';
-      }
-    };
-
     // Public Realtime Comments
     const COMMENT_OWNER_KEY = 'starvel_comment_owner_token';
     function getCommentOwnerToken() {
