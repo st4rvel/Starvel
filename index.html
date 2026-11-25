@@ -3044,7 +3044,7 @@
       const password = document.getElementById('admin-password-input').value;
 
       if (!ALLOWED_ADMIN_EMAILS.includes(email)) {
-        setStatus('admin-login-status', 'Use studiosstarvel@gmail.com or sathwik.gurram@gmail.com.', 'error');
+        setStatus('admin-login-status', 'Use Admin Autorized Email', 'error');
         return;
       }
       if (!password) {
