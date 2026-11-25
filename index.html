@@ -1966,63 +1966,6 @@
       text-transform: uppercase;
     }
 
-    .public-ai-messages {
-      padding: 14px;
-      height: 290px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .public-ai-chips {
-      padding: 0 14px 10px 14px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .public-ai-chip {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-muted);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .public-ai-chip:hover {
-      border-color: var(--comic-cyan);
-      color: #FFFFFF;
-      background: rgba(0, 229, 255, 0.16);
-    }
-
-    .public-ai-form {
-      padding: 12px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      gap: 8px;
-      background: rgba(5, 8, 16, 0.6);
-    }
-
-    @media (max-width: 600px) {
-      .public-ai-fab {
-        bottom: 14px;
-        right: 14px;
-        padding: 10px 15px;
-        font-size: 0.8rem;
-      }
-      .public-ai-drawer {
-        bottom: 66px;
-        right: 14px;
-        width: calc(100vw - 28px);
-      }
-    }
-
     .starvel-intel-font {
       font-family: 'Avengance', 'Bangers', sans-serif !important;
       letter-spacing: 2px;
@@ -2101,71 +2044,61 @@
     .liquid-tridot-ring span:nth-child(2) { bottom: 1px; left: 1px; background: var(--imdb-gold); }
     .liquid-tridot-ring span:nth-child(3) { bottom: 1px; right: 1px; background: var(--comic-orange); }
 
-    .section-header.dbx-header {
-      background: linear-gradient(135deg, rgba(0, 148, 255, 0.34), rgba(255, 255, 255, 0.08) 55%, rgba(15, 23, 38, 0.58));
-      border-color: rgba(80, 185, 255, 0.5);
-    }
-
-    .dbx-video-player {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      background: #000000;
-    }
-
-    .comment-actions-row {
+        .public-ai-messages {
+      padding: 14px;
+      height: 290px;
+      overflow-y: auto;
       display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .btn-comment-reply {
-      padding: 5px 12px;
+    .public-ai-chips {
+      padding: 0 14px 10px 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .public-ai-chip {
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(0, 229, 255, 0.45);
-      background: rgba(0, 229, 255, 0.14);
-      color: #CFFAFE;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.74rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .btn-comment-reply:hover {
-      background: rgba(0, 229, 255, 0.35);
+    .public-ai-chip:hover {
+      border-color: var(--comic-cyan);
       color: #FFFFFF;
+      background: rgba(0, 229, 255, 0.16);
     }
 
-    .comment-replies-list {
-      margin-top: 10px;
-      padding-left: 14px;
-      border-left: 2px solid rgba(255, 85, 0, 0.55);
+    .public-ai-form {
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
-      flex-direction: column;
       gap: 8px;
+      background: rgba(5, 8, 16, 0.6);
     }
 
-    .comment-reply-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 9px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .comment-reply-form {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
+    @media (max-width: 600px) {
+      .public-ai-fab {
+        bottom: 14px;
+        right: 14px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+      }
+      .public-ai-drawer {
+        bottom: 66px;
+        right: 14px;
+        width: calc(100vw - 28px);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -2655,18 +2588,6 @@
     </div>
   </section>
 
-  <!-- Dynamic Platform Sections Added by stArvel Intelligence -->
-  <div id="db-platform-sections"></div>
-
-  <!-- Dropbox Imported Videos Section -->
-  <section id="dropbox-videos" class="content-section" style="display: none;">
-    <div class="section-header dbx-header reveal">
-      <h2 class="section-title" id="dbx-section-title">DROPBOX STUDIO REELS</h2>
-      <button type="button" class="btn-section-admin" onclick="openAdminModal('dropbox')">+ Import Dropbox Video</button>
-    </div>
-    <div class="video-stack" id="db-dropbox-videos-list"></div>
-  </section>
-
   <!-- Public Realtime Comments Section -->
   <section id="comments" class="content-section">
     <div class="section-header reveal">
@@ -2785,7 +2706,6 @@
           <button type="button" class="admin-tab-btn" data-panel="panel-imdb" onclick="switchAdminPanel('panel-imdb')">IMDb Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-youtube" onclick="switchAdminPanel('panel-youtube')">YouTube Links</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-instagram" onclick="switchAdminPanel('panel-instagram')">Instagram Links</button>
-          <button type="button" class="admin-tab-btn" data-panel="panel-dropbox" onclick="switchAdminPanel('panel-dropbox')">Dropbox Videos</button>
           <button type="button" class="admin-tab-btn" data-panel="panel-gemini" onclick="switchAdminPanel('panel-gemini')"><span class="starvel-intel-font">✦ stArvel Intelligence</span></button>
         </div>
 
@@ -3030,33 +2950,6 @@
             <button type="submit" class="admin-btn-primary">Save Instagram Link</button>
           </form>
           <div class="admin-saved-list" id="admin-instagram-saved"></div>
-        </div>
-      </div>
-
-        <!-- PANEL 6: Dropbox Video Imports -->
-        <div id="panel-dropbox" class="admin-panel">
-          <form onsubmit="handleAddDropboxVideo(event)">
-            <div class="admin-form-grid">
-              <div class="admin-form-group">
-                <label class="admin-label">Video Title *</label>
-                <input type="text" id="dbx-video-title" class="admin-input" placeholder="Enter Dropbox Video Title" required>
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-label">Badge Label</label>
-                <input type="text" id="dbx-video-badge" class="admin-input" placeholder="DROPBOX CUT">
-              </div>
-            </div>
-            <div class="admin-form-group">
-              <label class="admin-label">Dropbox Video Link *</label>
-              <input type="url" id="dbx-video-url" class="admin-input" placeholder="https://www.dropbox.com/..." required>
-            </div>
-            <div class="admin-form-group">
-              <label class="admin-label">Notes / Logline</label>
-              <input type="text" id="dbx-video-notes" class="admin-input" placeholder="Optional description or cut notes">
-            </div>
-            <button type="submit" class="admin-btn-primary">Import Dropbox Video</button>
-          </form>
-          <div class="admin-saved-list" id="admin-dropbox-saved"></div>
         </div>
       </div>
 
@@ -3975,9 +3868,9 @@
           await loadAndRenderAll();
         }
 
-        const textReply = candidateParts.find(p => p.text)?.text
-          || (actionSummaries.length ? `Done! ${actionSummaries.join(' • ')}` : 'Completed your request.');
-        appendGeminiBubble('model', textReply);
+        const rawAdminReply = candidateParts.find(p => p.text)?.text
+          || (actionSummaries.length ? `Done! ${actionSummaries.join(' ')}` : 'Completed your request.');
+        appendGeminiBubble('model', formatPlainParagraph(rawAdminReply));
       } catch (err) {
         appendGeminiBubble('model', `Error: ${err.message}`);
       } finally {
@@ -4125,8 +4018,6 @@
             ]
           },
           additionalReleases: moviesData,
-          dropboxVideos: currentConfig.dropboxVideos || [],
-          platformSections: currentConfig.platformSections || [],
           officialLinks: {
             youtubeChannel: currentConfig.ytName,
             youtubeHandle: currentConfig.ytHandle,
@@ -4173,362 +4064,7 @@
       }
     };
 
-    // Dropbox Video Stream Link Helper & Renderer
-    function normalizeDropboxVideoUrl(rawUrl) {
-      const u = String(rawUrl || '').trim();
-      if (!u) return '';
-      try {
-        const parsed = new URL(u);
-        if (parsed.hostname.includes('dropbox.com')) {
-          parsed.searchParams.delete('dl');
-          parsed.searchParams.set('raw', '1');
-          return parsed.toString();
-        }
-      } catch (_) {}
-      return u.replace(/([?&])dl=0(&|$)/, '$1raw=1$2').replace(/([?&])dl=1(&|$)/, '$1raw=1$2');
-    }
-
-    function renderDropboxVideos(items) {
-      const list = Array.isArray(items) ? items : [];
-      const section = document.getElementById('dropbox-videos');
-      const container = document.getElementById('db-dropbox-videos-list');
-      const adminList = document.getElementById('admin-dropbox-saved');
-
-      if (section) {
-        section.style.display = list.length > 0 ? 'block' : 'none';
-      }
-
-      if (container) {
-        container.innerHTML = list.map((v, idx) => {
-          const streamUrl = normalizeDropboxVideoUrl(v.url);
-          const id = escapeHtml(v.id || `dbx-${idx}`);
-          return `
-            <div class="video-card glass-surface glass-interactive is-visible">
-              <div class="video-player-wrapper">
-                <video class="dbx-video-player" controls preload="metadata" src="${escapeHtml(streamUrl)}"></video>
-              </div>
-              <div class="video-details">
-                <div class="video-details-header">
-                  <div class="video-title-group">
-                    <h3>${escapeHtml(v.title || 'Dropbox Cut')}</h3>
-                    <span class="announcement-vol-badge">${escapeHtml(v.badge || 'DROPBOX IMPORT')}</span>
-                  </div>
-                  <div class="video-actions-group">
-                    <a href="${escapeHtml(v.url)}" target="_blank" rel="noopener noreferrer" class="btn-view-imdb">Open Dropbox ↗</a>
-                    <button type="button" class="btn-admin-delete-inline" onclick="deleteDropboxVideo('${id}')">Delete</button>
-                  </div>
-                </div>
-                ${v.notes ? `<p><span class="label">Notes</span> ${escapeHtml(v.notes)}</p>` : ''}
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-
-      if (adminList) {
-        adminList.innerHTML = list.length
-          ? list.map((v, idx) => {
-              const id = escapeHtml(v.id || `dbx-${idx}`);
-              return `
-                <div class="admin-saved-item">
-                  <div class="admin-saved-item-meta">
-                    <strong>${escapeHtml(v.title || 'Dropbox Cut')}</strong>
-                    <span>${escapeHtml(v.url)}</span>
-                  </div>
-                  <button type="button" class="btn-delete-row" onclick="deleteDropboxVideo('${id}')">Delete</button>
-                </div>
-              `;
-            }).join('')
-          : '<p style="font-size: 0.82rem; color: var(--text-muted);">No Dropbox videos imported yet.</p>';
-      }
-    }
-
-    async function persistConfigPatch(patchObj) {
-      const merged = { ...currentConfig, ...patchObj };
-      applySiteConfigToPublicUI(merged);
-      if (!supabase) return { error: null };
-      return await supabase
-        .from('site_config')
-        .upsert([{ id: 'starvel-main', data: merged, updated_at: new Date().toISOString() }]);
-    }
-
-    window.handleAddDropboxVideo = async function(e) {
-      e.preventDefault();
-      if (!isAdmin) return;
-      const title = document.getElementById('dbx-video-title').value.trim();
-      const badge = document.getElementById('dbx-video-badge').value.trim() || 'DROPBOX IMPORT';
-      const url = document.getElementById('dbx-video-url').value.trim();
-      const notes = document.getElementById('dbx-video-notes').value.trim();
-      if (!title || !url) return;
-
-      const list = Array.isArray(currentConfig.dropboxVideos) ? [...currentConfig.dropboxVideos] : [];
-      list.unshift({
-        id: crypto.randomUUID ? crypto.randomUUID() : `dbx-${Date.now()}`,
-        title,
-        badge,
-        url,
-        notes
-      });
-
-      const { error } = await persistConfigPatch({ dropboxVideos: list });
-      if (error) {
-        setStatus('admin-crud-status', error.message, 'error');
-        return;
-      }
-      e.target.reset();
-      setStatus('admin-crud-status', 'Dropbox video imported and published!', 'info');
-      await loadAndRenderAll();
-    };
-
-    window.deleteDropboxVideo = async function(id) {
-      if (!isAdmin) return;
-      const list = (Array.isArray(currentConfig.dropboxVideos) ? currentConfig.dropboxVideos : []).filter(v => v.id !== id);
-      const { error } = await persistConfigPatch({ dropboxVideos: list });
-      if (error) {
-        setStatus('admin-crud-status', error.message, 'error');
-        return;
-      }
-      setStatus('admin-crud-status', 'Dropbox video removed.', 'info');
-      await loadAndRenderAll();
-    };
-
-    // Dynamic Platform Sections Renderer (All Platforms)
-    function renderPlatformSections(sections) {
-      const list = Array.isArray(sections) ? sections : [];
-      const container = document.getElementById('db-platform-sections');
-      if (!container) return;
-
-      container.innerHTML = list.map((sec, idx) => {
-        const secId = escapeHtml(sec.id || `plat-${idx}`);
-        const platformName = escapeHtml(sec.platform || 'PLATFORM');
-        const heading = escapeHtml(sec.heading || `${platformName} HUB`);
-        const description = escapeHtml(sec.description || '');
-        const linkUrl = sec.url ? escapeHtml(sec.url) : '';
-        const linkLabel = escapeHtml(sec.link_label || `Open ${platformName} ↗`);
-
-        return `
-          <section id="platform-sec-${secId}" class="content-section">
-            <div class="section-header reveal is-visible">
-              <h2 class="section-title">${heading}</h2>
-              <button type="button" class="btn-admin-delete-inline" onclick="deletePlatformSection('${secId}')">Delete Section</button>
-            </div>
-            <div class="comments-window glass-surface glass-interactive is-visible">
-              <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-                <div>
-                  <span class="announcement-vol-badge" style="margin-bottom:10px;">${platformName}</span>
-                  ${description ? `<p style="color:var(--text-muted); font-size:0.92rem; margin-top:6px;">${description}</p>` : ''}
-                </div>
-                ${linkUrl ? `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="btn-editorial" style="padding:9px 20px; font-size:0.84rem;">${linkLabel}</a>` : ''}
-              </div>
-            </div>
-          </section>
-        `;
-      }).join('');
-    }
-
-    window.deletePlatformSection = async function(id) {
-      if (!isAdmin) return;
-      const list = (Array.isArray(currentConfig.platformSections) ? currentConfig.platformSections : []).filter(s => s.id !== id);
-      const { error } = await persistConfigPatch({ platformSections: list });
-      if (error) {
-        setStatus('admin-crud-status', error.message, 'error');
-        return;
-      }
-      setStatus('admin-crud-status', 'Platform section deleted.', 'info');
-      await loadAndRenderAll();
-    };
-
-    // Upgrade Admin stArvel Intelligence Tool Executor with All Add & Delete Operations
-    async function executeGeminiToolCall(call) {
-      const args = call.args || {};
-
-      if (call.name === 'update_site_config' && args.patch) {
-        const { error } = await persistConfigPatch(args.patch);
-        return error ? `Error: ${error.message}` : `Updated: ${Object.keys(args.patch).join(', ')}`;
-      }
-
-      if (call.name === 'add_movie') {
-        const { error } = await supabase.from('movies').insert([{
-          title: args.title,
-          badge: args.badge || 'STARVEL ORIGINAL',
-          youtube_id: extractYouTubeId(args.youtube_id),
-          imdb_url: args.imdb_url || null,
-          cast_line: args.cast_line || null,
-          logline: args.logline || null
-        }]);
-        return error ? `Error: ${error.message}` : `Added movie "${args.title}"`;
-      }
-
-      if (call.name === 'delete_movie' && args.id) {
-        const { error } = await supabase.from('movies').delete().eq('id', args.id);
-        return error ? `Error: ${error.message}` : `Deleted movie ${args.id}`;
-      }
-
-      if (call.name === 'manage_link') {
-        if (args.operation === 'add' && args.data) {
-          const { error } = await supabase.from(args.table).insert([args.data]);
-          return error ? `Error: ${error.message}` : `Added link to ${args.table}`;
-        }
-        if (args.operation === 'delete' && args.id) {
-          const { error } = await supabase.from(args.table).delete().eq('id', args.id);
-          return error ? `Error: ${error.message}` : `Deleted link from ${args.table}`;
-        }
-      }
-
-      if (call.name === 'add_platform_section') {
-        const list = Array.isArray(currentConfig.platformSections) ? [...currentConfig.platformSections] : [];
-        const newSec = {
-          id: crypto.randomUUID ? crypto.randomUUID() : `plat-${Date.now()}`,
-          platform: args.platform || 'PLATFORM',
-          heading: args.heading || `${args.platform || 'PLATFORM'} HUB`,
-          description: args.description || '',
-          url: args.url || '',
-          link_label: args.link_label || ''
-        };
-        list.push(newSec);
-        const { error } = await persistConfigPatch({ platformSections: list });
-        return error ? `Error: ${error.message}` : `Added section "${newSec.heading}"`;
-      }
-
-      if (call.name === 'delete_platform_section') {
-        const list = Array.isArray(currentConfig.platformSections) ? [...currentConfig.platformSections] : [];
-        const filtered = list.filter(s =>
-          s.id !== args.id &&
-          String(s.heading || '').toLowerCase() !== String(args.heading || '').toLowerCase() &&
-          String(s.platform || '').toLowerCase() !== String(args.platform || '').toLowerCase()
-        );
-        const { error } = await persistConfigPatch({ platformSections: filtered });
-        return error ? `Error: ${error.message}` : `Deleted platform section`;
-      }
-
-      if (call.name === 'import_dropbox_video') {
-        const list = Array.isArray(currentConfig.dropboxVideos) ? [...currentConfig.dropboxVideos] : [];
-        const item = {
-          id: crypto.randomUUID ? crypto.randomUUID() : `dbx-${Date.now()}`,
-          title: args.title || 'Dropbox Studio Video',
-          badge: args.badge || 'DROPBOX IMPORT',
-          url: args.url,
-          notes: args.notes || ''
-        };
-        list.unshift(item);
-        const { error } = await persistConfigPatch({ dropboxVideos: list });
-        return error ? `Error: ${error.message}` : `Imported Dropbox video "${item.title}"`;
-      }
-
-      if (call.name === 'delete_dropbox_video') {
-        const list = Array.isArray(currentConfig.dropboxVideos) ? [...currentConfig.dropboxVideos] : [];
-        const filtered = list.filter(v =>
-          v.id !== args.id &&
-          String(v.title || '').toLowerCase() !== String(args.title || '').toLowerCase()
-        );
-        const { error } = await persistConfigPatch({ dropboxVideos: filtered });
-        return error ? `Error: ${error.message}` : `Deleted Dropbox video`;
-      }
-
-      if (call.name === 'reply_comment' && args.comment_id && args.reply_text) {
-        const repliesMap = { ...(currentConfig.commentReplies || {}) };
-        const existing = Array.isArray(repliesMap[args.comment_id]) ? [...repliesMap[args.comment_id]] : [];
-        existing.push({
-          id: crypto.randomUUID ? crypto.randomUUID() : `rep-${Date.now()}`,
-          author_name: args.author_name || 'stArvel Studios',
-          message: args.reply_text,
-          created_at: new Date().toISOString()
-        });
-        repliesMap[args.comment_id] = existing;
-        const { error } = await persistConfigPatch({ commentReplies: repliesMap });
-        return error ? `Error: ${error.message}` : `Saved reply comment`;
-      }
-
-      if (call.name === 'delete_comment' && args.comment_id) {
-        const { error } = await supabase.from('comments').delete().eq('id', args.comment_id);
-        return error ? `Error: ${error.message}` : `Deleted comment ${args.comment_id}`;
-      }
-
-      return 'No action executed';
-    }
-
-    window.handleGeminiChatSubmit = async function(e) {
-      e.preventDefault();
-      if (!supabase || !isAdmin) return;
-
-      const input = document.getElementById('gemini-chat-input');
-      const btn = document.getElementById('btn-gemini-send');
-      const userText = input.value.trim();
-      if (!userText) return;
-
-      input.value = '';
-      appendGeminiBubble('user', userText);
-      geminiConversation.push({ role: 'user', parts: [{ text: userText }] });
-
-      btn.disabled = true;
-      btn.textContent = 'Thinking...';
-
-      try {
-        const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
-          supabase.from('movies').select('*'),
-          supabase.from('imdb_links').select('*'),
-          supabase.from('youtube_items').select('*'),
-          supabase.from('instagram_links').select('*')
-        ]);
-
-        const siteState = {
-          currentConfig,
-          movies: moviesRes.data || [],
-          imdb_links: imdbRes.data || [],
-          youtube_items: ytRes.data || [],
-          instagram_links: instaRes.data || [],
-          comments: commentsCache || [],
-          dropboxVideos: currentConfig.dropboxVideos || [],
-          platformSections: currentConfig.platformSections || [],
-          commentReplies: currentConfig.commentReplies || {}
-        };
-
-        const { data: { session } } = await supabase.auth.getSession();
-        const bearerToken = session?.access_token || SUPABASE_ANON_KEY;
-
-        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${bearerToken}`,
-            'apikey': SUPABASE_ANON_KEY
-          },
-          body: JSON.stringify({ messages: geminiConversation, siteState })
-        });
-
-        const data = await res.json();
-        if (!res.ok || data.error) {
-          throw new Error(data.error || `Request failed (${res.status})`);
-        }
-
-        const candidateParts = data?.candidates?.[0]?.content?.parts || [];
-        geminiConversation.push({ role: 'model', parts: candidateParts });
-
-        const actionSummaries = [];
-        for (const part of candidateParts) {
-          if (part.functionCall) {
-            const outcome = await executeGeminiToolCall(part.functionCall);
-            actionSummaries.push(outcome);
-          }
-        }
-
-        if (actionSummaries.length > 0) {
-          await loadAndRenderAll();
-          renderCommentsList();
-        }
-
-        const rawAdminReply = candidateParts.find(p => p.text)?.text
-          || (actionSummaries.length ? `Done! ${actionSummaries.join(' ')}` : 'Completed your request.');
-        appendGeminiBubble('model', formatPlainParagraph(rawAdminReply));
-      } catch (err) {
-        appendGeminiBubble('model', `Error: ${err.message}`);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Send';
-      }
-    };
-
-    // Public Realtime Comments + Reply Comments
+    // Public Realtime Comments
     const COMMENT_OWNER_KEY = 'starvel_comment_owner_token';
     function getCommentOwnerToken() {
       let token = localStorage.getItem(COMMENT_OWNER_KEY);
@@ -4540,69 +4076,11 @@
     }
 
     let commentsCache = [];
-    let openReplyBoxId = null;
-
-    window.toggleCommentReplyBox = function(commentId) {
-      openReplyBoxId = (openReplyBoxId === commentId) ? null : commentId;
-      renderCommentsList();
-      if (openReplyBoxId) {
-        setTimeout(() => document.getElementById(`reply-input-${commentId}`)?.focus(), 60);
-      }
-    };
-
-    window.submitCommentReply = async function(e, commentId) {
-      e.preventDefault();
-      const authorEl = document.getElementById(`reply-author-${commentId}`);
-      const textEl = document.getElementById(`reply-input-${commentId}`);
-      const replyText = (textEl?.value || '').trim();
-      const authorName = (authorEl?.value || '').trim() || (isAdmin ? 'stArvel Studios' : 'Anonymous');
-      if (!replyText) return;
-
-      const repliesMap = { ...(currentConfig.commentReplies || {}) };
-      const existing = Array.isArray(repliesMap[commentId]) ? [...repliesMap[commentId]] : [];
-      existing.push({
-        id: crypto.randomUUID ? crypto.randomUUID() : `rep-${Date.now()}`,
-        author_name: authorName,
-        message: replyText,
-        owner_token: getCommentOwnerToken(),
-        created_at: new Date().toISOString()
-      });
-      repliesMap[commentId] = existing;
-
-      openReplyBoxId = null;
-      currentConfig = { ...currentConfig, commentReplies: repliesMap };
-      renderCommentsList();
-
-      if (supabase) {
-        const { error } = await supabase
-          .from('site_config')
-          .upsert([{ id: 'starvel-main', data: currentConfig, updated_at: new Date().toISOString() }]);
-        if (error) {
-          setStatus('comment-status-msg', `Reply shown locally; cloud sync note: ${error.message}`, 'info');
-        }
-      }
-    };
-
-    window.deleteCommentReply = async function(commentId, replyId) {
-      const repliesMap = { ...(currentConfig.commentReplies || {}) };
-      const existing = Array.isArray(repliesMap[commentId]) ? repliesMap[commentId] : [];
-      repliesMap[commentId] = existing.filter(r => r.id !== replyId);
-
-      currentConfig = { ...currentConfig, commentReplies: repliesMap };
-      renderCommentsList();
-
-      if (supabase) {
-        await supabase
-          .from('site_config')
-          .upsert([{ id: 'starvel-main', data: currentConfig, updated_at: new Date().toISOString() }]);
-      }
-    };
 
     function renderCommentsList() {
       const feed = document.getElementById('comments-feed');
       if (!feed) return;
       const myToken = getCommentOwnerToken();
-      const repliesMap = currentConfig.commentReplies || {};
 
       if (!commentsCache.length) {
         feed.innerHTML = '<p style="font-size: 0.88rem; color: var(--text-muted);">No comments yet. Be the first to transmit.</p>';
@@ -4610,51 +4088,18 @@
       }
 
       feed.innerHTML = commentsCache.map((c) => {
-        const cid = String(c.id);
         const canDelete = isAdmin || (c.owner_token && c.owner_token === myToken);
         const dateLabel = c.created_at ? new Date(c.created_at).toLocaleString() : '';
-        const replies = Array.isArray(repliesMap[cid]) ? repliesMap[cid] : [];
-
-        const repliesHtml = replies.length
-          ? `<div class="comment-replies-list">${replies.map(rep => {
-              const repDate = rep.created_at ? new Date(rep.created_at).toLocaleString() : '';
-              const canDelRep = isAdmin || (rep.owner_token && rep.owner_token === myToken);
-              return `
-                <div class="comment-reply-card" id="reply-${escapeHtml(rep.id)}">
-                  <div>
-                    <span class="comment-author" style="color: var(--comic-orange);">↳ ${escapeHtml(rep.author_name || 'Reply')}</span>
-                    <span class="comment-time">${escapeHtml(repDate)}</span>
-                    <div class="comment-body" style="margin-top:4px; font-size:0.87rem;">${escapeHtml(rep.message)}</div>
-                  </div>
-                  ${canDelRep ? `<button type="button" class="btn-comment-delete" onclick="deleteCommentReply('${escapeHtml(cid)}', '${escapeHtml(rep.id)}')">Delete</button>` : ''}
-                </div>
-              `;
-            }).join('')}</div>`
-          : '';
-
-        const replyFormHtml = openReplyBoxId === cid
-          ? `<form class="comment-reply-form" onsubmit="submitCommentReply(event, '${escapeHtml(cid)}')">
-               <input type="text" id="reply-author-${escapeHtml(cid)}" class="admin-input" maxlength="40" placeholder="Your Name (optional)" style="max-width:170px; padding:7px 11px; font-size:0.82rem;">
-               <input type="text" id="reply-input-${escapeHtml(cid)}" class="admin-input" maxlength="400" placeholder="Write a reply comment..." style="flex:1; min-width:180px; padding:7px 11px; font-size:0.82rem;" required>
-               <button type="submit" class="btn-comment-reply" style="padding:7px 14px;">Save Reply</button>
-             </form>`
-          : '';
-
         return `
-          <div class="comment-item" id="comment-${escapeHtml(cid)}">
-            <div style="flex:1; min-width:0;">
+          <div class="comment-item" id="comment-${escapeHtml(c.id)}">
+            <div>
               <div>
                 <span class="comment-author">${escapeHtml(c.author_name || 'Anonymous')}</span>
                 <span class="comment-time">${escapeHtml(dateLabel)}</span>
               </div>
               <div class="comment-body">${escapeHtml(c.message)}</div>
-              ${repliesHtml}
-              ${replyFormHtml}
             </div>
-            <div class="comment-actions-row">
-              <button type="button" class="btn-comment-reply" onclick="toggleCommentReplyBox('${escapeHtml(cid)}')">Reply</button>
-              ${canDelete ? `<button type="button" class="btn-comment-delete" onclick="deletePublicComment('${escapeHtml(cid)}')">Delete</button>` : ''}
-            </div>
+            ${canDelete ? `<button type="button" class="btn-comment-delete" onclick="deletePublicComment('${escapeHtml(c.id)}')">Delete</button>` : ''}
           </div>
         `;
       }).join('');
@@ -4727,14 +4172,6 @@
         return;
       }
       commentsCache = commentsCache.filter(item => item.id !== id);
-      renderCommentsList();
-    };
-
-    const origApplyConfig = applySiteConfigToPublicUI;
-    applySiteConfigToPublicUI = function(cfg) {
-      origApplyConfig(cfg);
-      renderDropboxVideos(currentConfig.dropboxVideos || []);
-      renderPlatformSections(currentConfig.platformSections || []);
       renderCommentsList();
     };
 
