@@ -2703,6 +2703,7 @@
 
     <form class="public-ai-form" onsubmit="handlePublicAiSubmit(event)">
       <input type="text" id="public-ai-input" class="admin-input" placeholder="Ask about actors, directors, films..." style="padding: 9px 12px; font-size: 0.84rem;" required>
+      <button type="button" class="admin-btn-secondary" id="btn-public-ai-img" onclick="handlePublicAiImage()" style="padding: 9px 12px; font-size: 0.78rem;">Img</button>
       <button type="submit" class="admin-btn-primary" id="btn-public-ai-send" style="padding: 9px 16px; font-size: 0.82rem;">Ask</button>
     </form>
   </aside>
@@ -4185,6 +4186,56 @@
       } finally {
         btn.disabled = false;
         btn.textContent = 'Ask';
+      }
+    };
+
+    window.handlePublicAiImage = async function() {
+      const input = document.getElementById('public-ai-input');
+      const box = document.getElementById('public-ai-messages');
+      const btn = document.getElementById('btn-public-ai-img');
+      const promptText = input?.value.trim();
+      if (!promptText) return;
+
+      input.value = '';
+      appendPublicAiBubble('user', `Generate image: ${promptText}`);
+      if (btn) btn.disabled = true;
+
+      const loader = createLiquidGlassLoader('Rendering concept image...');
+      if (box) {
+        box.appendChild(loader);
+        box.scrollTop = box.scrollHeight;
+      }
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({ mode: 'generate_image', prompt: promptText })
+        });
+        const data = await res.json();
+        if (!res.ok || data.error || !data.imageDataUrl) {
+          throw new Error(data.error || 'Image generation failed');
+        }
+
+        document.getElementById('public-ai-loop-loader')?.remove();
+        const imgWrap = document.createElement('div');
+        imgWrap.style.cssText = 'align-self: flex-start; max-width: 88%; padding: 8px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);';
+        const img = document.createElement('img');
+        img.src = data.imageDataUrl;
+        img.alt = promptText;
+        img.style.borderRadius = '10px';
+        imgWrap.appendChild(img);
+        box?.appendChild(imgWrap);
+        if (box) box.scrollTop = box.scrollHeight;
+      } catch (err) {
+        document.getElementById('public-ai-loop-loader')?.remove();
+        appendPublicAiBubble('model', `Could not generate image: ${err.message}`);
+      } finally {
+        if (btn) btn.disabled = false;
       }
     };
 
