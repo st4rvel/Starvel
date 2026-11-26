@@ -3993,9 +3993,11 @@
           await loadAndRenderAll();
         }
 
-        const rawAdminReply = candidateParts.find(p => p.text)?.text
-          || (actionSummaries.length ? `Done! ${actionSummaries.join(' ')}` : 'Completed your request.');
-        appendGeminiBubble('model', formatPlainParagraph(rawAdminReply));
+        const modelText = candidateParts.find(p => p.text)?.text || '';
+        const combinedAdminReply = actionSummaries.length
+          ? `${actionSummaries.join(' ')}${modelText ? `\n\n${modelText}` : ''}`
+          : (modelText || 'No database tool was executed in this response.');
+        appendGeminiBubble('model', formatPlainParagraph(combinedAdminReply));
       } catch (err) {
         appendGeminiBubble('model', `Error: ${err.message}`);
       } finally {
