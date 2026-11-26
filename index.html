@@ -2000,6 +2000,50 @@
       transform: translate3d(0, 0, 0) scale(1);
     }
 
+    .public-ai-drawer.dragging {
+      transition: none !important;
+      user-select: none;
+    }
+
+    .public-ai-drawer.fullscreen {
+      top: 14px !important;
+      left: 14px !important;
+      right: 14px !important;
+      bottom: 14px !important;
+      width: calc(100vw - 28px) !important;
+      height: calc(100vh - 28px) !important;
+      max-width: none !important;
+      max-height: none !important;
+      border-radius: 22px;
+      transform: none !important;
+    }
+
+    .public-ai-drawer.fullscreen .public-ai-messages {
+      height: auto !important;
+      flex: 1 1 auto;
+    }
+
+    .public-ai-header {
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .public-ai-header:active {
+      cursor: grabbing;
+    }
+
+    .public-ai-fab.dragging {
+      transition: none !important;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .public-ai-header-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .public-ai-header {
       padding: 14px 18px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -2702,7 +2746,10 @@
         <div class="public-ai-title"><span class="starvel-intel-font">✦ stArvel Intelligence</span></div>
         <div class="public-ai-sub">Ask about TETHER, Cast, Directors &amp; Studio</div>
       </div>
-      <button type="button" class="admin-close-btn" onclick="togglePublicAiDrawer(false)" aria-label="Close Starvel Intelligence" style="width: 30px; height: 30px; font-size: 1rem;">✕</button>
+      <div class="public-ai-header-actions">
+        <button type="button" class="admin-close-btn" id="btn-ai-fullscreen" onclick="togglePublicAiFullscreen()" aria-label="Toggle Fullscreen" title="Toggle Fullscreen" style="width: 30px; height: 30px; font-size: 0.85rem;">⛶</button>
+        <button type="button" class="admin-close-btn" onclick="togglePublicAiDrawer(false)" aria-label="Close Starvel Intelligence" style="width: 30px; height: 30px; font-size: 1rem;">✕</button>
+      </div>
     </div>
 
     <div class="public-ai-messages" id="public-ai-messages">
@@ -4223,7 +4270,7 @@
 
       const isSingleWord = /^[A-Za-z0-9#_-]+$/.test(question);
       const effectivePrompt = isSingleWord
-        ? `Single-word prompt: "${question}". Explain what it means in general/human knowledge, any relevant films/directors/IMDb links, and how it relates to Starvel Studios or TETHER if applicable.`
+        ? `Single-word input: "${question}". Give a concise, smart, natural answer (1-2 short paragraphs). Only mention Starvel Studios or TETHER if "${question}" actually relates to Starvel Studios, TETHER, #OKA, or our team; otherwise answer directly about "${question}" and include a relevant IMDb link only if it involves a film, actor, or director.`
         : question;
 
       input.value = '';
@@ -4618,7 +4665,163 @@
     }
   </script>
 
-  <!-- PWA Service Worker & Home Screen Install Handler -->
+<script>
+    // Draggable minimized FAB + Draggable drawer + Fullscreen mode for stArvel Intelligence
+    (function setupStarvelIntelligenceWindowControls() {
+      const fab = document.getElementById('public-ai-fab');
+      const drawer = document.getElementById('public-ai-drawer');
+      const header = drawer ? drawer.querySelector('.public-ai-header') : null;
+      const fsBtn = document.getElementById('btn-ai-fullscreen');
+
+      window.togglePublicAiFullscreen = function(forceState) {
+        if (!drawer) return;
+        const isFs = typeof forceState === 'boolean' ? forceState : !drawer.classList.contains('fullscreen');
+        drawer.classList.toggle('fullscreen', isFs);
+        if (fsBtn) {
+          fsBtn.textContent = isFs ? '🗗' : '⛶';
+          fsBtn.title = isFs ? 'Exit Fullscreen' : 'Fullscreen';
+        }
+        if (isFs) {
+          drawer.style.left = '';
+          drawer.style.top = '';
+          drawer.style.right = '';
+          drawer.style.bottom = '';
+        } else {
+          positionDrawerNearFab();
+        }
+      };
+
+      function clampPosition(left, top, width, height) {
+        const pad = 10;
+        const maxLeft = Math.max(pad, window.innerWidth - width - pad);
+        const maxTop = Math.max(pad, window.innerHeight - height - pad);
+        return {
+          left: Math.min(maxLeft, Math.max(pad, left)),
+          top: Math.min(maxTop, Math.max(pad, top))
+        };
+      }
+
+      function positionDrawerNearFab() {
+        if (!fab || !drawer || drawer.classList.contains('fullscreen')) return;
+        const fabRect = fab.getBoundingClientRect();
+        const dWidth = Math.min(410, window.innerWidth - 28);
+        const dHeight = Math.min(window.innerHeight * 0.72, 540);
+        let left = fabRect.right - dWidth;
+        let top = fabRect.top - dHeight - 12;
+        if (top < 12) {
+          top = Math.min(window.innerHeight - dHeight - 12, fabRect.bottom + 12);
+        }
+        const clamped = clampPosition(left, top, dWidth, dHeight);
+        drawer.style.left = `${clamped.left}px`;
+        drawer.style.top = `${clamped.top}px`;
+        drawer.style.right = 'auto';
+        drawer.style.bottom = 'auto';
+      }
+
+      if (fab) {
+        let draggingFab = false;
+        let movedFab = false;
+        let startX = 0, startY = 0, origLeft = 0, origTop = 0;
+
+        fab.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          const rect = fab.getBoundingClientRect();
+          draggingFab = true;
+          movedFab = false;
+          startX = e.clientX;
+          startY = e.clientY;
+          origLeft = rect.left;
+          origTop = rect.top;
+          fab.style.left = `${origLeft}px`;
+          fab.style.top = `${origTop}px`;
+          fab.style.right = 'auto';
+          fab.style.bottom = 'auto';
+          fab.classList.add('dragging');
+          fab.setPointerCapture(e.pointerId);
+        });
+
+        fab.addEventListener('pointermove', (e) => {
+          if (!draggingFab) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          if (Math.abs(dx) > 4 || Math.abs(dy) > 4) movedFab = true;
+          const rect = fab.getBoundingClientRect();
+          const clamped = clampPosition(origLeft + dx, origTop + dy, rect.width, rect.height);
+          fab.style.left = `${clamped.left}px`;
+          fab.style.top = `${clamped.top}px`;
+        });
+
+        const endFabDrag = (e) => {
+          if (!draggingFab) return;
+          draggingFab = false;
+          fab.classList.remove('dragging');
+          if (fab.hasPointerCapture(e.pointerId)) fab.releasePointerCapture(e.pointerId);
+          if (movedFab) {
+            fab.dataset.justDragged = '1';
+            setTimeout(() => { delete fab.dataset.justDragged; }, 120);
+          }
+        };
+
+        fab.addEventListener('pointerup', endFabDrag);
+        fab.addEventListener('pointercancel', endFabDrag);
+
+        fab.addEventListener('click', (e) => {
+          if (fab.dataset.justDragged === '1') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          }
+        }, true);
+      }
+
+      if (header && drawer) {
+        let draggingDrawer = false;
+        let dStartX = 0, dStartY = 0, dOrigLeft = 0, dOrigTop = 0;
+
+        header.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('button')) return;
+          if (drawer.classList.contains('fullscreen')) return;
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          const rect = drawer.getBoundingClientRect();
+          draggingDrawer = true;
+          dStartX = e.clientX;
+          dStartY = e.clientY;
+          dOrigLeft = rect.left;
+          dOrigTop = rect.top;
+          drawer.style.left = `${dOrigLeft}px`;
+          drawer.style.top = `${dOrigTop}px`;
+          drawer.style.right = 'auto';
+          drawer.style.bottom = 'auto';
+          drawer.classList.add('dragging');
+          header.setPointerCapture(e.pointerId);
+        });
+
+        header.addEventListener('pointermove', (e) => {
+          if (!draggingDrawer) return;
+          const rect = drawer.getBoundingClientRect();
+          const clamped = clampPosition(
+            dOrigLeft + (e.clientX - dStartX),
+            dOrigTop + (e.clientY - dStartY),
+            rect.width,
+            rect.height
+          );
+          drawer.style.left = `${clamped.left}px`;
+          drawer.style.top = `${clamped.top}px`;
+        });
+
+        const endDrawerDrag = (e) => {
+          if (!draggingDrawer) return;
+          draggingDrawer = false;
+          drawer.classList.remove('dragging');
+          if (header.hasPointerCapture(e.pointerId)) header.releasePointerCapture(e.pointerId);
+        };
+
+        header.addEventListener('pointerup', endDrawerDrag);
+        header.addEventListener('pointercancel', endDrawerDrag);
+      }
+    })();
+</script>
+
+    <!-- PWA Service Worker & Home Screen Install Handler -->
   <script>
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
       window.addEventListener('load', () => {
