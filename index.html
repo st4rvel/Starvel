@@ -2395,6 +2395,39 @@
         gap: 22px;
       }
     }
+    /* Super Studio Engine: Runtime Optimization & Live DOM Override Layer */
+    body.perf-turbo .liquid-orb {
+      animation: none !important;
+      opacity: 0.22;
+    }
+    body.perf-turbo .glass-surface {
+      backdrop-filter: blur(8px) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+    }
+    .super-studio-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .super-studio-chip {
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.42);
+      background: rgba(0, 229, 255, 0.12);
+      color: #CFFAFE;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .super-studio-chip:hover {
+      background: rgba(255, 85, 0, 0.28);
+      border-color: var(--comic-orange);
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body>
@@ -3121,18 +3154,31 @@
         </div>
       </div>
 
-        <!-- PANEL 5: Starvel Intelligence Conversational AI -->
+        <!-- PANEL 5: Starvel Intelligence Private Super Studio -->
         <div id="panel-gemini" class="admin-panel">
           <div class="admin-subbox" style="display: flex; flex-direction: column; gap: 12px;">
-            <div class="admin-subbox-title"><span class="starvel-intel-font">stArvel Intelligence</span> — Conversational Studio AI</div>
-            <div id="gemini-chat-messages" style="height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: rgba(4, 8, 16, 0.55); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+              <div class="admin-subbox-title" style="margin: 0;"><span class="starvel-intel-font">stArvel Intelligence</span> — Private Super Studio (Full UI, HTML, Storage &amp; Perf)</div>
+              <span class="admin-badge-live">SUPER ACCESS</span>
+            </div>
+
+            <div class="super-studio-toolbar">
+              <button type="button" class="super-studio-chip" onclick="runSuperStudioQuickCommand('Optimize website performance, enable lazy media loading, and tune animations for peak speed')">⚡ Auto-Optimize Performance</button>
+              <button type="button" class="super-studio-chip" onclick="document.getElementById('super-studio-file-input').click()">⬆ Upload File / Image</button>
+              <button type="button" class="super-studio-chip" onclick="exportFullSiteHtmlSnapshot()">⬇ Export Live HTML</button>
+              <button type="button" class="super-studio-chip" onclick="exportFullBackupJson()">⬇ Backup JSON</button>
+              <button type="button" class="super-studio-chip" onclick="runSuperStudioQuickCommand('List all uploaded storage files, custom HTML blocks, and active optimizations')">📂 Inspect Studio State</button>
+              <input type="file" id="super-studio-file-input" style="display:none" onchange="handleSuperStudioFileUpload(event)">
+            </div>
+
+            <div id="gemini-chat-messages" style="height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 12px; border-radius: 14px; background: rgba(4, 8, 16, 0.55); border: 1px solid rgba(255,255,255,0.1);">
               <div style="color: var(--text-muted); font-size: 0.85rem;">
-                <span class="starvel-intel-font">stArvel Intelligence</span> online. Ask me to add a film, edit titles, links, or directors, or delete items—just like we talk.
+                <span class="starvel-intel-font">stArvel Intelligence</span> Super Studio online. I can rewrite live HTML/UI blocks, inject CSS/JS, optimize performance, upload/list/delete files in Supabase Storage, export your full site HTML or JSON backup, and manage every movie, link, section, comment, and knowledge entry.
               </div>
             </div>
             <form onsubmit="handleGeminiChatSubmit(event)" style="display: flex; gap: 10px;">
-              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Ask stArvel Intelligence to add, edit, or delete site content..." required>
-              <button type="submit" class="admin-btn-primary" id="btn-gemini-send">Send</button>
+              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Command stArvel Intelligence: edit HTML, redesign UI, optimize speed, manage files, export..." required>
+              <button type="submit" class="admin-btn-primary" id="btn-gemini-send">Execute</button>
             </form>
           </div>
         </div>
@@ -3383,7 +3429,16 @@
         }
       },
       themeVars: {},
-      customCss: ''
+      customCss: '',
+      customJs: '',
+      htmlOverrides: {},
+      injectedBlocks: [],
+      perfConfig: {
+        turboMode: false,
+        lazyMedia: true,
+        reducedOrbs: false,
+        prefetchLinks: true
+      }
     };
 
     let currentConfig = { ...DEFAULT_CONFIG };
@@ -3566,6 +3621,75 @@
         document.head.appendChild(customStyleEl);
       }
       customStyleEl.textContent = [activePreset?.css || '', currentConfig.customCss || ''].filter(Boolean).join('\n');
+
+      // Apply Live HTML DOM Overrides (selector -> innerHTML / outerHTML / attributes)
+      const overrides = currentConfig.htmlOverrides && typeof currentConfig.htmlOverrides === 'object'
+        ? currentConfig.htmlOverrides
+        : {};
+      Object.entries(overrides).forEach(([selector, spec]) => {
+        try {
+          document.querySelectorAll(selector).forEach((el) => {
+            if (typeof spec === 'string') {
+              el.innerHTML = spec;
+            } else if (spec && typeof spec === 'object') {
+              if (spec.html !== undefined) el.innerHTML = String(spec.html);
+              if (spec.text !== undefined) el.textContent = String(spec.text);
+              if (spec.style && typeof spec.style === 'object') {
+                Object.entries(spec.style).forEach(([k, v]) => { el.style[k] = String(v); });
+              }
+              if (spec.attrs && typeof spec.attrs === 'object') {
+                Object.entries(spec.attrs).forEach(([k, v]) => {
+                  if (v === null) el.removeAttribute(k);
+                  else el.setAttribute(k, String(v));
+                });
+              }
+              if (spec.hidden !== undefined) el.style.display = spec.hidden ? 'none' : '';
+            }
+          });
+        } catch (e) {
+          console.warn('Invalid HTML override selector:', selector, e);
+        }
+      });
+
+      // Render Live Injected HTML/UI Blocks
+      const blocks = Array.isArray(currentConfig.injectedBlocks) ? currentConfig.injectedBlocks : [];
+      document.querySelectorAll('[data-starvel-injected-block]').forEach((el) => el.remove());
+      blocks.forEach((blk) => {
+        if (!blk || !blk.id || !blk.html) return;
+        const target = document.querySelector(blk.target_selector || '#dynamic-sections-container') || document.body;
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-starvel-injected-block', blk.id);
+        wrapper.innerHTML = blk.html;
+        const pos = blk.position || 'beforeend';
+        if (['beforebegin', 'afterbegin', 'beforeend', 'afterend'].includes(pos)) {
+          target.insertAdjacentElement(pos, wrapper);
+        } else {
+          target.appendChild(wrapper);
+        }
+      });
+
+      // Apply Performance & Optimization Controls
+      const perf = { ...DEFAULT_CONFIG.perfConfig, ...(currentConfig.perfConfig || {}) };
+      document.body.classList.toggle('perf-turbo', Boolean(perf.turboMode));
+      if (perf.lazyMedia) {
+        document.querySelectorAll('img:not([fetchpriority="high"])').forEach((img) => {
+          if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+          img.setAttribute('decoding', 'async');
+        });
+        document.querySelectorAll('iframe').forEach((ifr) => {
+          if (!ifr.getAttribute('loading')) ifr.setAttribute('loading', 'lazy');
+        });
+      }
+
+      // Execute Custom Studio JS safely when updated
+      if (currentConfig.customJs && window.__lastStarvelCustomJs !== currentConfig.customJs) {
+        window.__lastStarvelCustomJs = currentConfig.customJs;
+        try {
+          new Function('siteConfig', currentConfig.customJs)(currentConfig);
+        } catch (jsErr) {
+          console.error('Custom Studio JS error:', jsErr);
+        }
+      }
 
       populateEditorInputs(currentConfig);
     }
@@ -4104,8 +4228,193 @@
       box.scrollTop = box.scrollHeight;
     }
 
+    window.runSuperStudioQuickCommand = function(cmd) {
+      const input = document.getElementById('gemini-chat-input');
+      if (!input) return;
+      input.value = cmd;
+      input.form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    };
+
+    window.exportFullSiteHtmlSnapshot = function() {
+      const docHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([docHtml], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `starvel-index-${new Date().toISOString().slice(0, 10)}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      appendGeminiBubble('model', 'Exported complete live index.html snapshot to your downloads.');
+    };
+
+    window.exportFullBackupJson = async function() {
+      if (!supabase) return;
+      const [moviesRes, imdbRes, ytRes, instaRes, secRes, kbRes, comRes] = await Promise.all([
+        supabase.from('movies').select('*'),
+        supabase.from('imdb_links').select('*'),
+        supabase.from('youtube_items').select('*'),
+        supabase.from('instagram_links').select('*'),
+        supabase.from('custom_sections').select('*'),
+        supabase.from('studio_knowledge').select('*'),
+        supabase.from('comments').select('*')
+      ]);
+      const backup = {
+        exportedAt: new Date().toISOString(),
+        site_config: currentConfig,
+        movies: moviesRes.data || [],
+        imdb_links: imdbRes.data || [],
+        youtube_items: ytRes.data || [],
+        instagram_links: instaRes.data || [],
+        custom_sections: secRes.data || [],
+        studio_knowledge: kbRes.data || [],
+        comments: comRes.data || []
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `starvel-studio-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      appendGeminiBubble('model', 'Exported complete Starvel Studio JSON database & config backup.');
+    };
+
+    window.handleSuperStudioFileUpload = async function(e) {
+      const file = e.target.files?.[0];
+      if (!file || !supabase || !isAdmin) return;
+      e.target.value = '';
+      const cleanName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]+/g, '_')}`;
+      appendGeminiBubble('user', `Upload file: ${file.name} (${Math.round(file.size / 1024)} KB)`);
+
+      const { data, error } = await supabase.storage
+        .from('starvel-assets')
+        .upload(cleanName, file, { upsert: true, contentType: file.type || 'application/octet-stream' });
+
+      if (error) {
+        appendGeminiBubble('model', `Upload error: ${error.message}. Ensure public bucket "starvel-assets" exists in Supabase Storage.`);
+        return;
+      }
+
+      const { data: pubData } = supabase.storage.from('starvel-assets').getPublicUrl(data.path);
+      const publicUrl = pubData?.publicUrl || '';
+      appendGeminiBubble('model', `Uploaded "${file.name}" to starvel-assets.\nPublic URL: ${publicUrl}\nTell me where on the page you want to place or embed it!`);
+    };
+
+    async function persistConfigAndApply(merged) {
+      applySiteConfigToPublicUI(merged);
+      const { error } = await supabase
+        .from('site_config')
+        .upsert([{ id: 'starvel-main', data: merged, updated_at: new Date().toISOString() }]);
+      return error;
+    }
+
     async function executeGeminiToolCall(call) {
       const args = call.args || {};
+      if (call.name === 'edit_html_dom') {
+        const op = String(args.operation || 'patch').toLowerCase();
+        const merged = {
+          ...currentConfig,
+          htmlOverrides: { ...(currentConfig.htmlOverrides || {}) },
+          injectedBlocks: [...(currentConfig.injectedBlocks || [])]
+        };
+
+        if (op === 'patch' && args.selector) {
+          merged.htmlOverrides[args.selector] = {
+            ...(typeof merged.htmlOverrides[args.selector] === 'object' ? merged.htmlOverrides[args.selector] : {}),
+            ...(args.html !== undefined ? { html: args.html } : {}),
+            ...(args.text !== undefined ? { text: args.text } : {}),
+            ...(args.style !== undefined ? { style: args.style } : {}),
+            ...(args.attrs !== undefined ? { attrs: args.attrs } : {}),
+            ...(args.hidden !== undefined ? { hidden: Boolean(args.hidden) } : {})
+          };
+        } else if (op === 'inject_block' && args.block_id && args.html) {
+          const idx = merged.injectedBlocks.findIndex(b => b.id === args.block_id);
+          const blockObj = {
+            id: args.block_id,
+            target_selector: args.target_selector || '#dynamic-sections-container',
+            position: args.position || 'beforeend',
+            html: args.html
+          };
+          if (idx >= 0) merged.injectedBlocks[idx] = blockObj;
+          else merged.injectedBlocks.push(blockObj);
+        } else if (op === 'remove_block' && args.block_id) {
+          merged.injectedBlocks = merged.injectedBlocks.filter(b => b.id !== args.block_id);
+        } else if (op === 'clear_override' && args.selector) {
+          delete merged.htmlOverrides[args.selector];
+        } else if (op === 'set_custom_code') {
+          if (args.custom_css !== undefined) merged.customCss = String(args.custom_css);
+          if (args.custom_js !== undefined) merged.customJs = String(args.custom_js);
+        }
+
+        const err = await persistConfigAndApply(merged);
+        return err ? `Error: ${err.message}` : `Applied HTML/UI operation (${op}) live and saved to Supabase.`;
+      }
+      if (call.name === 'optimize_performance') {
+        const merged = {
+          ...currentConfig,
+          perfConfig: {
+            ...DEFAULT_CONFIG.perfConfig,
+            ...(currentConfig.perfConfig || {}),
+            ...(args.turbo_mode !== undefined ? { turboMode: Boolean(args.turbo_mode) } : {}),
+            ...(args.lazy_media !== undefined ? { lazyMedia: Boolean(args.lazy_media) } : {}),
+            ...(args.reduced_orbs !== undefined ? { reducedOrbs: Boolean(args.reduced_orbs) } : {}),
+            ...(args.prefetch_links !== undefined ? { prefetchLinks: Boolean(args.prefetch_links) } : {})
+          }
+        };
+        const err = await persistConfigAndApply(merged);
+        return err
+          ? `Error: ${err.message}`
+          : `Updated performance profile (turboMode=${merged.perfConfig.turboMode}, lazyMedia=${merged.perfConfig.lazyMedia}).`;
+      }
+      if (call.name === 'manage_storage') {
+        const op = String(args.operation || 'list').toLowerCase();
+        const bucket = args.bucket || 'starvel-assets';
+        if (op === 'list') {
+          const { data, error } = await supabase.storage.from(bucket).list('', { limit: 50, sortBy: { column: 'created_at', order: 'desc' } });
+          if (error) return `Storage list error: ${error.message}`;
+          if (!data || data.length === 0) return `Bucket "${bucket}" is currently empty.`;
+          return `Files in "${bucket}": ` + data.map(f => `${f.name} (${supabase.storage.from(bucket).getPublicUrl(f.name).data.publicUrl})`).join(', ');
+        }
+        if (op === 'delete' && args.file_name) {
+          const { error } = await supabase.storage.from(bucket).remove([args.file_name]);
+          return error ? `Storage delete error: ${error.message}` : `Deleted "${args.file_name}" from "${bucket}".`;
+        }
+      }
+      if (call.name === 'manage_knowledge') {
+        const op = String(args.operation || 'add').toLowerCase();
+        if (op === 'add' && args.title && args.content) {
+          const { error } = await supabase.from('studio_knowledge').insert([{
+            title: args.title,
+            category: args.category || 'lore',
+            tags: args.tags || '',
+            content: args.content
+          }]);
+          return error ? `Error: ${error.message}` : `Saved knowledge entry "${args.title}".`;
+        }
+        if (op === 'delete' && args.id) {
+          const { error } = await supabase.from('studio_knowledge').delete().eq('id', args.id);
+          return error ? `Error: ${error.message}` : `Deleted knowledge entry ${args.id}.`;
+        }
+      }
+      if (call.name === 'export_site') {
+        const fmt = String(args.format || 'html').toLowerCase();
+        if (fmt === 'json') await window.exportFullBackupJson();
+        else window.exportFullSiteHtmlSnapshot();
+        return `Triggered ${fmt.toUpperCase()} download.`;
+      }
+      if (call.name === 'delete_comment' && args.id) {
+        const { error } = await supabase.from('comments').delete().eq('id', args.id);
+        if (!error) {
+          commentsCache = commentsCache.filter(item => item.id !== args.id && item.parent_id !== args.id);
+          renderCommentsList();
+        }
+        return error ? `Error: ${error.message}` : `Deleted comment ${args.id}.`;
+      }
+
       if (call.name === 'design_site' || call.name === 'manage_theme') {
         const op = String(args.operation || 'apply').toLowerCase();
         const presets = { ...DEFAULT_CONFIG.themePresets, ...(currentConfig.themePresets || {}) };
@@ -4256,11 +4565,14 @@
       btn.textContent = 'Thinking...';
 
       try {
-        const [moviesRes, imdbRes, ytRes, instaRes] = await Promise.all([
+        const [moviesRes, imdbRes, ytRes, instaRes, kbRes, comRes, storageRes] = await Promise.all([
           supabase.from('movies').select('*'),
           supabase.from('imdb_links').select('*'),
           supabase.from('youtube_items').select('*'),
-          supabase.from('instagram_links').select('*')
+          supabase.from('instagram_links').select('*'),
+          supabase.from('studio_knowledge').select('*'),
+          supabase.from('comments').select('id, author_name, message, parent_id, created_at').limit(30),
+          supabase.storage.from('starvel-assets').list('', { limit: 30 }).catch(() => ({ data: [] }))
         ]);
 
         const siteState = {
@@ -4269,7 +4581,13 @@
           imdb_links: imdbRes.data || [],
           youtube_items: ytRes.data || [],
           instagram_links: instaRes.data || [],
-          custom_sections: customSectionsCache
+          custom_sections: customSectionsCache,
+          studio_knowledge: kbRes?.data || [],
+          recent_comments: comRes?.data || [],
+          storage_files: (storageRes?.data || []).map(f => ({
+            name: f.name,
+            url: supabase.storage.from('starvel-assets').getPublicUrl(f.name).data.publicUrl
+          }))
         };
 
         const { data: { session } } = await supabase.auth.getSession();
