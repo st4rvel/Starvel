@@ -1,0 +1,25 @@
+{
+  "name": "STARVEL STUDIOS",
+  "short_name": "STARVEL",
+  "description": "Official TETHER Teasers, Comic Universe & stArvel Intelligence by Starvel Studios.",
+  "start_url": "/Starvel/",
+  "scope": "/Starvel/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070B14",
+  "theme_color": "#070B14",
+  "icons": [
+    {
+      "src": "./starvel.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./starvel.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
