@@ -2077,15 +2077,14 @@
       letter-spacing: 2px;
     }
 
-    @keyframes liquidGlassOrbit {
-      0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.06); }
-      100% { transform: rotate(360deg) scale(1); }
+    @keyframes liquidWaveFlow {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    @keyframes liquidTriDotSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes liquidWaveBar {
+      0%, 100% { transform: scaleY(0.38); opacity: 0.65; }
+      50% { transform: scaleY(1); opacity: 1; }
     }
 
     @keyframes liquidGlassShimmer {
@@ -2095,60 +2094,89 @@
     }
 
     .liquid-glass-loader {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 15px;
-      border-radius: 18px;
-      background: linear-gradient(125deg, rgba(0, 229, 255, 0.16), rgba(255, 255, 255, 0.06) 50%, rgba(255, 85, 0, 0.16));
+      padding: 11px 18px;
+      border-radius: 20px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.14) 0%,
+        rgba(0, 229, 255, 0.10) 48%,
+        rgba(255, 255, 255, 0.06) 100%
+      );
       background-size: 200% 200%;
-      backdrop-filter: blur(16px) saturate(185%);
-      -webkit-backdrop-filter: blur(16px) saturate(185%);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.34);
-      color: #E8F8FF;
+      backdrop-filter: blur(22px) saturate(200%);
+      -webkit-backdrop-filter: blur(22px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.38),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.48),
+        inset 0 -1px 2px rgba(0, 229, 255, 0.18);
+      color: #F2FBFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
       align-self: flex-start;
-      animation: liquidGlassShimmer 3.2s ease infinite;
+      animation: liquidGlassShimmer 3.6s ease infinite;
     }
 
-    .liquid-loop-ring {
+    .liquid-glass-wave-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: inherit;
+      opacity: 0.65;
+    }
+
+    .liquid-glass-wave-bg svg {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      animation: liquidWaveFlow 2.6s linear infinite;
+    }
+
+    .liquid-glass-wave-bg svg.wave-back {
+      opacity: 0.5;
+      animation-duration: 3.8s;
+      animation-direction: reverse;
+    }
+
+    .liquid-wave-bars {
       position: relative;
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
-      display: flex;
+      z-index: 2;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 3.5px;
+      height: 18px;
+      flex-shrink: 0;
     }
 
-    .liquid-loop-svg {
-      width: 28px;
-      height: 28px;
-      animation: liquidGlassOrbit 2.1s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    .liquid-wave-bars span {
+      width: 3px;
+      height: 16px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(0, 229, 255, 0.75));
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.45);
+      animation: liquidWaveBar 1.15s ease-in-out infinite;
     }
 
-    .liquid-tridot-ring {
-      position: absolute;
-      inset: 3px;
-      border-radius: 50%;
-      animation: liquidTriDotSpin 1.4s linear infinite;
-    }
+    .liquid-wave-bars span:nth-child(1) { animation-delay: 0s; }
+    .liquid-wave-bars span:nth-child(2) { animation-delay: 0.14s; }
+    .liquid-wave-bars span:nth-child(3) { animation-delay: 0.28s; }
+    .liquid-wave-bars span:nth-child(4) { animation-delay: 0.42s; }
+    .liquid-wave-bars span:nth-child(5) { animation-delay: 0.56s; }
 
-    .liquid-tridot-ring span {
-      position: absolute;
-      width: 4.5px;
-      height: 4.5px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 0 8px var(--comic-cyan);
+    .liquid-glass-loader-text {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
     }
-
-    .liquid-tridot-ring span:nth-child(1) { top: -1px; left: 50%; transform: translateX(-50%); background: var(--comic-cyan); }
-    .liquid-tridot-ring span:nth-child(2) { bottom: 1px; left: 1px; background: var(--imdb-gold); }
-    .liquid-tridot-ring span:nth-child(3) { bottom: 1px; right: 1px; background: var(--comic-orange); }
 
         .public-ai-messages {
       padding: 14px;
@@ -2758,11 +2786,6 @@
       </div>
     </div>
 
-    <div style="padding: 8px 14px 4px 14px;">
-      <input type="search" id="public-quick-search" class="admin-input" placeholder="Quick search sections, films, directors..." oninput="handleQuickSiteSearch(this.value)" style="padding: 7px 11px; font-size: 0.78rem;">
-      <div id="public-quick-search-results" style="display: none; flex-wrap: wrap; gap: 6px; margin-top: 6px;"></div>
-    </div>
-
     <div class="public-ai-chips">
       <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('TETHER')">TETHER</button>
       <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Directors')">Directors</button>
@@ -2771,7 +2794,7 @@
     </div>
 
     <form class="public-ai-form" onsubmit="handlePublicAiSubmit(event)">
-      <input type="text" id="public-ai-input" class="admin-input" placeholder="Ask about actors, directors, films..." style="padding: 9px 12px; font-size: 0.84rem;" required>
+      <input type="text" id="public-ai-input" class="admin-input" placeholder="Search or ask about films, YouTube videos, IMDb, directors..." style="padding: 9px 12px; font-size: 0.84rem;" required>
       <button type="button" class="admin-btn-secondary" id="btn-public-ai-img" onclick="handlePublicAiImage()" style="padding: 9px 12px; font-size: 0.78rem;">Img</button>
       <button type="submit" class="admin-btn-primary" id="btn-public-ai-send" style="padding: 9px 16px; font-size: 0.82rem;">Ask</button>
     </form>
@@ -4115,37 +4138,6 @@
     // Public Starvel Intelligence Q&A Chatbot (Read-Only Visitor Mode)
     let publicAiConversation = [];
 
-    window.handleQuickSiteSearch = function(query) {
-      const box = document.getElementById('public-quick-search-results');
-      if (!box) return;
-      const q = String(query || '').trim().toLowerCase();
-      if (!q) {
-        box.style.display = 'none';
-        box.innerHTML = '';
-        return;
-      }
-
-      const targets = [
-        { label: 'Home / Hero', href: '#top', keywords: 'home starvel hero' },
-        { label: 'TETHER Teasers', href: '#tether-teaser', keywords: 'tether teasers videos films' },
-        { label: 'IMDb Page (tt50941110)', href: '#imdb-page', keywords: 'imdb tt50941110 residual locus' },
-        { label: 'YouTube Channel', href: '#youtube-channel', keywords: 'youtube channel subscribe videos' },
-        { label: 'Directors', href: '#directors', keywords: 'directors jayden sathwik ishaaq abhirama' },
-        { label: 'Comments', href: '#comments', keywords: 'comments reply discussion' },
-        ...customSectionsCache.map(s => ({
-          label: s.title,
-          href: `#sec-${s.slug || s.id}`,
-          keywords: `${s.title} ${s.badge || ''} ${s.body || ''}`.toLowerCase()
-        }))
-      ];
-
-      const matches = targets.filter(t => t.label.toLowerCase().includes(q) || t.keywords.includes(q)).slice(0, 5);
-      box.style.display = 'flex';
-      box.innerHTML = matches.length
-        ? matches.map(m => `<a href="${escapeHtml(m.href)}" onclick="togglePublicAiDrawer(false)" class="public-ai-chip" style="text-decoration: none; color: #00E5FF; border-color: rgba(0,229,255,0.45);">↗ ${escapeHtml(m.label)}</a>`).join('')
-        : `<button type="button" class="public-ai-chip" onclick="askPublicAiPreset(document.getElementById('public-quick-search').value)">Ask AI about "${escapeHtml(query)}"</button>`;
-    };
-
     window.togglePublicAiDrawer = function(forceState) {
       const drawer = document.getElementById('public-ai-drawer');
       if (!drawer) return;
@@ -4184,23 +4176,64 @@
       return paragraphs.join('\n\n');
     }
 
-    function createLiquidGlassLoader(label = 'Looping through stArvel archive...') {
+    function createLiquidGlassLoader(label = 'Processing!') {
       const wrap = document.createElement('div');
       wrap.className = 'liquid-glass-loader';
       wrap.id = 'public-ai-loop-loader';
       wrap.innerHTML = `
-        <div class="liquid-loop-ring" aria-hidden="true">
-          <svg class="liquid-loop-svg" viewBox="0 0 28 28">
-            <circle cx="14" cy="14" r="10.5" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"></circle>
-            <path d="M 14 3.5 A 10.5 10.5 0 1 1 5.6 19.8" fill="none" stroke="#00E5FF" stroke-width="2.4" stroke-linecap="round"></path>
+        <div class="liquid-glass-wave-bg" aria-hidden="true">
+          <svg class="wave-back" viewBox="0 0 240 48" preserveAspectRatio="none">
+            <path d="M0,26 C30,14 60,38 90,26 C120,14 150,38 180,26 C210,14 240,38 240,26 L240,48 L0,48 Z" fill="rgba(255, 255, 255, 0.14)"></path>
           </svg>
-          <div class="liquid-tridot-ring">
-            <span></span><span></span><span></span>
-          </div>
+          <svg viewBox="0 0 240 48" preserveAspectRatio="none">
+            <path d="M0,28 C30,38 60,16 90,28 C120,38 150,16 180,28 C210,38 240,16 240,28 L240,48 L0,48 Z" fill="rgba(0, 229, 255, 0.20)"></path>
+          </svg>
         </div>
-        <span>${escapeHtml(label)}</span>
+        <div class="liquid-wave-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <span class="liquid-glass-loader-text">${escapeHtml(label)}</span>
       `;
       return wrap;
+    }
+
+    function buildYouTubePreviewCard(rawUrl) {
+      let cleanUrl = String(rawUrl || '').trim();
+      if (!/^https?:\/\//i.test(cleanUrl)) cleanUrl = `https://${cleanUrl}`;
+      let parsed;
+      try {
+        parsed = new URL(cleanUrl);
+      } catch {
+        return null;
+      }
+
+      const ytId = extractYouTubeId(cleanUrl);
+      const hasVideoId = /^[a-zA-Z0-9_-]{11}$/.test(ytId);
+      const sqParam = parsed.searchParams.get('search_query') || parsed.searchParams.get('q');
+      const badgeText = hasVideoId
+        ? 'YouTube • Video'
+        : (sqParam ? `YouTube Search • ${decodeURIComponent(sqParam)}` : 'YouTube');
+      const titleText = hasVideoId
+        ? (ytId === 't_P2gRGizco' ? 'TETHER — Official Film Teaser' : (ytId === 'H4hhmBM308o' ? 'TETHER — Official Title Teaser' : 'Watch Video on YouTube'))
+        : (sqParam ? `Watch "${decodeURIComponent(sqParam)}" on YouTube` : 'Open YouTube Channel / Video');
+
+      const card = document.createElement('a');
+      card.href = cleanUrl;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 9px 12px; border-radius: 12px; background: rgba(255, 30, 45, 0.14); border: 1px solid rgba(255, 70, 85, 0.55); text-decoration: none; color: #FFFFFF; transition: transform 0.2s ease, background 0.2s ease;';
+      const thumbHtml = hasVideoId
+        ? `<img src="https://img.youtube.com/vi/${escapeHtml(ytId)}/mqdefault.jpg" alt="" style="width: 78px; height: 46px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">`
+        : `<div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(255, 30, 45, 0.85); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">▶</div>`;
+      card.innerHTML = `
+        ${thumbHtml}
+        <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 1.2px; color: #FF7A85; text-transform: uppercase;">${escapeHtml(badgeText)}</span>
+          <strong style="font-size: 0.83rem; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(titleText)}</strong>
+          <span style="font-size: 0.7rem; color: #CBD5E1; word-break: break-all;">${escapeHtml(cleanUrl)} ↗</span>
+        </div>
+      `;
+      return card;
     }
 
     function buildImdbPreviewCard(rawUrl) {
@@ -4254,6 +4287,12 @@
           const preview = buildImdbPreviewCard(url);
           if (preview) bubble.appendChild(preview);
         });
+
+        const ytMatches = [...new Set((displayText.match(/https?:\/\/(?:www\.|m\.)?(?:youtube\.com|youtu\.be)\/[^\s)]+/gi) || []))];
+        ytMatches.slice(0, 3).forEach((url) => {
+          const ytPreview = buildYouTubePreviewCard(url);
+          if (ytPreview) bubble.appendChild(ytPreview);
+        });
       }
 
       box.appendChild(bubble);
@@ -4283,7 +4322,7 @@
       btn.disabled = true;
       btn.textContent = '...';
 
-      const loader = createLiquidGlassLoader('Looping through stArvel & global archive...');
+      const loader = createLiquidGlassLoader('Searching stArvel & global archive...');
       if (box) {
         box.appendChild(loader);
         box.scrollTop = box.scrollHeight;
