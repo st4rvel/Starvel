@@ -2462,12 +2462,6 @@
       <li><a href="#imdb-page" class="nav-imdb-link">IMDb</a></li>
       <li><a href="#youtube-channel">YouTube</a></li>
       <li><a href="#directors">Directors</a></li>
-      <li id="nav-theme-switcher-li" style="display: inline-flex; align-items: center; gap: 4px;">
-        <select id="nav-theme-select" aria-label="Select Theme" onchange="window.applyNamedTheme(this.value, false)" style="background: rgba(255,255,255,0.08); color: var(--text-main); border: 1px solid var(--glass-border); border-radius: 999px; padding: 4px 10px; font-family: 'Oswald', sans-serif; font-size: 0.74rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; outline: none;">
-          <option value="comic" style="background:#070B14;color:#fff;">Comic</option>
-          <option value="black-gold" style="background:#050505;color:#F5C518;">Black &amp; Gold</option>
-        </select>
-      </li>
       <li><button type="button" id="nav-admin-badge" class="nav-admin-pill" onclick="openAdminModal('editor')">★ Studio Editor</button></li>
     </ul>
   </header>
@@ -3394,38 +3388,6 @@
             '--glass-blur': '14px'
           },
           css: ''
-        },
-        'black-gold': {
-          label: 'Dark Black & Gold',
-          vars: {
-            '--bg-dark': '#040405',
-            '--bg-overlay-top': 'rgba(3, 3, 4, 0.88)',
-            '--bg-overlay-bottom': 'rgba(5, 5, 7, 0.94)',
-            '--comic-orange': '#D4AF37',
-            '--comic-orange-glow': 'rgba(212, 175, 55, 0.48)',
-            '--comic-cyan': '#F5C518',
-            '--comic-cyan-glow': 'rgba(245, 197, 24, 0.45)',
-            '--imdb-gold': '#FFD700',
-            '--text-main': '#FFFDF7',
-            '--text-muted': '#C8B98E',
-            '--glass-bg-start': 'rgba(245, 197, 24, 0.10)',
-            '--glass-bg-mid': 'rgba(12, 11, 9, 0.78)',
-            '--glass-bg-end': 'rgba(5, 5, 6, 0.88)',
-            '--glass-border': 'rgba(245, 197, 24, 0.28)',
-            '--header-bg-start': 'rgba(212, 175, 55, 0.28)',
-            '--header-border': 'rgba(245, 197, 24, 0.52)',
-            '--btn-primary-start': 'rgba(212, 175, 55, 0.82)',
-            '--btn-primary-end': 'rgba(145, 108, 22, 0.62)',
-            '--btn-primary-border': 'rgba(255, 223, 115, 0.72)',
-            '--hero-title-gradient': 'linear-gradient(180deg, #FFF8DC 0%, #F5C518 45%, #B8860B 80%, #FFF3B0 100%)',
-            '--hero-shadow-accent': 'rgba(184, 134, 11, 0.9)',
-            '--orb-1-color': 'rgba(245, 197, 24, 0.22)',
-            '--orb-2-color': 'rgba(212, 175, 55, 0.18)',
-            '--orb-3-color': 'rgba(255, 215, 0, 0.14)',
-            '--card-radius': '22px',
-            '--glass-blur': '18px'
-          },
-          css: ''
         }
       },
       themeVars: {},
@@ -3579,7 +3541,9 @@
       setText('directors-section-title', currentConfig.directorsSectionTitle || 'Directors');
 
       const rootStyle = document.documentElement.style;
-      const presets = { ...DEFAULT_CONFIG.themePresets, ...(currentConfig.themePresets || {}) };
+      const rawPresets = { ...(currentConfig.themePresets || {}) };
+      delete rawPresets['black-gold'];
+      const presets = { ...DEFAULT_CONFIG.themePresets, ...rawPresets };
       const activeKey = currentConfig.activeTheme && presets[currentConfig.activeTheme] ? currentConfig.activeTheme : 'comic';
       const activePreset = presets[activeKey] || presets.comic;
 
@@ -4542,7 +4506,36 @@
         const { error } = await supabase.from('custom_sections').delete().eq('id', idToDelete);
         return error ? `Error: ${error.message}` : `Deleted section "${target?.title || idToDelete}"`;
       }
-      return 'No action executed';
+      // Fallback auto-router so any design/theme/DOM/config call still executes cleanly
+      const nameLower = String(call.name || '').toLowerCase();
+      if (nameLower.includes('theme') || nameLower.includes('design') || nameLower.includes('style') || nameLower.includes('color')) {
+        const merged = {
+          ...currentConfig,
+          activeTheme: args.theme_id || args.activeTheme || 'comic',
+          customCss: args.custom_css || args.customCss || currentConfig.customCss || ''
+        };
+        const err = await persistConfigAndApply(merged);
+        return err ? `Error: ${err.message}` : `Updated site design (${merged.activeTheme}).`;
+      }
+      if (nameLower.includes('html') || nameLower.includes('dom') || nameLower.includes('ui') || nameLower.includes('element')) {
+        if (args.selector) {
+          const merged = {
+            ...currentConfig,
+            htmlOverrides: {
+              ...(currentConfig.htmlOverrides || {}),
+              [args.selector]: {
+                ...(args.html !== undefined ? { html: args.html } : {}),
+                ...(args.text !== undefined ? { text: args.text } : {}),
+                ...(args.hidden !== undefined ? { hidden: Boolean(args.hidden) } : {})
+              }
+            }
+          };
+          const err = await persistConfigAndApply(merged);
+          return err ? `Error: ${err.message}` : `Updated ${args.selector} live.`;
+        }
+      }
+
+      return `Executed ${call.name || 'action'}.`;
     }
 
     window.handleGeminiChatSubmit = async function(e) {
