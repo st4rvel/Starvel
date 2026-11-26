@@ -4189,18 +4189,35 @@
       }
     };
 
+    function buildStarvelImagePrompt(rawPrompt) {
+      const cleaned = String(rawPrompt || '')
+        .replace(/^generate\s+(any\s+)?image\s+(of|for)?\s*/i, '')
+        .trim();
+      const lower = cleaned.toLowerCase();
+      const mentionsTetherOrStarvel = lower.includes('tether') || lower.includes('starvel') || lower.includes('residual locus');
+      if (mentionsTetherOrStarvel) {
+        return `${cleaned}. Cinematic sci-fi time-travel thriller film key art and movie poster thumbnail for Starvel Studios TETHER: Chapter 1 - The Residual Locus, glowing cyan and blazing orange quantum wormhole energy, temporal watch motif, dramatic volumetric lighting, high-contrast anamorphic cinema frame, 16:9 composition, no random mountain landscapes.`;
+      }
+      return `${cleaned}. Cinematic visual concept art for Starvel Studios, dramatic lighting, rich atmospheric depth, sharp detail.`;
+    }
+
     window.handlePublicAiImage = async function() {
       const input = document.getElementById('public-ai-input');
       const box = document.getElementById('public-ai-messages');
       const btn = document.getElementById('btn-public-ai-img');
       const promptText = input?.value.trim();
-      if (!promptText) return;
+      if (!promptText) {
+        input?.focus();
+        appendPublicAiBubble('model', 'Type a scene or thumbnail prompt in the box first, then click Img.');
+        return;
+      }
 
+      const enrichedPrompt = buildStarvelImagePrompt(promptText);
       input.value = '';
       appendPublicAiBubble('user', `Generate image: ${promptText}`);
       if (btn) btn.disabled = true;
 
-      const loader = createLiquidGlassLoader('Rendering concept image...');
+      const loader = createLiquidGlassLoader('Rendering TETHER concept image...');
       if (box) {
         box.appendChild(loader);
         box.scrollTop = box.scrollHeight;
@@ -4214,7 +4231,7 @@
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
             'apikey': SUPABASE_ANON_KEY
           },
-          body: JSON.stringify({ mode: 'generate_image', prompt: promptText })
+          body: JSON.stringify({ mode: 'generate_image', prompt: enrichedPrompt })
         });
         const data = await res.json();
         if (!res.ok || data.error || !data.imageDataUrl) {
@@ -4223,12 +4240,20 @@
 
         document.getElementById('public-ai-loop-loader')?.remove();
         const imgWrap = document.createElement('div');
-        imgWrap.style.cssText = 'align-self: flex-start; max-width: 88%; padding: 8px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);';
+        imgWrap.style.cssText = 'align-self: flex-start; max-width: 88%; padding: 8px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: flex; flex-direction: column; gap: 8px;';
         const img = document.createElement('img');
         img.src = data.imageDataUrl;
         img.alt = promptText;
         img.style.borderRadius = '10px';
         imgWrap.appendChild(img);
+
+        const dlLink = document.createElement('a');
+        dlLink.href = data.imageDataUrl;
+        dlLink.download = `starvel-${promptText.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 28) || 'concept'}.jpg`;
+        dlLink.textContent = 'Download Image ⬇';
+        dlLink.style.cssText = 'align-self: flex-start; font-family: Oswald, sans-serif; font-size: 0.75rem; letter-spacing: 1px; color: #00E5FF; text-decoration: none; text-transform: uppercase;';
+        imgWrap.appendChild(dlLink);
+
         box?.appendChild(imgWrap);
         if (box) box.scrollTop = box.scrollHeight;
       } catch (err) {
@@ -4259,15 +4284,44 @@
       renderCommentsList();
     };
 
+    const LOCAL_REPLY_STORE_KEY = 'starvel_local_comment_replies_v1';
+    function loadLocalReplies() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(LOCAL_REPLY_STORE_KEY) || '{}');
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch {
+        return {};
+      }
+    }
+    function saveLocalReply(parentId, replyObj) {
+      const store = loadLocalReplies();
+      const existing = Array.isArray(store[parentId]) ? store[parentId] : [];
+      existing.push(replyObj);
+      store[parentId] = existing;
+      localStorage.setItem(LOCAL_REPLY_STORE_KEY, JSON.stringify(store));
+    }
+
     window.submitCommentReply = async function(e, parentId) {
       e.preventDefault();
-      if (!supabase) return;
 
       const authorEl = document.getElementById(`reply-author-${parentId}`);
       const msgEl = document.getElementById(`reply-msg-${parentId}`);
       const message = msgEl?.value.trim();
       const author_name = (authorEl?.value.trim() || 'Anonymous');
       if (!message) return;
+
+      if (!supabase) {
+        saveLocalReply(parentId, {
+          id: `local-${Date.now()}`,
+          author_name,
+          message,
+          parent_id: parentId,
+          created_at: new Date().toISOString()
+        });
+        activeReplyParentId = null;
+        renderCommentsList();
+        return;
+      }
 
       const { data, error } = await supabase
         .from('comments')
@@ -4281,6 +4335,19 @@
         .single();
 
       if (error) {
+        if (String(error.message || '').toLowerCase().includes('parent_id')) {
+          saveLocalReply(parentId, {
+            id: `local-${Date.now()}`,
+            author_name,
+            message,
+            parent_id: parentId,
+            created_at: new Date().toISOString()
+          });
+          setStatus('comment-status-msg', 'Reply saved locally in browser. Add parent_id column in Supabase SQL Editor to sync across all devices.', 'info');
+          activeReplyParentId = null;
+          renderCommentsList();
+          return;
+        }
         setStatus('comment-status-msg', `Could not post reply: ${error.message}`, 'error');
         return;
       }
@@ -4296,9 +4363,12 @@
     function renderSingleCommentCard(c, myToken, isReply = false) {
       const canDelete = isAdmin || (c.owner_token && c.owner_token === myToken);
       const dateLabel = c.created_at ? new Date(c.created_at).toLocaleString() : '';
+      const localStore = loadLocalReplies();
+      const dbReplies = commentsCache.filter(r => r.parent_id === c.id);
+      const localReplies = Array.isArray(localStore[c.id]) ? localStore[c.id] : [];
       const childReplies = isReply
         ? []
-        : commentsCache.filter(r => r.parent_id === c.id).sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        : [...dbReplies, ...localReplies].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
       const isReplyingHere = !isReply && activeReplyParentId === c.id;
 
       return `
