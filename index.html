@@ -8,6 +8,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./starvel.png">
   <link rel="apple-touch-icon" href="./starvel.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#070B14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="STARVEL">
+  <meta name="mobile-web-app-capable" content="yes">
 
   <!-- Critical Asset Preloading -->
   <link rel="preload" href="./AVENGEANCE HEROIC AVENGER.ttf" as="font" type="font/ttf" crossorigin>
@@ -2666,7 +2672,10 @@
       <a href="https://www.imdb.com/title/tt50941110/" target="_blank" rel="noopener noreferrer" class="footer-imdb" id="footer-imdb-link">IMDb</a>
       <span id="db-instagram-footer-extra"></span>
     </div>
-    <div>
+    <div style="display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <button type="button" id="btn-install-pwa" class="btn-admin-trigger" style="display: none;" onclick="triggerPwaInstall()">
+        📲 Install App
+      </button>
       <button type="button" id="footer-admin-btn" class="btn-admin-trigger" onclick="openAdminModal('editor')">
         🔒 Admin
       </button>
@@ -4472,5 +4481,44 @@
     }
   </script>
 
+  <!-- PWA Service Worker & Home Screen Install Handler -->
+  <script>
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    let deferredInstallPrompt = null;
+    const installBtn = document.getElementById('btn-install-pwa');
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+    if (isIos && !isStandalone && installBtn) {
+      installBtn.style.display = 'inline-flex';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      if (installBtn && !isStandalone) installBtn.style.display = 'inline-flex';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      if (installBtn) installBtn.style.display = 'none';
+    });
+
+    window.triggerPwaInstall = async function() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        if (installBtn) installBtn.style.display = 'none';
+      } else if (isIos) {
+        alert('To install STARVEL on iOS: tap the Share button in Safari, then tap "Add to Home Screen".');
+      }
+    };
+  </script>
 </body>
 </html>
