@@ -35,6 +35,10 @@
     }
 
     :root {
+      --font-display: 'Bangers', 'Oswald', cursive;
+      --font-directors-heading: 'Bangers', 'Oswald', cursive;
+      --font-director-name: 'Bangers', 'Oswald', cursive;
+      --font-body: 'Montserrat', sans-serif;
       --comic-orange: #FF5500;
       --comic-orange-glow: rgba(255, 85, 0, 0.55);
       --comic-cyan: #00E5FF;
@@ -211,7 +215,7 @@
       z-index: 99999;
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.45s var(--ease-liquid), visibility 0.45s var(--ease-liquid), transform 0.45s var(--ease-liquid);
+      transition: opacity 0.22s var(--ease-liquid), visibility 0.22s var(--ease-liquid), transform 0.22s var(--ease-liquid);
     }
 
     #preloader.preloader-hidden {
@@ -386,7 +390,7 @@
     .hero-fade {
       opacity: 0;
       transform: translate3d(0, 22px, 0);
-      transition: opacity 0.8s var(--ease-liquid), transform 0.8s var(--ease-liquid);
+      transition: opacity 0.36s var(--ease-liquid), transform 0.36s var(--ease-liquid); will-change: opacity, transform;
       transition-delay: var(--hero-delay, 0ms);
     }
 
@@ -505,7 +509,7 @@
     .reveal {
       opacity: 0;
       transform: translate3d(0, 28px, 0);
-      transition: opacity 0.75s var(--ease-liquid), transform 0.75s var(--ease-liquid);
+      transition: opacity 0.34s var(--ease-liquid), transform 0.34s var(--ease-liquid); will-change: opacity, transform;
       transition-delay: var(--reveal-delay, 0ms);
     }
 
@@ -1410,8 +1414,12 @@
       z-index: 2;
     }
 
+    #directors-section-title {
+      font-family: var(--font-directors-heading);
+    }
+
     .director-info h3 {
-      font-family: 'Bangers', 'Oswald', cursive;
+      font-family: var(--font-director-name);
       font-size: 1.55rem;
       letter-spacing: 1.5px;
       line-height: 1.15;
@@ -3071,8 +3079,8 @@
       }
     }
     requestAnimationFrame(animatePreloader);
-    setTimeout(() => { if (targetProgress < 80) targetProgress = 80; }, 80);
-    setTimeout(() => { targetProgress = 100; }, 550);
+    setTimeout(() => { if (targetProgress < 90) targetProgress = 90; }, 25);
+    setTimeout(() => { targetProgress = 100; }, 160);
     window.addEventListener('load', () => { targetProgress = 100; });
 
     const heroLogo = document.getElementById('hero-logo-3d');
@@ -3203,7 +3211,12 @@
       d3Name: 'Sathwik',
       d3Role: 'VFX Artist, Director, Writer',
       d4Name: 'Abhirama Reddy Kalluri',
-      d4Role: 'Director, Writer, Production Designer'
+      d4Role: 'Director, Writer, Production Designer',
+      directorsSectionTitle: 'Directors',
+      directorsHeadingFont: "'Bangers', 'Oswald', cursive",
+      directorNameFont: "'Bangers', 'Oswald', cursive",
+      directorNameWeight: '700',
+      customCss: ''
     };
 
     let currentConfig = { ...DEFAULT_CONFIG };
@@ -3341,6 +3354,26 @@
       setText('dir3-role', currentConfig.d3Role);
       setText('dir4-name', currentConfig.d4Name);
       setText('dir4-role', currentConfig.d4Role);
+      setText('directors-section-title', currentConfig.directorsSectionTitle || 'Directors');
+
+      const rootStyle = document.documentElement.style;
+      if (currentConfig.directorsHeadingFont) {
+        rootStyle.setProperty('--font-directors-heading', currentConfig.directorsHeadingFont);
+      }
+      if (currentConfig.directorNameFont) {
+        rootStyle.setProperty('--font-director-name', currentConfig.directorNameFont);
+      }
+      document.querySelectorAll('.director-info h3, #directors-section-title').forEach((el) => {
+        el.style.fontWeight = currentConfig.directorNameWeight || '700';
+      });
+
+      let customStyleEl = document.getElementById('starvel-ai-custom-style');
+      if (!customStyleEl) {
+        customStyleEl = document.createElement('style');
+        customStyleEl.id = 'starvel-ai-custom-style';
+        document.head.appendChild(customStyleEl);
+      }
+      customStyleEl.textContent = currentConfig.customCss || '';
 
       populateEditorInputs(currentConfig);
     }
@@ -3864,13 +3897,22 @@
 
     async function executeGeminiToolCall(call) {
       const args = call.args || {};
-      if (call.name === 'update_site_config' && args.patch) {
-        const merged = { ...currentConfig, ...args.patch };
+      if (call.name === 'update_site_config') {
+        const rawPatch = (args.patch && typeof args.patch === 'object') ? args.patch : args;
+        const cleanPatch = Object.fromEntries(
+          Object.entries(rawPatch).filter(([k, v]) => k !== 'patch' && v !== undefined)
+        );
+        if (Object.keys(cleanPatch).length === 0) {
+          return 'No configuration fields were provided in update_site_config.';
+        }
+        const merged = { ...currentConfig, ...cleanPatch };
         applySiteConfigToPublicUI(merged);
         const { error } = await supabase
           .from('site_config')
           .upsert([{ id: 'starvel-main', data: merged, updated_at: new Date().toISOString() }]);
-        return error ? `Error: ${error.message}` : `Updated: ${Object.keys(args.patch).join(', ')}`;
+        return error
+          ? `Error: ${error.message}`
+          : `Updated ${Object.keys(cleanPatch).join(', ')} live on the page.`;
       }
       if (call.name === 'add_movie') {
         const { error } = await supabase.from('movies').insert([{
@@ -3948,6 +3990,9 @@
       input.value = '';
       appendGeminiBubble('user', userText);
       geminiConversation.push({ role: 'user', parts: [{ text: userText }] });
+      if (geminiConversation.length > 8) {
+        geminiConversation = geminiConversation.slice(-8);
+      }
 
       btn.disabled = true;
       btn.textContent = 'Thinking...';
