@@ -2428,6 +2428,140 @@
       border-color: var(--comic-orange);
       color: #FFFFFF;
     }
+
+    /* stArvel Intelligence Voice Mode (Mic Input + AI Voice Output) */
+    .voice-btn {
+      padding: 9px 11px;
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: #E2E8F0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s var(--ease-liquid);
+      flex-shrink: 0;
+    }
+    .voice-btn:hover {
+      border-color: var(--comic-cyan);
+      color: #FFFFFF;
+      background: rgba(0, 229, 255, 0.16);
+    }
+    .voice-btn.listening {
+      border-color: #FF5500;
+      background: rgba(255, 85, 0, 0.3);
+      color: #FFFFFF;
+      animation: comicPulse 0.7s infinite alternate ease-in-out;
+    }
+    .bubble-speak-btn {
+      margin-top: 7px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.38);
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--comic-cyan);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .bubble-speak-btn:hover {
+      background: rgba(0, 229, 255, 0.26);
+      color: #FFFFFF;
+    }
+
+    /* Custom ./ai.jpg Logo Trigger & Active Response Animation */
+    .public-ai-fab.ai-logo-fab {
+      padding: 4px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      gap: 0;
+      border: 1.5px solid rgba(0, 229, 255, 0.72);
+      background: rgba(6, 10, 18, 0.88);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 22px rgba(0, 229, 255, 0.32), var(--glass-specular);
+      overflow: hidden;
+    }
+
+    .ai-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      transition: transform 0.35s var(--ease-liquid), filter 0.35s ease;
+    }
+
+    .public-ai-fab.ai-logo-fab:hover .ai-logo-img {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.75));
+    }
+
+    @keyframes starvelAiLogoPulse {
+      0% {
+        transform: scale(0.96) rotate(0deg);
+        box-shadow: 0 0 14px rgba(0, 229, 255, 0.45), 0 0 28px rgba(255, 85, 0, 0.25);
+        filter: brightness(1) contrast(1.05);
+      }
+      50% {
+        transform: scale(1.08) rotate(3deg);
+        box-shadow: 0 0 26px rgba(0, 229, 255, 0.9), 0 0 42px rgba(255, 85, 0, 0.55);
+        filter: brightness(1.25) contrast(1.18);
+      }
+      100% {
+        transform: scale(0.96) rotate(0deg);
+        box-shadow: 0 0 14px rgba(0, 229, 255, 0.45), 0 0 28px rgba(255, 85, 0, 0.25);
+        filter: brightness(1) contrast(1.05);
+      }
+    }
+
+    .ai-logo-animating {
+      border-radius: 50%;
+      animation: starvelAiLogoPulse 1.15s var(--ease-liquid) infinite !important;
+    }
+
+    .ai-header-logo-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(0, 229, 255, 0.6);
+      flex-shrink: 0;
+      background: #04060A;
+    }
+
+    .ai-header-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ai-answer-logo-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(0, 229, 255, 0.65);
+      flex-shrink: 0;
+      background: #04060A;
+    }
+
+    .ai-answer-logo-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
   </style>
 </head>
 <body>
@@ -2814,18 +2948,23 @@
   </footer>
 
   <!-- Public Starvel Intelligence Q&A Chatbot -->
-  <button type="button" class="public-ai-fab" id="public-ai-fab" onclick="togglePublicAiDrawer()" aria-label="Ask Starvel Intelligence">
-    <span class="public-ai-dot"></span>
-    <span class="starvel-intel-font">✦ Ask stArvel Intelligence</span>
+  <button type="button" class="public-ai-fab ai-logo-fab" id="public-ai-fab" onclick="togglePublicAiDrawer()" aria-label="Open stArvel Intelligence" title="Open stArvel Intelligence">
+    <img src="./ai.jpg" alt="stArvel Intelligence" class="ai-logo-img" id="public-ai-fab-logo" decoding="async">
   </button>
 
   <aside class="public-ai-drawer" id="public-ai-drawer" aria-label="Starvel Intelligence Film Guide">
     <div class="public-ai-header">
-      <div>
-        <div class="public-ai-title"><span class="starvel-intel-font">✦ stArvel Intelligence</span></div>
-        <div class="public-ai-sub">Ask about TETHER, Cast, Directors &amp; Studio</div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="ai-header-logo-wrap" id="ai-drawer-header-logo">
+          <img src="./ai.jpg" alt="stArvel Intelligence" decoding="async">
+        </div>
+        <div>
+          <div class="public-ai-title"><span class="starvel-intel-font">✦ stArvel Intelligence</span></div>
+          <div class="public-ai-sub">Ask about TETHER, Cast, Directors &amp; Studio</div>
+        </div>
       </div>
       <div class="public-ai-header-actions">
+        <button type="button" class="admin-close-btn" id="btn-ai-voice-toggle" onclick="toggleStarvelVoiceAuto()" aria-label="Toggle AI Voice" title="AI Voice: ON (Click to Mute)" style="width: 30px; height: 30px; font-size: 0.85rem; border-color: rgba(0,229,255,0.55); color: #00E5FF;">🔊</button>
         <button type="button" class="admin-close-btn" id="btn-ai-fullscreen" onclick="togglePublicAiFullscreen()" aria-label="Toggle Fullscreen" title="Toggle Fullscreen" style="width: 30px; height: 30px; font-size: 0.85rem;">⛶</button>
         <button type="button" class="admin-close-btn" onclick="togglePublicAiDrawer(false)" aria-label="Close Starvel Intelligence" style="width: 30px; height: 30px; font-size: 1rem;">✕</button>
       </div>
@@ -2845,7 +2984,8 @@
     </div>
 
     <form class="public-ai-form" onsubmit="handlePublicAiSubmit(event)">
-      <input type="text" id="public-ai-input" class="admin-input" placeholder="Search or ask about films, YouTube videos, IMDb, directors..." style="padding: 9px 12px; font-size: 0.84rem;" required>
+      <button type="button" class="voice-btn" id="btn-public-ai-mic" onclick="toggleStarvelVoiceInput('public-ai-input', 'btn-public-ai-mic', true)" title="Speak to stArvel Intelligence" aria-label="Voice Input">🎙</button>
+      <input type="text" id="public-ai-input" class="admin-input" placeholder="Search, ask, or tap 🎙 to speak..." style="padding: 9px 12px; font-size: 0.84rem;" required>
       <button type="button" class="admin-btn-secondary" id="btn-public-ai-img" onclick="handlePublicAiImage()" style="padding: 9px 12px; font-size: 0.78rem;">Img</button>
       <button type="submit" class="admin-btn-primary" id="btn-public-ai-send" style="padding: 9px 16px; font-size: 0.82rem;">Ask</button>
     </form>
@@ -3171,7 +3311,8 @@
               </div>
             </div>
             <form onsubmit="handleGeminiChatSubmit(event)" style="display: flex; gap: 10px;">
-              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Command stArvel Intelligence: edit HTML, redesign UI, optimize speed, manage files, export..." required>
+              <button type="button" class="voice-btn" id="btn-admin-ai-mic" onclick="toggleStarvelVoiceInput('gemini-chat-input', 'btn-admin-ai-mic', true)" title="Speak command to Super Studio" aria-label="Voice Command">🎙</button>
+              <input type="text" id="gemini-chat-input" class="admin-input" placeholder="Command stArvel Intelligence or tap 🎙 to speak..." required>
               <button type="submit" class="admin-btn-primary" id="btn-gemini-send">Execute</button>
             </form>
           </div>
@@ -4188,6 +4329,17 @@
         ? 'align-self: flex-end; max-width: 82%; padding: 10px 14px; border-radius: 16px; background: rgba(0, 229, 255, 0.2); border: 1px solid rgba(0, 229, 255, 0.45); color: #fff; font-size: 0.86rem; white-space: pre-wrap;'
         : 'align-self: flex-start; max-width: 86%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.86rem; white-space: pre-wrap;';
       bubble.textContent = text;
+      if (role === 'model' && displayText) {
+        const speakRow = document.createElement('div');
+        const replayBtn = document.createElement('button');
+        replayBtn.type = 'button';
+        replayBtn.className = 'bubble-speak-btn';
+        replayBtn.textContent = '🔊 Speak';
+        replayBtn.onclick = () => window.speakStarvelText(displayText, true);
+        speakRow.appendChild(replayBtn);
+        bubble.appendChild(speakRow);
+      }
+
       box.appendChild(bubble);
       box.scrollTop = box.scrollHeight;
     }
@@ -4620,7 +4772,9 @@
         const combinedAdminReply = actionSummaries.length
           ? `${actionSummaries.join(' ')}${modelText ? `\n\n${modelText}` : ''}`
           : (modelText || 'No database tool was executed in this response.');
-        appendGeminiBubble('model', formatPlainParagraph(combinedAdminReply));
+        const formattedAdminText = formatPlainParagraph(combinedAdminReply);
+        appendGeminiBubble('model', formattedAdminText);
+        window.speakStarvelText(formattedAdminText, false);
       } catch (err) {
         appendGeminiBubble('model', `Error: ${err.message}`);
       } finally {
@@ -4636,6 +4790,7 @@
       const drawer = document.getElementById('public-ai-drawer');
       if (!drawer) return;
       const shouldOpen = typeof forceState === 'boolean' ? forceState : !drawer.classList.contains('open');
+      if (!shouldOpen && typeof window.stopStarvelSpeech === 'function') window.stopStarvelSpeech();
       drawer.classList.toggle('open', shouldOpen);
       if (shouldOpen) {
         setTimeout(() => document.getElementById('public-ai-input')?.focus(), 120);
@@ -4670,6 +4825,13 @@
       return paragraphs.join('\n\n');
     }
 
+    function setStarvelAiAnimating(active) {
+      const fabImg = document.getElementById('public-ai-fab-logo');
+      const headerLogo = document.getElementById('ai-drawer-header-logo');
+      if (fabImg) fabImg.classList.toggle('ai-logo-animating', Boolean(active));
+      if (headerLogo) headerLogo.classList.toggle('ai-logo-animating', Boolean(active));
+    }
+
     function createLiquidGlassLoader(label = 'Searching stArvel & global archive...') {
       const wrap = document.createElement('div');
       wrap.className = 'liquid-glass-loader';
@@ -4682,6 +4844,9 @@
           <svg viewBox="0 0 240 48" preserveAspectRatio="none">
             <path d="M0,28 C30,38 60,16 90,28 C120,38 150,16 180,28 C210,38 240,16 240,28 L240,48 L0,48 Z" fill="rgba(0, 229, 255, 0.20)"></path>
           </svg>
+        </div>
+        <div class="ai-answer-logo-badge ai-logo-animating" aria-hidden="true">
+          <img src="./ai.jpg" alt="">
         </div>
         <div class="liquid-wave-bars" aria-hidden="true">
           <span></span><span></span><span></span><span></span><span></span>
@@ -4762,6 +4927,145 @@
       return card;
     }
 
+
+    // stArvel Intelligence AI Voice Engine (Neural TTS + Instant Fallback + Voice Input)
+    let starvelVoiceEnabled = localStorage.getItem('starvel_ai_voice') !== 'off';
+    let currentVoiceAudio = null;
+    let activeRecognition = null;
+
+    function updateVoiceToggleIcon() {
+      const btn = document.getElementById('btn-ai-voice-toggle');
+      if (!btn) return;
+      btn.textContent = starvelVoiceEnabled ? '🔊' : '🔇';
+      btn.title = starvelVoiceEnabled ? 'AI Voice: ON (Click to Mute)' : 'AI Voice: OFF (Click to Enable)';
+      btn.style.borderColor = starvelVoiceEnabled ? 'rgba(0,229,255,0.55)' : 'rgba(255,255,255,0.24)';
+      btn.style.color = starvelVoiceEnabled ? '#00E5FF' : '#B6C4D8';
+    }
+    updateVoiceToggleIcon();
+
+    window.stopStarvelSpeech = function() {
+      if (currentVoiceAudio) {
+        try {
+          currentVoiceAudio.pause();
+          currentVoiceAudio.currentTime = 0;
+        } catch {}
+        currentVoiceAudio = null;
+      }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch {}
+      }
+    };
+
+    window.toggleStarvelVoiceAuto = function() {
+      starvelVoiceEnabled = !starvelVoiceEnabled;
+      try { localStorage.setItem('starvel_ai_voice', starvelVoiceEnabled ? 'on' : 'off'); } catch {}
+      if (!starvelVoiceEnabled) window.stopStarvelSpeech();
+      updateVoiceToggleIcon();
+    };
+
+    function speakWithBrowserFallback(cleanText) {
+      if (!('speechSynthesis' in window)) return;
+      try {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(cleanText);
+        const voices = window.speechSynthesis.getVoices();
+        const preferred = voices.find(v => /Natural|Neural|Google UK English Male|Google US English|Microsoft Ryan|Microsoft Aria|Daniel|Samantha/i.test(v.name))
+          || voices.find(v => /^en/i.test(v.lang));
+        if (preferred) utter.voice = preferred;
+        utter.rate = 1.02;
+        utter.pitch = 0.96;
+        window.speechSynthesis.speak(utter);
+      } catch (e) {
+        console.warn('Browser speech fallback error:', e);
+      }
+    }
+
+    window.speakStarvelText = async function(rawText, forceSpeak = false) {
+      if (!forceSpeak && !starvelVoiceEnabled) return;
+      window.stopStarvelSpeech();
+
+      const cleanText = String(rawText || '')
+        .replace(/https?:\/\/[^\s)]+/gi, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 900);
+      if (!cleanText) return;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({ mode: 'tts', text: cleanText })
+        });
+        const data = await res.json();
+        if (res.ok && data?.audioDataUrl) {
+          currentVoiceAudio = new Audio(data.audioDataUrl);
+          await currentVoiceAudio.play();
+          return;
+        }
+      } catch {}
+
+      speakWithBrowserFallback(cleanText);
+    };
+
+    window.toggleStarvelVoiceInput = function(inputId, btnId, autoSubmit = true) {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const btn = document.getElementById(btnId);
+      const input = document.getElementById(inputId);
+      if (!SpeechRec || !input) {
+        alert('Voice microphone input is supported in Chrome, Edge, and Safari.');
+        return;
+      }
+
+      if (activeRecognition) {
+        try { activeRecognition.stop(); } catch {}
+        activeRecognition = null;
+        if (btn) btn.classList.remove('listening');
+        return;
+      }
+
+      window.stopStarvelSpeech();
+      const rec = new SpeechRec();
+      rec.lang = 'en-US';
+      rec.interimResults = true;
+      rec.maxAlternatives = 1;
+      activeRecognition = rec;
+
+      if (btn) btn.classList.add('listening');
+      input.placeholder = 'Listening... speak now';
+
+      rec.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        input.value = transcript.trim();
+        if (event.results[event.results.length - 1].isFinal && autoSubmit && input.value) {
+          setTimeout(() => {
+            input.form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          }, 120);
+        }
+      };
+
+      rec.onerror = () => {
+        if (btn) btn.classList.remove('listening');
+        input.placeholder = 'Search, ask, or tap 🎙 to speak...';
+        activeRecognition = null;
+      };
+
+      rec.onend = () => {
+        if (btn) btn.classList.remove('listening');
+        input.placeholder = 'Search, ask, or tap 🎙 to speak...';
+        activeRecognition = null;
+      };
+
+      rec.start();
+    };
+
     function appendPublicAiBubble(role, text) {
       const box = document.getElementById('public-ai-messages');
       if (!box) return;
@@ -4770,7 +5074,21 @@
       bubble.style.cssText = role === 'user'
         ? 'align-self: flex-end; max-width: 82%; padding: 9px 13px; border-radius: 16px; background: rgba(0, 229, 255, 0.22); border: 1px solid rgba(0, 229, 255, 0.45); color: #FFFFFF; font-size: 0.85rem; line-height: 1.55; white-space: pre-wrap;'
         : 'align-self: flex-start; max-width: 90%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;';
-      bubble.textContent = displayText;
+      if (role === 'model') {
+        const topRow = document.createElement('div');
+        topRow.style.cssText = 'display: flex; align-items: center; gap: 8px; margin-bottom: 6px;';
+        const badge = document.createElement('div');
+        badge.className = 'ai-answer-logo-badge ai-logo-animating';
+        badge.innerHTML = '<img src="./ai.jpg" alt="stArvel Intelligence">';
+        topRow.appendChild(badge);
+        const textNode = document.createElement('span');
+        textNode.textContent = displayText;
+        textNode.style.flex = '1';
+        bubble.appendChild(topRow);
+        bubble.appendChild(textNode);
+      } else {
+        bubble.textContent = displayText;
+      }
 
       if (role === 'model') {
         const imdbMatches = [...new Set((displayText.match(/https?:\/\/(?:www\.)?imdb\.com\/[^\s)]+/gi) || []))];
@@ -4815,6 +5133,7 @@
 
       btn.disabled = true;
       btn.textContent = '...';
+      if (typeof setStarvelAiAnimating === 'function') setStarvelAiAnimating(true);
 
       const loader = createLiquidGlassLoader('Searching stArvel & global archive...');
       if (box) {
@@ -4908,12 +5227,14 @@
         publicAiConversation.push({ role: 'model', parts: [{ text: replyText }] });
         document.getElementById('public-ai-loop-loader')?.remove();
         appendPublicAiBubble('model', replyText);
+        window.speakStarvelText(replyText, false);
       } catch (err) {
         document.getElementById('public-ai-loop-loader')?.remove();
         appendPublicAiBubble('model', formatPlainParagraph(`Sorry, stArvel Intelligence could not respond right now (${err.message}).`));
       } finally {
         btn.disabled = false;
         btn.textContent = 'Ask';
+        if (typeof setStarvelAiAnimating === 'function') setStarvelAiAnimating(false);
       }
     };
 
