@@ -4232,22 +4232,12 @@
     function appendGeminiBubble(role, text) {
       const box = document.getElementById('gemini-chat-messages');
       if (!box) return;
+      const cleanText = String(text ?? '');
       const bubble = document.createElement('div');
       bubble.style.cssText = role === 'user'
-        ? 'align-self: flex-end; max-width: 82%; padding: 10px 14px; border-radius: 16px; background: rgba(0, 229, 255, 0.2); border: 1px solid rgba(0, 229, 255, 0.45); color: #fff; font-size: 0.86rem; white-space: pre-wrap;'
-        : 'align-self: flex-start; max-width: 86%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.86rem; white-space: pre-wrap;';
-      bubble.textContent = text;
-      if (role === 'model' && displayText) {
-        const speakRow = document.createElement('div');
-        const replayBtn = document.createElement('button');
-        replayBtn.type = 'button';
-        replayBtn.className = 'bubble-speak-btn';
-        replayBtn.textContent = '🔊 Speak';
-        replayBtn.onclick = () => window.speakStarvelText(displayText, true);
-        speakRow.appendChild(replayBtn);
-        bubble.appendChild(speakRow);
-      }
-
+        ? 'align-self: flex-end; max-width: 82%; padding: 10px 14px; border-radius: 16px; background: rgba(0, 229, 255, 0.2); border: 1px solid rgba(0, 229, 255, 0.45); color: #fff; font-size: 0.86rem; line-height: 1.55; white-space: pre-wrap;'
+        : 'align-self: flex-start; max-width: 86%; padding: 10px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #E2E8F0; font-size: 0.86rem; line-height: 1.6; white-space: pre-wrap;';
+      bubble.textContent = cleanText;
       box.appendChild(bubble);
       box.scrollTop = box.scrollHeight;
     }
@@ -4615,7 +4605,14 @@
       }
 
       btn.disabled = true;
-      btn.textContent = 'Thinking...';
+      btn.textContent = '...';
+      const adminBox = document.getElementById('gemini-chat-messages');
+      const adminLoader = createLiquidGlassLoader('Executing in Private Super Studio...');
+      adminLoader.id = 'admin-ai-loop-loader';
+      if (adminBox) {
+        adminBox.appendChild(adminLoader);
+        adminBox.scrollTop = adminBox.scrollHeight;
+      }
 
       try {
         const [moviesRes, imdbRes, ytRes, instaRes, kbRes, comRes, storageRes] = await Promise.all([
@@ -4679,14 +4676,16 @@
         const modelText = candidateParts.find(p => p.text)?.text || '';
         const combinedAdminReply = actionSummaries.length
           ? `${actionSummaries.join(' ')}${modelText ? `\n\n${modelText}` : ''}`
-          : (modelText || 'No database tool was executed in this response.');
+          : (modelText || 'stArvel Intelligence Super Studio is ready. Give me a command to update UI, HTML, themes, performance, or studio data.');
+        document.getElementById('admin-ai-loop-loader')?.remove();
         const formattedAdminText = formatPlainParagraph(combinedAdminReply);
         appendGeminiBubble('model', formattedAdminText);
       } catch (err) {
+        document.getElementById('admin-ai-loop-loader')?.remove();
         appendGeminiBubble('model', `Error: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Send';
+        btn.textContent = 'Execute';
       }
     };
 
