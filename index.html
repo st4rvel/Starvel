@@ -1948,7 +1948,7 @@
       flex-wrap: wrap;
     }
 
-    /* Public Starvel Intelligence Floating Widget */
+    /* Public Starvel Intelligence — Refined Neural Studio Interface */
     .public-ai-fab {
       position: fixed;
       bottom: 22px;
@@ -1956,20 +1956,20 @@
       z-index: 4200;
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      padding: 12px 20px;
+      gap: 10px;
+      padding: 12px 22px;
       border-radius: 999px;
-      border: 1px solid rgba(0, 229, 255, 0.58);
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.28), rgba(14, 22, 38, 0.86) 55%, rgba(255, 85, 0, 0.28));
-      backdrop-filter: blur(18px) saturate(185%);
-      -webkit-backdrop-filter: blur(18px) saturate(185%);
+      border: 1px solid rgba(0, 229, 255, 0.55);
+      background: linear-gradient(135deg, rgba(10, 18, 34, 0.92) 0%, rgba(16, 30, 54, 0.88) 55%, rgba(255, 85, 0, 0.22) 100%);
+      backdrop-filter: blur(22px) saturate(200%);
+      -webkit-backdrop-filter: blur(22px) saturate(200%);
       color: #FFFFFF;
       font-family: 'Oswald', sans-serif;
       font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.6px;
       text-transform: uppercase;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.58), 0 0 22px rgba(0, 229, 255, 0.28), var(--glass-specular);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.62), 0 0 24px rgba(0, 229, 255, 0.26), var(--glass-specular);
       cursor: pointer;
       transition: transform 0.3s var(--ease-liquid), box-shadow 0.3s var(--ease-liquid), border-color 0.3s var(--ease-liquid);
     }
@@ -1977,38 +1977,43 @@
     .public-ai-fab:hover {
       transform: translateY(-3px) scale(1.02);
       border-color: #FFFFFF;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.65), 0 0 28px rgba(0, 229, 255, 0.45), var(--glass-specular);
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.72), 0 0 32px rgba(0, 229, 255, 0.45), var(--glass-specular);
+    }
+
+    @keyframes aiBeaconPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 8px var(--comic-cyan), 0 0 16px rgba(0, 229, 255, 0.5); }
+      50% { transform: scale(1.3); box-shadow: 0 0 14px var(--comic-cyan), 0 0 24px rgba(255, 85, 0, 0.65); }
     }
 
     .public-ai-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: var(--comic-cyan);
-      box-shadow: 0 0 10px var(--comic-cyan);
+      background: radial-gradient(circle, #FFFFFF 15%, var(--comic-cyan) 75%);
+      animation: aiBeaconPulse 2.2s ease-in-out infinite;
     }
 
     .public-ai-drawer {
       position: fixed;
       bottom: 78px;
       right: 22px;
-      width: min(410px, calc(100vw - 28px));
-      max-height: 72vh;
+      width: min(430px, calc(100vw - 28px));
+      max-height: 75vh;
       z-index: 4300;
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(12, 19, 34, 0.92) 48%, rgba(7, 11, 20, 0.96));
-      backdrop-filter: blur(22px) saturate(190%);
-      -webkit-backdrop-filter: blur(22px) saturate(190%);
-      border: 1px solid rgba(0, 229, 255, 0.45);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.72), var(--glass-specular);
+      border-radius: 26px;
+      background: linear-gradient(155deg, rgba(18, 28, 48, 0.94) 0%, rgba(9, 14, 26, 0.97) 52%, rgba(5, 8, 16, 0.99) 100%);
+      backdrop-filter: blur(28px) saturate(210%);
+      -webkit-backdrop-filter: blur(28px) saturate(210%);
+      border: 1px solid rgba(0, 229, 255, 0.42);
+      box-shadow: 0 30px 85px rgba(0, 0, 0, 0.8), 0 0 36px rgba(0, 229, 255, 0.14), var(--glass-specular);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translate3d(0, 16px, 0) scale(0.97);
-      transition: opacity 0.3s var(--ease-liquid), transform 0.3s var(--ease-liquid), visibility 0.3s var(--ease-liquid);
+      transform: translate3d(0, 18px, 0) scale(0.96);
+      transition: opacity 0.32s var(--ease-liquid), transform 0.32s var(--ease-liquid), visibility 0.32s var(--ease-liquid);
     }
 
     .public-ai-drawer.open {
@@ -2032,7 +2037,7 @@
       height: calc(100vh - 28px) !important;
       max-width: none !important;
       max-height: none !important;
-      border-radius: 22px;
+      border-radius: 24px;
       transform: none !important;
     }
 
@@ -2042,6 +2047,13 @@
     }
 
     .public-ai-header {
+      padding: 15px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: linear-gradient(90deg, rgba(0, 229, 255, 0.12), rgba(255, 85, 0, 0.08), rgba(10, 16, 28, 0.4));
       cursor: grab;
       touch-action: none;
     }
@@ -2062,19 +2074,9 @@
       gap: 6px;
     }
 
-    .public-ai-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: rgba(0, 229, 255, 0.08);
-    }
-
     .public-ai-title {
       font-family: 'Bangers', 'Oswald', cursive;
-      font-size: 1.35rem;
+      font-size: 1.38rem;
       letter-spacing: 2px;
       color: #FFFFFF;
       display: flex;
@@ -2084,10 +2086,11 @@
 
     .public-ai-sub {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 1.2px;
+      font-size: 0.68rem;
+      letter-spacing: 1.4px;
       color: var(--comic-cyan);
       text-transform: uppercase;
+      opacity: 0.92;
     }
 
     .starvel-intel-font {
@@ -2095,14 +2098,20 @@
       letter-spacing: 2px;
     }
 
+    /* Futuristic Neural Loader & Fluid Liquid-Glass Wave */
+    @keyframes neuralOrbitSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes neuralCorePulse {
+      0%, 100% { transform: scale(0.82); opacity: 0.75; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
     @keyframes liquidWaveFlow {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
-    }
-
-    @keyframes liquidWaveBar {
-      0%, 100% { transform: scaleY(0.38); opacity: 0.65; }
-      50% { transform: scaleY(1); opacity: 1; }
     }
 
     @keyframes liquidGlassShimmer {
@@ -2118,27 +2127,26 @@
       align-items: center;
       gap: 12px;
       padding: 11px 18px;
-      border-radius: 20px;
+      border-radius: 18px;
       background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.14) 0%,
-        rgba(0, 229, 255, 0.10) 48%,
-        rgba(255, 255, 255, 0.06) 100%
+        rgba(0, 229, 255, 0.14) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 85, 0, 0.14) 100%
       );
       background-size: 200% 200%;
       backdrop-filter: blur(22px) saturate(200%);
       -webkit-backdrop-filter: blur(22px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.30);
+      border: 1px solid rgba(0, 229, 255, 0.35);
       box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.38),
-        inset 0 1px 1.5px rgba(255, 255, 255, 0.48),
-        inset 0 -1px 2px rgba(0, 229, 255, 0.18);
+        0 12px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.45);
       color: #F2FBFF;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       align-self: flex-start;
-      animation: liquidGlassShimmer 3.6s ease infinite;
+      animation: liquidGlassShimmer 3s ease infinite;
     }
 
     .liquid-glass-wave-bg {
@@ -2147,7 +2155,7 @@
       pointer-events: none;
       overflow: hidden;
       border-radius: inherit;
-      opacity: 0.65;
+      opacity: 0.6;
     }
 
     .liquid-glass-wave-bg svg {
@@ -2156,87 +2164,128 @@
       left: 0;
       width: 200%;
       height: 100%;
-      animation: liquidWaveFlow 2.6s linear infinite;
+      animation: liquidWaveFlow 2.4s linear infinite;
     }
 
     .liquid-glass-wave-bg svg.wave-back {
-      opacity: 0.5;
-      animation-duration: 3.8s;
+      opacity: 0.45;
+      animation-duration: 3.5s;
       animation-direction: reverse;
     }
 
-    .liquid-wave-bars {
+    .neural-spinner {
       position: relative;
       z-index: 2;
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
       display: inline-flex;
       align-items: center;
-      gap: 3.5px;
-      height: 18px;
-      flex-shrink: 0;
+      justify-content: center;
     }
 
-    .liquid-wave-bars span {
-      width: 3px;
-      height: 16px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(0, 229, 255, 0.75));
-      box-shadow: 0 0 8px rgba(0, 229, 255, 0.45);
-      animation: liquidWaveBar 1.15s ease-in-out infinite;
+    .neural-spinner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--comic-cyan);
+      border-right-color: var(--comic-orange);
+      animation: neuralOrbitSpin 0.9s linear infinite;
     }
 
-    .liquid-wave-bars span:nth-child(1) { animation-delay: 0s; }
-    .liquid-wave-bars span:nth-child(2) { animation-delay: 0.14s; }
-    .liquid-wave-bars span:nth-child(3) { animation-delay: 0.28s; }
-    .liquid-wave-bars span:nth-child(4) { animation-delay: 0.42s; }
-    .liquid-wave-bars span:nth-child(5) { animation-delay: 0.56s; }
+    .neural-spinner::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 10px var(--comic-cyan);
+      animation: neuralCorePulse 1.1s ease-in-out infinite;
+    }
 
     .liquid-glass-loader-text {
       position: relative;
       z-index: 2;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+      letter-spacing: 0.2px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
     }
 
-        .public-ai-messages {
-      padding: 14px;
-      height: 290px;
+    .public-ai-messages {
+      padding: 16px;
+      height: 310px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 11px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 229, 255, 0.35) transparent;
     }
 
     .public-ai-chips {
-      padding: 0 14px 10px 14px;
+      padding: 0 15px 10px 15px;
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
     }
 
     .public-ai-chip {
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
       font-family: 'Montserrat', sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
     }
 
     .public-ai-chip:hover {
       border-color: var(--comic-cyan);
       color: #FFFFFF;
-      background: rgba(0, 229, 255, 0.16);
+      background: rgba(0, 229, 255, 0.18);
+      transform: translateY(-1px);
     }
 
     .public-ai-form {
       padding: 12px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
+      align-items: center;
       gap: 8px;
-      background: rgba(5, 8, 16, 0.6);
+      background: rgba(6, 10, 20, 0.78);
+    }
+
+    .public-ai-unified-input {
+      flex: 1;
+      padding: 10px 14px !important;
+      font-size: 0.85rem !important;
+      border-radius: 999px !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    }
+
+    .public-ai-unified-input:focus {
+      border-color: var(--comic-cyan) !important;
+      background: rgba(0, 229, 255, 0.07) !important;
+    }
+
+    .public-ai-ask-btn {
+      padding: 10px 20px !important;
+      font-size: 0.82rem !important;
+      border-radius: 999px !important;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.85), rgba(0, 150, 210, 0.68)) !important;
+      border: 1px solid rgba(255, 255, 255, 0.55) !important;
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.28) !important;
+      white-space: nowrap;
+    }
+
+    .public-ai-ask-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 85, 0, 0.9), rgba(255, 130, 50, 0.75)) !important;
+      box-shadow: 0 8px 24px rgba(255, 85, 0, 0.36) !important;
     }
 
     @media (max-width: 600px) {
@@ -2839,16 +2888,15 @@
     </div>
 
     <div class="public-ai-chips">
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Starvel rules')">Starvel Rules</button>
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Starvel team &amp; friends')">Team &amp; Friends</button>
       <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('TETHER')">TETHER</button>
-      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Directors')">Directors</button>
-      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Cast')">Cast</button>
-      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Inception')">Films &amp; IMDb</button>
+      <button type="button" class="public-ai-chip" onclick="askPublicAiPreset('Create a TETHER sci-fi poster')">Generate Poster</button>
     </div>
 
     <form class="public-ai-form" onsubmit="handlePublicAiSubmit(event)">
-      <input type="text" id="public-ai-input" class="admin-input" placeholder="Search or ask about films, YouTube videos, IMDb, directors..." style="padding: 9px 12px; font-size: 0.84rem;" required>
-      <button type="button" class="admin-btn-secondary" id="btn-public-ai-img" onclick="handlePublicAiImage()" style="padding: 9px 12px; font-size: 0.78rem;">Img</button>
-      <button type="submit" class="admin-btn-primary" id="btn-public-ai-send" style="padding: 9px 16px; font-size: 0.82rem;">Ask</button>
+      <input type="text" id="public-ai-input" class="admin-input public-ai-unified-input" placeholder="Ask anything or say 'generate poster / create image'..." required>
+      <button type="submit" class="admin-btn-primary public-ai-ask-btn" id="btn-public-ai-send">Ask</button>
     </form>
   </aside>
 
@@ -4683,7 +4731,7 @@
       return paragraphs.join('\n\n');
     }
 
-    function createLiquidGlassLoader(label = 'Searching stArvel & global archive...') {
+    function createLiquidGlassLoader(label = 'Thinking with stArvel Intelligence...') {
       const wrap = document.createElement('div');
       wrap.className = 'liquid-glass-loader';
       wrap.id = 'public-ai-loop-loader';
@@ -4693,12 +4741,10 @@
             <path d="M0,26 C30,14 60,38 90,26 C120,14 150,38 180,26 C210,14 240,38 240,26 L240,48 L0,48 Z" fill="rgba(255, 255, 255, 0.14)"></path>
           </svg>
           <svg viewBox="0 0 240 48" preserveAspectRatio="none">
-            <path d="M0,28 C30,38 60,16 90,28 C120,38 150,16 180,28 C210,38 240,16 240,28 L240,48 L0,48 Z" fill="rgba(0, 229, 255, 0.20)"></path>
+            <path d="M0,28 C30,38 60,16 90,28 C120,38 150,16 180,28 C210,38 240,16 240,28 L240,48 L0,48 Z" fill="rgba(0, 229, 255, 0.22)"></path>
           </svg>
         </div>
-        <div class="liquid-wave-bars" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
+        <div class="neural-spinner" aria-hidden="true"></div>
         <span class="liquid-glass-loader-text">${escapeHtml(label)}</span>
       `;
       return wrap;
@@ -4807,6 +4853,13 @@
       box.scrollTop = box.scrollHeight;
     }
 
+    function isImageGenerationIntent(text) {
+      const q = String(text || '').trim();
+      if (!q) return false;
+      return /\b(generate|create|make|draw|render|design|paint|illustrate|give|show|send|produce)\b.*\b(image|images|photo|photos|photograph|picture|pictures|pic|pics|poster|posters|wallpaper|artwork|illustration|banner|thumbnail|visual|portrait)\b/i.test(q)
+        || /^\s*(image|photo|poster|picture|pic|artwork|wallpaper)\s*(of|for|:|-)/i.test(q);
+    }
+
     window.handlePublicAiSubmit = async function(e) {
       e.preventDefault();
       const input = document.getElementById('public-ai-input');
@@ -4815,9 +4868,50 @@
       const question = input.value.trim();
       if (!question) return;
 
+      // Single unified button: generate image ONLY when user explicitly asks for an image/photo/poster
+      if (isImageGenerationIntent(question)) {
+        input.value = '';
+        appendPublicAiBubble('user', question);
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = '...';
+        }
+        const imgLoader = createLiquidGlassLoader('Rendering realistic visual...');
+        if (box) {
+          box.appendChild(imgLoader);
+          box.scrollTop = box.scrollHeight;
+        }
+        try {
+          const res = await fetch(`${SUPABASE_URL}/functions/v1/starvel-gemini`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'apikey': SUPABASE_ANON_KEY
+            },
+            body: JSON.stringify({ mode: 'generate_image', prompt: question })
+          });
+          const data = await res.json();
+          if (!res.ok || data.error || !data.imageDataUrl) {
+            throw new Error(data.error || 'Image generation failed');
+          }
+          document.getElementById('public-ai-loop-loader')?.remove();
+          appendGeneratedImageCard(box, question, data.imageDataUrl);
+        } catch (err) {
+          document.getElementById('public-ai-loop-loader')?.remove();
+          appendPublicAiBubble('model', formatPlainParagraph(`Could not generate image right now (${err.message}).`));
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'Ask';
+          }
+        }
+        return;
+      }
+
       const isSingleWord = /^[A-Za-z0-9#_-]+$/.test(question);
       const effectivePrompt = isSingleWord
-        ? `Single-word input: "${question}". Give a concise, smart, natural answer (1-2 short paragraphs). Only mention Starvel Studios or TETHER if "${question}" actually relates to Starvel Studios, TETHER, #OKA, or our team; otherwise answer directly about "${question}" and include a relevant IMDb link only if it involves a film, actor, or director.`
+        ? `Single-word input: "${question}". Give a very short, sharp, natural answer (1 short paragraph max). Only mention Starvel Studios, Starvel rules, or TETHER if "${question}" relates to Starvel Studios, TETHER, #OKA, or our team; otherwise answer directly about "${question}" and include a relevant IMDb link only if it involves a film, actor, or director.`
         : question;
 
       input.value = '';
@@ -4830,7 +4924,7 @@
       btn.disabled = true;
       btn.textContent = '...';
 
-      const loader = createLiquidGlassLoader('Searching stArvel & global archive...');
+      const loader = createLiquidGlassLoader('Thinking with stArvel Intelligence...');
       if (box) {
         box.appendChild(loader);
         box.scrollTop = box.scrollHeight;
@@ -4859,8 +4953,26 @@
         }
 
         const publicKnowledge = {
-          responseStyle: 'Always respond in clean natural paragraphs with zero asterisks, bullet points, or lists.',
-          studio: 'stArvel Studios (India)',
+          responseStyle: 'Prefer short, crisp answers (1-2 short natural paragraphs) with zero asterisks, bullet points, or lists.',
+          studio: 'Starvel Studios (India)',
+          starvelRules: [
+            'Rule 1: There will be no love story in Starvel Films.',
+            'Rule 2: Starvel makes only Sci-Fi, Crime-Thriller, and Mind-bending films.',
+            'Rule 3: Starvel was founded by Sathwik Gurram; because he is a huge fan of Marvel, he named Starvel Studios inspired by Marvel Studios.'
+          ],
+          starvelTeamAndFriends: {
+            overview: 'Sathwik Gurram, Rithwik Gurram, Abhi Rama Reddy Kalluri, Madda Jayden Jacob, Chinmay Kumar, Kaarthikeyan Sivakumar, Mohammed Ishaaq Ali Khan, and Srijan form the core Starvel circle. All of them are best friends of Sathwik, except Rithwik Gurram who is Sathwik’s younger brother.',
+            members: [
+              { name: 'Sathwik Gurram', relation: 'Founder of Starvel Studios', specialty: 'Loves Marvel style, brings creative filmography ideas, and crafts mind-bending stories.' },
+              { name: 'Rithwik Gurram', relation: 'Small brother of Sathwik Gurram', specialty: 'Acts in Starvel films (playfully forced to act by the crew).' },
+              { name: 'Abhi Rama Reddy Kalluri', relation: 'Best friend of Sathwik', specialty: 'Loves bringing friendship-oriented and comedy-drama films.' },
+              { name: 'Mohammed Ishaaq Ali Khan', relation: 'Best friend of Sathwik', specialty: 'Loves making all kinds of genres, especially Crime-Thriller.' },
+              { name: 'Madda Jayden Jacob', relation: 'Best friend of Sathwik', specialty: 'Loves bringing spiritual stories to life.' },
+              { name: 'Chinmay Kumar', relation: 'Best friend of Sathwik', specialty: 'Acts in Starvel films (forced to act by the crew).' },
+              { name: 'Kaarthikeyan Sivakumar', relation: 'Best friend of Sathwik', specialty: 'Acts in Starvel films (forced to act by the crew).' },
+              { name: 'Srijan', relation: 'Best friend of Sathwik', specialty: 'Acts in Starvel films (forced to act by the crew).' }
+            ]
+          },
           flagshipFilm: {
             title: currentConfig.imdbTitle,
             imdbId: currentConfig.imdbId,
